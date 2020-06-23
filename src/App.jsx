@@ -4,29 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import Page from './Page';
 
-function changeTitle(taskTitle) {
-  return {
-    type: 'changeTitle',
-    payload: {
-      taskTitle,
-    },
-  };
-}
-
-function addTask() {
-  return {
-    type: 'addTask',
-  };
-}
-
-function deleteTask(id) {
-  return {
-    type: 'changeTitle',
-    payload: {
-      id,
-    },
-  };
-}
+import { changeTitle, addTask, deleteTask } from './action';
 
 function selector(state) {
   return {
@@ -49,7 +27,7 @@ export default function App() {
   }
 
   function handleClickDeleteTask(id) {
-    dispatch(deleteTask(state, id));
+    dispatch(deleteTask(id));
   }
 
   return (
