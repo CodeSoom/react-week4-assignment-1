@@ -1,8 +1,4 @@
-function reducer() {
-  return {
-    taskTitle: 'New Title',
-  };
-}
+import reducer from './reducer';
 
 describe('reducer', () => {
   describe('changeTitle', () => {
