@@ -1,6 +1,9 @@
 describe('<App />', () => {
   context('When a user first launches the to-do app', () => {
-    it('shows "To-do" ', () => {});
+    it('shows "To-do" ', () => {
+      const { container } = render(<App />);
+      expect(container).toHaveTextContent('To-do');
+    });
 
     it('shows "할 일"', () => {});
 
