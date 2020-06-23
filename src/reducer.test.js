@@ -1,6 +1,22 @@
 describe('reducer', () => {
   describe('changeTitle', () => {
-    it('change a new task title', () => {});
+    it('change a new task title', () => {
+      const prevState = {
+        taskTitle: '',
+        tasks: [],
+      };
+
+      const action = {
+        type: 'changeTitle',
+        payload: {
+          taskTitle: 'New Title',
+        },
+      };
+
+      const newState = reducer(prevState, action);
+
+      expect(newState.taskTitle).toBe('New Title');
+    });
   });
 
   describe('addTask', () => {
