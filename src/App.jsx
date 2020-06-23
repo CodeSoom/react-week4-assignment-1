@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 
+import { useSelector } from 'react-redux';
+
 import Page from './Page';
 
 const initState = {
@@ -16,9 +18,11 @@ function changeTitle(state, taskTitle) {
 }
 
 export default function App() {
-  const [state, setState] = useState(initState);
 
-  const { newId, taskTitle, tasks } = state;
+  const { taskTitle, tasks } = useSelector((state) => ({ 
+    taskTitle: state.taskTitle,
+    tasks: state.tasks,
+  }));
 
   function handleChangeTitle(event) {
     setState(changeTitle(state, event.target.value));
