@@ -1,3 +1,5 @@
+import { render } from '@testing-library/react';
+
 describe('<App />', () => {
   context('When a user first launches the to-do app', () => {
     it('shows "To-do" ', () => {
