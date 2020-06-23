@@ -1,31 +1,29 @@
 import React, { useState } from 'react';
 
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import Page from './Page';
 
-const initState = {
-  newId: 100,
-  taskTitle: '',
-  tasks: [],
-};
 
-function changeTitle(state, taskTitle) {
+function changeTitleActionCreator(taskTitle) {
   return {
-    ...state,
-    taskTitle,
+    type: 'changeTitle',
+    payload: {
+      taskTitle,
+    },
   };
 }
 
 export default function App() {
-
-  const { taskTitle, tasks } = useSelector((state) => ({ 
+  const { taskTitle, tasks } = useSelector((state) => ({
     taskTitle: state.taskTitle,
     tasks: state.tasks,
   }));
 
+  const dispatch = useDispatch();
+
   function handleChangeTitle(event) {
-    setState(changeTitle(state, event.target.value));
+    dispatch(changeTitleActionCreator(event.target.value));
   }
 
   function handleClickAddTask() {
