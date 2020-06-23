@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { render } from '@testing-library/react';
+import { render, fireEvent } from '@testing-library/react';
 
 import App from './App';
 
@@ -28,7 +28,18 @@ describe('<App />', () => {
   });
 
   context('When a user enters a task called "바뀐다"', () => {
-    it('shows "바뀐다" in the input', () => {});
+    it('shows "바뀐다" in the input', () => {
+      const { getByLabelText } = render(<App />);
+
+      fireEvent.change(getByLabelText('할 일'), {
+        target: {
+          value: '바뀐다',
+        },
+      });
+
+      expect(getByLabelText('할 일').value).toBe('바뀐다');
+
+    });
   });
 
   context('when a user add a task called "할 일4"', () => {
