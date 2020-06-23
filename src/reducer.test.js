@@ -1,7 +1,20 @@
 import { updateTitle, addTask, deleteTask } from './actions';
 import reducer from './reducer';
 
-describe('actions', () => {
+describe('reducer', () => {
+  describe('default', () => {
+    it('return priviousState', () => {
+      const state = reducer(
+        {
+          taskTitle: 'initialState',
+        },
+        {
+          type: 'DEFAULT_TEST',
+        },
+      );
+      expect(state.taskTitle).toBe('initialState');
+    });
+  });
   describe('updateTitle', () => {
     it('return updated task input', () => {
       const state = reducer(

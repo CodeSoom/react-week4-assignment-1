@@ -1,8 +1,11 @@
-export const initialState = {
+const initialState = {
   newId: 100,
   taskTitle: '',
   tasks: [],
 };
+
+// FIXME:
+// initialState 에 대한 테스트케이스 작성
 const reducer = (state = initialState, action) => {
   const { newId, taskTitle, tasks } = state;
   switch (action.type) {
