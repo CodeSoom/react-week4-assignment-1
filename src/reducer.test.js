@@ -2,7 +2,8 @@ import reducer from './reducer';
 
 describe('reducer', () => {
   test('updateTaskTitle', () => {
-    const taskTitle = 'Update Task Title!';
+    const taskTitle = reducer();
+    
     expect(taskTitle).toBe('Update Task Title!');
   });
 });
