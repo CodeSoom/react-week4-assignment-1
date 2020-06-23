@@ -11,11 +11,20 @@ describe('<App />', () => {
       expect(container).toHaveTextContent('To-do');
     });
 
-    it('shows "할 일"', () => {});
+    it('shows "할 일"', () => {
+      const { container } = render(<App />);
+      expect(container).toHaveTextContent('할 일');
+    });
 
-    it('shows "추가"', () => {});
+    it('shows "추가"', () => {
+      const { container } = render(<App />);
+      expect(container).toHaveTextContent('추가');
+    });
 
-    it('shows "할 일이 없어요!"', () => {});
+    it('shows "할 일이 없어요!"', () => {
+      const { container } = render(<App />);
+      expect(container).toHaveTextContent('할 일이 없어요!');
+    });
   });
 
   context('When a user enters a task called "바뀐다"', () => {
