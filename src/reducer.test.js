@@ -1,0 +1,26 @@
+describe('reducer', () => {
+  describe('changeTitle', () => {
+    it('change a new task title', () => {});
+  });
+
+  describe('addTask', () => {
+    context('with taskTitle', () => {
+      it('clear task title', () => {});
+
+      it('appends a new task into tasks', () => {});
+    });
+
+    context('without taskTitle', () => {
+      it('happens nothing', () => {});
+    });
+  });
+
+  describe('deleteTask', () => {
+    context('with task ID', () => {
+      it('remove the task from tasks', () => {});
+    });
+    context('without task ID', () => {
+      it('happens nothing', () => {});
+    });
+  });
+});
