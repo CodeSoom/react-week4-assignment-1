@@ -1,11 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
 import Page from './Page';
 
-
-function changeTitleActionCreator(taskTitle) {
+function changeTitle(taskTitle) {
   return {
     type: 'changeTitle',
     payload: {
@@ -14,32 +13,43 @@ function changeTitleActionCreator(taskTitle) {
   };
 }
 
-export default function App() {
-  const { taskTitle, tasks } = useSelector((state) => ({
+function addTask() {
+  return {
+    type: 'addTask',
+  };
+}
+
+function deleteTask(id) {
+  return {
+    type: 'changeTitle',
+    payload: {
+      id,
+    },
+  };
+}
+
+function selector(state) {
+  return {
     taskTitle: state.taskTitle,
     tasks: state.tasks,
-  }));
+  };
+}
+
+export default function App() {
+  const { taskTitle, tasks } = useSelector(selector);
 
   const dispatch = useDispatch();
 
   function handleChangeTitle(event) {
-    dispatch(changeTitleActionCreator(event.target.value));
+    dispatch(changeTitle(event.target.value));
   }
 
   function handleClickAddTask() {
-    setState({
-      ...state,
-      newId: newId + 1,
-      taskTitle: '',
-      tasks: [...tasks, { id: newId, title: taskTitle }],
-    });
+    dispatch(addTask());
   }
 
   function handleClickDeleteTask(id) {
-    setState({
-      ...state,
-      tasks: tasks.filter((task) => task.id !== id),
-    });
+    dispatch(deleteTask(state, id));
   }
 
   return (
