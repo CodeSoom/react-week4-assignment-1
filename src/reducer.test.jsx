@@ -59,7 +59,21 @@ describe('reducer', () => {
     });
 
     context('without taskTitle', () => {
-      it('happens nothing', () => {});
+      it('happens nothing', () => {
+        const prevState = {
+          newId: 100,
+          taskTitle: '',
+          tasks: [],
+        };
+
+        const action = {
+          type: 'addTask',
+        };
+
+        const newState = reducer(prevState, action);
+
+        expect(newState.tasks).toHaveLength(0);
+      });
     });
   });
 
