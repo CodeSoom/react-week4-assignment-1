@@ -53,29 +53,29 @@ describe('reducer', () => {
   });
 
   describe('addTask', () => {
-    const reduceAddTask = () => {
+    const reduceAddTask = (state) => {
       const action = addTask();
-      return reducer(previousState, action);
+      return reducer(state, action);
     };
 
     context('with task title', () => {
       it('add a task to the tasks of state', () => {
         // when
-        const state = reduceAddTask();
+        const state = reduceAddTask(previousState);
         // then
         expect(state.tasks).toHaveLength(previousState.tasks.length + 1);
       });
 
       it('increases new id by one', () => {
         // when
-        const state = reduceAddTask();
+        const state = reduceAddTask(previousState);
         // then
         expect(state.newId).toBe(previousState.newId + 1);
       });
 
       it('clears task title', () => {
         // when
-        const state = reduceAddTask();
+        const state = reduceAddTask(previousState);
         // then
         expect(state.taskTitle).toBe('');
       });
@@ -84,7 +84,10 @@ describe('reducer', () => {
     context('without task title', () => {
       it('do not work', () => {
         // when
-        const state = reduceAddTask();
+        const state = reduceAddTask({
+          ...previousState,
+          taskTitle: '',
+        });
         // then
         expect(state.tasks).toEqual(previousState.tasks);
       });
@@ -102,7 +105,7 @@ describe('reducer', () => {
         // when
         const state = reduceDeleteTask(1);
         // then
-        expect(state.tasks).toHaveLength(previousState.length - 1);
+        expect(state.tasks).toHaveLength(previousState.tasks.length - 1);
       });
     });
     context('without existing id', () => {
@@ -110,7 +113,7 @@ describe('reducer', () => {
         // when
         const state = reduceDeleteTask(1234);
         // then
-        expect(state.tasks).toHaveLength(previousState.length);
+        expect(state.tasks).toHaveLength(previousState.tasks.length);
       });
     });
   });
