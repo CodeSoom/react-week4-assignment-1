@@ -14,6 +14,9 @@ const reducer = (state = initialState, action) => {
     };
   }
   if (type === 'ADD_TASK') {
+    if (state.taskTitle === '') {
+      return state;
+    }
     return {
       ...state,
       newId: state.newId + 1,
