@@ -53,6 +53,8 @@ describe('reducer', () => {
           addTaskAction(),
         );
         expect(state.tasks).toHaveLength(2);
+        expect(state.tasks[0].title).toEqual('old Task');
+        expect(state.tasks[1].title).toEqual('new Title');
       });
     });
     context('without taskTitle', () => {});
