@@ -101,13 +101,22 @@ describe('reducer', () => {
       expect(deleteTaskAction(id)).toEqual(expectedAction);
     });
 
-    context('with id', () => {
+    context('with exact id', () => {
       it('return new state without removed task', () => {
         const state = reducer(
           { taskTitle: '', tasks: [{ id: 0, title: 'remove task' }] },
           deleteTaskAction(0),
         );
         expect(state.tasks).toHaveLength(0);
+      });
+    });
+    context('with incorrect id', () => {
+      it("dosn't work", () => {
+        const state = reducer(
+          { taskTitle: '', tasks: [{ id: 0, title: 'remove task' }] },
+          deleteTaskAction('uid4'),
+        );
+        expect(state.tasks).toHaveLength(1);
       });
     });
   });
