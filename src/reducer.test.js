@@ -31,6 +31,13 @@ describe('reducer', () => {
         );
         expect(state.tasks).toHaveLength(1);
       });
+      it('added task has a id', () => {
+        const state = reducer(
+          { taskTitle: 'new Title', tasks: [] },
+          addTaskAction(),
+        );
+        expect(state.tasks[0].id).toEqual(0);
+      });
     });
     context('without taskTitle', () => {});
   });
