@@ -5,7 +5,9 @@ export const initialState = {
 };
 
 const reducer = (state = initialState, action) => {
-  return { ...state };
+  const { type, payload } = action;
+
+  return state;
 };
 
 export default reducer;
