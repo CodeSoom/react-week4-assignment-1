@@ -1,9 +1,11 @@
-const initialState = {
+export const initialState = {
   newId: 0,
   taskTitle: '',
   tasks: [],
 };
 
-module.exports = {
-  initialState,
+const reducer = (state = initialState, action) => {
+  return { ...state };
 };
+
+export default reducer;
