@@ -1,5 +1,9 @@
 import reducer from './reducer';
-import { addTaskAction, changeTaskTitleAction } from './actions';
+import {
+  addTaskAction,
+  changeTaskTitleAction,
+  deleteTaskAction,
+} from './actions';
 
 describe('reducer', () => {
   it('should return the initial state', () => {

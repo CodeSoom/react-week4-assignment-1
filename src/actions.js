@@ -12,7 +12,15 @@ const changeTaskTitleAction = (title) => ({
   },
 });
 
+const deleteTaskAction = (id) => ({
+  type: 'DELETE_TASK',
+  payload: {
+    id,
+  },
+});
+
 module.exports = {
   addTaskAction,
   changeTaskTitleAction,
+  deleteTaskAction,
 };
