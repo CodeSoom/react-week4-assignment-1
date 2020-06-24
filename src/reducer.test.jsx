@@ -1,6 +1,12 @@
 import reducer from './reducer';
 
-import { tasks } from '../__fixture__/data';
+import tasks from '../__fixture__/data';
+
+function deleteTaskReducer() {
+  return {
+    tasks: tasks.filter((task) => task.id !== 1),
+  };
+}
 
 describe('reducer', () => {
   describe('changeTitle', () => {
