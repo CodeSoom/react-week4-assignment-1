@@ -12,7 +12,7 @@ describe('reducer', () => {
       },
     };
     const state = reducer(previousState, action);
-    
+
     expect(state.taskTitle).toBe('Update Task Title!');
   });
 
@@ -27,7 +27,7 @@ describe('reducer', () => {
         type: 'addTask',
       };
       const state = reducer(previousState, action);
-  
+
       expect(state.tasks).toHaveLength(1);
       expect(state.tasks[0].id).not.toBeUndefined();
       expect(state.tasks[0].title).toBe('Add Task');
@@ -43,7 +43,7 @@ describe('reducer', () => {
         type: 'addTask',
       };
       const state = reducer(previousState, action);
-      
+
       expect(state.tasks).toHaveLength(0);
     });
   });
@@ -65,7 +65,7 @@ describe('reducer', () => {
         },
       };
       const state = reducer(previousState, action);
-      
+
       expect(state.tasks).toHaveLength(0);
     });
 

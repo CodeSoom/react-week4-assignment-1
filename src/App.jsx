@@ -12,7 +12,7 @@ const initialState = {
 };
 
 function updateTaskTitle(state, value) {
-  return{
+  return {
     ...state,
     taskTitle: value,
   };
