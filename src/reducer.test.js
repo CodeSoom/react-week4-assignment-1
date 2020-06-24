@@ -38,6 +38,18 @@ describe('reducer', () => {
       };
       expect(changeTaskTitleAction(taskTitle)).toEqual(expectedAction);
     });
+
+    it('return new state with new taskTitle', () => {
+      const state = reducer(
+        {
+          newId: 0,
+          taskTitle: '',
+          tasks: [],
+        },
+        changeTaskTitleAction('new Title'),
+      );
+      expect(state.taskTitle).toEqual('new Title');
+    });
   });
 
   describe('DELETE_TASK', () => {
