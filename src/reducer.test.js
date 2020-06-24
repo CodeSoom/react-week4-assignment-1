@@ -33,7 +33,7 @@ describe('reducer', () => {
       });
       it('added task has a id', () => {
         const state = reducer(
-          { taskTitle: 'new Title', tasks: [] },
+          { newId: 0, taskTitle: 'new Title', tasks: [] },
           addTaskAction(),
         );
         expect(state.tasks[0].id).toEqual(0);
