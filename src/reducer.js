@@ -13,6 +13,16 @@ const reducer = (state = initialState, action) => {
       taskTitle: payload.title,
     };
   }
+  if (type === 'ADD_TASK') {
+    return {
+      ...state,
+      tasks: [
+        {
+          title: payload.title,
+        },
+      ],
+    };
+  }
   return state;
 };
 
