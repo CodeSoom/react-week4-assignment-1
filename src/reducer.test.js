@@ -19,9 +19,6 @@ describe('reducer', () => {
       const taskTitle = 'New TItle';
       const expectedAction = {
         type: 'ADD_TASK',
-        payload: {
-          title: taskTitle,
-        },
       };
       expect(addTaskAction(taskTitle)).toEqual(expectedAction);
     });
@@ -29,8 +26,8 @@ describe('reducer', () => {
     context('with taskTitle', () => {
       it('return new state with new tasks', () => {
         const state = reducer(
-          { taskTitle: '', tasks: [] },
-          addTaskAction('new Title'),
+          { taskTitle: 'new Title', tasks: [] },
+          addTaskAction(),
         );
         expect(state.tasks).toHaveLength(1);
       });

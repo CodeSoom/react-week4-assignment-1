@@ -18,7 +18,7 @@ const reducer = (state = initialState, action) => {
       ...state,
       tasks: [
         {
-          title: payload.title,
+          title: state.taskTitle,
         },
       ],
     };

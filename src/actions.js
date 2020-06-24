@@ -1,8 +1,5 @@
-const addTaskAction = (title) => ({
+const addTaskAction = () => ({
   type: 'ADD_TASK',
-  payload: {
-    title,
-  },
 });
 
 const changeTaskTitleAction = (title) => ({
