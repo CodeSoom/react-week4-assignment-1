@@ -2,12 +2,6 @@ import reducer from './reducer';
 
 import tasks from '../__fixture__/data';
 
-function deleteTaskReducer() {
-  return {
-    tasks: tasks.filter((task) => task.id !== 1),
-  };
-}
-
 describe('reducer', () => {
   describe('changeTitle', () => {
     it('change a new task title', () => {
@@ -101,7 +95,7 @@ describe('reducer', () => {
           },
         };
 
-        const newState = deleteTaskReducer(prevState, action);
+        const newState = reducer(prevState, action);
 
         expect(newState.tasks).toHaveLength(tasks.length - 1);
       });

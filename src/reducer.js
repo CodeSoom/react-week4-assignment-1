@@ -9,7 +9,7 @@ export default function reducer(state, action) {
   if (action.type === 'addTask') {
     const { newId, taskTitle, tasks } = state;
 
-    if(!taskTitle) {
+    if (!taskTitle) {
       return state;
     }
 
@@ -18,6 +18,15 @@ export default function reducer(state, action) {
       newId: newId + 1,
       taskTitle: '',
       tasks: [...tasks, { id: newId, title: taskTitle }],
+    };
+  }
+
+  if (action.type === 'deleteTask') {
+    const { tasks } = state;
+
+    return {
+      ...state,
+      tasks: tasks.filter((task) => task.id !== action.payload.id),
     };
   }
 
