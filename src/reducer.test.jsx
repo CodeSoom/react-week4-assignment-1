@@ -1,17 +1,5 @@
 import reducer from './reducer';
 
-function addTaskReducer() {
-  return {
-    taskTitle: '',
-    tasks: [
-      {
-        id: 100,
-        title: '할 일4',
-      },
-    ],
-  };
-}
-
 describe('reducer', () => {
   describe('changeTitle', () => {
     it('change a new task title', () => {
@@ -37,6 +25,7 @@ describe('reducer', () => {
     context('with taskTitle', () => {
       it('clear task title', () => {
         const prevState = {
+          newId: 100,
           taskTitle: '할 일4',
           tasks: [],
         };
@@ -45,13 +34,14 @@ describe('reducer', () => {
           type: 'addTask',
         };
 
-        const newState = addTaskReducer(prevState, action);
+        const newState = reducer(prevState, action);
 
         expect(newState.taskTitle).toBe('');
       });
 
       it('appends a new task into tasks', () => {
         const prevState = {
+          newId: 100,
           taskTitle: '할 일4',
           tasks: [],
         };
@@ -60,7 +50,7 @@ describe('reducer', () => {
           type: 'addTask',
         };
 
-        const newState = addTaskReducer(prevState, action);
+        const newState = reducer(prevState, action);
 
         expect(newState.tasks).toHaveLength(1);
         expect(newState.tasks[0].id).not.toBeUndefined();
