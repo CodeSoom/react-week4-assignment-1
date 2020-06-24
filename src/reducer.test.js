@@ -57,7 +57,15 @@ describe('reducer', () => {
         expect(state.tasks[1].title).toEqual('new Title');
       });
     });
-    context('without taskTitle', () => {});
+    context('without taskTitle', () => {
+      it("dosn't work", () => {
+        const state = reducer(
+          { newId: 0, taskTitle: '', tasks: [] },
+          addTaskAction(),
+        );
+        expect(state.tasks).toHaveLength(0);
+      });
+    });
   });
 
   describe('CHANGE_TITLE', () => {
