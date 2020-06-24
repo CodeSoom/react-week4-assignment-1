@@ -22,4 +22,17 @@ describe('reducer', () => {
       expect(addTaskAction(taskTitle)).toEqual(expectedAction);
     });
   });
+
+  describe('CHANGE_TITLE', () => {
+    it('should create an action to change title', () => {
+      const taskTitle = 'New TItle';
+      const expectedAction = {
+        type: 'CHANGE_TITLE',
+        payload: {
+          title: taskTitle,
+        },
+      };
+      expect(changeTaskTitleAction(taskTitle)).toEqual(expectedAction);
+    });
+  });
 });
