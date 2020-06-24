@@ -1,5 +1,7 @@
 import reducer from './reducer';
 
+import { tasks } from '../__fixture__/data';
+
 describe('reducer', () => {
   describe('changeTitle', () => {
     it('change a new task title', () => {
@@ -79,7 +81,24 @@ describe('reducer', () => {
 
   describe('deleteTask', () => {
     context('with task ID', () => {
-      it('remove the task from tasks', () => {});
+      it('remove the task from tasks', () => {
+        const prevState = {
+          newId: 100,
+          taskTitle: '',
+          tasks,
+        };
+
+        const action = {
+          type: 'deleteTask',
+          payload: {
+            id: 1,
+          },
+        };
+
+        const newState = deleteTaskReducer(prevState, action);
+
+        expect(newState.tasks).toHaveLength(tasks.length - 1);
+      });
     });
     context('without task ID', () => {
       it('happens nothing', () => {});
