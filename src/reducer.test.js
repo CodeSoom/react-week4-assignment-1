@@ -24,7 +24,7 @@ describe('reducer', () => {
     });
 
     context('with taskTitle', () => {
-      it('return new state with new tasks', () => {
+      it('return new state with new task', () => {
         const state = reducer(
           { taskTitle: 'new Title', tasks: [] },
           addTaskAction(),
@@ -37,6 +37,22 @@ describe('reducer', () => {
           addTaskAction(),
         );
         expect(state.tasks[0].id).toEqual(0);
+      });
+      it('return new state with new task and old task', () => {
+        const state = reducer(
+          {
+            newId: 1,
+            taskTitle: 'new Title',
+            tasks: [
+              {
+                id: 0,
+                title: 'old Task',
+              },
+            ],
+          },
+          addTaskAction(),
+        );
+        expect(state.tasks).toHaveLength(2);
       });
     });
     context('without taskTitle', () => {});
