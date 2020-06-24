@@ -2,7 +2,7 @@ import React from 'react';
 
 import { render, fireEvent, screen } from '@testing-library/react';
 
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import InputContainer from './InputContainer';
 
@@ -21,6 +21,9 @@ const dispatch = jest.fn();
 beforeEach(() => {
   dispatch.mockClear();
   useDispatch.mockImplementation(() => dispatch);
+  useSelector.mockImplementation((selector) => selector({
+    taskTitle: '오늘 할 일',
+  }));
 });
 
 test('할 일을 입력한다', () => {
