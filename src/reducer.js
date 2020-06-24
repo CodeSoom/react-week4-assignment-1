@@ -1,5 +1,5 @@
 const initialState = {
-  newId: 100,
+  newId: 1,
   taskTitle: '',
   tasks: [],
 };
