@@ -101,7 +101,24 @@ describe('reducer', () => {
       });
     });
     context('without task ID', () => {
-      it('happens nothing', () => {});
+      it('happens nothing', () => {
+        const prevState = {
+          newId: 100,
+          taskTitle: '',
+          tasks,
+        };
+
+        const action = {
+          type: 'deleteTask',
+          payload: {
+            id: -1,
+          },
+        };
+
+        const newState = reducer(prevState, action);
+
+        expect(newState.tasks).toHaveLength(tasks.length);
+      });
     });
   });
 });
