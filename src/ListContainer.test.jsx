@@ -52,8 +52,8 @@ test('할 일을 완료한다', () => {
   useDispatch.mockImplementation(() => dispatch);
 
   // when
-  const { taskDoneButtons } = renderListContainer();
-  taskDoneButtons.forEach((button) => fireEvent.click(button));
+  const { doneButtons } = renderListContainer();
+  doneButtons.forEach((button) => fireEvent.click(button));
 
   // then
   expect(dispatch).toBeCalledTimes(2);
