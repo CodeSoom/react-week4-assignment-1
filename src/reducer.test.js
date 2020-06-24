@@ -35,4 +35,17 @@ describe('reducer', () => {
       expect(changeTaskTitleAction(taskTitle)).toEqual(expectedAction);
     });
   });
+
+  describe('DELETE_TASK', () => {
+    it('should create an action to delete a task', () => {
+      const id = 1;
+      const expectedAction = {
+        type: 'DELETE_TASK',
+        payload: {
+          id,
+        },
+      };
+      expect(deleteTaskAction(id)).toEqual(expectedAction);
+    });
+  });
 });
