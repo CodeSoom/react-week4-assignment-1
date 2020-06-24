@@ -2,10 +2,9 @@ import React from 'react';
 
 import { render, fireEvent, screen } from '@testing-library/react';
 
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import App from './App';
-import { useDispatch } from '../__mocks__/react-redux';
 
 jest.mock('react-redux');
 
