@@ -100,5 +100,15 @@ describe('reducer', () => {
       };
       expect(deleteTaskAction(id)).toEqual(expectedAction);
     });
+
+    context('with id', () => {
+      it('return new state without removed task', () => {
+        const state = reducer(
+          { taskTitle: '', tasks: [{ id: 0, title: 'remove task' }] },
+          deleteTaskAction(0),
+        );
+        expect(state.tasks).toHaveLength(0);
+      });
+    });
   });
 });
