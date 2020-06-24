@@ -25,6 +25,17 @@ describe('reducer', () => {
       };
       expect(addTaskAction(taskTitle)).toEqual(expectedAction);
     });
+
+    context('with taskTitle', () => {
+      it('return new state with new tasks', () => {
+        const state = reducer(
+          { taskTitle: '', tasks: [] },
+          addTaskAction('new Title'),
+        );
+        expect(state.tasks).toHaveLength(1);
+      });
+    });
+    context('without taskTitle', () => {});
   });
 
   describe('CHANGE_TITLE', () => {
@@ -41,11 +52,7 @@ describe('reducer', () => {
 
     it('return new state with new taskTitle', () => {
       const state = reducer(
-        {
-          newId: 0,
-          taskTitle: '',
-          tasks: [],
-        },
+        { taskTitle: '' },
         changeTaskTitleAction('new Title'),
       );
       expect(state.taskTitle).toEqual('new Title');
