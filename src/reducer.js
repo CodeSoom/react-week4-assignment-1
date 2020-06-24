@@ -14,11 +14,11 @@ const reducer = (state = initialState, action) => {
     };
   }
   if (type === 'ADD_TASK') {
-    console.log(state);
     return {
       ...state,
       newId: state.newId + 1,
       tasks: [
+        ...state.tasks,
         {
           id: state.newId,
           title: state.taskTitle,
