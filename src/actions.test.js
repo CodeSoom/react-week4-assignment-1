@@ -15,7 +15,7 @@ test('create addTask action', () => {
   const action = addTask();
   // then
   expect(action.type).toBe('addTask');
-  expect(action.payload).toBeNull();
+  expect(action.payload).toEqual({});
 });
 
 test('create deleteTask action', () => {

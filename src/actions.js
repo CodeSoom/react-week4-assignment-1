@@ -1,7 +1,16 @@
-const updateTaskTitle = () => {};
+const updateTaskTitle = (taskTitle) => ({
+  type: 'updateTaskTitle',
+  payload: { taskTitle },
+});
 
-const addTask = () => {};
+const addTask = () => ({
+  type: 'addTask',
+  payload: {},
+});
 
-const deleteTask = () => {};
+const deleteTask = (id) => ({
+  type: 'deleteTask',
+  payload: { id },
+});
 
 export { updateTaskTitle, addTask, deleteTask };
