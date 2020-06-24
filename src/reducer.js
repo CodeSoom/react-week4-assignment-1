@@ -1,7 +1,14 @@
-const reducer = () => {
-  const taskTitle = 'Update Task Title!';
+// Redux Action
+// - type(string)
+// - payload => object => { taskTitle }
 
-  return taskTitle;
+const reducer = (state, action) => {
+  if(action.type === 'updateTaskTitle'){
+    return {
+      state,
+      taskTitle: action.payload.taskTitle,
+    };
+  };
 };
 
 export default reducer;
