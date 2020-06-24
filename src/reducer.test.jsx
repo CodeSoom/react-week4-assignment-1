@@ -23,9 +23,37 @@ describe('reducer', () => {
 
   describe('addTask', () => {
     context('with taskTitle', () => {
-      it('clear task title', () => {});
+      it('clear task title', () => {
+        const prevState = {
+          taskTitle: '할 일4',
+          tasks: [],
+        };
 
-      it('appends a new task into tasks', () => {});
+        const action = {
+          type: 'addTask',
+        };
+
+        const newState = addTaskReducer(prevState, action);
+
+        expect(newState.taskTitle).toBe('');
+      });
+
+      it('appends a new task into tasks', () => {
+        const prevState = {
+          taskTitle: '할 일4',
+          tasks: [],
+        };
+
+        const action = {
+          type: 'addTask',
+        };
+
+        const newState = addTaskReducer(prevState, action);
+
+        expect(newState.tasks).toHaveLength(1);
+        expect(newState.tasks[0].id).not.toBeUndefined();
+        expect(newState.tasks[0].title).toBe('할 일4');
+      });
     });
 
     context('without taskTitle', () => {
