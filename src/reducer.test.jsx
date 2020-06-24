@@ -1,8 +1,4 @@
-function changeTitleReducer() {
-  return {
-    taskTitle: 'New Title',
-  };
-}
+import reducer from './reducer';
 
 describe('reducer', () => {
   describe('changeTitle', () => {
@@ -19,7 +15,7 @@ describe('reducer', () => {
         },
       };
 
-      const newState = changeTitleReducer(prevState, action);
+      const newState = reducer(prevState, action);
 
       expect(newState.taskTitle).toBe('New Title');
     });
