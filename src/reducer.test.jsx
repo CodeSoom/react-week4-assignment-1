@@ -1,5 +1,17 @@
 import reducer from './reducer';
 
+function addTaskReducer() {
+  return {
+    taskTitle: '',
+    tasks: [
+      {
+        id: 100,
+        title: '할 일4',
+      },
+    ],
+  };
+}
+
 describe('reducer', () => {
   describe('changeTitle', () => {
     it('change a new task title', () => {
