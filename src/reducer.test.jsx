@@ -2,6 +2,8 @@ import reducer from './reducer';
 
 import tasks from '../__fixture__/data';
 
+import { changeTitle, addTask, deleteTask } from './action';
+
 describe('reducer', () => {
   describe('changeTitle', () => {
     it('change a new task title', () => {
@@ -10,14 +12,7 @@ describe('reducer', () => {
         tasks: [],
       };
 
-      const action = {
-        type: 'changeTitle',
-        payload: {
-          taskTitle: 'New Title',
-        },
-      };
-
-      const newState = reducer(prevState, action);
+      const newState = reducer(prevState, changeTitle('New Title'));
 
       expect(newState.taskTitle).toBe('New Title');
     });
@@ -31,12 +26,7 @@ describe('reducer', () => {
           taskTitle: '할 일4',
           tasks: [],
         };
-
-        const action = {
-          type: 'addTask',
-        };
-
-        const newState = reducer(prevState, action);
+        const newState = reducer(prevState, addTask());
 
         expect(newState.taskTitle).toBe('');
       });
@@ -48,11 +38,7 @@ describe('reducer', () => {
           tasks: [],
         };
 
-        const action = {
-          type: 'addTask',
-        };
-
-        const newState = reducer(prevState, action);
+        const newState = reducer(prevState, addTask());
 
         expect(newState.tasks).toHaveLength(1);
         expect(newState.tasks[0].id).not.toBeUndefined();
@@ -68,11 +54,7 @@ describe('reducer', () => {
           tasks: [],
         };
 
-        const action = {
-          type: 'addTask',
-        };
-
-        const newState = reducer(prevState, action);
+        const newState = reducer(prevState, addTask());
 
         expect(newState.tasks).toHaveLength(0);
       });
@@ -88,14 +70,7 @@ describe('reducer', () => {
           tasks,
         };
 
-        const action = {
-          type: 'deleteTask',
-          payload: {
-            id: 1,
-          },
-        };
-
-        const newState = reducer(prevState, action);
+        const newState = reducer(prevState, deleteTask(1));
 
         expect(newState.tasks).toHaveLength(tasks.length - 1);
       });
@@ -108,14 +83,7 @@ describe('reducer', () => {
           tasks,
         };
 
-        const action = {
-          type: 'deleteTask',
-          payload: {
-            id: -1,
-          },
-        };
-
-        const newState = reducer(prevState, action);
+        const newState = reducer(prevState, deleteTask(-1));
 
         expect(newState.tasks).toHaveLength(tasks.length);
       });
@@ -125,6 +93,7 @@ describe('reducer', () => {
   describe('non-exited action type', () => {
     it('change a new task title', () => {
       const prevState = {
+        newId: 100,
         taskTitle: '',
         tasks: [],
       };
