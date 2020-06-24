@@ -107,4 +107,20 @@ describe('reducer', () => {
       expect(newState).toBe(prevState);
     });
   });
+
+  describe('without parameter', () => {
+    const newState = reducer();
+
+    it('newId is 100', () => {
+      expect(newState.newId).toBe(100);
+    });
+
+    it('taskTitle is empty', () => {
+      expect(newState.taskTitle).toBe('');
+    });
+
+    it('tasks is empty', () => {
+      expect(newState.tasks).toHaveLength(0);
+    });
+  });
 });
