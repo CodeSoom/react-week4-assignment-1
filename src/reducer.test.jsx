@@ -121,4 +121,21 @@ describe('reducer', () => {
       });
     });
   });
+
+  describe('non-exited action type', () => {
+    it('change a new task title', () => {
+      const prevState = {
+        taskTitle: '',
+        tasks: [],
+      };
+
+      const action = {
+        type: 'non-exited action type',
+      };
+
+      const newState = reducer(prevState, action);
+
+      expect(newState).toBe(prevState);
+    });
+  });
 });
