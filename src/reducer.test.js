@@ -47,4 +47,46 @@ describe('reducer', () => {
       expect(state.tasks).toHaveLength(0);
     });
   });
+
+  describe('deleteTask', () => {
+    context('with existed task id', () => {
+      const previousState = {
+        tasks: [
+          {
+            id: 100,
+            title: 'Delete Task?',
+          },
+        ],
+      };
+      const action = {
+        type: 'deleteTask',
+        payload: {
+          id: 100,
+        },
+      };
+      const state = reducer(previousState, action);
+      
+      expect(state.tasks).toHaveLength(0);
+    });
+
+    context('without existed task id', () => {
+      const previousState = {
+        tasks: [
+          {
+            id: 100,
+            title: 'Delete Task?',
+          },
+        ],
+      };
+      const action = {
+        type: 'deleteTask',
+        payload: {
+          id: 1,
+        },
+      };
+      const state = reducer(previousState, action);
+
+      expect(state.tasks).toHaveLength(1);
+    });
+  });
 });
