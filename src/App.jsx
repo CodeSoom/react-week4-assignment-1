@@ -1,51 +1,37 @@
-import React, { useState } from 'react';
+import React from 'react';
+
+import { useDispatch, useSelector } from 'react-redux';
 
 import Page from './Page';
 
-const initialState = {
-  newId: 100,
-  taskTitle: '',
-  tasks: [],
-};
-
-const updateTaskTitle = (state, taskTitle) => ({
-  ...state,
-  taskTitle,
-});
-
-const addTask = (state) => ({
-  ...state,
-  newId: state.newId + 1,
-  taskTitle: '',
-  tasks: [...state.tasks, { id: state.newId, title: state.taskTitle }],
-});
-
-const deleteTask = (state, id) => ({
-  ...state,
-  tasks: state.tasks.filter((task) => task.id !== id),
-});
+import { updateTaskTitle, addTask, deleteTask } from './actions';
 
 export default function App() {
-  const [state, setState] = useState(initialState);
+  const { taskTitle, tasks } = useSelector((state) => ({
+    taskTitle: state.taskTitle,
+    tasks: state.tasks,
+  }));
+
+  const dispatch = useDispatch();
 
   function handleChangeTitle(event) {
-    setState(updateTaskTitle(state, event.target.value));
+    dispatch(updateTaskTitle(event.target.value));
   }
 
   function handleClickAddTask() {
-    setState(addTask(state));
+    dispatch(addTask());
   }
 
   function handleClickDeleteTask(id) {
-    setState(deleteTask(state, id));
+    dispatch(deleteTask(id));
   }
 
   return (
     <Page
-      taskTitle={state.taskTitle}
+      taskTitle={taskTitle}
       onChangeTitle={handleChangeTitle}
       onClickAddTask={handleClickAddTask}
-      tasks={state.tasks}
+      tasks={tasks}
       onClickDeleteTask={handleClickDeleteTask}
     />
   );
