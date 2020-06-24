@@ -5,6 +5,10 @@ const initState = {
 };
 
 export default function reducer(state = initState, action) {
+  if (!action) {
+    return state;
+  }
+
   if (action.type === 'changeTitle') {
     return {
       ...state,
