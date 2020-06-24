@@ -1,3 +1,9 @@
+function changeTitleReducer() {
+  return {
+    taskTitle: 'New Title',
+  };
+}
+
 describe('reducer', () => {
   describe('changeTitle', () => {
     it('change a new task title', () => {
