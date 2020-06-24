@@ -4,7 +4,7 @@ const initialState = {
   tasks: [],
 };
 
-const reduce = {
+const handlers = {
   updateTaskTitle: (state, { taskTitle }) => (taskTitle ? {
     ...state,
     taskTitle,
@@ -24,5 +24,5 @@ const reduce = {
 };
 
 export default function reducer(state = initialState, action) {
-  return reduce[action.type](state, action.payload);
+  return handlers[action.type] ? handlers[action.type](state, action.payload) : state;
 }
