@@ -6,6 +6,8 @@ import { render } from '@testing-library/react';
 
 import InputContainer from './InputContainer';
 
+jest.mock('react-redux');
+
 describe('<InputContainer />', () => {
   context('When the user does nothing', () => {
     it('shows "할 일을 입력해 주세요"', () => {
