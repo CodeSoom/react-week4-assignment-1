@@ -75,6 +75,7 @@ describe('reducer', () => {
         expect(newState.tasks).toHaveLength(tasks.length - 1);
       });
     });
+
     context('without task ID', () => {
       it('happens nothing', () => {
         const prevState = {
@@ -91,7 +92,7 @@ describe('reducer', () => {
   });
 
   describe('non-exited action type', () => {
-    it('change a new task title', () => {
+    it('happens nothing', () => {
       const prevState = {
         newId: 100,
         taskTitle: '',
