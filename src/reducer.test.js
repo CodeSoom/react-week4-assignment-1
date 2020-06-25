@@ -3,6 +3,7 @@ import reducer from './reducer';
 import {
   updateTaskTitle,
   addTask,
+  deleteTask,
 } from './actions';
 
 describe('reducer', () => {
@@ -35,6 +36,19 @@ describe('reducer', () => {
         tasks: [],
       }, addTask());
       expect(newState.taskTitle).toBe('');
+    });
+  });
+
+  describe('deleteTask', () => {
+    it('할 일이 삭제된 상태를 반환한다.', () => {
+      const newState = reducer({
+        newId: 10,
+        taskTitle: '',
+        tasks: [
+          { id: 1, title: 'New Task' },
+        ],
+      }, deleteTask(1));
+      expect(newState.tasks).toHaveLength(0);
     });
   });
 });
