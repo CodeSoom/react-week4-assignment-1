@@ -10,14 +10,36 @@ import { changeTitle, addTask } from './action';
 
 jest.mock('react-redux');
 
+const initState = {
+  taskTitle: '',
+};
+
+function mockUseSelector(state = initState) {
+  useSelector.mockImplementation((selector) => selector({
+    taskTitle: state.taskTitle,
+  }));
+}
+
+const dispatch = jest.fn();
+
+function renderInputContainer() {
+  return render(<InputContainer />);
+}
+
 describe('<InputContainer />', () => {
+  beforeEach(() => {
+    useDispatch.mockImplementation(() => dispatch);
+  });
+
+  afterEach(() => {
+    dispatch.mockClear();
+  });
+
   context('When the user does nothing', () => {
     it('shows "할 일을 입력해 주세요"', () => {
-      useSelector.mockImplementation((selector) => selector({
-        taskTitle: '',
-      }));
+      mockUseSelector();
 
-      const { getByPlaceholderText } = render(<InputContainer />);
+      const { getByPlaceholderText } = renderInputContainer();
 
       expect(
         getByPlaceholderText(/할 일을 입력해 주세요/i),
@@ -25,7 +47,7 @@ describe('<InputContainer />', () => {
     });
 
     it('shows a "추가" button', () => {
-      const { container } = render(<InputContainer />);
+      const { container } = renderInputContainer();
 
       expect(container).toHaveTextContent('추가');
     });
@@ -33,13 +55,9 @@ describe('<InputContainer />', () => {
 
   context('When a user enters a task called "바뀐다"', () => {
     it('shows "바뀐다" in the input', () => {
-      useSelector.mockImplementation((selector) => selector({}));
+      mockUseSelector({});
 
-      const dispatch = jest.fn();
-
-      useDispatch.mockImplementation(() => dispatch);
-
-      const { getByLabelText } = render(<InputContainer />);
+      const { getByLabelText } = renderInputContainer();
 
       fireEvent.change(getByLabelText(/할 일/i), {
         target: {
@@ -57,13 +75,9 @@ describe('<InputContainer />', () => {
 
   context('when a user add a task called "할 일4"', () => {
     it('clear task title', () => {
-      useSelector.mockImplementation((selector) => selector({
-        taskTitle: '할 일4',
-      }));
+      mockUseSelector({ taskTitle: '할 일4' });
 
-      const { getByLabelText, getByText, getByPlaceholderText } = render(
-        <InputContainer />,
-      );
+      const { getByLabelText, getByText, getByPlaceholderText } = renderInputContainer();
 
       const inputTodo = getByLabelText(/할 일/i);
 
@@ -77,15 +91,9 @@ describe('<InputContainer />', () => {
     });
 
     it('occurs a addTask action', () => {
-      useSelector.mockImplementation((selector) => selector({
-        taskTitle: '할 일4',
-      }));
+      mockUseSelector({ taskTitle: '할 일4' });
 
-      const dispatch = jest.fn();
-
-      useDispatch.mockImplementation(() => dispatch);
-
-      const { getByLabelText, getByText } = render(<InputContainer />);
+      const { getByLabelText, getByText } = renderInputContainer();
 
       const inputTodo = getByLabelText(/할 일/i);
 
