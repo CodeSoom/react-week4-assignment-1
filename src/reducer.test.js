@@ -18,23 +18,23 @@ describe('reducer', () => {
   });
 
   context('addTask', () => {
-    it('새로운 할 일을 추가한 상태를 반환한다.', () => {
-      const newState = reducer({
+    function reduceAddTask(taskTitle) {
+      return reducer({
         newId: 1,
-        taskTitle: 'New Task',
+        taskTitle,
         tasks: [],
       }, addTask());
+    }
+
+    it('새로운 할 일을 추가한 상태를 반환한다.', () => {
+      const newState = reduceAddTask('New Task');
 
       expect(newState.newId).toBe(2);
       expect(newState.tasks).not.toHaveLength(0);
     });
 
     it('추가한 뒤 taskTitle을 초기화 한다', () => {
-      const newState = reducer({
-        newId: 1,
-        taskTitle: 'New Task',
-        tasks: [],
-      }, addTask());
+      const newState = reduceAddTask('New Task');
       expect(newState.taskTitle).toBe('');
     });
   });
