@@ -25,7 +25,15 @@ describe('reducer', () => {
   describe('add task', () => {
     context('with task title', () => {
       it('append a new task into tasks', () => {
+        const state = reducer({
+          newId: 2,
+          taskTitle: 'test',
+          tasks: [],
+        }, addTask());
 
+        expect(state.taskTitle).toBe('');
+        expect(state.tasks.length).toEqual(3);
+        expect(state.tasks[0].taskTitle).toBe(tasks[0].taskTitle);
       });
       it('clears task title', () => {
         const state = reducer({
