@@ -40,7 +40,7 @@ describe('reducer', () => {
       });
     });
 
-    context('without new task title', () => {
+    context('with null task title', () => {
       it('do not work', () => {
         // given
         const taskTitle = null;
