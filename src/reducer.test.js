@@ -44,6 +44,18 @@ describe('reducer', () => {
         expect(newState.newId).toBe(1 + 1);
         expect(newState.tasks[0].title).toBe('첫 번째 할 일');
       });
+
+      it('taskTitle이 초기화된다.', () => {
+        const newState = reducer({
+          newId: 1,
+          taskTitle: '첫 번째 할 일',
+          tasks: [],
+        }, {
+          type: 'addTask',
+        });
+
+        expect(newState.taskTitle).toBe('');
+      });
     });
   });
 });
