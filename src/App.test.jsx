@@ -24,7 +24,7 @@ beforeEach(() => {
   useDispatch.mockImplementation(() => dispatch);
 });
 
-test('아무런 To-do가 등록되어 있지 않으면 "할 일이 없어요!"라는 메시지가 보인다', () => {
+test('할 일이 없다면 안내 메시지를 출력한다', () => {
   // given
   useSelector.mockImplementation((selector) => selector({
     tasks: [],
