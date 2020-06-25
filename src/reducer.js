@@ -11,5 +11,11 @@ export default function reducer(state = initialState, action) {
       taskTitle: action.payload.taskTitle,
     };
   }
+  if (action.type === 'addTask') {
+    return {
+      ...state,
+      tasks: [{ id: 1, title: 'New Title' }],
+    };
+  }
   return state;
 }
