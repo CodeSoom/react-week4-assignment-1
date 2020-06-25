@@ -17,7 +17,7 @@ describe('reducer', () => {
     });
   });
 
-  context('addTask', () => {
+  describe('addTask', () => {
     function reduceAddTask(taskTitle) {
       return reducer({
         newId: 1,
@@ -25,17 +25,25 @@ describe('reducer', () => {
         tasks: [],
       }, addTask());
     }
+    context('할 일이 있으면', () => {
+      it('할 일을 추가한다.', () => {
+        const newState = reduceAddTask('New Task');
 
-    it('새로운 할 일을 추가한 상태를 반환한다.', () => {
-      const newState = reduceAddTask('New Task');
+        expect(newState.newId).toBe(2);
+        expect(newState.tasks).not.toHaveLength(0);
+      });
 
-      expect(newState.newId).toBe(2);
-      expect(newState.tasks).not.toHaveLength(0);
+      it('추가한 뒤 초기화 한다', () => {
+        const newState = reduceAddTask('New Task');
+        expect(newState.taskTitle).toBe('');
+      });
     });
 
-    it('추가한 뒤 taskTitle을 초기화 한다', () => {
-      const newState = reduceAddTask('New Task');
-      expect(newState.taskTitle).toBe('');
+    context('할 일이 없으면', () => {
+      it('아무것도 추가되지 않는다.', () => {
+        const newState = reduceAddTask('');
+        expect(newState.tasks).toHaveLength(0);
+      });
     });
   });
 
