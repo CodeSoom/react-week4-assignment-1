@@ -25,12 +25,22 @@ describe('reducer', () => {
           tasks: [],
         }, {
           type: 'addTask',
-          payload: {
-            taskTitle: '첫 번째 할 일',
-          },
         });
 
         expect(newState.tasks).toHaveLength(1);
+      });
+
+      it('추가된 task에 id가 부여된다.', () => {
+        const newState = reducer({
+          newId: 1,
+          tasks: [],
+        }, {
+          type: 'addTask',
+        });
+
+        expect(newState.tasks[0].id).not.toBeNull();
+        expect(newState.tasks[0].id).not.toBeUndefined();
+        expect(newState.tasks[0].title).toBe('첫 번째 할 일');
       });
     });
   });
