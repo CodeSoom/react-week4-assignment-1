@@ -27,6 +27,18 @@ describe('reducer', () => {
       const newState = reducer(previousState, addTask());
 
       expect(newState.newId).toBe(2);
+      expect(newState.tasks).not.toHaveLength(0);
+    });
+
+    it('추가한 뒤 taskTitle을 초기화 한다', () => {
+      const previousState = {
+        newId: 1,
+        taskTitle: 'New Task',
+        tasks: [],
+      };
+
+      const newState = reducer(previousState, addTask());
+      expect(newState.taskTitle).toBe('');
     });
   });
 });
