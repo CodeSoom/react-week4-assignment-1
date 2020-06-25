@@ -41,5 +41,20 @@ describe('reducer', () => {
       };
       expect(addTaskAction()).toEqual(expectAction);
     });
+
+    context('taskTitle 값이 있으면,', () => {
+      it('새로운 task가 추가된 state를 반환한다', () => {
+        const state = reducer(
+          {
+            newId: 0,
+            taskTitle: 'new task',
+            tasks: [],
+          },
+          addTaskAction(),
+        );
+
+        expect(state.tasks).toHaveLength(1);
+      });
+    });
   });
 });
