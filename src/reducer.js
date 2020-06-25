@@ -1,4 +1,10 @@
-export default function reducer(state, action) {
+const initialState = {
+  newId: 1,
+  taskTitle: '',
+  tasks: [],
+};
+
+export default function reducer(state = initialState, action) {
   const { newId, taskTitle, tasks } = state;
 
   if (action.type === 'updateTaskTitle') {
