@@ -5,10 +5,25 @@ const initialState = {
 };
 export default function reducer(state = initialState, action) {
   const { type, payload } = action;
+  const { newId, taskTitle, tasks } = state;
   if (type === 'CHANGE_TITLE') {
     return {
       ...state,
       taskTitle: payload.title,
+    };
+  }
+
+  if (type === 'ADD_TASK') {
+    return {
+      ...state,
+      newId: newId + 1,
+      tasks: [
+        ...tasks,
+        {
+          id: newId,
+          title: taskTitle,
+        },
+      ],
     };
   }
   return state;
