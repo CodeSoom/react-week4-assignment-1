@@ -1,6 +1,6 @@
 import reducer from './reducer';
 
-import { changeTitleAction } from './actions';
+import { changeTitleAction, addTaskAction } from './actions';
 
 describe('reducer', () => {
   it('기본적으로 initialState를 반환한다', () => {

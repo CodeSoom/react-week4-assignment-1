@@ -5,4 +5,8 @@ module.exports = {
       title,
     },
   }),
+
+  addTaskAction: () => ({
+    type: 'ADD_TASK',
+  }),
 };
