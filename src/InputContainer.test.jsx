@@ -6,7 +6,7 @@ import { render, fireEvent } from '@testing-library/react';
 
 import InputContainer from './InputContainer';
 
-import { changeTitle } from './action';
+import { changeTitle, addTask } from './action';
 
 jest.mock('react-redux');
 
@@ -76,6 +76,26 @@ describe('<InputContainer />', () => {
       ).toBeInTheDocument();
     });
 
-    it('occurs a addTask action', () => {});
+    it('occurs a addTask action', () => {
+      useSelector.mockImplementation((selector) => selector({
+        taskTitle: '할 일4',
+      }));
+
+      const dispatch = jest.fn();
+
+      useDispatch.mockImplementation(() => dispatch);
+
+      const { getByLabelText, getByText } = render(<InputContainer />);
+
+      const inputTodo = getByLabelText(/할 일/i);
+
+      fireEvent.change(inputTodo, { target: { value: '할 일4' } });
+
+      fireEvent.click(getByText(/추가/i));
+
+      expect(dispatch).toHaveBeenCalledWith(addTask());
+
+      expect(dispatch).toHaveBeenCalledTimes(1);
+    });
   });
 });
