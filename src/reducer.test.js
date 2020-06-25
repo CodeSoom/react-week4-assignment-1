@@ -1,5 +1,7 @@
 import reducer from './reducer';
 
+import { changeTitleAction } from './actions';
+
 describe('reducer', () => {
   it('기본적으로 initialState를 반환한다.', () => {
     const state = reducer(undefined, {});
