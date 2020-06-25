@@ -16,28 +16,24 @@ describe('reducer', () => {
     });
   });
 
-  describe('addTask', () => {
+  context('addTask', () => {
     it('새로운 할 일을 추가한 상태를 반환한다.', () => {
-      const previousState = {
+      const newState = reducer({
         newId: 1,
         taskTitle: 'New Task',
         tasks: [],
-      };
-
-      const newState = reducer(previousState, addTask());
+      }, addTask());
 
       expect(newState.newId).toBe(2);
       expect(newState.tasks).not.toHaveLength(0);
     });
 
     it('추가한 뒤 taskTitle을 초기화 한다', () => {
-      const previousState = {
+      const newState = reducer({
         newId: 1,
         taskTitle: 'New Task',
         tasks: [],
-      };
-
-      const newState = reducer(previousState, addTask());
+      }, addTask());
       expect(newState.taskTitle).toBe('');
     });
   });
