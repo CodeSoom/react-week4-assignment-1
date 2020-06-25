@@ -6,7 +6,7 @@ import { changeTitle, addTask, deleteTask } from './action';
 
 describe('reducer', () => {
   describe('changeTitle', () => {
-    it('change a new task title', () => {
+    it('change a task title', () => {
       const prevState = {
         taskTitle: '',
         tasks: [],
@@ -19,7 +19,7 @@ describe('reducer', () => {
   });
 
   describe('addTask', () => {
-    context('with taskTitle', () => {
+    context('when taskTitle is not empty', () => {
       it('clear task title', () => {
         const prevState = {
           newId: 100,
@@ -46,7 +46,7 @@ describe('reducer', () => {
       });
     });
 
-    context('without taskTitle', () => {
+    context('when taskTitle is empty', () => {
       it('happens nothing', () => {
         const prevState = {
           newId: 100,
@@ -76,7 +76,7 @@ describe('reducer', () => {
       });
     });
 
-    context('without task ID', () => {
+    context('without non-existent task ID', () => {
       it('happens nothing', () => {
         const prevState = {
           newId: 100,
