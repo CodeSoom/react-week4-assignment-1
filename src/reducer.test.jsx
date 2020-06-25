@@ -1,5 +1,7 @@
 import reducer from './reducer';
 
+import { changeTitle } from './action';
+
 describe('reducer', () => {
   // test('has initialState', () => {
   //   const state = reducer();
@@ -14,7 +16,7 @@ describe('reducer', () => {
     it('changes new task title', () => {
       const state = reducer({
         taskTitle: '',
-      }, changeTitle('change'));
+      }, changeTitle('Change task title'));
 
       expect(state.taskTitle).toBe('Change task title');
     });

@@ -5,5 +5,12 @@ const initialState = {
 };
 
 export default function reducer(state = initialState, action) {
+  if (action.type === 'changeTitle') {
+    return {
+      ...state,
+      taskTitle: action.payload.taskTitle,
+    };
+  }
+
   return state;
 }
