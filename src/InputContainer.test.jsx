@@ -1,10 +1,12 @@
 import React from 'react';
 
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
-import { render } from '@testing-library/react';
+import { render, fireEvent } from '@testing-library/react';
 
 import InputContainer from './InputContainer';
+
+import { changeTitle } from './action';
 
 jest.mock('react-redux');
 
@@ -32,7 +34,7 @@ describe('<InputContainer />', () => {
   context('When a user enters a task called "바뀐다"', () => {
     it('shows "바뀐다" in the input', () => {
       useSelector.mockImplementation((selector) => selector({
-        taskTitle: '',
+
       }));
 
       const dispatch = jest.fn();
