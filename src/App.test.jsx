@@ -35,7 +35,7 @@ test('할 일이 없다면 안내 메시지를 출력한다', () => {
   expect(screen.getByText(/할 일이 없어요!/i)).toBeInTheDocument();
 });
 
-test('할 일을 입력한다', () => {
+test('입력창에 할 일을 입력한다', () => {
   // when
   const { taskInput } = renderApp();
   fireEvent.change(taskInput, { target: { value: '아무것도 하지 않기' } });
@@ -47,7 +47,7 @@ test('할 일을 입력한다', () => {
   });
 });
 
-test('할 일을 추가한다', () => {
+test('추가 버튼을 누르면 할 일을 추가한다', () => {
   // when
   const { taskAddButton } = renderApp();
   fireEvent.click(taskAddButton);
@@ -59,22 +59,15 @@ test('할 일을 추가한다', () => {
   });
 });
 
-test('할 일을 완료한다', () => {
+test('완료 버튼을 누르면 할 일을 완료한다', () => {
   // given
-  useSelector.mockImplementation((selector) => selector({
-    tasks: [{ id: 1, title: '코드숨 과제하기' }, { id: 2, title: '아무것도 하지 않기' }],
-  }));
+  const tasks = [{ id: 1, title: '코드숨 과제하기' }, { id: 2, title: '아무것도 하지 않기' }];
+  useSelector.mockImplementation((selector) => selector({ tasks }));
   // when
   const { taskDoneButtons } = renderApp();
   taskDoneButtons.forEach((button) => fireEvent.click(button));
   // then
-  expect(dispatch).toBeCalledTimes(2);
-  expect(dispatch).toBeCalledWith({
-    type: 'deleteTask',
-    payload: { id: 1 },
-  });
-  expect(dispatch).toBeCalledWith({
-    type: 'deleteTask',
-    payload: { id: 2 },
+  tasks.forEach(({ id }) => {
+    expect(dispatch).toBeCalledWith({ type: 'deleteTask', payload: { id } });
   });
 });
