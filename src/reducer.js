@@ -2,26 +2,29 @@ export function reducer(state, action) {
   if (action.type === 'changeTitle') {
     return {
       ...state,
-      taskTitle: '새로운 할 일',
+      taskTitle: action.payload.taskTitle,
     };
   }
 
-  if (action.type === 'addTask' && state.taskTitle) {
+  if (action.type === 'addTask') {
+    const { newId, taskTitle, tasks } = state;
+
     return {
       ...state,
-      newId: 101,
+      newId: newId + 1,
       taskTitle: '',
-      tasks: [{ id: 100, title: '새로운 할 일' }],
+      tasks: [...tasks, { id: newId, title: taskTitle }],
     };
   }
 
-  if (action.type === 'deleteTask' && action.payload.id === 1) {
+  if (action.type === 'deleteTask') {
+    const { tasks } = state;
+
     return {
       ...state,
-      tasks: [],
+      tasks: tasks.filter((task) => task.id !== action.payload.id),
     };
   }
-
   return state;
 }
 
