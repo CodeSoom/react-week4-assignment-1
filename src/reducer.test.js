@@ -71,4 +71,14 @@ describe('reducer', () => {
       });
     });
   });
+
+  describe('deleteTaskAction은', () => {
+    it('액션을 생성한다', () => {
+      const expectAction = {
+        type: 'DELETE_TASK',
+        payload: { id: 1 },
+      };
+      expect(deleteTaskAction(1)).toEqual(expectAction);
+    });
+  });
 });
