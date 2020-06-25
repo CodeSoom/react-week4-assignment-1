@@ -10,7 +10,7 @@ export default function reducer(state, action) {
     return {
       ...state,
       tasks: [...state.tasks, {
-        title: action.payload.taskTitle,
+        title: state.taskTitle,
       }],
     };
   }
