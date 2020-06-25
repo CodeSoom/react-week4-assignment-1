@@ -7,8 +7,8 @@ import {
 } from './actions';
 
 describe('reducer', () => {
-  context('updateTaskTitle', () => {
-    it('taskTitle을 바꿔 새로운 상태를 반환한다.', () => {
+  describe('updateTaskTitle', () => {
+    it('taskTitle을 바꾼다.', () => {
       const newState = reducer({
         taskTitle: '',
       }, updateTaskTitle('New Task'));
@@ -49,7 +49,7 @@ describe('reducer', () => {
   });
 
   describe('deleteTask', () => {
-    it('할 일이 삭제된 상태를 반환한다.', () => {
+    it('할 일 목록에서 삭제한다.', () => {
       const newState = reducer({
         newId: 10,
         taskTitle: '',
