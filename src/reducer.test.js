@@ -100,5 +100,24 @@ describe('reducer', () => {
         expect(state.tasks).toHaveLength(0);
       });
     });
+    context('아이디가 없으면, ', () => {
+      it('기존의 state를 그대로 반환한다.', () => {
+        const state = reducer(
+          {
+            newId: 100,
+            taskTitle: '',
+            tasks: [
+              {
+                id: 1,
+                title: 'remove task',
+              },
+            ],
+          },
+          deleteTaskAction(5),
+        );
+
+        expect(state.tasks).toHaveLength(1);
+      });
+    });
   });
 });
