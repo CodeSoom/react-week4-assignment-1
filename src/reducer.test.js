@@ -83,6 +83,24 @@ describe('reducer', () => {
       });
     });
 
+    context('without existed task id', () => {
+      it("doesn't work", () => {
+        const newState = reducer({
+          tasks: [
+            {
+              id: 1,
+              title: '첫 번째 할 일',
+            },
+          ],
+        }, {
+          type: 'deleteTask',
+          payload: {
+            id: 2,
+          },
+        });
+
+        expect(newState.tasks).toHaveLength(1);
+      });
     });
   });
 });
