@@ -6,3 +6,9 @@ export function changeTitle(taskTitle) {
     },
   };
 }
+
+export function addTask() {
+  return {
+    type: 'addTask',
+  };
+}

@@ -1,6 +1,6 @@
 import reducer from './reducer';
 
-import { changeTitle } from './action';
+import { changeTitle, addTask } from './action';
 
 describe('reducer', () => {
   // test('has initialState', () => {
