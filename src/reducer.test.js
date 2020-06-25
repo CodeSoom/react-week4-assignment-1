@@ -1,5 +1,7 @@
 import reducer from './reducer';
 
+import { updateTaskTitle, addTask } from './actions';
+
 describe('reducer', () => {
   describe('updateTaskTitle', () => {
     it('should return new state with new task title', () => {
@@ -23,19 +25,11 @@ describe('reducer', () => {
   describe('addTask', () => {
     it('should return new state with a new task', () => {
       const previousState = {
-        taskTitle: '',
-        task: [],
+        taskTitle: 'New Title',
+        tasks: [],
       };
 
-      const action = {
-        type: 'addTask',
-        payload: {
-          taskTitle: 'New Title',
-          tasks: ['New Title'],
-        },
-      };
-
-      const state = reducer(previousState, action);
+      const state = reducer(previousState, addTask());
 
       expect(state.tasks).toHaveLength(1);
       expect(state.tasks[0].title).toBe('New Title');
