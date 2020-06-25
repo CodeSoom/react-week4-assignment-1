@@ -56,5 +56,19 @@ describe('reducer', () => {
         expect(state.tasks).toHaveLength(1);
       });
     });
+    context('taskTitle 값이 없으면,', () => {
+      it('기존 state를 반환한다', () => {
+        const state = reducer(
+          {
+            newId: 0,
+            taskTitle: '',
+            tasks: [],
+          },
+          addTaskAction(),
+        );
+
+        expect(state.tasks).toHaveLength(0);
+      });
+    });
   });
 });
