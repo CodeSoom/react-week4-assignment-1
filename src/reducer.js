@@ -1,3 +1,10 @@
 export default function reducer(state, action) {
-  return {};
+  if (action.type === 'updateTaskTitle') {
+    return {
+      ...state,
+      taskTitle: action.payload.taskTitle,
+    };
+  }
+
+  return state;
 }
