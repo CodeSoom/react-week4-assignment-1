@@ -53,7 +53,14 @@ describe('reducer', () => {
     });
     context('without task title', () => {
       it("doesn't work", () => {
+        const state = reducer({
+          newId: 0,
+          taskTitle: '',
+          tasks: [],
+        }, addTask());
 
+        expect(state.taskTitle).toBe('');
+        expect(state.tasks.length).toBe(1);
       });
     });
   });
