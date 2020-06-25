@@ -2,20 +2,9 @@ import React from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
-import { updateTaskTitle } from './actions';
+import { updateTaskTitle, addTask } from './actions';
 
 import Page from './Page';
-
-function addTask(state) {
-  const { newId, taskTitle, tasks } = state;
-
-  return {
-    ...state,
-    newId: newId + 1,
-    taskTitle: '',
-    tasks: [...tasks, { id: newId, title: taskTitle }],
-  };
-}
 
 function deleteTask(state, id) {
   const { tasks } = state;
