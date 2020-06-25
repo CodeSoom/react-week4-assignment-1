@@ -22,7 +22,11 @@ describe('<InputContainer />', () => {
       ).toBeInTheDocument();
     });
 
-    it('shows a "추가" button', () => {});
+    it('shows a "추가" button', () => {
+      const { container } = render(<InputContainer />);
+
+      expect(container).toHaveTextContent('추가');
+    });
   });
 
   context('When a user enters a task called "바뀐다"', () => {
