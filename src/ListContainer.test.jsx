@@ -6,6 +6,8 @@ import { useSelector } from 'react-redux';
 
 import ListContainer from './ListContainer';
 
+import tasks from '../__fixture__/data';
+
 jest.mock('react-redux');
 
 describe('<ListContainer />', () => {
@@ -23,7 +25,17 @@ describe('<ListContainer />', () => {
     });
 
     context('When tasks are not empty', () => {
-      it('shows tasks', () => {});
+      it('shows tasks', () => {
+        useSelector.mockImplementation((selector) => selector({
+          tasks,
+        }));
+
+        const { container } = render(<ListContainer />);
+
+        expect(container).toHaveTextContent(/할 일1/i);
+        expect(container).toHaveTextContent(/할 일2/i);
+        expect(container).toHaveTextContent(/할 일3/i);
+      });
     });
   });
 
