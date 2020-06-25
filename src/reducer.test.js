@@ -1,28 +1,10 @@
 import reducer from './reducer';
 
-function updateTaskTitle(taskTitle) {
-  return {
-    type: 'updateTaskTitle',
-    payload: {
-      taskTitle,
-    },
-  };
-}
-
-function addTask() {
-  return {
-    type: 'addTask',
-  };
-}
-
-function deleteTask(id) {
-  return {
-    type: 'deleteTask',
-    payload: {
-      id,
-    },
-  };
-}
+import {
+  updateTaskTitle,
+  addTask,
+  deleteTask,
+} from './action';
 
 describe('reducer', () => {
   describe('updateTaskTitle', () => {
