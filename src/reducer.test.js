@@ -17,4 +17,21 @@ describe('reducer', () => {
       });
     });
   });
+
+  describe('addTask', () => {
+    context('with task title', () => {
+      it('tasks에 새로운 task가 추가된다.', () => {
+        const newState = reducer({
+          tasks: [],
+        }, {
+          type: 'addTask',
+          payload: {
+            taskTitle: '첫 번째 할 일',
+          },
+        });
+
+        expect(newState.tasks).toHaveLength(1);
+      });
+    });
+  });
 });
