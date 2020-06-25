@@ -92,4 +92,20 @@ describe('reducer', () => {
       });
     });
   });
+
+  context('without existed action', () => {
+    const state = reducer({
+      newId: 1,
+      taskTitle: '',
+      tasks: [],
+    }, {
+      type: 'notExistedAction',
+    });
+
+    expect(state).toEqual({
+      newId: 1,
+      taskTitle: '',
+      tasks: [],
+    });
+  });
 });
