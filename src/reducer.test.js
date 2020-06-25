@@ -33,13 +33,15 @@ describe('reducer', () => {
       it('추가된 task에 id가 부여된다.', () => {
         const newState = reducer({
           newId: 1,
+          taskTitle: '첫 번째 할 일',
           tasks: [],
         }, {
           type: 'addTask',
         });
 
         expect(newState.tasks[0].id).not.toBeNull();
-        expect(newState.tasks[0].id).not.toBeUndefined();
+        expect(newState.tasks[0].id).toBe(1);
+        expect(newState.newId).toBe(1 + 1);
         expect(newState.tasks[0].title).toBe('첫 번째 할 일');
       });
     });
