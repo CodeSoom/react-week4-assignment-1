@@ -12,7 +12,7 @@ describe('reducer', () => {
     });
   });
 
-  describe('changeTitleAction', () => {
+  describe('changeTitleAction는', () => {
     it('액션을 생성한다.', () => {
       const expectAction = {
         type: 'CHANGE_TITLE',
@@ -21,6 +21,16 @@ describe('reducer', () => {
         },
       };
       expect(changeTitleAction('new Title')).toEqual(expectAction);
+    });
+
+    it('변경된 taskTitle을 갖는 새로운 state를 반환한다.', () => {
+      const state = reducer(
+        {
+          taskTitle: '',
+        },
+        changeTitleAction('new Title'),
+      );
+      expect(state.taskTitle).toEqual(/new Title/);
     });
   });
 });
