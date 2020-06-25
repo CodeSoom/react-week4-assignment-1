@@ -1,3 +1,15 @@
+import React from 'react';
+
+import { render } from '@testing-library/react';
+
+import { useSelector } from 'react-redux';
+
+function ListContainer() {
+  return <p>할 일이 없어요!</p>
+}
+
+jest.mock('react-redux');
+
 describe('<ListContainer />', () => {
   describe('Initial rendering', () => {
     context('When tasks are empty', () => {
@@ -5,7 +17,7 @@ describe('<ListContainer />', () => {
         useSelector.mockImplementation((selector) => selector({
           tasks: [],
         }));
-        
+
         const { container } = render(<ListContainer />);
 
         expect(container).toHaveTextContent('할 일이 없어요!');
