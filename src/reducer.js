@@ -1,5 +1,11 @@
-export default function reducer(state, action) {
-  const reducerFunction = {
+const initialState = {
+  newId: 100,
+  taskTitle: '',
+  tasks: [],
+};
+
+export default function reducer(state = initialState, action) {
+  const handlers = {
     updateTaskTitle: ({ taskTitle }) => ({
       ...state,
       taskTitle,
@@ -24,5 +30,10 @@ export default function reducer(state, action) {
       };
     },
   };
-  return reducerFunction[action.type](action.payload);
+
+  const handler = handlers[action.type];
+  if (handler) {
+    return handler(action.payload);
+  }
+  return state;
 }
