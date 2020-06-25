@@ -29,8 +29,9 @@ describe('reducer', () => {
       it('할 일을 추가한다.', () => {
         const newState = reduceAddTask('New Task');
 
-        expect(newState.newId).toBe(2);
-        expect(newState.tasks).not.toHaveLength(0);
+        expect(newState.tasks).toHaveLength(1);
+        expect(newState.tasks[0].id).not.toBeUndefined();
+        expect(newState.tasks[0].title).toBe('New Task');
       });
 
       it('추가한 뒤 초기화 한다', () => {
