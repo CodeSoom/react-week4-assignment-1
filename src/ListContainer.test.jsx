@@ -43,7 +43,23 @@ describe('<ListContainer />', () => {
     context(
       'when a user click the "완료" button for a task called "할 일2"',
       () => {
-        it('occurs a deleteTask action', () => {});
+        it('occurs a deleteTask action', () => {
+          useSelector.mockImplementation((selector) => selector({
+            tasks,
+          }));
+
+          const dispatch = jest.fn();
+
+          useDispatch.mockImplementation(() => dispatch);
+
+          const { getByText } = render(<ListContainer />);
+
+          fireEvent.click(getByText(/할 일2/i).lastChild);
+
+          expect(dispatch).toHaveBeenCalledWith(deleteTask(2));
+
+          expect(dispatch).toHaveBeenCalledTimes(1);
+        });
       },
     );
   });
