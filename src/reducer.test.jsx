@@ -1,19 +1,25 @@
 import reducer from './reducer';
 
 describe('reducer', () => {
-  test('has initialState', () => {
-    const state = reducer();
-    expect(state).toEqual({
-      newId: 100,
-      taskTitle: '',
-      tasks: [],
-    });
-  });
+  // test('has initialState', () => {
+  //   const state = reducer();
+  //   expect(state).toBe({
+  //     newId: 100,
+  //     taskTitle: '',
+  //     tasks: [],
+  //   });
+  // });
+
   describe('update task title', () => {
     it('changes new task title', () => {
+      const state = reducer({
+        taskTitle: '',
+      }, changeTitle('change'));
 
+      expect(state.taskTitle).toBe('Change task title');
     });
   });
+
   describe('add task', () => {
     context('with task title', () => {
       it('append a new task into tasks', () => {
