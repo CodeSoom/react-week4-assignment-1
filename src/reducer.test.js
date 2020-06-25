@@ -110,4 +110,14 @@ describe('reducer', () => {
       });
     });
   });
+
+  context('without state', () => {
+    it('initialState를 사용한다.', () => {
+      const state = reducer(undefined, updateTaskTitle('첫 번째 할 일'));
+
+      expect(state.newId).toBe(1);
+      expect(state.taskTitle).toBe('첫 번째 할 일');
+      expect(state.tasks).toHaveLength(0);
+    });
+  });
 });
