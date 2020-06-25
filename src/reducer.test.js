@@ -80,5 +80,25 @@ describe('reducer', () => {
       };
       expect(deleteTaskAction(1)).toEqual(expectAction);
     });
+
+    context('아이디가 있으면, ', () => {
+      it('해당 아이디의 task를 삭제한다.', () => {
+        const state = reducer(
+          {
+            newId: 100,
+            taskTitle: '',
+            tasks: [
+              {
+                id: 1,
+                title: 'remove task',
+              },
+            ],
+          },
+          deleteTaskAction(1),
+        );
+
+        expect(state.tasks).toHaveLength(0);
+      });
+    });
   });
 });
