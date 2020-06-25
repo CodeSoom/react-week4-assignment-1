@@ -64,16 +64,4 @@ describe('reducer', () => {
       });
     });
   });
-  describe('delete task', () => {
-    context('with existed task ID', () => {
-      it('remove the task from tasks', () => {
-
-      });
-    });
-    context('without existed task ID', () => {
-      it("doesn't worrk", () => {
-
-      });
-    });
-  });
 });
