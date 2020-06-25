@@ -1,6 +1,16 @@
 describe('<InputContainer />', () => {
   context('When the user does nothing', () => {
-    it('shows "할 일을 입력해 주세요"', () => {});
+    it('shows "할 일을 입력해 주세요"', () => {
+      useSelector.mockImplementation((selector) => selector({
+        taskTitle: '',
+      }));
+
+      const { getByPlaceholderText } = render(<InputContainer />);
+
+      expect(
+        getByPlaceholderText(/할 일을 입력해 주세요/i),
+      ).toBeInTheDocument();
+    });
 
     it('shows a "추가" button', () => {});
   });
