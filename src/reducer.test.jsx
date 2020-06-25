@@ -1,6 +1,6 @@
 import reducer from './reducer';
 
-import { changeTitle, addTask } from './action';
+import { changeTitle, addTask } from './actions';
 
 describe('reducer', () => {
   // test('has initialState', () => {
@@ -42,7 +42,7 @@ describe('reducer', () => {
       });
       it('clears task title', () => {
         const state = reducer({
-          newId: 0,
+          newId: 2,
           taskTitle: 'test',
           tasks: [],
         }, addTask());
@@ -54,12 +54,23 @@ describe('reducer', () => {
     context('without task title', () => {
       it("doesn't work", () => {
         const state = reducer({
-          newId: 0,
+          newId: 2,
           taskTitle: '',
           tasks: [],
         }, addTask());
 
         expect(state.taskTitle).toBe('');
+        expect(state.tasks.length).toBe(0);
+      });
+    });
+  });
+  describe('delete task', () => {
+    context('with existed task id', () => {
+      it('remove task from tasks', () => {
+        const state = reducer({
+          tasks,
+        }, deleteTask(0)); 
+
         expect(state.tasks.length).toBe(1);
       });
     });
