@@ -6,17 +6,17 @@ import Input from './Input';
 
 export default function InputContainer() {
   const { taskTitle } = useSelector((state) => ({
-    taskTitle: '과제과제',
+    taskTitle: state.taskTitle,
   }));
 
   const dispatch = useDispatch();
 
   function handleChangeTitle(event) {
-    dispatch(changeTitle('과제과제과제'));
+    dispatch(changeTitle(event.target.value));
   }
 
   function handleClickAddTask(title) {
-    dispatch(addTask('과제과제과제'));
+    dispatch(addTask(title));
   }
 
   return (
