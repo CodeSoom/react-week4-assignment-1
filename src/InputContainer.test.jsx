@@ -30,7 +30,30 @@ describe('<InputContainer />', () => {
   });
 
   context('When a user enters a task called "바뀐다"', () => {
-    it('shows "바뀐다" in the input', () => {});
+    it('shows "바뀐다" in the input', () => {
+      useSelector.mockImplementation((selector) => selector({
+        taskTitle: '',
+      }));
+
+      const dispatch = jest.fn();
+
+      useDispatch.mockImplementation(() => dispatch);
+
+      const { getByLabelText } = render(<InputContainer />);
+
+      fireEvent.change(getByLabelText(/할 일/i), {
+        target: {
+          value: '바뀐다',
+        },
+      });
+
+      expect(getByLabelText(/할 일/i).value).toBe('바뀐다');
+
+      expect(dispatch).toHaveBeenCalledWith(changeTitle('바뀐다'));
+
+      expect(dispatch).toHaveBeenCalledTimes(1);
+
+    });
   });
 
   context('when a user add a task called "할 일4"', () => {
