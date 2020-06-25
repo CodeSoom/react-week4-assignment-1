@@ -9,4 +9,9 @@ module.exports = {
   addTaskAction: () => ({
     type: 'ADD_TASK',
   }),
+
+  deleteTaskAction: (id) => ({
+    type: 'DELETE_TASK',
+    payload: { id },
+  }),
 };
