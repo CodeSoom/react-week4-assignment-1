@@ -6,5 +6,13 @@ export default function reducer(state, action) {
     };
   }
 
+  if (action.type === 'addTask') {
+    return {
+      ...state,
+      tasks: [...state.tasks, {
+        title: action.payload.taskTitle,
+      }],
+    };
+  }
   return state;
 }
