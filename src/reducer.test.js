@@ -57,5 +57,20 @@ describe('reducer', () => {
         expect(newState.taskTitle).toBe('');
       });
     });
+
+    context('without task title', () => {
+      it('동작하지 않는다.', () => {
+        const newState = reducer({
+          newId: 1,
+          taskTitle: '',
+          tasks: [],
+        }, {
+          type: 'addTask',
+        });
+
+        expect(newState.tasks).toHaveLength(0);
+        expect(newState.newId).toBe(1);
+      });
+    });
   });
 });
