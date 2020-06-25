@@ -14,6 +14,9 @@ export default function reducer(state = initialState, action) {
   }
 
   if (type === 'ADD_TASK') {
+    if (taskTitle === '') {
+      return state;
+    }
     return {
       ...state,
       newId: newId + 1,
