@@ -30,7 +30,7 @@ describe('reducer', () => {
         },
         changeTitleAction('new Title'),
       );
-      expect(state.taskTitle).toEqual(/new Title/);
+      expect(state.taskTitle).toEqual('new Title');
     });
   });
 });
