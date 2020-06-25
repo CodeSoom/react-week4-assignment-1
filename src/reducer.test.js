@@ -9,4 +9,16 @@ describe('reducer', () => {
       tasks: [],
     });
   });
+
+  describe('changeTitleAction', () => {
+    it('액션을 생성한다.', () => {
+      const expectAction = {
+        type: 'CHANGE_TITLE',
+        payload: {
+          title: 'new Title',
+        },
+      };
+      expect(changeTitleAction('new Title')).toEqual(expectAction);
+    });
+  });
 });
