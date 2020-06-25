@@ -1,12 +1,14 @@
 import React from 'react';
 
-import { render } from '@testing-library/react';
+import { render, fireEvent } from '@testing-library/react';
 
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
 import ListContainer from './ListContainer';
 
 import tasks from '../__fixture__/data';
+
+import { deleteTask } from './action';
 
 jest.mock('react-redux');
 
