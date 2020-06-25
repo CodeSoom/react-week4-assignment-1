@@ -1,3 +1,13 @@
+import React from 'react';
+
+import { useSelector } from 'react-redux';
+
+import { render } from '@testing-library/react';
+
+function InputContainer() {
+  return <input placeholder="할 일을 입력해 주세요" />;
+}
+
 describe('<InputContainer />', () => {
   context('When the user does nothing', () => {
     it('shows "할 일을 입력해 주세요"', () => {
