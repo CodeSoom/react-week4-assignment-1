@@ -64,23 +64,25 @@ describe('reducer', () => {
 
   describe('delete task', () => {
     context('with existed task id', () => {
-      const newState = reducer({
-        newId: 1,
-        taskTitle: '',
-        tasks: [
-          {
+      it('task가 삭제된다.', () => {
+        const newState = reducer({
+          tasks: [
+            {
+              id: 1,
+              title: '첫 번째 할 일',
+            },
+          ],
+        }, {
+          type: 'deleteTask',
+          payload: {
             id: 1,
-            title: '첫 번째 할 일',
           },
-        ],
-      }, {
-        type: 'deleteTask',
-        payload: {
-          id: 1,
-        },
-      });
+        });
 
-      expect(newState.tasks).toHaveLength(0);
+        expect(newState.tasks).toHaveLength(0);
+      });
+    });
+
     });
   });
 });
