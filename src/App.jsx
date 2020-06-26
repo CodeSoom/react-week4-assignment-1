@@ -4,29 +4,11 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import Page from './Page';
 
-function updateTaskTitle(taskTitle) {
-  return {
-    type: 'updateTaskTitle',
-    payload: {
-      taskTitle,
-    },
-  };
-}
-
-function addTask() {
-  return {
-    type: 'addTask',
-  };
-}
-
-function deleteTask(id) {
-  return {
-    type: 'deleteTask',
-    payload: {
-      id,
-    },
-  };
-}
+import {
+  updateTaskTitle,
+  addTask,
+  deleteTask,
+} from './actions';
 
 export default function App() {
   const dispatch = useDispatch();
@@ -37,7 +19,7 @@ export default function App() {
   }));
 
   function handleChangeTitle(event) {
-    dispatch(updateTaskTitle(event.target.value)); 
+    dispatch(updateTaskTitle(event.target.value));
   }
 
   function handleClickAddTask() {
