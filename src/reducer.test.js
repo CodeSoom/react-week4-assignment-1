@@ -3,6 +3,17 @@ import reducer from './reducer';
 import { deleteTask, addTask, updateTaskTitle } from './actions';
 
 describe('reducer', () => {
+
+  describe('without state', () => {
+    it ('return initialState', () => {
+      const state = reducer(undefined, updateTaskTitle('새로운 이름'));
+
+      expect(state.newId).toBe(1);
+      expect(state.tasks).toHaveLength(0);
+      expect(state.taskTitle).toBe('새로운 이름');
+    });
+  });
+
   describe('with not action', () => {
     it('return original state', () => {
       const state = reducer({

@@ -4,7 +4,7 @@ const initialState = {
   tasks: [],
 };
 
-export default function reudcer(state = initialState, action) {
+export default function reducer(state = initialState, action) {
   if (action.type === 'updateTaskTitle') {
     return {
       ...state,
@@ -21,6 +21,8 @@ export default function reudcer(state = initialState, action) {
 
     return {
       ...state,
+      taskTitle: '',
+      newId: newId + 1,
       tasks: [...tasks, { id: newId + 1, title: taskTitle }],
     };
   }
