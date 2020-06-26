@@ -1,4 +1,5 @@
 import reducer from './reducer';
+import { updateTaskTitle, addTask, deleteTask } from './action/action-creators';
 
 import Tasks from './__fixtures__/tasks.json';
 
@@ -27,12 +28,7 @@ describe('reducer', () => {
         taskTitle: '',
       };
       const newTaskTitle = '아무것도 하지 않기';
-      const nextState = reducer(previousState, {
-        type: 'updateTaskTitle',
-        payload: {
-          taskTitle: newTaskTitle,
-        },
-      });
+      const nextState = reducer(previousState, updateTaskTitle(newTaskTitle));
       expect(nextState.taskTitle).toBe(newTaskTitle);
     });
   });
@@ -45,7 +41,7 @@ describe('reducer', () => {
           taskTitle: '아무것도 하지 않기',
           tasks: [],
         };
-        const nextState = reducer(previousState, { type: 'addTask' });
+        const nextState = reducer(previousState, addTask());
         expect(nextState.tasks).toHaveLength(1);
         expect(nextState.tasks[0].id).toBe(previousState.taskId);
         expect(nextState.tasks[0].title).toBe(previousState.taskTitle);
@@ -56,7 +52,7 @@ describe('reducer', () => {
           taskTitle: '아무것도 하지 않기',
           tasks: [],
         };
-        const nextState = reducer(previousState, { type: 'addTask' });
+        const nextState = reducer(previousState, addTask());
         expect(nextState.taskTitle).toBe('');
       });
     });
@@ -67,7 +63,7 @@ describe('reducer', () => {
           taskTitle: '',
           tasks: [],
         };
-        const nextState = reducer(previousState, { type: 'addTask' });
+        const nextState = reducer(previousState, addTask());
         expect(nextState.tasks.length).toBe(previousState.tasks.length);
       });
     });
@@ -79,12 +75,7 @@ describe('reducer', () => {
         const previousState = {
           tasks: Tasks,
         };
-        const nextState = reducer(previousState, {
-          type: 'deleteTask',
-          payload: {
-            id: previousState.tasks[0].id,
-          },
-        });
+        const nextState = reducer(previousState, deleteTask(previousState.tasks[0].id));
         expect(nextState.tasks.length).toBe(previousState.tasks.length - 1);
         expect(nextState.tasks[0].id).toBe(previousState.tasks[1].id);
         expect(nextState.tasks[0].title).toBe(previousState.tasks[1].title);
@@ -96,12 +87,7 @@ describe('reducer', () => {
         const previousState = {
           tasks: Tasks,
         };
-        const nextState = reducer(previousState, {
-          type: 'deleteTask',
-          payload: {
-            id: Math.random() * 10,
-          },
-        });
+        const nextState = reducer(previousState, previousState.tasks[0].id);
         expect(nextState.tasks.length).toBe(previousState.tasks.length);
         for (let i = 0; i < nextState.length - 1; i += 1) {
           expect(nextState.tasks[i].id).toBe(previousState.tasks[i].id);
