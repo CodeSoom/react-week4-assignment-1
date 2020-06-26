@@ -4,11 +4,11 @@ import Input from './Input';
 import ListContainer from './ListContainer';
 import InputContainer from './InputContainer';
 
-export default function Page({ taskTitle, onChangeTitle, onClickAddTask }) {
+export default function Page() {
   return (
     <div>
       <h1>To-do</h1>
-      <InputContainer value={taskTitle} />
+      <InputContainer />
       <ListContainer />
     </div>
   );
