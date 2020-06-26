@@ -17,6 +17,12 @@ describe('reducer', () => {
     { id: 1, title: 'test2' },
   ];
 
+  context('when no actions', () => {
+    it('no happened', () => {
+      // TODO: ?
+    });
+  });
+
   describe('update task title', () => {
     it('changes new task title', () => {
       const state = reducer({
@@ -69,10 +75,20 @@ describe('reducer', () => {
       it('remove task from tasks', () => {
         const state = reducer({
           tasks,
-        }, deleteTask(0)); 
+        }, deleteTask(0));
 
         expect(state.tasks.length).toBe(1);
       });
     });
+    context('without existed task id', () => {
+      it("doesn't work", () => {
+        const state = reducer({
+          tasks,
+        }, deleteTask(200));
+
+        expect(state.tasks.length).toBe(2);
+      });
+    });
   });
+
 });
