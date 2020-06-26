@@ -7,6 +7,20 @@ import {
 } from './actions';
 
 describe('reducer', () => {
+  context('action이 없으면', () => {
+    it('상태에 변화가 없다.', () => {
+      const newState = reducer({
+        newId: 100,
+        taskTitle: '',
+        tasks: [],
+      });
+
+      expect(newState.newId).toBe(100);
+      expect(newState.taskTitle).toBe('');
+      expect(newState.tasks).toHaveLength(0);
+    });
+  });
+
   describe('updateTaskTitle', () => {
     it('taskTitle을 바꾼다.', () => {
       const newState = reducer({
