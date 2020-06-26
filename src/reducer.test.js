@@ -1,3 +1,5 @@
+import reducer from './reducer';
+
 describe('reducer', () => {
   describe('updateTaskTitle', () => {
     it('taskTitle 값이 변화한다.', () => {
