@@ -11,6 +11,26 @@ describe('reducer', () => {
     tasks: [{ id: 1, title: '기존 할 일' }],
   };
 
+  const triggerMockAction = () => ({ action: 'mockAction' });
+
+  context('when reducer is executed first time', () => {
+    it('set initial state', () => {
+      const state = reducer(undefined, triggerMockAction());
+
+      expect(state.newId).toBe(100);
+      expect(state.taskTitle).toHaveLength(0);
+      expect(state.tasks).toHaveLength(0);
+    });
+  });
+
+  context('when action type does not exist', () => {
+    it('return previous state', () => {
+      const state = reducer(testState, triggerMockAction());
+
+      expect(state).toBe(testState);
+    });
+  });
+
   describe('changeTitle', () => {
     it('changes task title', () => {
       const state = reducer(testState, changeTitle('새로운 할 일'));
@@ -54,15 +74,6 @@ describe('reducer', () => {
 
         expect(state.tasks).toHaveLength(1);
       });
-    });
-  });
-
-  context('when action type does not exist', () => {
-    it('return previous state', () => {
-      const triggerMockAction = () => ({ action: 'mockAction' });
-      const state = reducer(testState, triggerMockAction());
-
-      expect(state).toBe(testState);
     });
   });
 });
