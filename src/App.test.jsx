@@ -57,4 +57,29 @@ describe('App', () => {
       type: 'ADD_TASK',
     });
   });
+  it('taskTitle을 변경한다.', () => {
+    const dispatch = jest.fn();
+    useDispatch.mockImplementation(() => dispatch);
+    useSelector.mockImplementation((selector) =>
+      selector({
+        taskTitle: '',
+        tasks: [],
+      }),
+    );
+    const { getByPlaceholderText } = render(<App />);
+
+    expect(getByPlaceholderText('할 일을 입력해 주세요')).not.toBeNull();
+
+    fireEvent.change(getByPlaceholderText('할 일을 입력해 주세요'), {
+      target: { value: 'new task' },
+    });
+
+    expect(dispatch).toBeCalled();
+    expect(dispatch).toBeCalledWith({
+      type: 'CHANGE_TITLE',
+      payload: {
+        title: 'new task',
+      },
+    });
+  });
 });
