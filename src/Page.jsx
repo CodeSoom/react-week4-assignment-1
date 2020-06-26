@@ -18,7 +18,7 @@ export default function Page({
         onChange={onChangeTitle}
         onClick={onClickAddTask}
       />
-      <ListContainer tasks={tasks} onClickDelete={onClickDeleteTask} />
+      <ListContainer />
     </div>
   );
 }

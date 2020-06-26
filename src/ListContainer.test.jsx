@@ -23,6 +23,12 @@ describe('ListContainer', () => {
     expect(getByText('Task-2')).not.toBeNull();
   });
 
+  it("'완료'버튼 2개가 있다.", () => {
+    const { getAllByText } = render(<ListContainer />);
+
+    expect(getAllByText('완료')).toHaveLength(2);
+  });
+
   // TODO: 통합 테스트 코드 작성
 
   // CodeceptJS => 실제 브라우저에서 사용자 테스트 실행 가능.

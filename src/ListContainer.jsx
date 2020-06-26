@@ -1,7 +1,9 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 
 import List from './List';
 
-export default function ListContainer({ tasks, onClickDelete }) {
-  return <List tasks={tasks} onClickDelete={onClickDelete} />;
+export default function ListContainer() {
+  const { tasks } = useSelector((state) => state);
+  return <List tasks={tasks} onClickDelete={null} />;
 }
