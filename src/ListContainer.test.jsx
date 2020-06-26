@@ -7,29 +7,40 @@ import ListContainer from './ListContainer';
 jest.mock('react-redux');
 
 describe('ListContainer', () => {
-  useSelector.mockImplementation((selector) =>
-    selector({
-      tasks: [
-        { id: 1, title: 'Task-1' },
-        { id: 2, title: 'Task-2' },
-      ],
-    }),
-  );
+  it("tasks가 없을 경우, '할 일이 없어요!' 텍스트가 보인다.", () => {
+    useSelector.mockImplementation((selector) =>
+      selector({
+        tasks: [],
+      }),
+    );
+    const { getByText } = render(<ListContainer />);
+    expect(getByText('할 일이 없어요!')).not.toBeNull();
+  });
 
   it('기존에 등록되어있는 task가 있다.', () => {
+    useSelector.mockImplementation((selector) =>
+      selector({
+        tasks: [
+          { id: 1, title: 'Task-1' },
+          { id: 2, title: 'Task-2' },
+        ],
+      }),
+    );
     const { getByText } = render(<ListContainer />);
-
     expect(getByText('Task-1')).not.toBeNull();
     expect(getByText('Task-2')).not.toBeNull();
   });
 
   it("'완료'버튼 2개가 있다.", () => {
+    useSelector.mockImplementation((selector) =>
+      selector({
+        tasks: [
+          { id: 1, title: 'Task-1' },
+          { id: 2, title: 'Task-2' },
+        ],
+      }),
+    );
     const { getAllByText } = render(<ListContainer />);
-
     expect(getAllByText('완료')).toHaveLength(2);
   });
-
-  // TODO: 통합 테스트 코드 작성
-
-  // CodeceptJS => 실제 브라우저에서 사용자 테스트 실행 가능.
 });
