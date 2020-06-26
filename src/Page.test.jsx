@@ -1,24 +1,31 @@
 import React from 'react';
 
+import { useDispatch, useSelector } from 'react-redux';
+
 import { render, fireEvent } from '@testing-library/react';
 
 import Page from './Page';
 
+jest.mock('react-redux');
+
 test('Page', () => {
-  const handleChangeTitle = jest.fn();
-  const handleClickAddTask = jest.fn();
-  const handleClickDeleteTask = jest.fn();
+  const dispatch = jest.fn();
+
+  useDispatch.mockImplementation(() => dispatch);
 
   const tasks = [
     { id: 1, title: 'Task-1' },
     { id: 2, title: 'Task-2' },
   ];
 
+  useSelector.mockImplementation((selector) => selector({
+    tasks,
+  }));
+
+  const handleClickDeleteTask = jest.fn();
+
   const { getByText } = render((
     <Page
-      taskTitle=""
-      onChangeTitle={handleChangeTitle}
-      onClickAddTask={handleClickAddTask}
       tasks={tasks}
       onClickDeleteTask={handleClickDeleteTask}
     />
@@ -29,5 +36,5 @@ test('Page', () => {
 
   fireEvent.click(getByText('추가'));
 
-  expect(handleClickAddTask).toBeCalled();
+  expect(dispatch).toBeCalled();
 });
