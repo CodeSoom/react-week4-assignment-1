@@ -22,8 +22,10 @@ export default function reducer(state = initialState, action) {
     };
   }
   if (action.type === 'deleteTask') {
+    const { tasks } = state;
     return {
-      tasks: action.payload.tasks,
+      ...state,
+      tasks: tasks.filter((task) => task.id !== action.payload.id),
     };
   }
   return state;

@@ -13,11 +13,11 @@ export function addTask() {
   };
 }
 
-export function deleteTask() {
+export function deleteTask(id) {
   return {
     type: 'deleteTask',
     payload: {
-      tasks: [],
+      id,
     },
   };
 }

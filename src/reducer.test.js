@@ -36,10 +36,10 @@ describe('reducer', () => {
         tasks: [{ id: 101, task: '할일 1' }],
       };
 
-      const state = reducer(previousState, deleteTask());
+      const state = reducer(previousState, deleteTask(101));
 
       expect(state.tasks).toHaveLength(0);
-      
+
     });
   });
 });
