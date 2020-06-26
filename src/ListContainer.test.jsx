@@ -25,11 +25,12 @@ describe('ListContainer', () => {
   context('when click 완료', () => {
     it('call handleClickDeleteTask function', () => {
       // When
-      const { getByText } = render((
+      const { getAllByText } = render((
         <ListContainer />
       ));
 
-      fireEvent.click(getByText('완료'));
+      const buttons = getAllByText('완료');
+      fireEvent.click(buttons[0]);
 
       // Then
       expect(dispatch).toBeCalled();
