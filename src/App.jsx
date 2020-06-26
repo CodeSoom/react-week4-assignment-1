@@ -9,15 +9,11 @@ export default function App() {
 
   function handleClickAddTask() {}
 
-  function handleClickDeleteTask(id) {}
-
   return (
     <Page
       taskTitle={taskTitle}
       onChangeTitle={handleChangeTitle}
       onClickAddTask={handleClickAddTask}
-      tasks={tasks}
-      onClickDeleteTask={handleClickDeleteTask}
     />
   );
 }
