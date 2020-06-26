@@ -1,4 +1,4 @@
-import reducer from './reducer';
+import { reducer, defaultState } from './reducer';
 
 import {
   updateTaskTitle,
@@ -8,6 +8,16 @@ import {
 
 describe('reducer', () => {
   const testTitle = 'Distribute new version';
+
+  context('with default state', () => {
+    it("doesn't change anything", () => {
+      const state = reducer();
+
+      expect(state.newId).toBe(defaultState.newId);
+      expect(state.taskTitle).toBe(defaultState.taskTitle);
+      expect(state.tasks).toBe(defaultState.tasks);
+    });
+  });
 
   // update task title
   describe('updateTaskTitle', () => {
