@@ -9,13 +9,12 @@ import InputContainer from './InputContainer';
 jest.mock('react-redux');
 
 describe('InputContainer', () => {
+  const dispatch = jest.fn();
+  useDispatch.mockImplementation(() => dispatch);
+  const testTaskTitle = 'Distribute new version';
+
   context('when change input task title', () => {
     it('dispatch updateTaskTitle', () => {
-      const dispatch = jest.fn();
-
-      useDispatch.mockImplementation(() => dispatch);
-
-      const testTaskTitle = 'Distribute new version';
       const testInputEvent = { target: { value: testTaskTitle } };
 
       useSelector.mockImplementation((selector) => selector({
@@ -41,12 +40,6 @@ describe('InputContainer', () => {
 
   context('when click add button', () => {
     it('dispatch addTask', () => {
-      const dispatch = jest.fn();
-
-      useDispatch.mockImplementation(() => dispatch);
-
-      const testTaskTitle = 'Distribute new version';
-
       useSelector.mockImplementation((selector) => selector({
         taskTitle: testTaskTitle,
       }));
