@@ -12,17 +12,7 @@ describe('reducer', () => {
     });
   });
 
-  describe('changeTitleAction는', () => {
-    it('액션을 생성한다', () => {
-      const expectAction = {
-        type: 'CHANGE_TITLE',
-        payload: {
-          title: 'new Title',
-        },
-      };
-      expect(changeTitleAction('new Title')).toEqual(expectAction);
-    });
-
+  describe('changeTitle', () => {
     it('변경된 taskTitle을 갖는 새로운 state를 반환한다', () => {
       const state = reducer(
         {
@@ -34,14 +24,7 @@ describe('reducer', () => {
     });
   });
 
-  describe('addTaskAction은', () => {
-    it('액션을 생성한다', () => {
-      const expectAction = {
-        type: 'ADD_TASK',
-      };
-      expect(addTaskAction()).toEqual(expectAction);
-    });
-
+  describe('addTask', () => {
     context('taskTitle 값이 있으면,', () => {
       it('새로운 task가 추가된 state를 반환한다', () => {
         const state = reducer(
@@ -72,15 +55,7 @@ describe('reducer', () => {
     });
   });
 
-  describe('deleteTaskAction은', () => {
-    it('액션을 생성한다', () => {
-      const expectAction = {
-        type: 'DELETE_TASK',
-        payload: { id: 1 },
-      };
-      expect(deleteTaskAction(1)).toEqual(expectAction);
-    });
-
+  describe('deleteTask', () => {
     context('아이디가 있으면, ', () => {
       it('해당 아이디의 task를 삭제한다.', () => {
         const state = reducer(
