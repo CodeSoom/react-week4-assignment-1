@@ -2,12 +2,13 @@ import React from 'react';
 
 import { render, fireEvent } from '@testing-library/react';
 
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import InputContainer from './InputContainer';
 
 import {
   updateTaskTitle,
+  addTask,
 } from './actions';
 
 jest.mock('react-redux');
@@ -37,6 +38,28 @@ describe('InputContainer', () => {
       fireEvent.change(input, { target: { value: 'do something' } });
 
       expect(dispatch).toBeCalledWith(updateTaskTitle('do something'));
+    });
+  });
+
+  context('추가 버튼을 누르면', () => {
+    it('addTask 액션이 dispatch 된다.', () => {
+      const dispatch = jest.fn();
+
+      useDispatch.mockImplementation(() => dispatch);
+
+      useSelector.mockImplementation((selector) => selector({
+        taskTitle: 'new title',
+      }));
+
+      const { getByLabelText } = render((
+        <InputContainer />
+      ));
+
+      const input = getByLabelText('추가');
+
+      fireEvent.click(input);
+
+      expect(dispatch).toBeCalledWith(addTask());
     });
   });
 });
