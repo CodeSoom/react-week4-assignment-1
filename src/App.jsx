@@ -1,10 +1,15 @@
 import React from "react";
 
-import Page from "./Page";
+import InputContainer from "./InputContainer";
+import ListContainer from "./ListContainer";
 
 export default function App() {
 
   return (
-    <Page />
+    <div>
+      <h1>To-do</h1>
+      <InputContainer />
+      <ListContainer />
+    </div>
   );
 }
