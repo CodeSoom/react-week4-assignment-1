@@ -36,4 +36,21 @@ describe('InputContainer', () => {
 
     expect(dispatch).toBeCalled();
   });
+
+  it('task를 추가한다.', () => {
+    const dispatch = jest.fn();
+    useDispatch.mockImplementation(() => dispatch);
+    useSelector.mockImplementation((selector) =>
+      selector({
+        taskTitle: 'new Task',
+        tasks: [],
+      }),
+    );
+
+    const { getByText } = render(<InputContainer />);
+
+    fireEvent.click(getByText(/추가/));
+
+    expect(dispatch).toBeCalled();
+  });
 });
