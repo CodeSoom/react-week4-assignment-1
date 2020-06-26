@@ -3,6 +3,7 @@ import reducer from './reducer';
 import {
   updateTaskTitle,
   addTask,
+  deleteTask,
 } from './actions';
 
 describe('reducer', () => {
@@ -45,10 +46,25 @@ describe('reducer', () => {
 
     context('taskTitle이 없는 경우', () => {
       it('task가 추가되지 않는다.', () => {
-        const state = reduceAddTask();
+        const state = reduceAddTask('');
 
         expect(state.tasks).toHaveLength(0);
       });
+    });
+  });
+
+  describe('updateTaskTitle', () => {
+    it('deleteTask', () => {
+      const previousState = {
+        tasks: [{
+          id: 1,
+          title: 'do something',
+        }],
+      };
+
+      const state = reducer(previousState, deleteTask(1));
+
+      expect(state.tasks).toHaveLength(0);
     });
   });
 });
