@@ -2,7 +2,7 @@ import React from "react";
 
 import { render, fireEvent } from "@testing-library/react";
 
-import { useSelector, useDispatcher } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 
 import ListContainer from "./ListContainer";
 
@@ -13,7 +13,7 @@ describe("ListContainer", () => {
   context("with tasks", () => {
     it("exist task in tasks", () => {
 
-      useSelector().mockImplementation((selector) => selector({
+      useSelector.mockImplementation((selector) => selector({
         newId: 1,
         tasks: [
           {
@@ -26,21 +26,21 @@ describe("ListContainer", () => {
         ]
       }));
 
-      const { getByText } = render((
+      const { getByText, getAllByText } = render((
         <ListContainer/>
       ));
 
+      expect(getAllByText(/완료/)).toHaveLength(2);
       expect(getByText(/1/)).not.toBeNull();
       expect(getByText(/너의 첫번째 임무다! #1/)).not.toBeNull();
-      expect(getByText(/추가/)).not.toBeNull();
     });
 
     it("event called when '추가' button click", () => {
       const dispatch = jest.fn();
 
-      useDispatcher().mockImplementation(() => dispatch);
+      useDispatch.mockImplementation(() => dispatch);
 
-      useSelector().mockImplementation((selector) => selector({
+      useSelector.mockImplementation((selector) => selector({
         tasks: [
           {
             id: 1,
@@ -55,7 +55,7 @@ describe("ListContainer", () => {
 
       expect(dispatch).not.toBeCalled();
 
-      fireEvent.click(getByText(/추가/));
+      fireEvent.click(getByText(/완료/));
 
       expect(dispatch).toBeCalled();
     });
@@ -64,7 +64,7 @@ describe("ListContainer", () => {
   context("without tasks", () => {
     it("not exist task", () => {
 
-      useSelector().mockImplementation((selector) => selector({
+      useSelector.mockImplementation((selector) => selector({
         tasks: []
       }));
 
@@ -72,8 +72,7 @@ describe("ListContainer", () => {
         <ListContainer/>
       ));
 
-      expect(getByText(/너의 첫번째 임무다! #1/)).toBeNull();
-      expect(getByText(/추가/)).toBeNull();
+      expect(getByText(/할 일이 없어요!/)).not.toBeNull();
     });
   });
 });
