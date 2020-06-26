@@ -1,6 +1,6 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
-import { render } from '@testing-library/react';
+import { useSelector, useDispatch } from 'react-redux';
+import { render, fireEvent } from '@testing-library/react';
 
 import ListContainer from './ListContainer';
 
@@ -42,5 +42,22 @@ describe('ListContainer', () => {
     );
     const { getAllByText } = render(<ListContainer />);
     expect(getAllByText('완료')).toHaveLength(2);
+  });
+
+  it("'완료' 버튼을 클릭하면 task가 사라진다.", () => {
+    const dispatch = jest.fn();
+    useDispatch.mockImplementation(() => dispatch);
+    useSelector.mockImplementation((selector) =>
+      selector({
+        tasks: [
+          { id: 1, title: 'Task-1' },
+          { id: 2, title: 'Task-2' },
+        ],
+      }),
+    );
+    const { getAllByText } = render(<ListContainer />);
+
+    fireEvent.click(getAllByText('완료')[0]);
+    expect(dispatch).toBeCalledTimes(1);
   });
 });
