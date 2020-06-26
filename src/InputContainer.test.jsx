@@ -22,7 +22,7 @@ describe('InputContainer', () => {
     useDispatch.mockImplementation(() => dispatch);
 
     const { getByText, getByDisplayValue } = render(<InputContainer />);
-    
+
     expect(getByText(/추가/)).not.toBeNull();
     expect(getByDisplayValue(/New Task/)).not.toBeNull();
 
