@@ -9,7 +9,6 @@ import Input from './Input';
 export default function InputContainer() {
   const { taskTitle } = useSelector((state) => ({
     taskTitle: state.taskTitle,
-    tasks: state.tasks,
   }));
 
   const dispatch = useDispatch();

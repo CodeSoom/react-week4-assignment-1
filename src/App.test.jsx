@@ -18,8 +18,8 @@ test('App', () => {
     tasks,
   }));
 
-  // const dispatch = jest.fn();
-  // useDispatch.mockImplementation(() => dispatch);
+  const dispatch = jest.fn();
+  useDispatch.mockImplementation(() => dispatch);
 
   const { getByText, getByLabelText } = render((
     <App />
@@ -27,10 +27,7 @@ test('App', () => {
 
   expect(getByText(/추가/)).not.toBeNull();
 
-  // fireEvent.change(getByLabelText(/할 일/), { target: { value: /테스트/ } });
-  // fireEvent.click(getByText(/추가/));
 
-  // expect(getByText(/테스트/)).not.toBeNull();
 
   // fireEvent.click(getByText(/완료/));
 
