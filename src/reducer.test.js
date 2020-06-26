@@ -4,7 +4,7 @@ describe("reducer", () => {
   describe("updateTaskTitle", () => {
     it("returns updated taskTitle", () => {
 
-      const state = reudcer({
+      const state = reducer({
         taskTitle: ""
       }, {
         type: "updateTaskTitle",
@@ -21,7 +21,7 @@ describe("reducer", () => {
     context("with taskTitle", () => {
       it("returns new task in tasks", () => {
 
-        const state = reudcer({
+        const state = reducer({
           taskTitle: "새로운 업무",
           tasks: []
         }, {
@@ -36,7 +36,7 @@ describe("reducer", () => {
     context("without taskTitle", () => {
       it("doesnt work", () => {
 
-        const state = reudcer({
+        const state = reducer({
           taskTitle: "",
           tasks: []
         }, {
@@ -52,7 +52,7 @@ describe("reducer", () => {
     context("with delete task", () => {
       it("returns tasks without deleted task", () => {
 
-        const state = reudcer({
+        const state = reducer({
           taskTitle: "새로운 업무",
           tasks: [{
             id: 1,
@@ -76,7 +76,7 @@ describe("reducer", () => {
     context("without delete tasks", () => {
       it("doesnt work", () => {
 
-        const state = reudcer({
+        const state = reducer({
           taskTitle: "새로운 업무",
           tasks: [{
             id: 1,
