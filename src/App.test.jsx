@@ -82,4 +82,31 @@ describe('App', () => {
       },
     });
   });
+
+  it('task를 완료한다.', () => {
+    const dispatch = jest.fn();
+    useDispatch.mockImplementation(() => dispatch);
+    useSelector.mockImplementation((selector) =>
+      selector({
+        taskTitle: '',
+        tasks: [
+          { id: 1, title: 'task-1' },
+          { id: 2, title: 'task-2' },
+        ],
+      }),
+    );
+    const { getAllByText } = render(<App />);
+
+    expect(getAllByText('완료')).toHaveLength(2);
+
+    fireEvent.click(getAllByText('완료')[0]);
+
+    expect(dispatch).toBeCalled();
+    expect(dispatch).toBeCalledWith({
+      type: 'DELETE_TASK',
+      payload: {
+        id: 1,
+      },
+    });
+  });
 });
