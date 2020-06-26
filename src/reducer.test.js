@@ -70,4 +70,36 @@ describe('reducer', () => {
       });
     });
   });
+
+  describe('wrong actions', () => {
+    it('should return previous state', () => {
+      const previousState = {
+        taskTitle: '',
+      };
+
+      const state = reducer(previousState, { type: 'wrong-action' });
+
+      expect(state.taskTitle).toBe('');
+    });
+  });
+
+  describe('no actions', () => {
+    it('should return previous state', () => {
+      const previousState = {
+        taskTitle: '',
+      };
+
+      const state = reducer(previousState, '');
+
+      expect(state.taskTitle).toBe('');
+    });
+  });
+
+  describe('without params', () => {
+    it('should return previous state', () => {
+      const state = reducer();
+
+      expect(state.taskTitle).toBe('');
+    });
+  });
 });
