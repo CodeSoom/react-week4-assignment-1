@@ -7,6 +7,26 @@ import {
 } from './actions';
 
 describe('reducer', () => {
+  context('존재하지 않는 action을 dispatch한 경우', () => {
+    it('state에는 아무 변화도 일어나지 않는다.', () => {
+      const state = reducer({}, { type: 'thisIsNotAction' });
+
+      expect(state).toEqual({});
+    });
+  });
+
+  context('state 값을 undefined로 전달하고, action을 dispatch한 경우', () => {
+    it('state에는 initialState가 반환된다.', () => {
+      const state = reducer(undefined, { type: 'addTask' });
+
+      expect(state).toEqual({
+        newId: 100,
+        taskTitle: '',
+        tasks: [],
+      });
+    });
+  });
+
   describe('updateTaskTitle', () => {
     it('taskTitle 값이 변화한다.', () => {
       const previousState = { taskTitle: '' };
