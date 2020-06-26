@@ -1,38 +1,15 @@
 import React, { useState } from 'react';
-
+import { useSelector } from 'react-redux';
 import Page from './Page';
 
 export default function App() {
-  const [state, setState] = useState({
-    newId: 100,
-    taskTitle: '',
-    tasks: [],
-  });
+  const { newId, taskTitle, tasks } = useSelector((state) => state);
 
-  const { newId, taskTitle, tasks } = state;
+  function handleChangeTitle(event) {}
 
-  function handleChangeTitle(event) {
-    setState({
-      ...state,
-      taskTitle: event.target.value,
-    });
-  }
+  function handleClickAddTask() {}
 
-  function handleClickAddTask() {
-    setState({
-      ...state,
-      newId: newId + 1,
-      taskTitle: '',
-      tasks: [...tasks, { id: newId, title: taskTitle }],
-    });
-  }
-
-  function handleClickDeleteTask(id) {
-    setState({
-      ...state,
-      tasks: tasks.filter((task) => task.id !== id),
-    });
-  }
+  function handleClickDeleteTask(id) {}
 
   return (
     <Page
