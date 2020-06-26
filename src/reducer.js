@@ -9,6 +9,8 @@ export default function reducer(state, action) {
   if (action.type === 'addTask') {
     const { tasks, newId, taskTitle } = state;
 
+    if (taskTitle === '') return { tasks: [] };
+
     return {
       ...state,
       newId: newId + 1,
