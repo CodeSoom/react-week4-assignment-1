@@ -44,15 +44,15 @@ describe('App', () => {
     });
   });
 
-  context('input에 할 일을 적고 추가 버튼을 누르면', () => {
-    it('할 일이 추가된다.', () => {
+  context('input에 할 일을 작성하면', () => {
+    it('updateTaskTitle 액션이 dispatch 된다.', () => {
       mockSelector();
 
       const dispatch = jest.fn();
 
       useDispatch.mockImplementation(() => dispatch);
 
-      const { getByText, getByLabelText } = render((
+      const { getByLabelText } = render((
         <App />
       ));
 
@@ -61,6 +61,20 @@ describe('App', () => {
       fireEvent.change(input, { target: { value: 'do something' } });
 
       expect(dispatch).toBeCalledWith(updateTaskTitle('do something'));
+    });
+  });
+
+  context('taskTitle이 존재하는 상태에서 추가 버튼을 누르면', () => {
+    it('addTask 액션이 dispatch 된다.', () => {
+      mockSelector({ taskTitle: 'do something' });
+
+      const dispatch = jest.fn();
+
+      useDispatch.mockImplementation(() => dispatch);
+
+      const { getByText } = render((
+        <App />
+      ));
 
       fireEvent.click(getByText('추가'));
 
@@ -69,7 +83,7 @@ describe('App', () => {
   });
 
   context('할 일이 추가된 상태에서 완료 버튼을 누르면', () => {
-    it('할 일이 제거되고 할 일이 없어요! 문구가 뜨게 된다.', () => {
+    it('deleteTask 액션이 dispatch 된다.', () => {
       mockSelector({
         tasks: [
           { id: 1, title: 'do something' },

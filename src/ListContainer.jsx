@@ -22,7 +22,7 @@ export default function App() {
   return (
     <List
       tasks={tasks}
-      onClickDeleteTask={handleClickDeleteTask}
+      onClickDelete={handleClickDeleteTask}
     />
   );
 }

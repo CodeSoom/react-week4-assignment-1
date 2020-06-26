@@ -1,10 +1,14 @@
 import React from 'react';
 
-import { render } from '@testing-library/react';
+import { render, fireEvent } from '@testing-library/react';
 
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import ListContainer from './ListContainer';
+
+import {
+  deleteTask,
+} from './actions';
 
 jest.mock('react-redux');
 
@@ -41,6 +45,31 @@ describe('ListContainer', () => {
       ));
 
       expect(container).toHaveTextContent(/do nothing/);
+    });
+
+    context('완료 버튼을 누를 경우', () => {
+      it('deleteTask가 dispatch 된다.', () => {
+        const tasks = [
+          { id: 1, title: 'do nothing 1' },
+          { id: 2, title: 'do nothing 2' },
+        ];
+
+        useSelector.mockImplementation((selector) => selector({
+          tasks,
+        }));
+
+        const dispatch = jest.fn();
+
+        useDispatch.mockImplementation(() => dispatch);
+
+        const { getAllByText } = render((
+          <ListContainer />
+        ));
+
+        fireEvent.click(getAllByText(/완료/)[1]);
+
+        expect(dispatch).toBeCalledWith(deleteTask(2));
+      });
     });
   });
 });
