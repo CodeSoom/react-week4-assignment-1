@@ -4,7 +4,7 @@ const initialState = {
   tasks: [],
 };
 
-export function reducer(state = initialState, action) {
+function reducer(state = initialState, action) {
   if (action.type === 'changeTitle') {
     return {
       ...state,
