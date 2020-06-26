@@ -1,4 +1,4 @@
-import { createStore } from 'react-redux';
+import { createStore } from 'react';
 
 import reducer from './reducer';
 

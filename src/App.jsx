@@ -2,17 +2,9 @@ import React from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
-import { updateTaskTitle, addTask } from './actions';
+import { updateTaskTitle, addTask, deleteTask } from './actions';
 
 import Page from './Page';
-
-function deleteTask(state, id) {
-  const { tasks } = state;
-  return {
-    ...state,
-    tasks: tasks.filter((task) => task.id !== id),
-  };
-}
 
 export default function App() {
   const { taskTitle, tasks } = useSelector((state) => ({
