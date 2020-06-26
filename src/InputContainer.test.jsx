@@ -7,13 +7,6 @@ import InputContainer from './InputContainer';
 
 jest.mock("react-redux");
 
-function mockSelector({ tasks }) {
-  useSelector.mockImplementation((selector) => selector({
-    newId: 1,
-    tasks
-  }));
-}
-
 describe("InputContainer", () => {
 
   describe('addTask', () => {
@@ -22,16 +15,17 @@ describe("InputContainer", () => {
         const dispatch = jest.fn();
         useDispatch.mockImplementation(() => dispatch);
 
-        mockSelector({
+        useSelector.mockImplementation((selector) => selector({
+          newId: 1,
           taskTitle: '와우',
-          tasks
-        });
+          tasks: [],
+        }));
 
-        const { getByText } = render((
+        const { getByText, getByDisplayValue } = render((
           <InputContainer/>
         ));
 
-        expect(getByText(/와우/)).toBeNull();
+        expect(getByDisplayValue(/와우/)).not.toBeNull();
 
         fireEvent.click(getByText(/추가/));
 
@@ -44,20 +38,21 @@ describe("InputContainer", () => {
         const dispatch = jest.fn();
         useDispatch.mockImplementation(() => dispatch);
 
-        mockSelector({
+        useSelector.mockImplementation((selector) => selector({
+          newId: 1,
           taskTitle: '',
-          tasks
-        });
+          tasks: [],
+        }));
 
-        const { getByText } = render((
+        const { getByText, queryByDisplayValue} = render((
           <InputContainer/>
         ));
 
-        expect(getByText(/와우/)).toBeNull();
+        expect(queryByDisplayValue(/와우/)).toBeNull();
 
         fireEvent.click(getByText(/추가/));
 
-        expect(getByText(/와우/)).toBeNull();
+        expect(queryByDisplayValue(/와우/)).toBeNull();
         expect(dispatch).toBeCalled();
       })
     })
