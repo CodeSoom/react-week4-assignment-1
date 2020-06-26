@@ -1,19 +1,14 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
-import Page from './Page';
+
+import ListContainer from './ListContainer';
+import InputContainer from './InputContainer';
 
 export default function App() {
-  const { newId, taskTitle, tasks } = useSelector((state) => state);
-
-  function handleChangeTitle(event) {}
-
-  function handleClickAddTask() {}
-
   return (
-    <Page
-      taskTitle={taskTitle}
-      onChangeTitle={handleChangeTitle}
-      onClickAddTask={handleClickAddTask}
-    />
+    <>
+      <h1>To-do</h1>
+      <InputContainer />
+      <ListContainer />
+    </>
   );
 }
