@@ -2,12 +2,18 @@ import React from 'react';
 
 import { render, fireEvent } from '@testing-library/react';
 
-import Tasks from './__fixtures__/tasks.json';
+import { Provider } from 'react-redux';
+import RootStore from './stores';
+
 import App from './App';
+
+import Tasks from './__fixtures__/tasks.json';
 
 describe('<App />', () => {
   const renderComponent = () => render((
-    <App />
+    <Provider store={RootStore}>
+      <App />
+    </Provider>
   ));
 
   it('display empty tasks', () => {

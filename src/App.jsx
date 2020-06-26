@@ -1,53 +1,28 @@
-import React, { useState } from 'react';
+import React from 'react';
+
+import { useSelector, useDispatch } from 'react-redux';
+import { updateTaskTitle, addTask, deleteTask } from './action/action-creators';
 
 import Page from './Page';
 
-const initialState = {
-  taskId: 0,
-  taskTitle: '',
-  tasks: [],
-};
-
-function updateTaskTitle(previousState, taskTitle) {
-  return {
-    ...previousState,
-    taskTitle,
-  };
-}
-
-function addTask(previousState) {
-  const { tasks, taskId, taskTitle } = previousState;
-  return {
-    ...previousState,
-    taskId: taskId + 1,
-    taskTitle: '',
-    tasks: [...tasks, { id: taskId, title: taskTitle }],
-  };
-}
-
-function deleteTask(previousState, id) {
-  const { tasks } = previousState;
-  return {
-    ...previousState,
-    tasks: tasks.filter((task) => task.id !== id),
-  };
-}
-
 export default function App() {
-  const [state, setState] = useState(initialState);
+  const { tasks, taskTitle } = useSelector((state) => ({
+    tasks: state.tasks,
+    taskTitle: state.taskTitle,
+  }));
 
-  const { taskTitle, tasks } = state;
+  const dispatch = useDispatch();
 
   function handleChangeTitle(event) {
-    setState(updateTaskTitle(state, event.target.value));
+    dispatch(updateTaskTitle(event.target.value));
   }
 
   function handleClickAddTask() {
-    setState(addTask(state));
+    dispatch(addTask());
   }
 
   function handleClickDeleteTask(id) {
-    setState(deleteTask(state, id));
+    dispatch(deleteTask(id));
   }
 
   return (
