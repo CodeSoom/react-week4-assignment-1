@@ -7,11 +7,13 @@ export default function reducer(state, action) {
   }
 
   if (action.type === 'addTask') {
+    const { tasks, newId, taskTitle } = state;
+
     return {
-      tasks: [{
-        id: 100,
-        title: 'do something',
-      }],
+      ...state,
+      newId: newId + 1,
+      taskTitle: '',
+      tasks: [...tasks, { id: newId, title: taskTitle }],
     };
   }
 

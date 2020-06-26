@@ -18,7 +18,11 @@ describe('reducer', () => {
 
   describe('addTask', () => {
     it('task가 추가된다.', () => {
-      const previousState = { tasks: [] };
+      const previousState = {
+        newId: 100,
+        taskTitle: 'do something',
+        tasks: [],
+      };
 
       const state = reducer(previousState, addTask());
 
