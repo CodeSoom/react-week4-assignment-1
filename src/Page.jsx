@@ -8,11 +8,7 @@ export default function Page({ taskTitle, onChangeTitle, onClickAddTask }) {
   return (
     <div>
       <h1>To-do</h1>
-      <InputContainer
-        value={taskTitle}
-        onChange={onChangeTitle}
-        onClick={onClickAddTask}
-      />
+      <InputContainer value={taskTitle} />
       <ListContainer />
     </div>
   );
