@@ -1,13 +1,12 @@
-import React from "react";
+import React from 'react';
 
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector, useDispatch } from 'react-redux';
 
-import { addTask, updateTaskTitle } from "./actions";
+import { addTask, updateTaskTitle } from './actions';
 
-import Input from "./Input";
+import Input from './Input';
 
 export default function InputContainer() {
-
   const dispatch = useDispatch();
 
   const { taskTitle } = useSelector((selector) => ({

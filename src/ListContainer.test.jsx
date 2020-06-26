@@ -1,37 +1,36 @@
-import React from "react";
+import React from 'react';
 
-import { render, fireEvent } from "@testing-library/react";
-import { useSelector, useDispatch } from "react-redux";
+import { render, fireEvent } from '@testing-library/react';
+import { useSelector, useDispatch } from 'react-redux';
 
-import ListContainer from "./ListContainer";
+import ListContainer from './ListContainer';
 
-jest.mock("react-redux");
+jest.mock('react-redux');
 
 function mockSelector({ tasks }) {
   useSelector.mockImplementation((selector) => selector({
     newId: 1,
-    tasks
+    tasks,
   }));
 }
 
-describe("ListContainer", () => {
-
-  context("with tasks", () => {
-    it("exist task in tasks", () => {
+describe('ListContainer', () => {
+  context('with tasks', () => {
+    it('exist task in tasks', () => {
       mockSelector({
         tasks: [
           {
             id: 1,
-            title: "너의 첫번째 임무다! #1"
+            title: '너의 첫번째 임무다! #1',
           }, {
             id: 2,
-            title: "너의 첫번째 임무다! #2"
-          }
-        ]
+            title: '너의 첫번째 임무다! #2',
+          },
+        ],
       });
 
       const { getByText, getAllByText } = render((
-        <ListContainer/>
+        <ListContainer />
       ));
 
       expect(getAllByText(/완료/)).toHaveLength(2);
@@ -48,13 +47,13 @@ describe("ListContainer", () => {
         tasks: [
           {
             id: 1,
-            title: "너의 첫번째 임무다! #1"
-          }
-        ]
+            title: '너의 첫번째 임무다! #1',
+          },
+        ],
       });
 
       const { getByText } = render((
-        <ListContainer/>
+        <ListContainer />
       ));
 
       expect(dispatch).not.toBeCalled();
@@ -65,15 +64,14 @@ describe("ListContainer", () => {
     });
   });
 
-  context("without tasks", () => {
-    it("not exist task", () => {
-
+  context('without tasks', () => {
+    it('not exist task', () => {
       mockSelector({
-        tasks: []
+        tasks: [],
       });
 
       const { getByText } = render((
-        <ListContainer/>
+        <ListContainer />
       ));
 
       expect(getByText(/할 일이 없어요!/)).not.toBeNull();

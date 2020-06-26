@@ -1,17 +1,16 @@
-import React from "react";
+import React from 'react';
 
-import { render, fireEvent } from "@testing-library/react";
-import { useSelector, useDispatch } from "react-redux";
+import { render, fireEvent } from '@testing-library/react';
+import { useSelector, useDispatch } from 'react-redux';
 
 import InputContainer from './InputContainer';
 
-jest.mock("react-redux");
+jest.mock('react-redux');
 
-describe("InputContainer", () => {
-
+describe('InputContainer', () => {
   describe('addTask', () => {
     context('with taskTitle', () => {
-      it ('append task in Tasks', () => {
+      it('append task in Tasks', () => {
         const dispatch = jest.fn();
         useDispatch.mockImplementation(() => dispatch);
 
@@ -22,7 +21,7 @@ describe("InputContainer", () => {
         }));
 
         const { getByText, getByDisplayValue } = render((
-          <InputContainer/>
+          <InputContainer />
         ));
 
         expect(getByDisplayValue(/와우/)).not.toBeNull();
@@ -34,7 +33,7 @@ describe("InputContainer", () => {
     });
 
     context('without taskTitle', () => {
-      it ('doesnt work', () => {
+      it('doesnt work', () => {
         const dispatch = jest.fn();
         useDispatch.mockImplementation(() => dispatch);
 
@@ -44,8 +43,8 @@ describe("InputContainer", () => {
           tasks: [],
         }));
 
-        const { getByText, queryByDisplayValue} = render((
-          <InputContainer/>
+        const { getByText, queryByDisplayValue } = render((
+          <InputContainer />
         ));
 
         expect(queryByDisplayValue(/와우/)).toBeNull();
@@ -54,7 +53,30 @@ describe("InputContainer", () => {
 
         expect(queryByDisplayValue(/와우/)).toBeNull();
         expect(dispatch).toBeCalled();
-      })
-    })
+      });
+    });
+  });
+
+  describe('changeTaskTitle', () => {
+    it('changed taskTitle', () => {
+      const dispatch = jest.fn();
+      useDispatch.mockImplementation(() => dispatch);
+
+      useSelector.mockImplementation((selector) => selector({
+        newId: 1,
+        taskTitle: '',
+        tasks: [],
+      }));
+
+      const { getByLabelText } = render((
+        <InputContainer />
+      ));
+
+      fireEvent.change(getByLabelText('할 일'), {
+        target: { value: '무언가 하기' },
+      });
+
+      expect(dispatch).toBeCalled();
+    });
   });
 });
