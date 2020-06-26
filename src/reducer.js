@@ -6,5 +6,14 @@ export default function reducer(state, action) {
     };
   }
 
+  if (action.type === 'addTask') {
+    return {
+      tasks: [{
+        id: 100,
+        title: 'do something',
+      }],
+    };
+  }
+
   return state;
 }

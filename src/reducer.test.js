@@ -24,7 +24,7 @@ describe('reducer', () => {
 
       expect(state.tasks).toHaveLength(1);
       expect(state.tasks[0].id).not.toBeUndefined();
-      expect(state.tasks[0].title).toHaveLength(1);
+      expect(state.tasks[0].title).toBe('do something');
     });
   });
 });
