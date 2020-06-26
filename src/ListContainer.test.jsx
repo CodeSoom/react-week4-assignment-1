@@ -48,7 +48,7 @@ describe('ListContainer', () => {
       }));
 
       const { getByText } = render(<ListContainer />);
-      
+
       expect(getByText('할 일이 없어요!')).not.toBeNull();
     });
   });
