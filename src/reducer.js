@@ -31,10 +31,9 @@ export default function reducer(state = initialState, action = {}) {
     },
   };
 
-  // return reducers[action.type](action.payload);
-  const newState = reducers[action.type];
-  if (newState) {
-    return newState(action.payload);
-  }
-  return state;
+  return reducers[action.type] ? (
+    reducers[action.type](action.payload)
+  ) : (
+    state
+  );
 }
