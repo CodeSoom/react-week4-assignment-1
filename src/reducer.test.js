@@ -53,18 +53,35 @@ describe('reducer', () => {
     });
   });
 
-  describe('updateTaskTitle', () => {
-    it('deleteTask', () => {
-      const previousState = {
-        tasks: [{
-          id: 1,
-          title: 'do something',
-        }],
-      };
+  describe('deleteTask', () => {
+    context('task에 해당하는 id가 있다면', () => {
+      it('tasks가 삭제된다.', () => {
+        const previousState = {
+          tasks: [{
+            id: 1,
+            title: 'do something',
+          }],
+        };
 
-      const state = reducer(previousState, deleteTask(1));
+        const state = reducer(previousState, deleteTask(1));
 
-      expect(state.tasks).toHaveLength(0);
+        expect(state.tasks).toHaveLength(0);
+      });
+    });
+
+    context('task에 해당하는 id가 있다면', () => {
+      it('task가 삭제되지 않는다.', () => {
+        const previousState = {
+          tasks: [{
+            id: 1,
+            title: 'do something',
+          }],
+        };
+
+        const state = reducer(previousState, deleteTask(2));
+
+        expect(state.tasks).toHaveLength(1);
+      });
     });
   });
 });
