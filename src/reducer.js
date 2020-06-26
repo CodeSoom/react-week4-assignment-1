@@ -5,7 +5,7 @@ const initialState = {
 };
 
 export default function reducer(state = initialState, action = {}) {
-  const handlers = {
+  const reducers = {
     updateTaskTitle: ({ taskTitle }) => ({
       ...state,
       taskTitle,
@@ -31,9 +31,10 @@ export default function reducer(state = initialState, action = {}) {
     },
   };
 
-  const handler = handlers[action.type];
-  if (handler) {
-    return handler(action.payload);
+  // return reducers[action.type](action.payload);
+  const newState = reducers[action.type];
+  if (newState) {
+    return newState(action.payload);
   }
   return state;
 }
