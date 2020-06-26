@@ -11,6 +11,12 @@ jest.mock('react-redux');
 describe('ListContainer', () => {
   context('tasks가 없을 경우', () => {
     it('초기화면 로딩', () => {
+      const tasks = [];
+
+      useSelector.mockImplementation((selector) => selector({
+        tasks,
+      }));
+
       const { container } = render((
         <ListContainer />
       ));
@@ -19,17 +25,17 @@ describe('ListContainer', () => {
     });
   });
 
-  describe('tasks가 있을 경우', () => {
-    const tasks = [
-      { id: 1, title: 'do nothing 1' },
-      { id: 2, title: 'do nothing 2' },
-    ];
-
-    useSelector.mockImplementation((selector) => selector({
-      tasks,
-    }));
-
+  context('tasks가 있을 경우', () => {
     it('할일 목록을 보여준다.', () => {
+      const tasks = [
+        { id: 1, title: 'do nothing 1' },
+        { id: 2, title: 'do nothing 2' },
+      ];
+
+      useSelector.mockImplementation((selector) => selector({
+        tasks,
+      }));
+
       const { container } = render((
         <ListContainer />
       ));
