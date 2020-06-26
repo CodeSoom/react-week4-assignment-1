@@ -15,6 +15,10 @@ jest.mock('react-redux');
 
 describe('InputContainer', () => {
   it('초기화면 로딩', () => {
+    useSelector.mockImplementation((selector) => selector({
+      taskTitle: '',
+    }));
+
     const { container } = render((
       <InputContainer />
     ));
@@ -28,6 +32,10 @@ describe('InputContainer', () => {
       const dispatch = jest.fn();
 
       useDispatch.mockImplementation(() => dispatch);
+
+      useSelector.mockImplementation((selector) => selector({
+        taskTitle: '',
+      }));
 
       const { getByLabelText } = render((
         <InputContainer />
@@ -51,11 +59,13 @@ describe('InputContainer', () => {
         taskTitle: 'new title',
       }));
 
-      const { getByLabelText } = render((
+      const { getByText, getByDisplayValue } = render((
         <InputContainer />
       ));
 
-      const input = getByLabelText('추가');
+      expect(getByDisplayValue(/new title/)).not.toBeNull();
+
+      const input = getByText('추가');
 
       fireEvent.click(input);
 
