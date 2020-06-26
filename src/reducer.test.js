@@ -31,6 +31,18 @@ describe('reducer', () => {
         expect(state.tasks[0].id).not.toBeUndefined();
         expect(state.tasks[0].title).toBe('do something');
       });
+
+      it('taskTitle이 초기화된다.', () => {
+        const previousState = {
+          newId: 100,
+          taskTitle: 'do something',
+          tasks: [],
+        };
+
+        const state = reducer(previousState, addTask());
+
+        expect(state.taskTitle).toBe('new title');
+      });
     });
   });
 
