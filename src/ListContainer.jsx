@@ -8,7 +8,7 @@ import {
   deleteTask,
 } from './actions';
 
-export default function App() {
+export default function ListContainer() {
   const dispatch = useDispatch();
 
   const { tasks } = useSelector((state) => ({
