@@ -1,16 +1,61 @@
 import React from 'react';
 
-import { render } from '@testing-library/react';
+import { render, fireEvent } from '@testing-library/react';
 
+import Tasks from './__fixtures__/tasks.json';
 import App from './App';
 
-test('App', () => {
-  const { getByText } = render((
+describe('<App />', () => {
+  const renderComponent = () => render((
     <App />
   ));
 
-  expect(getByText(/추가/)).not.toBeNull();
+  it('display empty tasks', () => {
+    const { container } = renderComponent();
+    expect(container).toHaveTextContent('할 일이 없어요!');
+  });
 
-  // TODO: 통합 테스트 코드 작성
-  // CodeceptJS => 실제 브라우저에서 사용자 테스트 실행 가능.
+  it('input task', () => {
+    const { getByRole } = renderComponent();
+
+    const taskInput = getByRole('textbox');
+    Tasks.forEach((task) => {
+      fireEvent.change(taskInput, { target: { value: task.title } });
+      expect(taskInput.value).toBe(task.title);
+    });
+  });
+
+  it('add task', () => {
+    const { getByRole, getAllByRole } = renderComponent();
+
+    const taskInput = getByRole('textbox');
+    Tasks.forEach((task) => {
+      fireEvent.change(taskInput, { target: { value: task.title } });
+      expect(taskInput.value).toBe(task.title);
+      const addTaskButton = getByRole('button', { name: '추가' });
+      fireEvent.click(addTaskButton);
+      expect(taskInput.value).toBe('');
+    });
+
+    const confirmButtons = getAllByRole('button', { name: '완료' });
+    expect(confirmButtons.length).toBe(Tasks.length);
+  });
+
+  it('confirm added task', () => {
+    const { container, getByRole, getAllByRole } = renderComponent();
+
+    const taskInput = getByRole('textbox');
+    Tasks.forEach((task) => {
+      fireEvent.change(taskInput, { target: { value: task.title } });
+      expect(taskInput.value).toBe(task.title);
+      const addTaskButton = getByRole('button', { name: '추가' });
+      fireEvent.click(addTaskButton);
+      expect(taskInput.value).toBe('');
+    });
+
+    const confirmButtons = getAllByRole('button', { name: '완료' });
+    confirmButtons.forEach((button) => fireEvent.click(button));
+
+    expect(container).toHaveTextContent('할 일이 없어요!');
+  });
 });
