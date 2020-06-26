@@ -3,7 +3,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import { render, fireEvent } from '@testing-library/react';
 
 import App from './App';
-import reducer from './reducer';
 
 jest.mock('react-redux');
 
@@ -15,14 +14,13 @@ describe('App', () => {
   });
 
   it('기존에 등록되어있는 task가 있다.', () => {
-    useSelector.mockImplementation((selector) =>
-      selector({
-        tasks: [
-          { id: 1, title: 'Task-1' },
-          { id: 2, title: 'Task-2' },
-        ],
-      }),
-    );
+    useSelector.mockImplementation((selector) => selector({
+      tasks: [
+        { id: 1, title: 'Task-1' },
+        { id: 2, title: 'Task-2' },
+      ],
+    }));
+
     const { getByText } = render(<App />);
 
     expect(getByText('Task-1')).not.toBeNull();
@@ -30,24 +28,24 @@ describe('App', () => {
   });
 
   it("task가 없을 경우 '할 일이 없어요' 텍스트가 노출된다.", () => {
-    useSelector.mockImplementation((selector) =>
-      selector({
-        tasks: [],
-      }),
-    );
+    useSelector.mockImplementation((selector) => selector({
+      tasks: [],
+    }));
+
     const { getByText } = render(<App />);
     expect(getByText('할 일이 없어요!')).not.toBeNull();
   });
 
-  it('추가 버튼을 클릭하면 task를 추가 한다.', () => {
+  it('task를 추가 한다.', () => {
     const dispatch = jest.fn();
     useDispatch.mockImplementation(() => dispatch);
-    useSelector.mockImplementation((selector) =>
-      selector({
-        taskTitle: 'new Title',
-        tasks: [],
-      }),
-    );
+    useSelector.mockImplementation((selector) => selector({
+      tasks: [
+        { id: 1, title: 'Task-1' },
+        { id: 2, title: 'Task-2' },
+      ],
+    }));
+
     const { getByText } = render(<App />);
 
     fireEvent.click(getByText('추가'));
@@ -60,12 +58,11 @@ describe('App', () => {
   it('taskTitle을 변경한다.', () => {
     const dispatch = jest.fn();
     useDispatch.mockImplementation(() => dispatch);
-    useSelector.mockImplementation((selector) =>
-      selector({
-        taskTitle: '',
-        tasks: [],
-      }),
-    );
+    useSelector.mockImplementation((selector) => selector({
+      taskTitle: '',
+      tasks: [],
+    }));
+
     const { getByPlaceholderText } = render(<App />);
 
     expect(getByPlaceholderText('할 일을 입력해 주세요')).not.toBeNull();
@@ -86,15 +83,13 @@ describe('App', () => {
   it('task를 완료한다.', () => {
     const dispatch = jest.fn();
     useDispatch.mockImplementation(() => dispatch);
-    useSelector.mockImplementation((selector) =>
-      selector({
-        taskTitle: '',
-        tasks: [
-          { id: 1, title: 'task-1' },
-          { id: 2, title: 'task-2' },
-        ],
-      }),
-    );
+    useSelector.mockImplementation((selector) => selector({
+      tasks: [
+        { id: 1, title: 'Task-1' },
+        { id: 2, title: 'Task-2' },
+      ],
+    }));
+
     const { getAllByText } = render(<App />);
 
     expect(getAllByText('완료')).toHaveLength(2);
