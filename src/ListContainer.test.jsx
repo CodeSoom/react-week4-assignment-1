@@ -7,7 +7,6 @@ import ListContainer from './ListContainer';
 jest.mock('react-redux');
 
 describe('ListContainer', () => {
-
   context('tasks가 있을 경우,', () => {
     useSelector.mockImplementation((selector) => selector({
       tasks: [

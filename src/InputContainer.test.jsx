@@ -22,11 +22,9 @@ describe('InputContainer', () => {
   it('taskTitle을 변경한다.', () => {
     const dispatch = jest.fn();
     useDispatch.mockImplementation(() => dispatch);
-    useSelector.mockImplementation((selector) =>
-      selector({
-        taskTitle: '',
-      }),
-    );
+    useSelector.mockImplementation((selector) => selector({
+      taskTitle: '',
+    }));
 
     const { getByPlaceholderText } = render(<InputContainer />);
 
@@ -40,12 +38,10 @@ describe('InputContainer', () => {
   it('task를 추가한다.', () => {
     const dispatch = jest.fn();
     useDispatch.mockImplementation(() => dispatch);
-    useSelector.mockImplementation((selector) =>
-      selector({
-        taskTitle: 'new Task',
-        tasks: [],
-      }),
-    );
+    useSelector.mockImplementation((selector) => selector({
+      taskTitle: 'new Task',
+      tasks: [],
+    }));
 
     const { getByText } = render(<InputContainer />);
 
