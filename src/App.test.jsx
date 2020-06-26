@@ -23,4 +23,14 @@ describe('App', () => {
     expect(getByText(/New Task #1/)).not.toBeNull();
     expect(getByText(/New Task #2/)).not.toBeNull();
   });
+
+  it('할 일이 없으면 빈 메세지를 출력한다', () => {
+    useSelector.mockImplementation((selector) => selector({
+      tasks: [],
+    }));
+
+    const { getByText } = render(<App />);
+
+    expect(getByText(/할 일이 없어요!/)).not.toBeNull();
+  });
 });
