@@ -1,17 +1,14 @@
 import reducer from "./reducer";
 
+import { deleteTask, addTask, updateTaskTitle } from "./actions";
+
 describe("reducer", () => {
   describe("updateTaskTitle", () => {
     it("returns updated taskTitle", () => {
 
       const state = reducer({
         taskTitle: ""
-      }, {
-        type: "updateTaskTitle",
-        payload: {
-          taskTitle: "새로운 이름"
-        }
-      });
+      }, updateTaskTitle("새로운 이름"));
 
       expect(state.taskTitle).toBe("새로운 이름");
     });
@@ -24,9 +21,7 @@ describe("reducer", () => {
         const state = reducer({
           taskTitle: "새로운 업무",
           tasks: []
-        }, {
-          type: "addTask"
-        });
+        }, addTask());
 
         expect(state.tasks).toHaveLength(1);
         expect(state.tasks[0].title).toBe("새로운 업무");
@@ -39,9 +34,7 @@ describe("reducer", () => {
         const state = reducer({
           taskTitle: "",
           tasks: []
-        }, {
-          type: "addTask"
-        });
+        }, addTask());
 
         expect(state.tasks).toHaveLength(0);
       });
@@ -61,12 +54,7 @@ describe("reducer", () => {
             id: 2,
             title: "너의 첫번째 임무다! #2"
           }]
-        }, {
-          type: "deleteTask",
-          payload: {
-            id: 1
-          }
-        });
+        }, deleteTask(1));
 
         expect(state.tasks).toHaveLength(1);
         expect(state.tasks[0].id).toBe(2);
@@ -85,12 +73,7 @@ describe("reducer", () => {
             id: 2,
             title: "너의 첫번째 임무다! #2"
           }]
-        }, {
-          type: "deleteTask",
-          payload: {
-            id: 3
-          }
-        });
+        }, deleteTask(3));
 
         expect(state.tasks).toHaveLength(2);
         expect(state.tasks[0].id).toBe(1);
