@@ -16,24 +16,26 @@ describe('InputContainer', () => {
       useDispatch.mockImplementation(() => dispatch);
 
       const testTaskTitle = 'Distribute new version';
+      const testInputEvent = { target: { value: testTaskTitle } };
 
       useSelector.mockImplementation((selector) => selector({
         taskTitle: '',
       }));
 
-      const { container, getByText, getByDisplayValue } = render((
+      const { container } = render((
         <InputContainer />
       ));
 
       const inputBox = container.querySelector('#input-task-title');
 
-      expect(getByDisplayValue(testTaskTitle)).toBeNull();
+      fireEvent.change(inputBox, testInputEvent);
 
-      fireEvent.change(inputBox, testTaskTitle);
-
-      expect(getByDisplayValue(testTaskTitle)).not.toBeNull();
-
-      expect(dispatch).toBeCalledWith({ type: 'updateTaskTitle' });
+      expect(dispatch).toBeCalledWith({
+        type: 'updateTaskTitle',
+        payload: {
+          taskTitle: testTaskTitle,
+        },
+      });
     });
   });
 
