@@ -1,6 +1,6 @@
 import reducer from './reducer';
 
-import { updateTaskTitle, addTask } from './actions';
+import { updateTaskTitle, addTask, deleteTask } from './actions';
 
 describe('reducer', () => {
   describe('updateTaskTitle', () => {
@@ -9,14 +9,7 @@ describe('reducer', () => {
         taskTitle: '',
       };
 
-      const action = {
-        type: 'updateTaskTitle',
-        payload: {
-          taskTitle: 'New Title',
-        },
-      };
-
-      const state = reducer(previousState, action);
+      const state = reducer(previousState, updateTaskTitle('New Title'));
 
       expect(state.taskTitle).toBe('New Title');
     });
@@ -33,6 +26,20 @@ describe('reducer', () => {
 
       expect(state.tasks).toHaveLength(1);
       expect(state.tasks[0].title).toBe('New Title');
+    });
+  });
+
+  describe('deleteTask', () => {
+    it('should return state with empty task', () => {
+      const previousState = {
+        taskTitle: '',
+        tasks: [{ id: 101, task: '할일 1' }],
+      };
+
+      const state = reducer(previousState, deleteTask());
+
+      expect(state.tasks).toHaveLength(0);
+      
     });
   });
 });

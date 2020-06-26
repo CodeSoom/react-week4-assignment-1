@@ -21,5 +21,10 @@ export default function reducer(state = initialState, action) {
       tasks: [...tasks, { id: newId, title: taskTitle }],
     };
   }
+  if (action.type === 'deleteTask') {
+    return {
+      tasks: action.payload.tasks,
+    };
+  }
   return state;
 }
