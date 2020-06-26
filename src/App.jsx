@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { updateTaskTitle, addTask, deleteTask } from './actions';
 
 import Page from './Page';
+import ListContainer from './ListContainer';
 
 export default function App() {
   const { taskTitle, tasks } = useSelector((state) => ({
@@ -22,17 +23,11 @@ export default function App() {
     dispatch(addTask());
   }
 
-  function handleClickDeleteTask(id) {
-    dispatch(deleteTask(id));
-  }
-
   return (
     <Page
       taskTitle={taskTitle}
       onChangeTitle={handleChangeTitle}
       onClickAddTask={handleClickAddTask}
-      tasks={tasks}
-      onClickDeleteTask={handleClickDeleteTask}
     />
   );
 }
