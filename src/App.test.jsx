@@ -2,9 +2,26 @@ import React from 'react';
 
 import { render, fireEvent } from '@testing-library/react';
 
+import { useDispatch, useSelector } from 'react-redux';
+
 import App from './App';
 
+jest.mock('react-redux');
+
 describe('App', () => {
+  const dispatch = jest.fn();
+
+  useDispatch.mockImplementation(() => dispatch);
+
+  const tasks = [{
+    id: 1,
+    title: '첫 번째 할 일',
+  }];
+
+  useSelector.mockImplementation((selector) => selector({
+    tasks,
+  }));
+
   context('when start application', () => {
     it('first display', () => {
       // When
@@ -18,7 +35,7 @@ describe('App', () => {
       expect(container).toHaveTextContent('To-do');
       expect(container).toHaveTextContent('할 일');
       expect(container).toHaveTextContent('추가');
-      expect(container).toHaveTextContent('할 일이 없어요!');
+      expect(container).toHaveTextContent('첫 번째 할 일');
     });
   });
 
@@ -42,7 +59,7 @@ describe('App', () => {
   context('when click 추가', () => {
     it('call handleClickAddTask function', () => {
       // When
-      const { container, getByText, getByLabelText } = render(
+      const { getByText, getByLabelText } = render(
         (
           <App />
         ),
@@ -52,26 +69,23 @@ describe('App', () => {
       fireEvent.click(getByText('추가'));
 
       // Then
-      expect(container).toHaveTextContent('첫 번째 할 일');
-      expect(container).toHaveTextContent('완료');
+      expect(dispatch).toBeCalled();
     });
   });
 
   context('when click 완료', () => {
     it('call handleClickDeleteTask function', () => {
       // When
-      const { container, getByText, getByLabelText } = render(
+      const { getByText } = render(
         (
           <App />
         ),
       );
 
-      fireEvent.change(getByLabelText('할 일'), { target: { value: '첫 번째 할 일' } });
-      fireEvent.click(getByText('추가'));
       fireEvent.click(getByText('완료'));
 
       // Then
-      expect(container).toHaveTextContent('할 일이 없어요!');
+      expect(dispatch).toBeCalled();
     });
   });
 });
