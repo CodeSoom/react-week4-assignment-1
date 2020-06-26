@@ -19,5 +19,9 @@ export default function reducer(state, action) {
     };
   }
 
+  if (action.type === 'deleteTask') {
+    return { tasks: [] };
+  }
+
   return state;
 }
