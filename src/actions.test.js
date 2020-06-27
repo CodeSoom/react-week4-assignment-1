@@ -1,4 +1,4 @@
-import { updateTaskTitle, addTask } from './actions';
+import { updateTaskTitle, addTask, deleteTask } from './actions';
 
 describe('actions', () => {
   test('updateTaskTitle Action', () => {
@@ -15,5 +15,12 @@ describe('actions', () => {
 
     expect(action.type).toBe('addTask');
     expect(action.payload).toBeNull();
+  });
+
+  test('deleteTask Action', () => {
+    const action = deleteTask(1);
+
+    expect(action.type).toBe('deleteTask');
+    expect(action.payload.id).toBe(1);
   });
 });
