@@ -3,6 +3,7 @@ import reducer from './reducer';
 import {
   updateTaskTitle,
   addTask,
+  deleteTask,
 } from './action';
 
 describe('reducer', () => {
@@ -46,6 +47,32 @@ describe('reducer', () => {
         const state = reduceAddTask('');
 
         expect(state.tasks).toHaveLength(0);
+      });
+    });
+  });
+
+  describe('deleteTask', () => {
+    context('존재하는 id 지우기', () => {
+      it('id 1 지우기', () => {
+        const state = reducer({
+          tasks: [
+            { id: 1, taskTitle: '고양이 밥주기' },
+          ],
+        }, deleteTask(1));
+
+        expect(state.tasks).toHaveLength(0);
+      });
+    });
+
+    context('존재하지 않는 id 지우기', () => {
+      it('id 2 지우기', () => {
+        const state = reducer({
+          tasks: [
+            { id: 1, taskTitle: '고양이 밥주기' },
+          ],
+        }, deleteTask(2));
+
+        expect(state.tasks).toHaveLength(1);
       });
     });
   });
