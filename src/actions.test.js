@@ -7,14 +7,14 @@ describe('actions', () => {
     const action = updateTaskTitle(taskTitle);
 
     expect(action.type).toBe('updateTaskTitle');
-    expect(action.payload.title).toBe(taskTitle);
+    expect(action.payload.taskTitle).toBe(taskTitle);
   });
 
   test('addTask Action', () => {
     const action = addTask();
 
     expect(action.type).toBe('addTask');
-    expect(action.payload).toBeNull();
+    expect(action.payload).toBeUndefined();
   });
 
   test('deleteTask Action', () => {
