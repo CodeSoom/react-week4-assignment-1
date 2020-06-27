@@ -11,39 +11,43 @@ const initialState = {
   ],
 };
 
+const updateTaskTitle = (state, action) => ({
+  state,
+  taskTitle: action.payload.taskTitle,
+});
+
+const addTask = (state) => {
+  const { newId, taskTitle, tasks } = state;
+
+  if (!taskTitle) {
+    return state;
+  }
+
+  return {
+    ...state,
+    newId: newId + 1,
+    taskTitle: '',
+    tasks: [...tasks, { id: newId, title: taskTitle }],
+  };
+};
+
+const deleteTask = (state, action) => {
+  const { tasks } = state;
+
+  return {
+    ...state,
+    tasks: tasks.filter((task) => task.id !== action.payload.id),
+  };
+};
+
 const reducer = (state = initialState, action) => {
-  if (action.type === 'updateTaskTitle') {
-    return {
-      state,
-      taskTitle: action.payload.taskTitle,
-    };
-  }
+  const handleAction = {
+    updateTaskTitle,
+    addTask,
+    deleteTask,
+  };
 
-  if (action.type === 'addTask') {
-    const { newId, taskTitle, tasks } = state;
-
-    if (!taskTitle) {
-      return state;
-    }
-
-    return {
-      ...state,
-      newId: newId + 1,
-      taskTitle: '',
-      tasks: [...tasks, { id: newId, title: taskTitle }],
-    };
-  }
-
-  if (action.type === 'deleteTask') {
-    const { tasks } = state;
-
-    return {
-      ...state,
-      tasks: tasks.filter((task) => task.id !== action.payload.id),
-    };
-  }
-
-  return state;
+  return handleAction[action.type](state, action);
 };
 
 export default reducer;

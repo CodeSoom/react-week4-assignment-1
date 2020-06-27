@@ -33,6 +33,7 @@ describe('reducer', () => {
       expect(state.tasks[0].title).toBe('Add Task');
       expect(state.taskTitle).toBe('');
     });
+
     context('without task title', () => {
       const previousState = {
         newId: 100,
