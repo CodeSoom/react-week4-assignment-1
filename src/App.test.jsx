@@ -2,6 +2,8 @@ import React from 'react';
 
 import { render } from '@testing-library/react';
 
+import { useSelector } from 'react-redux';
+
 import App from './App';
 
 // react-redux 이름을 가진 파일을 찾아서
@@ -9,6 +11,14 @@ import App from './App';
 jest.mock('react-redux');
 
 test('App', () => {
+  // TODO: useSelector 조작
+  // store에 저장된 초기 상태 tasks와 독립적으로
+  // test에서 가짜 상태를 가정하여 확인할 수 있다.
+  const tasks = [{ id: 1, title: '아무것도 하지 않기 #1' }];
+
+  useSelector.mockImplementation((selector) => selector({
+    tasks,
+  }));
   const { getByText } = render((
     <App />
   ));
