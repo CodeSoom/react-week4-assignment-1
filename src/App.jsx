@@ -4,38 +4,23 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import Page from './Page';
 
-// action creator
-// 기존 상태는 reducer에서 알고 있기 때문에 여기서 알 필요 없다
-function updateTaskTitle(taskTitle) {
-  return {
-    type: 'updateTaskTitle',
-    payload: {
-      taskTitle,
-    },
-  };
-}
+// App 컴포넌트는 세 가지 액션을 취할 예정.
+import {
+  updateTaskTitle,
+  addTask,
+  deleteTask,
+} from './action';
 
-function addTask() {
+function selector(state) {
   return {
-    type: 'addTask',
-  };
-}
-
-function deleteTask(id) {
-  return {
-    type: 'deleteTask',
-    payload: {
-      id,
-    },
+    taskTitle: state.taskTitle,
+    tasks: state.tasks,
   };
 }
 
 export default function App() {
-  // 1. 화면에 그리기 위해서 store에서 상태를 가져오는 과정
-  const { taskTitle, tasks } = useSelector((state) => ({
-    taskTitle: state.taskTitle,
-    tasks: state.tasks,
-  }));
+  // 1. 화면에 그리기 위해서 store에서 ★상태를 가져오는 과정
+  const { taskTitle, tasks } = useSelector(selector);
 
   // 2. redux를 통한 상태 관리 (기존 상태 몰라도 된다.)
   const dispatch = useDispatch();
