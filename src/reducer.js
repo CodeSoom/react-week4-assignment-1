@@ -1,14 +1,11 @@
 const initialState = {
   newId: 100,
   taskTitle: '',
-  tasks: [
-    { id: 1, title: 'redux 강의 듣기 #1' },
-    { id: 2, title: 'redux 과제 하기 #2' },
-  ],
+  tasks: [],
 };
 
 const updateTaskTitle = (state, action) => ({
-  state,
+  ...state,
   taskTitle: action.payload.taskTitle,
 });
 
