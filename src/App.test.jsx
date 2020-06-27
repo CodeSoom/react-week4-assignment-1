@@ -2,52 +2,83 @@ import React from 'react';
 
 import { render, fireEvent } from '@testing-library/react';
 
+import { useSelector, useDispatch } from 'react-redux';
+
 import App from './App';
 
-const renderApp = () => {
-  const { container, getByPlaceholderText, getByText } = render(
-    <App />,
-  );
-
-  return {
-    container,
-    getByPlaceholderText,
-    getByText,
-  };
-};
+jest.mock('react-redux');
 
 describe('App', () => {
-  test('handleClickAddTask', () => {
-    const todo = 'Handle Click Add Task!';
-    const { container, getByPlaceholderText, getByText } = renderApp();
+  test('handleChangeTitle', () => {
+    const dispatch = jest.fn();
+  
+    useSelector.mockImplementation((selector) => selector({
+      taskTitle: '',
+      tasks: [],
+    }));
+    useDispatch.mockImplementation(() => dispatch);
+  
+    const { getByPlaceholderText } = render(
+      <App />
+    );
+
     const input = getByPlaceholderText('할 일을 입력해 주세요');
-    const button = getByText('추가');
 
-    fireEvent.change(input, { target: { value: todo } });
+    fireEvent.change(input, { target: { value: 'Handle Change Title' } });
 
-    expect(input).toHaveAttribute('value', todo);
+    expect(dispatch).toHaveBeenCalledTimes(1);
+    expect(dispatch).toBeCalledWith({
+      type: 'updateTaskTitle',
+      payload: {
+        taskTitle: 'Handle Change Title',
+      },
+    });
+  });
 
-    fireEvent.click(button);
+  test('handleClickAddTask', () => {
+    const dispatch = jest.fn();
 
-    expect(input).toHaveAttribute('value', '');
-    expect(container).toHaveTextContent(todo);
+    useSelector.mockImplementation((selector) => selector({
+      tasks: [],
+    }));
+    useDispatch.mockImplementation(() => dispatch);
+
+    const { getByText } = render(
+      <App />
+    );
+
+    fireEvent.click(getByText('추가'));
+
+    expect(dispatch).toHaveBeenCalledTimes(1);
+    expect(dispatch).toBeCalledWith({
+      type: 'addTask',
+    });
   });
 
   test('handleClickDeleteTask', () => {
-    const todo = 'Handle Click Delete Task';
-    const { container, getByPlaceholderText, getByText } = renderApp();
-    const input = getByPlaceholderText('할 일을 입력해 주세요');
-    const addButton = getByText('추가');
-
-    fireEvent.change(input, { target: { value: todo } });
-    fireEvent.click(addButton);
-
-    const completeButton = getByText('완료');
-
-    expect(container).toHaveTextContent(todo);
-
-    fireEvent.click(completeButton);
-
-    expect(container).toHaveTextContent('할 일이 없어요!');
+    const dispatch = jest.fn();
+    const tasks = [
+      {
+        id: 1,
+        title: 'Handle Click Delete Task',
+      },
+    ];
+  
+    useSelector.mockImplementation((selector) => selector({
+      tasks,
+    }));
+    useDispatch.mockImplementation(() => dispatch);
+  
+    const { getByText } = render(
+      <App />
+    );
+  
+    fireEvent.click(getByText('완료'));
+  
+    expect(dispatch).toBeCalledTimes(1);
+    expect(dispatch).toBeCalledWith({
+      type: 'deleteTask',
+      payload: { id: 1 },
+    });
   });
 });
