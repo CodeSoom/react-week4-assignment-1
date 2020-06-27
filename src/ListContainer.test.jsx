@@ -11,10 +11,8 @@ jest.mock('react-redux');
 describe('ListContainer', () => {
   context('without any tasks', () => {
     it("doesn't anything", () => {
-      const emptyTasks = [];
-
       useSelector.mockImplementation((selector) => selector({
-        tasks: emptyTasks,
+        tasks: [],
       }));
 
       const { getByText } = render((
