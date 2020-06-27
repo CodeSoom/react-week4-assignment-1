@@ -15,8 +15,6 @@ describe('InputContainer', () => {
 
   context('when change input task title', () => {
     it('dispatch updateTaskTitle', () => {
-      const testInputEvent = { target: { value: testTaskTitle } };
-
       useSelector.mockImplementation((selector) => selector({
         taskTitle: '',
       }));
@@ -26,6 +24,7 @@ describe('InputContainer', () => {
       ));
 
       const inputBox = container.querySelector('#input-task-title');
+      const testInputEvent = { target: { value: testTaskTitle } };
 
       fireEvent.change(inputBox, testInputEvent);
 
