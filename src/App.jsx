@@ -11,13 +11,8 @@ function addTask() {
   return { type: 'addTask' };
 }
 
-function deleteTask(state, id) {
-  const { tasks } = state;
-
-  return {
-    ...state,
-    tasks: tasks.filter((task) => task.id !== id),
-  };
+function deleteTask(id) {
+  return { type: 'deleteTask', payload: { id } };
 }
 
 export default function App() {
