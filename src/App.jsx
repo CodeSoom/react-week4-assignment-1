@@ -4,18 +4,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import Page from './Page';
 
 function updateTaskTitle(taskTitle) {
-  return { type: 'updateTaskTitle', payload: taskTitle };
+  return { type: 'updateTaskTitle', payload: { taskTitle } };
 }
 
-function addTask(state) {
-  const { newId, taskTitle, tasks } = state;
-
-  return {
-    ...state,
-    newId: newId + 1,
-    taskTitle: '',
-    tasks: [...tasks, { id: newId, title: taskTitle }],
-  };
+function addTask() {
+  return { type: 'addTask' };
 }
 
 function deleteTask(state, id) {
