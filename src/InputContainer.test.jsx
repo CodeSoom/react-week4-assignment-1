@@ -33,4 +33,21 @@ describe('InputContainer', () => {
       },
     });
   });
+
+  test('handleClickAddTask', () => {
+    const dispatch = jest.fn();
+
+    useDispatch.mockImplementation(() => dispatch);
+
+    const { getByText } = render((
+      <InputContainer />
+    ));
+
+    fireEvent.click(getByText('추가'));
+
+    expect(dispatch).toHaveBeenCalledTimes(1);
+    expect(dispatch).toBeCalledWith({
+      type: 'addTask',
+    });
+  });
 });
