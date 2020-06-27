@@ -1,7 +1,3 @@
-// Redux Action
-// - type(string)
-// - payload => object => { taskTitle }
-
 const initialState = {
   newId: 100,
   taskTitle: '',
@@ -40,14 +36,14 @@ const deleteTask = (state, action) => {
   };
 };
 
-const reducer = (state = initialState, action) => {
-  const handleAction = {
-    updateTaskTitle,
-    addTask,
-    deleteTask,
-  };
-
-  return handleAction[action.type](state, action);
+const handleAction = {
+  updateTaskTitle,
+  addTask,
+  deleteTask,
 };
+
+const reducer = (state = initialState, action) => {
+  return handleAction[action.type] ? handleAction[action.type](state, action) : state;
+}
 
 export default reducer;
