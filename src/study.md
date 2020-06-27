@@ -11,12 +11,20 @@ view에서 '할 일 추가' 버튼을 클릭한다면 또 다른 action 발생
 #### view - action - dispatcher - store - view
 
 * action: helper 메소드인 action-creator로 생성
+    - 예시) updateTaskTitle, addTask, deleteTask
 * dispatcher: store에 action을 보냄
-* store: 상태 업데이트
+* store: 상태 관리
+    - reducer로 상태 업데이트
+* **Provider**로 store를 전달함
+    - useDispatch::
+    - useSelector:: 기존에는 컴포넌트가 상태 관리함. redux로 상태를 관리하면서 useSelector로 상태 state에서 필요한 taskTitle, tasks를 꺼내올 수 있다.
 
 ## flux architecture 구현체:: Redux
-#### Redux 장점:: ★관심사의 분리★
+#### Redux 장점:: ★ 관심사의 분리 ★
 App 컴포넌트를 보자.
 관심사는 다음과 같이 두 가지로 나눌 수 있다.
-* 이벤트 처리
+* 상태 관리
+    - 초기 상태
+    - 상태 관리 (추가, 수정, 삭제)
 * 컴포넌트 화면에 그리기
+    - page 구성 요소
