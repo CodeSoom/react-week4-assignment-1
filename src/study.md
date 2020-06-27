@@ -28,3 +28,11 @@ App 컴포넌트를 보자.
     - 상태 관리 (추가, 수정, 삭제)
 * 컴포넌트 화면에 그리기
     - page 구성 요소
+
+## App 컴포넌트가 하는 Container 역할 분리하기
+* ListContainer.jsx - ListContainer.test.jsx
+* 
+기존에는 App 컴포넌트가 모든 상태를 관리했다.
+하지만 현재는 redux를 이용하여 상태를 관리하고 있기 때문에
+상태를 가져오는 useSelector와 상태를 갱신하는 useDispatch가 있으면
+다른 컴포넌트도 상태를 처리할 수 있는 container가 될 수 있다.

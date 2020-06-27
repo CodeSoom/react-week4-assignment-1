@@ -8,7 +8,6 @@ import Page from './Page';
 import {
   updateTaskTitle,
   addTask,
-  deleteTask,
 } from './action';
 
 function selector(state) {
@@ -20,7 +19,7 @@ function selector(state) {
 
 export default function App() {
   // 1. 화면에 그리기 위해서 store에서 ★상태를 가져오는 과정
-  const { taskTitle, tasks } = useSelector(selector);
+  const { taskTitle } = useSelector(selector);
 
   // 2. redux를 통한 상태 관리 (기존 상태 몰라도 된다.)
   const dispatch = useDispatch();
@@ -40,17 +39,11 @@ export default function App() {
     dispatch(addTask());
   }
 
-  function handleClickDeleteTask(id) {
-    dispatch(deleteTask(id));
-  }
-
   return (
     <Page
       taskTitle={taskTitle}
       onChangeTitle={handleChangeTitle}
       onClickAddTask={handleClickAddTask}
-      tasks={tasks}
-      onClickDeleteTask={handleClickDeleteTask}
     />
   );
 }
