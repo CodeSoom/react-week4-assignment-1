@@ -48,8 +48,8 @@ describe('InputContainer', () => {
         <InputContainer />
       ));
 
-      expect(getByText(/추가/)).not.toBeNull();
-      expect(getByDisplayValue(testTaskTitle)).not.toBeNull();
+      expect(getByText(/추가/)).toBeInTheDocument();
+      expect(getByDisplayValue(testTaskTitle)).toBeInTheDocument();
 
       fireEvent.click(getByText(/추가/));
 

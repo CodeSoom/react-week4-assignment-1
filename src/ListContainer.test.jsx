@@ -40,7 +40,7 @@ describe('ListContainer', () => {
         <ListContainer />
       ));
 
-      expect(getByText(testTasks[0].title)).not.toBeNull();
+      expect(getByText(testTasks[0].title)).toBeInTheDocument();
     });
 
     it('dispatch id of task to be deleted', () => {

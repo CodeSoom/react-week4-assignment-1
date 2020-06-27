@@ -23,6 +23,6 @@ test('App', () => {
     <App />
   ));
 
-  expect(getByText(/추가/)).not.toBeNull();
-  expect(getByText(testTasks[0].title)).not.toBeNull();
+  expect(getByText(/추가/)).toBeInTheDocument();
+  expect(getByText(testTasks[0].title)).toBeInTheDocument();
 });
