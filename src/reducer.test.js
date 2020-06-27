@@ -1,32 +1,25 @@
 import reducer from './reducer';
 
+import {
+  updateTaskTitle,
+  addTask,
+  deleteTask,
+} from './actions';
+
 describe('reducer', () => {
   test('updateTaskTitle', () => {
-    const previousState = {
-      taskTitle: '',
-    };
-    const action = {
-      type: 'updateTaskTitle',
-      payload: {
-        taskTitle: 'Update Task Title!',
-      },
-    };
-    const state = reducer(previousState, action);
+    const state = reducer({ taskTitle: '' }, updateTaskTitle('Update Task Title!'));
 
     expect(state.taskTitle).toBe('Update Task Title!');
   });
 
   describe('addTask', () => {
     context('with task title', () => {
-      const previousState = {
+      const state = reducer({
         newId: 100,
         taskTitle: 'Add Task',
         tasks: [],
-      };
-      const action = {
-        type: 'addTask',
-      };
-      const state = reducer(previousState, action);
+      }, addTask());
 
       expect(state.tasks).toHaveLength(1);
       expect(state.tasks[0].id).not.toBeUndefined();
@@ -35,15 +28,11 @@ describe('reducer', () => {
     });
 
     context('without task title', () => {
-      const previousState = {
+      const state = reducer({
         newId: 100,
         taskTitle: '',
         tasks: [],
-      };
-      const action = {
-        type: 'addTask',
-      };
-      const state = reducer(previousState, action);
+      }, addTask());
 
       expect(state.tasks).toHaveLength(0);
     });
@@ -51,41 +40,25 @@ describe('reducer', () => {
 
   describe('deleteTask', () => {
     context('with existed task id', () => {
-      const previousState = {
-        tasks: [
-          {
+      const state = reducer({
+        tasks: [{
             id: 100,
             title: 'Delete Task?',
           },
         ],
-      };
-      const action = {
-        type: 'deleteTask',
-        payload: {
-          id: 100,
-        },
-      };
-      const state = reducer(previousState, action);
+      }, deleteTask(100));
 
       expect(state.tasks).toHaveLength(0);
     });
 
     context('without existed task id', () => {
-      const previousState = {
-        tasks: [
-          {
+      const state = reducer({
+        tasks: [{
             id: 100,
             title: 'Delete Task?',
           },
         ],
-      };
-      const action = {
-        type: 'deleteTask',
-        payload: {
-          id: 1,
-        },
-      };
-      const state = reducer(previousState, action);
+      }, deleteTask(1));
 
       expect(state.tasks).toHaveLength(1);
     });
