@@ -14,9 +14,12 @@ test('App', () => {
   // TODO: useSelector 조작
   // store에 저장된 초기 상태 tasks와 독립적으로
   // test에서 가짜 상태를 가정하여 확인할 수 있다.
-  const tasks = [{ id: 1, title: '아무것도 하지 않기 #1' }];
+  const tasks = [
+    { id: 1, title: '아무것도 하지 않기 #1' },
+  ];
 
   useSelector.mockImplementation((selector) => selector({
+    taskTitle: '',
     tasks,
   }));
   const { getByText } = render((

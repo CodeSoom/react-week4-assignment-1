@@ -1,9 +1,14 @@
 import React from 'react';
 
-import Page from './Page';
+import ListContainer from './ListContainer';
+import InputContainer from './InputContainer';
 
 export default function App() {
   return (
-    <Page />
+    <div>
+      <h1>To-do</h1>
+      <InputContainer />
+      <ListContainer />
+    </div>
   );
 }
