@@ -57,7 +57,8 @@ describe('reducer', () => {
   describe('deleteTask action', () => {
     context('with existed task id', () => {
       const state = reducer({
-        tasks: [{
+        tasks: [
+          {
             id: 100,
             title: 'Delete Task?',
           },
@@ -69,7 +70,8 @@ describe('reducer', () => {
 
     context('without existed task id', () => {
       const state = reducer({
-        tasks: [{
+        tasks: [
+          {
             id: 100,
             title: 'Delete Task?',
           },

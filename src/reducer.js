@@ -39,8 +39,6 @@ const handleAction = {
   deleteTask,
 };
 
-const reducer = (state = initialState, action) => {
+export default function reducer(state = initialState, action) {
   return handleAction[action.type] ? handleAction[action.type](state, action) : state;
 }
-
-export default reducer;

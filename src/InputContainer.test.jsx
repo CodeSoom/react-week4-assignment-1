@@ -11,12 +11,12 @@ jest.mock('react-redux');
 describe('InputContainer', () => {
   test('handleChangeTitle', () => {
     const dispatch = jest.fn();
-  
+
     useSelector.mockImplementation((selector) => selector({
       taskTitle: '',
     }));
     useDispatch.mockImplementation(() => dispatch);
-  
+
     const { getByPlaceholderText } = render((
       <InputContainer />
     ));

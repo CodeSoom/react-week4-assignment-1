@@ -11,15 +11,15 @@ jest.mock('react-redux');
 describe('App', () => {
   test('handleChangeTitle', () => {
     const dispatch = jest.fn();
-  
+
     useSelector.mockImplementation((selector) => selector({
       taskTitle: '',
       tasks: [],
     }));
     useDispatch.mockImplementation(() => dispatch);
-  
+
     const { getByPlaceholderText } = render(
-      <App />
+      <App />,
     );
 
     const input = getByPlaceholderText('할 일을 입력해 주세요');
@@ -44,7 +44,7 @@ describe('App', () => {
     useDispatch.mockImplementation(() => dispatch);
 
     const { getByText } = render(
-      <App />
+      <App />,
     );
 
     fireEvent.click(getByText('추가'));
@@ -63,18 +63,18 @@ describe('App', () => {
         title: 'Handle Click Delete Task',
       },
     ];
-  
+
     useSelector.mockImplementation((selector) => selector({
       tasks,
     }));
     useDispatch.mockImplementation(() => dispatch);
-  
+
     const { getByText } = render(
-      <App />
+      <App />,
     );
-  
+
     fireEvent.click(getByText('완료'));
-  
+
     expect(dispatch).toBeCalledTimes(1);
     expect(dispatch).toBeCalledWith({
       type: 'deleteTask',

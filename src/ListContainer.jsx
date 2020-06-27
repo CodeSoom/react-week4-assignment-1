@@ -19,7 +19,7 @@ export default function ListContainer() {
   }
 
   return (
-    <List 
+    <List
       tasks={tasks}
       onClickDelete={handleClickDeleteTask}
     />

@@ -17,18 +17,18 @@ describe('ListContainer', () => {
         title: 'Handle Click Delete Task',
       },
     ];
-  
+
     useSelector.mockImplementation((selector) => selector({
       tasks,
     }));
     useDispatch.mockImplementation(() => dispatch);
-  
+
     const { getByText } = render(
-      <ListContainer />
+      <ListContainer />,
     );
-  
+
     fireEvent.click(getByText('완료'));
-  
+
     expect(dispatch).toBeCalledTimes(1);
     expect(dispatch).toBeCalledWith({
       type: 'deleteTask',
