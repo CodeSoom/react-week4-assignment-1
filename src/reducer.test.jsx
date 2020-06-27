@@ -18,8 +18,10 @@ describe('reducer', () => {
   ];
 
   context('when no actions', () => {
-    it('no happened', () => {
-      // TODO: ?
+    it('return same state', () => {
+      const state = reducer({}, { type: 'test' });
+
+      expect(state).toEqual({});
     });
   });
 
