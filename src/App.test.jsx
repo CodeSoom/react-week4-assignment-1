@@ -13,6 +13,7 @@ test('App', () => {
     { id: 1, todo: '아무 것도 하지 않기' },
   ];
   useSelector.mockImplementation((selector) => selector({
+    taskTitle: {},
     tasks,
   }));
   const { getByText } = render((
