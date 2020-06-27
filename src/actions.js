@@ -1,5 +1,8 @@
-const actions = () => {
-  
-};
-
-export default actions;
+export function updateTaskTitle(taskTitle) {
+  return {
+    type: 'updateTaskTitle',
+    payload: {
+      taskTitle,
+    }
+  };
+}
