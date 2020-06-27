@@ -7,13 +7,29 @@ import {
 } from './actions';
 
 describe('reducer', () => {
-  test('updateTaskTitle', () => {
+  test('initialState', () => {
+    const state = reducer(undefined, { type: 'addTask' });
+
+    expect(state).toEqual({
+      newId: 100,
+      taskTitle: '',
+      tasks: [],
+    });
+  });
+
+  test('unexist action', () => {
+    const state = reducer({}, { type: 'unexist action' });
+
+    expect(state).toEqual({});
+  });
+
+  test('updateTaskTitle action', () => {
     const state = reducer({ taskTitle: '' }, updateTaskTitle('Update Task Title!'));
 
     expect(state.taskTitle).toBe('Update Task Title!');
   });
 
-  describe('addTask', () => {
+  describe('addTask action', () => {
     context('with task title', () => {
       const state = reducer({
         newId: 100,
@@ -38,7 +54,7 @@ describe('reducer', () => {
     });
   });
 
-  describe('deleteTask', () => {
+  describe('deleteTask action', () => {
     context('with existed task id', () => {
       const state = reducer({
         tasks: [{
