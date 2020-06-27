@@ -1,16 +1,54 @@
 import React from 'react';
 
-import { render } from '@testing-library/react';
+import { render, fireEvent } from '@testing-library/react';
+import { useDispatch, useSelector } from 'react-redux';
 
 import App from './App';
+import {
+  changeTitle, addTask, deleteTask,
+} from './actions';
 
-test('App', () => {
-  const { getByText } = render((
-    <App />
-  ));
+jest.mock('react-redux');
 
-  expect(getByText(/추가/)).not.toBeNull();
+describe('App', () => {
+  const dispatch = jest.fn();
+  useDispatch.mockImplementation(() => dispatch);
+  useSelector.mockImplementation((selector) => selector({
+    taskTitle: '',
+    tasks: [{ id: 1, title: '저녁먹기' }],
+  }));
 
-  // TODO: 통합 테스트 코드 작성
-  // CodeceptJS => 실제 브라우저에서 사용자 테스트 실행 가능.
+  context('when value is changed', () => {
+    it('occurs change title action', () => {
+      const value = '새로운 할 일';
+      const { getByLabelText } = render((
+        <App />
+      ));
+
+      fireEvent.change(getByLabelText(/할 일/), { target: { value } });
+      expect(dispatch).toBeCalledWith(changeTitle(value));
+    });
+  });
+
+  context('when add button is clicked', () => {
+    it('occurs add task action', () => {
+      const { getByText } = render((
+        <App />
+      ));
+
+      fireEvent.click(getByText(/추가/));
+      expect(dispatch).toBeCalledWith(addTask());
+    });
+  });
+
+  context('when delete button is clicked', () => {
+    it('occurs delete task action', () => {
+      const { getByText } = render((
+        <App />
+      ));
+
+      fireEvent.click(getByText(/완료/));
+      expect(dispatch).toBeCalledWith(deleteTask(1));
+    });
+  });
 });
