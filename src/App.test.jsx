@@ -8,6 +8,17 @@ import App from './App';
 
 jest.mock('react-redux');
 
+const renderApp = () => {
+  const { getByText, getByPlaceholderText } = render(
+    <App />,
+  );
+
+  return {
+    getByText,
+    getByPlaceholderText,
+  };
+};
+
 describe('App', () => {
   test('handleChangeTitle', () => {
     const dispatch = jest.fn();
@@ -18,13 +29,12 @@ describe('App', () => {
     }));
     useDispatch.mockImplementation(() => dispatch);
 
-    const { getByPlaceholderText } = render(
-      <App />,
+    const { getByPlaceholderText } = renderApp();
+
+    fireEvent.change(
+      getByPlaceholderText('할 일을 입력해 주세요'),
+      { target: { value: 'Handle Change Title' } },
     );
-
-    const input = getByPlaceholderText('할 일을 입력해 주세요');
-
-    fireEvent.change(input, { target: { value: 'Handle Change Title' } });
 
     expect(dispatch).toHaveBeenCalledTimes(1);
     expect(dispatch).toBeCalledWith({
@@ -43,9 +53,7 @@ describe('App', () => {
     }));
     useDispatch.mockImplementation(() => dispatch);
 
-    const { getByText } = render(
-      <App />,
-    );
+    const { getByText } = renderApp();
 
     fireEvent.click(getByText('추가'));
 
@@ -57,21 +65,18 @@ describe('App', () => {
 
   test('handleClickDeleteTask', () => {
     const dispatch = jest.fn();
-    const tasks = [
-      {
-        id: 1,
-        title: 'Handle Click Delete Task',
-      },
-    ];
 
     useSelector.mockImplementation((selector) => selector({
-      tasks,
+      tasks: [
+        {
+          id: 1,
+          title: 'Handle Click Delete Task',
+        },
+      ],
     }));
     useDispatch.mockImplementation(() => dispatch);
 
-    const { getByText } = render(
-      <App />,
-    );
+    const { getByText } = renderApp();
 
     fireEvent.click(getByText('완료'));
 

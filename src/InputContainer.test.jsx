@@ -8,22 +8,33 @@ import InputContainer from './InputContainer';
 
 jest.mock('react-redux');
 
+const renderInputContainer = () => {
+  const { getByText, getByPlaceholderText } = render(
+    <InputContainer />,
+  );
+
+  return {
+    getByText,
+    getByPlaceholderText,
+  };
+};
+
 describe('InputContainer', () => {
   test('handleChangeTitle', () => {
     const dispatch = jest.fn();
 
     useSelector.mockImplementation((selector) => selector({
       taskTitle: '',
+      tasks: [],
     }));
     useDispatch.mockImplementation(() => dispatch);
 
-    const { getByPlaceholderText } = render((
-      <InputContainer />
-    ));
+    const { getByPlaceholderText } = renderInputContainer();
 
-    const input = getByPlaceholderText('할 일을 입력해 주세요');
-
-    fireEvent.change(input, { target: { value: 'Handle Change Title' } });
+    fireEvent.change(
+      getByPlaceholderText('할 일을 입력해 주세요'),
+      { target: { value: 'Handle Change Title' } },
+    );
 
     expect(dispatch).toHaveBeenCalledTimes(1);
     expect(dispatch).toBeCalledWith({
@@ -37,11 +48,12 @@ describe('InputContainer', () => {
   test('handleClickAddTask', () => {
     const dispatch = jest.fn();
 
+    useSelector.mockImplementation((selector) => selector({
+      tasks: [],
+    }));
     useDispatch.mockImplementation(() => dispatch);
 
-    const { getByText } = render((
-      <InputContainer />
-    ));
+    const { getByText } = renderInputContainer();
 
     fireEvent.click(getByText('추가'));
 
