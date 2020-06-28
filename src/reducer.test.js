@@ -1,4 +1,4 @@
-import reducer from './reducer';
+import { reducer, initialState } from './reducer';
 
 import {
   updateTaskTitle,
@@ -52,8 +52,8 @@ describe('reducer', () => {
   });
 
   describe('deleteTask', () => {
-    context('존재하는 id 지우기', () => {
-      it('id 1 지우기', () => {
+    context('존재하는 id 완료 클릭', () => {
+      it('완료 클릭한 리스트 삭제', () => {
         const state = reducer({
           tasks: [
             { id: 1, taskTitle: '고양이 밥주기' },
@@ -64,8 +64,8 @@ describe('reducer', () => {
       });
     });
 
-    context('존재하지 않는 id 지우기', () => {
-      it('id 2 지우기', () => {
+    context('존재하지 id 완료 클릭', () => {
+      it('작동안함', () => {
         const state = reducer({
           tasks: [
             { id: 1, taskTitle: '고양이 밥주기' },
@@ -74,6 +74,22 @@ describe('reducer', () => {
 
         expect(state.tasks).toHaveLength(1);
       });
+    });
+  });
+
+  context('해당 action이 없을 때', () => {
+    it('작동안함', () => {
+      const state = reducer({}, { type: 'removeTitle' });
+
+      expect(state).toEqual(initialState);
+    });
+  });
+
+  context('이전 상태가 없으면', () => {
+    it('initialState 적용', () => {
+      const state = reducer();
+
+      expect(state).toEqual(initialState);
     });
   });
 });
