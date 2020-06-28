@@ -17,12 +17,18 @@ describe('reducer', () => {
     { id: 1, title: 'test2' },
   ];
 
-  context('when no actions', () => {
+  context('with no matched action', () => {
     it('return same state', () => {
       const state = reducer({}, { type: 'test' });
 
       expect(state).toEqual({});
     });
+  });
+
+  context('send no parameter of state for using initial state', () => {
+    const state = reducer(undefined, {});
+
+    expect(state).toEqual({ newId: 100, taskTitle: '', tasks: [] });
   });
 
   describe('update task title', () => {
@@ -92,5 +98,4 @@ describe('reducer', () => {
       });
     });
   });
-
 });
