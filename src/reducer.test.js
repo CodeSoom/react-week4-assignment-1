@@ -11,6 +11,14 @@ describe('reducer', () => {
     };
     return reducer(previousState, addTask());
   }
+  it('start with initial state', () => {
+    const state = reducer(undefined, {});
+    expect(state).toEqual({
+      newId: 100,
+      taskTitle: '',
+      tasks: [],
+    });
+  });
 
   describe('updateTaskTitle', () => {
     it('changes task title', () => {
