@@ -4,7 +4,6 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import List from './List';
 
-// App 컴포넌트는 세 가지 액션을 취할 예정.
 import {
   deleteTask,
 } from './action';
@@ -25,7 +24,7 @@ export default function ListContainer() {
   return (
     <List
       tasks={tasks}
-      onClickDeleteTask={handleClickDeleteTask}
+      onClickDelete={handleClickDeleteTask}
     />
   );
 }
