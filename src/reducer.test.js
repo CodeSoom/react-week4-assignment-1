@@ -4,16 +4,8 @@ import { updateTaskTitle, addTask, deleteTask } from './action/action-creators';
 import Tasks from './__fixtures__/tasks.json';
 
 describe('reducer', () => {
-  describe('no state', () => {
-    it('set initial-state ', () => {
-      const previousState = undefined;
-      const nextState = reducer(previousState, { type: 'invalid-action-type' });
-      expect(nextState).not.toBeUndefined();
-    });
-  });
-
-  describe('invalid action', () => {
-    it('do nothing', () => {
+  context('when previous state is undefined', () => {
+    it('uses initial state', () => {
       const previousState = {
         someStatePropperty: Math.random() * 10,
       };
