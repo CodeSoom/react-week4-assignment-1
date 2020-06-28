@@ -25,7 +25,6 @@ describe('InputContainer', () => {
 
       const inputBox = container.querySelector('#input-task-title');
       const testInputEvent = { target: { value: testTaskTitle } };
-
       fireEvent.change(inputBox, testInputEvent);
 
       expect(dispatch).toBeCalledWith({
@@ -52,7 +51,7 @@ describe('InputContainer', () => {
 
       fireEvent.click(getByText(/추가/));
 
-      expect(dispatch).toBeCalledWith({ type: 'addTask' });
+      expect(dispatch).toBeCalledWith({ type: 'addTask', payload: {} });
     });
   });
 });

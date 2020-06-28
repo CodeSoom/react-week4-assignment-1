@@ -25,6 +25,7 @@ describe('reducer', () => {
       it('change task title', () => {
         const state = reducer({
           taskTitle: '',
+          tasks: [],
         }, updateTaskTitle(testTitle));
 
         expect(state.taskTitle).toBe(testTitle);
