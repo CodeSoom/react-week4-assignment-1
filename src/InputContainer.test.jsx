@@ -14,9 +14,20 @@ function renderComponent() {
 }
 
 describe('<InputContainer />', () => {
-  it('input task', () => {
-    const dispatch = jest.fn();
+  let dispatch;
+
+  beforeEach(() => {
+    dispatch = jest.fn();
     useDispatch.mockImplementation(() => dispatch);
+  });
+
+  describe('input task title', () => {
+    it('updates task title', () => {
+      // ...
+    });
+  });
+
+  it('input task-title', () => {
     useSelector.mockImplementation((selector) => selector({
       taskTitle: '',
     }));
@@ -29,9 +40,7 @@ describe('<InputContainer />', () => {
     expect(dispatch).toBeCalledWith(updateTaskTitle(newTaskTitle));
   });
 
-  it('add task', () => {
-    const dispatch = jest.fn();
-    useDispatch.mockImplementation(() => dispatch);
+  it('add new task', () => {
     useSelector.mockImplementation((selector) => selector({
       taskId: 0,
       taskTitle: 'some task',
