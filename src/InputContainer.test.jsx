@@ -24,7 +24,7 @@ describe('InputContainer', () => {
 
     expect(dispatch).toBeCalledWith({
       type: 'updateTaskTitle',
-      payload: '공부',
+      payload: { taskTitle: '공부' },
     });
   });
 
