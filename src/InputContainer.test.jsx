@@ -10,27 +10,44 @@ import InputContainer from './InputContainer';
 // 찾은 그 파일을 이용하여 테스트를 작동한다.
 jest.mock('react-redux');
 
-test('InputContainer', () => {
-  const dispatch = jest.fn();
+describe('InputContainer', () => {
+  it('change task title', () => {
+    const dispatch = jest.fn();
+    useDispatch.mockImplementation(() => dispatch);
 
-  useDispatch.mockImplementation(() => dispatch);
+    const { getByPlaceholderText } = render((
+      <InputContainer />
+    ));
 
-  useSelector.mockImplementation((selector) => selector({
-    taskTitle: 'New title',
-  }));
+    fireEvent.change(getByPlaceholderText('할 일을 입력해 주세요')
+      , { target: { value: '공부' } });
 
-  const { getByText, getByDisplayValue } = render((
-    <InputContainer />
-  ));
+    expect(dispatch).toBeCalledWith({
+      type: 'updateTaskTitle',
+      payload: '공부',
+    });
+  });
 
-  expect(getByText(/추가/)).not.toBeNull();
+  it('add the task to tasks', () => {
+    const dispatch = jest.fn();
+    useDispatch.mockImplementation(() => dispatch);
 
-  // expect(getByText(/New title/)).not.toBeNull();
-  expect(getByDisplayValue(/New title/)).not.toBeNull();
+    useSelector.mockImplementation((selector) => selector({
+      taskTitle: 'New title',
+    }));
+    const { getByText, getByDisplayValue } = render((
+      <InputContainer />
+    ));
 
-  fireEvent.click(getByText(/추가/));
+    expect(getByText(/추가/)).not.toBeNull();
 
-  expect(dispatch).toBeCalledWith({ type: 'addTask' });
+    // expect(getByText(/New title/)).not.toBeNull();
+    expect(getByDisplayValue(/New title/)).not.toBeNull();
+
+    fireEvent.click(getByText(/추가/));
+
+    expect(dispatch).toBeCalledWith({ type: 'addTask' });
+  });
 
   // TODO: 통합 테스트 코드 작성
   // CodeceptJS => 실제 브라우저에서 사용자 테스트 실행 가능.

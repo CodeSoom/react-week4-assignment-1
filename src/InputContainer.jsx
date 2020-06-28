@@ -30,6 +30,7 @@ export default function InputContainer() {
   function handleClickAddTask() {
     dispatch(addTask());
   }
+
   return (
     <Input
       value={taskTitle}
