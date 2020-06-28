@@ -1,4 +1,4 @@
-import { reducer, initialState } from './reducer';
+import reducer, { initialState } from './reducer';
 
 import {
   updateTaskTitle,
@@ -79,7 +79,7 @@ describe('reducer', () => {
 
   context('해당 action이 없을 때', () => {
     it('작동안함', () => {
-      const state = reducer({}, { type: 'removeTitle' });
+      const state = reducer(initialState, { type: 'removeTitle' });
 
       expect(state).toEqual(initialState);
     });
