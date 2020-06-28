@@ -32,7 +32,12 @@ test('ListContainer', () => {
 
   fireEvent.click(getByText(/완료/));
 
-  expect(dispatch).toBeCalledWith({ type: 'deleteTask' });
+  expect(dispatch).toBeCalledWith({
+    type: 'deleteTask',
+    payload: {
+      id: 1,
+    },
+  });
 
   // TODO: 통합 테스트 코드 작성
   // CodeceptJS => 실제 브라우저에서 사용자 테스트 실행 가능.
