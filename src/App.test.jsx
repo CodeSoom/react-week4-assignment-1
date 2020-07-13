@@ -7,7 +7,7 @@ import { updateTaskTitle, addTask } from './action/action-creators';
 
 import App from './App';
 
-import Tasks from './__fixtures__/tasks.json';
+import TASKS from './__fixtures__/tasks.json';
 
 jest.mock('react-redux');
 
@@ -16,79 +16,90 @@ function renderComponent() {
 }
 
 describe('<App />', () => {
-  it('display empty tasks', () => {
-    useSelector.mockImplementation((selector) => selector({
-      tasks: [],
-    }));
+  let dispatch;
+  let tasks;
 
-    const { container } = renderComponent();
-    expect(container).toHaveTextContent('할 일이 없어요!');
+  beforeEach(() => {
+    dispatch = jest.fn();
+    useDispatch.mockImplementation(() => dispatch);
   });
 
-  it('display tasks', () => {
-    const dispatch = jest.fn();
-    useDispatch.mockImplementation(() => dispatch);
-    useSelector.mockImplementation((selector) => selector({
-      tasks: Tasks,
-    }));
+  context('without tasks', () => {
+    beforeEach(() => {
+      tasks = [];
+    });
 
-    const { getAllByRole } = renderComponent();
+    it('display empty tasks', () => {
+      useSelector.mockImplementation((selector) => selector({
+        tasks,
+      }));
 
-    const tasks = getAllByRole('listitem');
-    expect(tasks).toHaveLength(Tasks.length);
-    tasks.forEach((task, taskIndex) => {
-      expect(task.firstChild.nodeValue).toBe(Tasks[taskIndex].title);
+      const { container } = renderComponent();
+
+      expect(container).toHaveTextContent('할 일이 없어요!');
+    });
+
+    it('input task-title', () => {
+      useSelector.mockImplementation((selector) => selector({
+        taskTitle: '',
+        tasks,
+      }));
+
+      const { getByRole } = renderComponent();
+
+      const newTaskTitle = 'some task';
+      const taskInput = getByRole('textbox');
+      fireEvent.change(taskInput, { target: { value: newTaskTitle } });
+      expect(dispatch).toBeCalledWith(updateTaskTitle(newTaskTitle));
+    });
+
+    it('add new task', () => {
+      useSelector.mockImplementation((selector) => selector({
+        taskId: 0,
+        taskTitle: 'some task',
+        tasks,
+      }));
+
+      const { getByRole } = renderComponent();
+
+      const addTaskButton = getByRole('button', { name: '추가' });
+      fireEvent.click(addTaskButton);
+      expect(dispatch).toBeCalledTimes(1);
+      expect(dispatch).toBeCalledWith(addTask());
     });
   });
 
-  it('input task', () => {
-    const dispatch = jest.fn();
-    useDispatch.mockImplementation(() => dispatch);
-    useSelector.mockImplementation((selector) => selector({
-      taskTitle: '',
-      tasks: [],
-    }));
-
-    const { getByRole } = renderComponent();
-
-    const newTaskTitle = 'some task';
-    const taskInput = getByRole('textbox');
-    fireEvent.change(taskInput, { target: { value: newTaskTitle } });
-    expect(dispatch).toBeCalledWith(updateTaskTitle(newTaskTitle));
-  });
-
-  it('add task', () => {
-    const dispatch = jest.fn();
-    useDispatch.mockImplementation(() => dispatch);
-    useSelector.mockImplementation((selector) => selector({
-      taskId: 0,
-      taskTitle: 'some task',
-      tasks: [],
-    }));
-
-    const { getByRole } = renderComponent();
-
-    const addTaskButton = getByRole('button', { name: '추가' });
-    fireEvent.click(addTaskButton);
-    expect(dispatch).toBeCalledTimes(1);
-    expect(dispatch).toBeCalledWith(addTask());
-  });
-
-  it('confirm added task', () => {
-    const dispatch = jest.fn();
-    useDispatch.mockImplementation(() => dispatch);
-    useSelector.mockImplementation((selector) => selector({
-      tasks: Tasks,
-    }));
-
-    const { getAllByRole } = renderComponent();
-
-    const confirmButtons = getAllByRole('button', { name: '완료' });
-    expect(confirmButtons).toHaveLength(Tasks.length);
-
-    confirmButtons.forEach((button) => {
-      fireEvent.click(button);
+  context('with tasks', () => {
+    beforeEach(() => {
+      tasks = TASKS;
     });
-    expect(dispatch).toBeCalledTimes(confirmButtons.length);
+
+    it('display task-list', () => {
+      useSelector.mockImplementation((selector) => selector({
+        tasks,
+      }));
+
+      const { getAllByRole } = renderComponent();
+
+      const taskListItems = getAllByRole('listitem');
+      expect(taskListItems).toHaveLength(TASKS.length);
+      taskListItems.forEach((item, itemIndex) => {
+        expect(item.firstChild.nodeValue).toBe(TASKS[itemIndex].title);
+      });
+    });
+
+    it('confirm added task', () => {
+      useSelector.mockImplementation((selector) => selector({
+        tasks,
+      }));
+
+      const { getAllByRole } = renderComponent();
+
+      const confirmButtons = getAllByRole('button', { name: '완료' });
+      expect(confirmButtons).toHaveLength(TASKS.length);
+
+      confirmButtons.forEach((button) => fireEvent.click(button));
+      expect(dispatch).toBeCalledTimes(confirmButtons.length);
+    });
   });
 });
