@@ -3,7 +3,7 @@ const initialState = {
 };
 
 export default function reducer(state = initialState, action) {
-  if (action.type === 'Typing') {
+  if (action.type === 'changeTitle') {
     return {
       ...state,
       title: action.payload,
