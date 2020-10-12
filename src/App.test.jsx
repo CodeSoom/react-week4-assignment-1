@@ -2,9 +2,18 @@ import React from 'react';
 
 import { render, screen, fireEvent } from '@testing-library/react';
 
+import { useDispatch, useSelector } from 'react-redux';
+
 import App from './App';
 
+jest.mock('react-redux');
+
 describe('App', () => {
+  useSelector.mockImplementation((selector) => selector({
+    taskTitle: '',
+  }));
+  useDispatch.mockImplementation(() => () => { });
+
   const { getByText } = render((
     <App />
   ));
