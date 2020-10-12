@@ -12,7 +12,15 @@ function reducer(state = initialState, action) {
     return {
       ...state,
       taskTitle: action.payload.title,
-    }
+    };
+  }
+
+  if (action.type === 'addTask') {
+    return {
+      ...state,
+      taskTitle: '',
+      tasks: [{id : 1, title: '첫번째 할 일' }],
+    };
   }
   return state;
 }
