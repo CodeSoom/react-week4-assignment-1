@@ -4,14 +4,32 @@ import { updateTaskTitle } from './actions';
 
 describe('reducer', () => {
   describe('updateTaskTitle', () => {
-    it('returns new state with new task title', () => {
-      const previousState = {
-        taskTitle: '',
-      };
+    context('with valid taskTitle', () => {
+      const newTaskTitle = 'New Task';
 
-      const newState = reducer(previousState, updateTaskTitle('New Task'));
+      it('returns new state with new task title', () => {
+        const previousState = {
+          taskTitle: '',
+        };
 
-      expect(newState.taskTitle).toBe('New Task');
+        const newState = reducer(previousState, updateTaskTitle(newTaskTitle));
+
+        expect(newState.taskTitle).toBe('New Task');
+      });
+    });
+
+    context('with invalid taskTitle', () => {
+      const newTaskTitle = 0.555;
+
+      it('returns previous state with unchanged title', () => {
+        const previousState = {
+          taskTitle: 'prevTitle',
+        };
+
+        const newState = reducer(previousState, updateTaskTitle(newTaskTitle));
+
+        expect(newState.taskTitle).toBe(previousState.taskTitle);
+      });
     });
   });
 });
