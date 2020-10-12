@@ -9,9 +9,11 @@ const initialState = {
 
 function reducer(state = initialState, action) {
   if (action.type === 'updateTaskTitle') {
+    const { title } = action.payload;
+
     return {
       ...state,
-      taskTitle: action.payload.title,
+      taskTitle: title,
     };
   }
 
@@ -29,9 +31,12 @@ function reducer(state = initialState, action) {
   }
 
   if (action.type === 'deleteTask') {
+    const { tasks } = state;
+    const { id } = action.payload;
+
     return {
       ...state,
-      tasks: state.tasks.filter((task) => task.id !== action.payload.id),
+      tasks: tasks.filter((task) => task.id !== id),
     };
   }
   return state;
