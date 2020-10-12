@@ -31,7 +31,7 @@ function reducer(state = initialState, action) {
   if (action.type === 'deleteTask') {
     return {
       ...state,
-      tasks: [{ id: 2, title: '두번째 할 일' }],
+      tasks: state.tasks.filter((task) => task.id !== action.payload.id),
     };
   }
   return state;
