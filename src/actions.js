@@ -1,6 +1,8 @@
+export const CHANGE_TITLE = 'CHANGE_TITLE';
+
 function changeTitle(value) {
   return {
-    type: 'changeTitle',
+    type: CHANGE_TITLE,
     payload: value,
   };
 }
