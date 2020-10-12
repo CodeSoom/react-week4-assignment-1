@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import selector from './selector';
+import action from './actions';
 
 import Page from './Page';
 
@@ -17,10 +18,7 @@ export default function App() {
   const { newId, tasks } = state;
 
   function handleChangeTitle(event) {
-    dispatch({
-      type: 'changeTitle',
-      payload: event.target.value,
-    });
+    dispatch(action.changeTitle(event.target.value));
   }
 
   function handleClickAddTask() {
