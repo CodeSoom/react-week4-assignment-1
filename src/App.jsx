@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 
+import { createStore } from 'redux';
+
 import Page from './Page';
 
 const initialState = {
@@ -7,9 +9,15 @@ const initialState = {
   taskTitle: '',
   tasks: [
     { id: 1, title: '첫번째 할 일' },
-    { id: 1, title: '두번째 할 일' },
+    { id: 2, title: '두번째 할 일' },
   ],
 };
+
+function reducer() {
+  return initialState;
+}
+
+const store = createStore(reducer);
 
 function updateTaskTitle(state, taskTitle) {
   return {
@@ -39,8 +47,7 @@ function deleteTask(state, id) {
 export default function App() {
   const [state, setState] = useState(initialState);
 
-  const { taskTitle, tasks } = state;
-
+  const { taskTitle, tasks } = store.getState();
   function handleChangeTitle(event) {
     setState(updateTaskTitle(state, event.target.value));
   }
