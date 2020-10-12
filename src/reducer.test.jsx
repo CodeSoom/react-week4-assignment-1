@@ -22,6 +22,7 @@ describe('reducer', () => {
   describe('addTask', () => {
     it('appends task into tasks', () => {
       const previousState = {
+        newId: 100,
         taskTitle: '첫번째 할 일',
         tasks: [],
       };
