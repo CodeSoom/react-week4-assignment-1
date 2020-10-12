@@ -5,7 +5,10 @@ import Page from './Page';
 const initialState = {
   newId: 100,
   taskTitle: '',
-  tasks: [],
+  tasks: [
+    { id: 1, title: '첫번째 할 일' },
+    { id: 1, title: '두번째 할 일' },
+  ],
 };
 
 function updateTaskTitle(state, taskTitle) {
