@@ -8,7 +8,7 @@ export default function reducer(state = initialState, action) {
   if (action.type === CHANGE_TITLE) {
     return {
       ...state,
-      title: action.payload,
+      taskTitle: action.payload,
     };
   }
 
