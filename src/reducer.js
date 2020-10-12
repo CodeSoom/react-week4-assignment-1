@@ -1,10 +1,7 @@
 const initialState = {
   newId: 100,
   taskTitle: '',
-  tasks: [
-    { id: 1, title: '첫번째 할 일' },
-    { id: 2, title: '두번째 할 일' },
-  ],
+  tasks: [],
 };
 
 function reducer(state = initialState, action) {
