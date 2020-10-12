@@ -74,4 +74,25 @@ describe('reducer', () => {
       });
     });
   });
+
+  describe('deleteTask', () => {
+    it('remove task from tasks', () => {
+      const previousState = {
+        tasks: [
+          { id: 1, title: '첫번째 할 일' },
+          { id: 2, title: '두번째 할 일' },
+        ],
+      };
+
+      const action = {
+        type: 'deleteTask',
+        payload: { id: 1 },
+      };
+
+      const state = reducer(previousState, action);
+
+      expect(state.tasks).not.toContain({ id: 1 });
+      expect(state.tasks).toHaveLength(1);
+    });
+  });
 });
