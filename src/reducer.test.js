@@ -1,3 +1,5 @@
+import reducer from './reducer';
+
 describe('reducer', () => {
   describe('updateTaskTitle', () => {
     it('returns new state with new task title', () => {
