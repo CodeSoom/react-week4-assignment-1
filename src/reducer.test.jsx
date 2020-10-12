@@ -41,6 +41,7 @@ describe('reducer', () => {
 
       it('clear task title', () => {
         const previousState = {
+          newId: 100,
           taskTitle: '첫번째 할 일',
           tasks: [],
         };
@@ -58,6 +59,7 @@ describe('reducer', () => {
     context('without task title', () => {
       it("dosen't work", () => {
         const previousState = {
+          newId: 100,
           taskTitle: '',
           tasks: [],
         };
