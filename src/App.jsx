@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import selector from './selector';
-import action from './actions';
+import selectors from './selectors';
+import actions from './actions';
 
 import Page from './Page';
 
@@ -13,12 +13,12 @@ export default function App() {
     tasks: [],
   });
   const dispatch = useDispatch();
-  const { taskTitle } = useSelector(selector.getTaskTitle);
+  const { taskTitle } = useSelector(selectors.getTaskTitle);
 
   const { newId, tasks } = state;
 
   function handleChangeTitle(event) {
-    dispatch(action.changeTitle(event.target.value));
+    dispatch(actions.changeTitle(event.target.value));
   }
 
   function handleClickAddTask() {
