@@ -5,9 +5,9 @@ export function updateTaskTitle(taskTitle) {
   };
 }
 
-export function AddTaskTitle() {
+export function addTask() {
   return {
-    type: 'AddTask',
+    type: 'addTask',
   };
 }
 

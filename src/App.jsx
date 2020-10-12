@@ -6,7 +6,7 @@ import Page from './Page';
 
 import {
   updateTaskTitle,
-  AddTaskTitle,
+  addTask,
   deleteTask,
 } from './actions';
 
@@ -23,7 +23,7 @@ export default function App() {
   }
 
   function handleClickAddTask() {
-    dispatch(AddTaskTitle());
+    dispatch(addTask());
   }
 
   function handleClickDeleteTask(id) {
