@@ -28,7 +28,7 @@ function selector(state) {
   return {
     taskTitle: state.taskTitle,
     tasks: state.tasks,
-  }
+  };
 }
 
 export default function App() {
