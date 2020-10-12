@@ -3,16 +3,7 @@ import { createStore } from 'redux';
 const initialState = {
   newId: 100,
   taskTitle: '',
-  tasks: [
-    {
-      id: 1,
-      title: '아무것도 하지않기1',
-    },
-    {
-      id: 2,
-      title: '아무것도 하지않기2',
-    },
-  ],
+  tasks: [],
 };
 
 function reducer(state = initialState, action) {
