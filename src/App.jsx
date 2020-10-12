@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import { createStore } from 'redux';
+import store from './store';
 
 import Page from './Page';
 
@@ -12,12 +12,6 @@ const initialState = {
     { id: 2, title: '두번째 할 일' },
   ],
 };
-
-function reducer() {
-  return initialState;
-}
-
-const store = createStore(reducer);
 
 function updateTaskTitle(state, taskTitle) {
   return {
