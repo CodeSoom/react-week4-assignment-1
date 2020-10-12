@@ -20,37 +20,56 @@ describe('reducer', () => {
   });
 
   describe('addTask', () => {
-    it('appends task into tasks', () => {
-      const previousState = {
-        newId: 100,
-        taskTitle: '첫번째 할 일',
-        tasks: [],
-      };
+    context('with task title', () => {
+      it('appends task into tasks', () => {
+        const previousState = {
+          newId: 100,
+          taskTitle: '첫번째 할 일',
+          tasks: [],
+        };
 
-      const action = {
-        type: 'addTask',
-      };
+        const action = {
+          type: 'addTask',
+        };
 
-      const state = reducer(previousState, action);
+        const state = reducer(previousState, action);
 
-      expect(state.tasks).toHaveLength(1);
-      expect(state.tasks[0].title).toBe('첫번째 할 일');
-      expect(state.tasks[0].id).not.toBeUndefined();
+        expect(state.tasks).toHaveLength(1);
+        expect(state.tasks[0].title).toBe('첫번째 할 일');
+        expect(state.tasks[0].id).not.toBeUndefined();
+      });
+
+      it('clear task title', () => {
+        const previousState = {
+          taskTitle: '첫번째 할 일',
+          tasks: [],
+        };
+
+        const action = {
+          type: 'addTask',
+        };
+
+        const state = reducer(previousState, action);
+
+        expect(state.taskTitle).toBe('');
+      });
     });
 
-    it('clear task title', () => {
-      const previousState = {
-        taskTitle: '첫번째 할 일',
-        tasks: [],
-      };
+    context('without task title', () => {
+      it("dosen't work", () => {
+        const previousState = {
+          taskTitle: '',
+          tasks: [],
+        };
 
-      const action = {
-        type: 'addTask',
-      };
+        const action = {
+          type: 'addTask',
+        };
 
-      const state = reducer(previousState, action);
+        const state = reducer(previousState, action);
 
-      expect(state.taskTitle).toBe('');
+        expect(state.tasks).toHaveLength(0);
+      });
     });
   });
 });
