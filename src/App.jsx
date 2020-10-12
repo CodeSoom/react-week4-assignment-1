@@ -24,13 +24,17 @@ function deleteTask(id) {
   };
 }
 
+function selector(state) {
+  return {
+    taskTitle: state.taskTitle,
+    tasks: state.tasks,
+  }
+}
+
 export default function App() {
   const dispatch = useDispatch();
 
-  const { taskTitle, tasks } = useSelector((state) => ({
-    taskTitle: state.taskTitle,
-    tasks: state.tasks,
-  }));
+  const { taskTitle, tasks } = useSelector(selector);
 
   function handleChangeTitle(event) {
     dispatch(updateTaskTitle(event.target.value));
