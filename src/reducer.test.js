@@ -1,6 +1,6 @@
 import reducer from './reducer';
 
-import { updateTaskTitle, addTask } from './actions';
+import { updateTaskTitle, addTask, deleteTask } from './actions';
 
 describe('reducer', () => {
   it('returns initial state in case of undefined state', () => {
@@ -74,10 +74,6 @@ describe('reducer', () => {
 
   describe('deleteTask', () => {
     const targetId = 101;
-    const action = {
-      type: 'deleteTask',
-      payload: { id: targetId },
-    };
     const previousState = {
       tasks: [
         { id: 101, title: 'TASK-1' },
@@ -86,9 +82,9 @@ describe('reducer', () => {
     };
 
     it('returns state without deleted task', () => {
-      const newState = reducer(previousState, action);
+      const newState = reducer(previousState, deleteTask(targetId));
 
-      expect(newState.tasks.filter(({ id }) => id === targetId).length).toBe(0);
+      expect(newState.tasks.find(({ id }) => id === targetId)).toBeUndefined();
     });
   });
 });

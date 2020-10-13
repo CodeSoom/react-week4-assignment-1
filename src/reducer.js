@@ -5,21 +5,21 @@ const initialState = ({
 });
 
 export default function reducer(state = initialState, action) {
+  const { newId, tasks, taskTitle } = state;
+
   const isValid = (title) => typeof title === 'string';
   const isBlank = (string) => string.trim().length === 0;
 
   if (action?.type === 'updateTaskTitle' && isValid(action.payload.taskTitle)) {
-    const { taskTitle } = action.payload;
+    const { taskTitle: newTitle } = action.payload;
 
     return ({
       ...state,
-      taskTitle,
+      taskTitle: newTitle,
     });
   }
 
   if (action?.type === 'addTask' && !isBlank(state.taskTitle)) {
-    const { newId, tasks, taskTitle } = state;
-
     return ({
       ...state,
       newId: newId + 1,
@@ -29,7 +29,6 @@ export default function reducer(state = initialState, action) {
   }
 
   if (action?.type === 'deleteTask') {
-    const { tasks } = state;
     const { id } = action.payload;
 
     return ({
