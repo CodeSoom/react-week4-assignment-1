@@ -3,7 +3,7 @@ import reducer from './reducer';
 import {
   updateTaskTitle,
   addTask,
-  deleteTask
+  deleteTask,
 } from './actions';
 
 describe('reducer', () => {
@@ -16,7 +16,7 @@ describe('reducer', () => {
       expect(state.taskTitle).toBe('입력 값');
     });
   });
-  
+
   describe('addTask', () => {
     function reduceAddTask(taskTitle) {
       return reducer({
@@ -49,7 +49,7 @@ describe('reducer', () => {
       });
     });
   });
-  
+
   describe('deleteTask', () => {
     context('with existed task ID', () => {
       it('remove the task from tasks', () => {

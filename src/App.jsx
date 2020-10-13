@@ -11,8 +11,7 @@ import {
 } from './actions';
 
 export default function App() {
-  const { newId, taskTitle, tasks } = useSelector((state) => ({
-    newId: state.newId,
+  const { taskTitle, tasks } = useSelector((state) => ({
     taskTitle: state.taskTitle,
     tasks: state.tasks,
   }));
