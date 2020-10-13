@@ -23,6 +23,7 @@ export default function reducer(state = initialState, action) {
 
     return {
       ...state,
+      taskTitle: initialState.taskTitle,
       newId: newId + 1,
       tasks: [
         ...tasks, { id: newId, title: taskTitle },
