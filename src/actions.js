@@ -6,22 +6,15 @@ export function updateTaskTitle(taskTitle) {
   };
 }
 
-export function addTask(state) {
-  const { newId, taskTitle, tasks } = state;
-
+export function addTask() {
   return {
-    ...state,
-    newId: newId + 1,
-    taskTitle: '',
-    tasks: [...tasks, { id: newId, title: taskTitle }],
+    type: 'addTask',
   };
 }
 
-export function deleteTask(state, id) {
-  const { tasks } = state;
-
+export function deleteTask(id) {
   return {
-    ...state,
-    tasks: tasks.filter((task) => task.id !== id),
+    type: 'deleteTask',
+    payload: { id },
   };
 }
