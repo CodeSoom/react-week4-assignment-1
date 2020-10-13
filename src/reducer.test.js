@@ -16,27 +16,27 @@ describe('reducer', () => {
   });
 
   describe(ADD_TASK, () => {
+    // Given
+    const previousState = {
+      newId: 100,
+      taskTitle: '독서하기',
+      tasks: [],
+    };
+    const action = actions.addTask();
+
     it('add Task to the list', () => {
-      const previousState = {
-        newId: 100,
-        taskTitle: '독서하기',
-        tasks: [],
-      };
-      const action = actions.addTask();
+      // When
       const state = reducer(previousState, action);
 
+      // Then
       expect(state.tasks).toMatchObject([{ id: 100, title: '독서하기' }]);
     });
 
     it('initializes task title', () => {
-      const previousState = {
-        newId: 100,
-        taskTitle: '독서하기',
-        tasks: [],
-      };
-      const action = actions.addTask();
+      // When
       const state = reducer(previousState, action);
 
+      // Then
       expect(state.taskTitle).toBe('');
     });
   });
