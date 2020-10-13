@@ -1,16 +1,67 @@
 import React from 'react';
 
-import { render } from '@testing-library/react';
+import { render, fireEvent } from '@testing-library/react';
 
 import App from './App';
 
-test('App', () => {
-  const { getByText } = render((
-    <App />
-  ));
+describe('App', () => {
+  it('renders elements correctly', () => {
+    const { getByText, getByLabelText } = render((
+      <App />
+    ));
 
-  expect(getByText(/추가/)).not.toBeNull();
+    expect(getByText(/추가/)).not.toBeNull();
+    expect(getByLabelText(/할 일/)).not.toBeNull();
+  });
 
-  // TODO: 통합 테스트 코드 작성
-  // CodeceptJS => 실제 브라우저에서 사용자 테스트 실행 가능.
+  context('when user change task title', () => {
+    const newTitle = 'New Task';
+    it('input has the title', () => {
+      const { getByLabelText } = render(<App />);
+      const input = getByLabelText(/할 일/);
+
+      expect(input).not.toHaveValue(newTitle);
+
+      fireEvent.change(input, { target: { value: newTitle } });
+
+      expect(input).toHaveValue(newTitle);
+    });
+  });
+
+  context('when user click addButton', () => {
+    it('added task appears on the screen', () => {
+      const newTitle = 'New Task';
+      const { getByText, getByLabelText, queryByText } = render(<App />);
+      const input = getByLabelText(/할 일/);
+      const addButton = getByText(/추가/);
+
+      fireEvent.change(input, { target: { value: newTitle } });
+
+      expect(queryByText(newTitle)).toBeNull();
+      expect(queryByText(/완료/)).toBeNull();
+
+      fireEvent.click(addButton);
+
+      expect(queryByText(newTitle)).not.toBeNull();
+      expect(queryByText(/완료/)).not.toBeNull();
+    });
+  });
+
+  context('when user click deleteButton', () => {
+    it('deleted task disappears out of screen', () => {
+      const taskTitle = 'TASK-01';
+      const { queryByText, getByText, getByLabelText } = render(<App />);
+      const input = getByLabelText(/할 일/);
+      const addButton = getByText(/추가/);
+
+      fireEvent.change(input, { target: { value: taskTitle } });
+      fireEvent.click(addButton);
+
+      expect(queryByText(taskTitle)).not.toBeNull();
+
+      fireEvent.click(getByText(/완료/));
+
+      expect(queryByText(taskTitle)).toBeNull();
+    });
+  });
 });
