@@ -9,11 +9,13 @@ import App from './App';
 jest.mock('react-redux');
 
 test('App', () => {
+  const tasks =  [
+    { id: 1, title: '첫번째 할 일' },
+    { id: 2, title: '두번째 할 일' },
+  ];
+
   useSelector.mockImplementation((selector) => selector({
-    tasks: [
-      { id: 1, title: '첫번째 할 일' },
-      { id: 2, title: '두번째 할 일' },
-    ],
+    tasks,
   }));
 
   const { getByText } = render((
@@ -22,9 +24,10 @@ test('App', () => {
 
   expect(getByText(/추가/)).not.toBeNull();
 
-  expect(getByText(/첫번째 할 일/)).not.toBeNull();
-  expect(getByText(/두번째 할 일/)).not.toBeNull();
-
+  tasks.forEach((task) => {
+    expect(getByText(task.title)).not.toBeNull();
+  });
+  
   // TODO: 통합 테스트 코드 작성
   // CodeceptJS => 실제 브라우저에서 사용자 테스트 실행 가능.
 });
