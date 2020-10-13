@@ -73,7 +73,6 @@ describe('reducer', () => {
   });
 
   describe('deleteTask', () => {
-    const targetId = 101;
     const previousState = {
       tasks: [
         { id: 101, title: 'TASK-1' },
@@ -81,10 +80,30 @@ describe('reducer', () => {
       ],
     };
 
-    it('returns state without deleted task', () => {
-      const newState = reducer(previousState, deleteTask(targetId));
+    context('with existing id', () => {
+      const targetId = 101;
 
-      expect(newState.tasks.find(({ id }) => id === targetId)).toBeUndefined();
+      it('returns state without deleted task', () => {
+        const newState = reducer(previousState, deleteTask(targetId));
+
+        expect(newState.tasks.find(({ id }) => id === targetId)).toBeUndefined();
+      });
+    });
+
+    context('with not existing id', () => {
+      const targetId = 404;
+
+      it('returns previous state', () => {
+        expect(reducer(previousState, deleteTask(targetId))).toEqual(previousState);
+      });
+    });
+
+    context('with invalid id', () => {
+      const targetId = 'xxo';
+
+      it('returns previous state', () => {
+        expect(reducer(previousState, deleteTask(targetId))).toEqual(previousState);
+      });
     });
   });
 });
