@@ -3,10 +3,7 @@ import { createStore } from 'redux';
 const initialState = {
   newId: 100,
   taskTitle: '',
-  tasks: [
-    { id: 1, title: '할일 #1' },
-    { id: 2, title: '할일 #2' },
-  ],
+  tasks: [],
 };
 
 function reducer(state = initialState, action) {
@@ -19,6 +16,7 @@ function reducer(state = initialState, action) {
 
   if (action.type === 'addTask') {
     const { newId, tasks, taskTitle } = state;
+
     return {
       ...state,
       newId: newId + 1,
@@ -29,6 +27,7 @@ function reducer(state = initialState, action) {
 
   if (action.type === 'deleteTask') {
     const { tasks } = state;
+
     return {
       ...state,
       tasks: tasks.filter((task) => task.id !== action.payload.id),
