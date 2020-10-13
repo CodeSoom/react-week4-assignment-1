@@ -10,24 +10,26 @@ function getValidater(state, action) {
 
   const defaultValidater = () => true;
 
+  const isString = (value) => typeof value === 'string';
+  const isBlank = (string) => string.trim().length === 0;
+
   return ({
-    updateTaskTitle: ({ taskTitle: newTitle }) => typeof newTitle === 'string',
-    addTask: () => taskTitle.trim().length !== 0,
+    updateTaskTitle: ({ taskTitle: newTitle }) => isString(newTitle),
+    addTask: () => !isBlank(taskTitle),
   })[type] || defaultValidater;
 }
 
-function getUpdater(state, action) {
+export default function reducer(state = initialState, action = { type: 'default' }) {
   const { newId, tasks, taskTitle } = state;
   const { type, payload } = action;
 
   const validate = getValidater(state, action);
-  const defaultUpdater = () => state;
 
   if (!validate(payload)) {
-    return defaultUpdater;
+    return state;
   }
 
-  return ({
+  const newStates = {
     updateTaskTitle: ({ taskTitle: newTitle }) => ({
       ...state,
       taskTitle: newTitle,
@@ -42,13 +44,8 @@ function getUpdater(state, action) {
       ...state,
       tasks: tasks.filter((task) => task.id !== id),
     }),
-  }[type]) || defaultUpdater;
-}
+    default: () => state,
+  };
 
-export default function reducer(state = initialState, action = { type: 'default' }) {
-  const { payload } = action;
-
-  const update = getUpdater(state, action);
-
-  return update(payload);
+  return newStates[type](payload);
 }
