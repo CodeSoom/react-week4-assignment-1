@@ -71,7 +71,7 @@ describe('reducer', () => {
           ],
         }, deleteTask(100));
 
-        expect(state.tasks).toHaveLength(0);
+        expect(state.tasks).toHaveLength(1);
       });
     });
   });
