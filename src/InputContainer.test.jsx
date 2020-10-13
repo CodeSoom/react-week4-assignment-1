@@ -14,12 +14,16 @@ test('InputContainer', () => {
   useDispatch.mockImplementation(() => dispatch);
 
   useSelector.mockImplementation((selector) => selector({
-    taskTitle: 'New Title',
+    taskTitle: '',
   }));
 
-  const { getByText } = render((
+  const { getByText, getByLabelText } = render((
     <InputContainer />
   ));
+
+  fireEvent.change(getByLabelText(/할 일/), {
+    target: { value: 'New Title' },
+  });
 
   expect(getByText(/추가/)).not.toBeNull();
 

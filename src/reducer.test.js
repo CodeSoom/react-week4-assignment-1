@@ -70,4 +70,32 @@ describe('reducer', () => {
       });
     });
   });
+
+  describe('undefined action', () => {
+    context('with state', () => {
+      it('can see a tasks', () => {
+        const state = reducer(
+          {
+            tasks: [
+              { id: 1, title: 'Task' },
+            ],
+          },
+          { type: 'undefined', payload: {} },
+        );
+
+        expect(state.tasks).toHaveLength(1);
+      });
+    });
+
+    context('without state', () => {
+      it('can not see tasks', () => {
+        const state = reducer(
+          undefined,
+          { type: 'undefined', payload: {} },
+        );
+
+        expect(state.tasks).toHaveLength(0);
+      });
+    });
+  });
 });
