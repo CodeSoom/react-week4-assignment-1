@@ -1,7 +1,13 @@
-export default function reducer(state, action) {
+const initialState = ({
+  newId: 100,
+  taskTitle: '',
+  tasks: [],
+});
+
+export default function reducer(state = initialState, action) {
   const isValidTaskTitle = (title) => typeof title === 'string' && title;
 
-  if (action.type === 'updateTaskTitle') {
+  if (action?.type === 'updateTaskTitle') {
     const { taskTitle } = action.payload;
 
     return ({
