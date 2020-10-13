@@ -10,10 +10,12 @@ const initialState = {
   tasks: [],
 };
 
-function updateTaskTitle(state, taskTitle) {
+function updateTaskTitle(taskTitle) {
   return {
-    ...state,
-    taskTitle,
+    type: 'updateTaskTitle',
+    payload: {
+      taskTitle,
+    },
   };
 }
 
@@ -44,7 +46,7 @@ export default function App() {
   }));
 
   function handleChangeTitle(event) {
-    dispatch(updateTaskTitle(state, event.target.value));
+    dispatch(updateTaskTitle(event.target.value));
   }
 
   function handleClickAddTask() {
