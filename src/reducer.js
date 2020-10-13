@@ -1,7 +1,9 @@
-import { CHANGE_TITLE } from './actions';
+import { CHANGE_TITLE, ADD_TASK } from './actions';
 
 const initialState = {
+  newId: 100,
   taskTitle: '',
+  tasks: [],
 };
 
 export default function reducer(state = initialState, action) {
@@ -9,6 +11,22 @@ export default function reducer(state = initialState, action) {
     return {
       ...state,
       taskTitle: action.payload,
+    };
+  }
+
+  if (action.type === ADD_TASK) {
+    const {
+      newId,
+      taskTitle,
+      tasks,
+    } = state;
+
+    return {
+      ...state,
+      newId: newId + 1,
+      tasks: [
+        ...tasks, { id: newId, title: taskTitle },
+      ],
     };
   }
 
