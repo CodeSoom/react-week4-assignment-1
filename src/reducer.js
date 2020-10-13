@@ -4,7 +4,7 @@ const initialState = {
   tasks: [],
 };
 
-function reducer(state = initialState, action) {
+function reducer(state = initialState, action = { type: 'initialState' }) {
   if (action.type === 'updateTaskTitle') {
     const { title } = action.payload;
 
