@@ -4,7 +4,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import { render, fireEvent } from '@testing-library/react';
 
 import App from './App';
-import { mockComponent } from 'react-dom/test-utils';
 
 describe('App', () => {
   context('with initial state', () => {
