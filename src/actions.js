@@ -11,9 +11,9 @@ export function deleteTask(id) {
   };
 }
 
-export function updateTaskTitle(taskTitle) {
+export function updateTaskTitle(title) {
   return {
     type: 'updateTaskTitle',
-    payload: { title: taskTitle },
+    payload: { title },
   };
 }
