@@ -7,6 +7,16 @@ import {
 } from './actions';
 
 describe('reducer', () => {
+  describe('initialState', () => {
+    it('set the inital state', () => {
+      const state = reducer();
+
+      expect(state.taskTitle).toBe('');
+      expect(state.tasks).toHaveLength(0);
+      expect(state.newId).toBe(100);
+    });
+  });
+
   describe('updateTaskTitle', () => {
     it('changes task title', () => {
       const taskTitle = '';
