@@ -27,5 +27,17 @@ describe('reducer', () => {
 
       expect(state.tasks).toMatchObject([{ id: 100, title: '독서하기' }]);
     });
+
+    it('initializes task title', () => {
+      const previousState = {
+        newId: 100,
+        taskTitle: '독서하기',
+        tasks: [],
+      };
+      const action = actions.addTask();
+      const state = reducer(previousState, action);
+
+      expect(state.taskTitle).toBe('');
+    });
   });
 });
