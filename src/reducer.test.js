@@ -1,6 +1,6 @@
 import reducer from './reducer';
 
-import { updateTaskTitle } from './actions';
+import { updateTaskTitle, addTask } from './actions';
 
 describe('reducer', () => {
   it('returns initial state in case of undefined state', () => {
@@ -38,8 +38,6 @@ describe('reducer', () => {
   });
 
   describe('addTask', () => {
-    const action = { type: 'addTask' };
-
     context('with previous task with taskTitle', () => {
       const previousState = {
         newId: 105,
@@ -48,7 +46,7 @@ describe('reducer', () => {
       };
 
       it('returns new state with new task added to tasks, empty taskTitle and updated id', () => {
-        const newState = reducer(previousState, action);
+        const newState = reducer(previousState, addTask());
 
         expect(newState.tasks).toContainEqual({
           id: previousState.newId,
@@ -67,7 +65,7 @@ describe('reducer', () => {
       };
 
       it('returns previous state', () => {
-        const newState = reducer(previousState, action);
+        const newState = reducer(previousState, addTask());
 
         expect(newState).toEqual(previousState);
       });

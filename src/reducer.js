@@ -6,7 +6,7 @@ const initialState = ({
 
 export default function reducer(state = initialState, action) {
   const isValid = (title) => typeof title === 'string';
-  const isBlank = (string) => string.length === 0;
+  const isBlank = (string) => string.trim().length === 0;
 
   if (action?.type === 'updateTaskTitle' && isValid(action.payload.taskTitle)) {
     const { taskTitle } = action.payload;
