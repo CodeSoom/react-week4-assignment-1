@@ -42,4 +42,23 @@ describe('reducer', () => {
       });
     });
   });
+
+  describe('addTask', () => {
+    it('returns new state with new task added to tasks', () => {
+      const previousState = {
+        newId: 105,
+        taskTitle: 'newTask',
+        tasks: [],
+      };
+
+      const action = { type: 'addTask' };
+
+      const newState = reducer(previousState, action);
+
+      expect(newState.tasks).toContain({ 
+        id: previousState.id + 1,
+        title: previousState.taskTitle,
+      });
+    });
+  });
 });
