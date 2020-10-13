@@ -1,22 +1,17 @@
 import React from 'react';
+import { Provider } from 'react-redux';
 
 import { render, screen, fireEvent } from '@testing-library/react';
 
-import { useDispatch, useSelector } from 'react-redux';
+import store from './store';
 
 import App from './App';
 
-jest.mock('react-redux');
-
 describe('App', () => {
-  useSelector.mockImplementation((selector) => selector({
-    taskTitle: '',
-    tasks: [],
-  }));
-  useDispatch.mockImplementation(() => () => { });
-
   const { getByText } = render((
-    <App />
+    <Provider store={store}>
+      <App />
+    </Provider>
   ));
 
   expect(getByText(/추가/)).not.toBeNull();
