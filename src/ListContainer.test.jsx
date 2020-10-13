@@ -1,8 +1,8 @@
 import React from 'react';
 
-import { render } from '@testing-library/react';
+import { render, fireEvent } from '@testing-library/react';
 
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import ListContainer from './ListContainer';
 
@@ -14,15 +14,29 @@ test('ListContainer', () => {
     { id: 2, title: '두번째 할 일' },
   ];
 
+  const dispatch = jest.fn();
+
   useSelector.mockImplementation((selector) => selector({
     tasks,
   }));
 
-  const { getByText } = render((
+  useDispatch.mockImplementation(() => dispatch);
+
+  const { getByText, getAllByText } = render((
     <ListContainer />
   ));
 
   tasks.forEach((task) => {
     expect(getByText(task.title)).not.toBeNull();
+  });
+
+  const deleteButtons = getAllByText(/완료/);
+  deleteButtons.forEach((deleteButton, index) => {
+    fireEvent.click(deleteButton);
+
+    expect(dispatch).toBeCalledWith({
+      type: 'deleteTask',
+      payload: { id: tasks[index].id },
+    });
   });
 });
