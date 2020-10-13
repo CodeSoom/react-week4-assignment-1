@@ -32,4 +32,17 @@ describe('App', () => {
     // Then
     expect(screen.getByRole('textbox')).toHaveValue('청소하기');
   });
+
+  it('Task 추가시 목록에 Task가 출력된다.', () => {
+    // Given
+    fireEvent.change(screen.getByRole('textbox'), {
+      target: { value: '선물사기' },
+    });
+
+    // When
+    fireEvent.click(screen.getByText('추가'));
+
+    // Then
+    expect(screen.getByRole('list')).toHaveTextContent('선물사기');
+  });
 });
