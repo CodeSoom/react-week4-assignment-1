@@ -4,13 +4,13 @@ const initialState = ({
   tasks: [],
 });
 
-export default function reducer(state = initialState, action) {
+export default function reducer(state = initialState, action = { type: 'default' }) {
   const { newId, tasks, taskTitle } = state;
 
   const isValid = (title) => typeof title === 'string';
   const isBlank = (string) => string.trim().length === 0;
 
-  if (action?.type === 'updateTaskTitle' && isValid(action.payload.taskTitle)) {
+  if (action.type === 'updateTaskTitle' && isValid(action.payload.taskTitle)) {
     const { taskTitle: newTitle } = action.payload;
 
     return ({
@@ -19,7 +19,7 @@ export default function reducer(state = initialState, action) {
     });
   }
 
-  if (action?.type === 'addTask' && !isBlank(state.taskTitle)) {
+  if (action.type === 'addTask' && !isBlank(state.taskTitle)) {
     return ({
       ...state,
       newId: newId + 1,
@@ -28,7 +28,7 @@ export default function reducer(state = initialState, action) {
     });
   }
 
-  if (action?.type === 'deleteTask') {
+  if (action.type === 'deleteTask') {
     const { id } = action.payload;
 
     return ({
