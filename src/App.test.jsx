@@ -9,12 +9,14 @@ import App from './App';
 jest.mock('react-redux');
 
 test('App', () => {
-  const tasks =  [
+  const taskTitle = '';
+  const tasks = [
     { id: 1, title: '첫번째 할 일' },
     { id: 2, title: '두번째 할 일' },
   ];
 
   useSelector.mockImplementation((selector) => selector({
+    taskTitle,
     tasks,
   }));
 
@@ -27,7 +29,4 @@ test('App', () => {
   tasks.forEach((task) => {
     expect(getByText(task.title)).not.toBeNull();
   });
-  
-  // TODO: 통합 테스트 코드 작성
-  // CodeceptJS => 실제 브라우저에서 사용자 테스트 실행 가능.
 });
