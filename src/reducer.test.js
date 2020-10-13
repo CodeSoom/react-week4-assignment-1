@@ -48,4 +48,30 @@ describe('reducer', () => {
       });
     });
   });
+  
+  describe('deleteTask', () => {
+    context('with existed task ID', () => {
+      it('remove the task from tasks', () => {
+        const state = reducer({
+          tasks: [
+            { id: 1, title: 'Task' },
+          ],
+        }, deleteTask(1));
+
+        expect(state.tasks).toHaveLength(0);
+      });
+    });
+
+    context('without existed task ID', () => {
+      it("doesn't work", () => {
+        const state = reducer({
+          tasks: [
+            { id: 1, title: 'Task' },
+          ],
+        }, deleteTask(100));
+
+        expect(state.tasks).toHaveLength(1);
+      });
+    });
+  });
 });
