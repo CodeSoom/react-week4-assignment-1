@@ -6,6 +6,8 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import ListContainer from './ListContainer';
 
+import { deleteTask } from './actions';
+
 jest.mock('react-redux');
 
 test('ListContainer', () => {
@@ -34,9 +36,6 @@ test('ListContainer', () => {
   deleteButtons.forEach((deleteButton, index) => {
     fireEvent.click(deleteButton);
 
-    expect(dispatch).toBeCalledWith({
-      type: 'deleteTask',
-      payload: { id: tasks[index].id },
-    });
+    expect(dispatch).toBeCalledWith(deleteTask(tasks[index].id));
   });
 });
