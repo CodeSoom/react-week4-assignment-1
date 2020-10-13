@@ -3,6 +3,16 @@ import reducer from './reducer';
 import { updateTaskTitle } from './actions';
 
 describe('reducer', () => {
+  it('returns initial state with undefined state', () => {
+    const initialState = ({
+      newId: 100,
+      taskTitle: '',
+      tasks: [],
+    });
+
+    expect(reducer()).toEqual(initialState);
+  });
+
   describe('updateTaskTitle', () => {
     context('with valid taskTitle', () => {
       const newTaskTitle = 'New Task';
