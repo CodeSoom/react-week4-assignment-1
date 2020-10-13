@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import selectors from './selectors';
+import { getState } from './selectors';
 import actions from './actions';
 
 import Page from './Page';
@@ -13,21 +13,14 @@ export default function App() {
     tasks: [],
   });
   const dispatch = useDispatch();
-  const { taskTitle } = useSelector(selectors.getTaskTitle);
-
-  const { newId, tasks } = state;
+  const { taskTitle, tasks } = useSelector(getState);
 
   function handleChangeTitle(event) {
     dispatch(actions.changeTitle(event.target.value));
   }
 
   function handleClickAddTask() {
-    setState({
-      ...state,
-      newId: newId + 1,
-      taskTitle: '',
-      tasks: [...tasks, { id: newId, title: taskTitle }],
-    });
+    dispatch(actions.addTask());
   }
 
   function handleClickDeleteTask(id) {
