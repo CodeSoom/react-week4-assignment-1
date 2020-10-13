@@ -38,23 +38,39 @@ describe('reducer', () => {
   });
 
   describe('addTask', () => {
-    it('returns new state with new task added to tasks, empty taskTitle and updated id', () => {
+    const action = { type: 'addTask' };
+
+    context('with previous task with taskTitle', () => {
       const previousState = {
         newId: 105,
         taskTitle: 'newTask',
         tasks: [],
       };
 
-      const action = { type: 'addTask' };
+      it('returns new state with new task added to tasks, empty taskTitle and updated id', () => {
+        const newState = reducer(previousState, action);
 
-      const newState = reducer(previousState, action);
-
-      expect(newState.tasks).toContainEqual({
-        id: previousState.newId,
-        title: previousState.taskTitle,
+        expect(newState.tasks).toContainEqual({
+          id: previousState.newId,
+          title: previousState.taskTitle,
+        });
+        expect(newState.taskTitle).toBe('');
+        expect(newState.newId).toBe(previousState.newId + 1);
       });
-      expect(newState.taskTitle).toBe('');
-      expect(newState.newId).toBe(previousState.newId + 1);
+    });
+
+    context('without taskTitle', () => {
+      const previousState = {
+        newId: 105,
+        taskTitle: '',
+        tasks: [],
+      };
+
+      it('returns previous state', () => {
+        const newState = reducer(previousState, action);
+
+        expect(newState).toEqual(previousState);
+      });
     });
   });
 });
