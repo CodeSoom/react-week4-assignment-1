@@ -11,5 +11,20 @@ const initialState = {
           taskTitle: action.payload.taskTitle,
         };
       }
-    return state;
+
+    if (action.type === 'addTask') {
+      const { newId, taskTitle, tasks } = state;
+
+      if (!taskTitle) {
+        return state;
+      }
+
+      return {
+        ...state,
+        newId: newId + 1,
+        taskTitle: '',
+        tasks: [...tasks, { id: newId, title: taskTitle }],
+      };
+    }    
+    return state;   
   }
