@@ -11,6 +11,7 @@ jest.mock('react-redux');
 describe('App', () => {
   useSelector.mockImplementation((selector) => selector({
     taskTitle: '',
+    tasks: [],
   }));
   useDispatch.mockImplementation(() => () => { });
 
