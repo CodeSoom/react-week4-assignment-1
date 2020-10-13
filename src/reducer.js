@@ -5,18 +5,19 @@ const initialState = ({
 });
 
 export default function reducer(state = initialState, action) {
-  const isValidTaskTitle = (title) => typeof title === 'string' && title;
+  const isValid = (title) => typeof title === 'string';
+  const isBlank = (string) => string.length === 0;
 
-  if (action?.type === 'updateTaskTitle') {
+  if (action?.type === 'updateTaskTitle' && isValid(action.payload.taskTitle)) {
     const { taskTitle } = action.payload;
 
     return ({
       ...state,
-      taskTitle: isValidTaskTitle(taskTitle) || state.taskTitle,
+      taskTitle,
     });
   }
 
-  if (action?.type === 'addTask') {
+  if (action?.type === 'addTask' && !isBlank(state.taskTitle)) {
     const { newId, tasks, taskTitle } = state;
 
     return ({
