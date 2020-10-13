@@ -44,7 +44,7 @@ describe('reducer', () => {
   });
 
   describe('addTask', () => {
-    it('returns new state with new task added to tasks', () => {
+    it('returns new state with new task added to tasks and empty taskTitle', () => {
       const previousState = {
         newId: 105,
         taskTitle: 'newTask',
@@ -55,8 +55,8 @@ describe('reducer', () => {
 
       const newState = reducer(previousState, action);
 
-      expect(newState.tasks).toContain({ 
-        id: previousState.id + 1,
+      expect(newState.tasks).toContainEqual({
+        id: previousState.newId,
         title: previousState.taskTitle,
       });
     });
