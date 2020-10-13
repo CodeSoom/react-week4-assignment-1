@@ -71,4 +71,24 @@ describe('reducer', () => {
       });
     });
   });
+
+  describe('deleteTask', () => {
+    const targetId = 101;
+    const action = {
+      type: 'deleteTask',
+      payload: { id: targetId },
+    };
+    const previousState = {
+      tasks: [
+        { id: 101, title: 'TASK-1' },
+        { id: 102, title: 'TASK-2' },
+      ],
+    };
+
+    it('returns state without deleted task', () => {
+      const newState = reducer(previousState, action);
+
+      expect(newState.tasks.filter(({ id }) => id === targetId).length).toBe(0);
+    });
+  });
 });
