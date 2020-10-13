@@ -4,38 +4,54 @@ const initialState = ({
   tasks: [],
 });
 
-export default function reducer(state = initialState, action = { type: 'default' }) {
+function getValidater(state, action) {
+  const { taskTitle } = state;
+  const { type } = action;
+
+  const defaultValidater = () => true;
+
+  return ({
+    updateTaskTitle: ({ taskTitle: newTitle }) => typeof newTitle === 'string',
+    addTask: () => taskTitle.trim().length !== 0,
+  })[type] || defaultValidater;
+}
+
+function getUpdater(state, action, validate) {
   const { newId, tasks, taskTitle } = state;
+  const { type, payload } = action;
 
-  const isValid = (title) => typeof title === 'string';
-  const isBlank = (string) => string.trim().length === 0;
+  const defaultUpdater = () => state;
 
-  if (action.type === 'updateTaskTitle' && isValid(action.payload.taskTitle)) {
-    const { taskTitle: newTitle } = action.payload;
-
-    return ({
-      ...state,
-      taskTitle: newTitle,
-    });
+  if (!validate(payload)) {
+    return defaultUpdater;
   }
 
-  if (action.type === 'addTask' && !isBlank(state.taskTitle)) {
-    return ({
+  return ({
+    updateTaskTitle: ({ taskTitle: newTitle }) => ({
+      ...state,
+      taskTitle: newTitle,
+    }),
+    addTask: () => ({
       ...state,
       newId: newId + 1,
       taskTitle: '',
       tasks: [...tasks, { id: newId, title: taskTitle }],
-    });
-  }
-
-  if (action.type === 'deleteTask') {
-    const { id } = action.payload;
-
-    return ({
+    }),
+    deleteTask: ({ id }) => ({
       ...state,
       tasks: tasks.filter((task) => task.id !== id),
-    });
-  }
+    }),
+  }[type]) || defaultUpdater;
+}
 
-  return state;
+export default function reducer(state = initialState, action = { type: 'default' }) {
+  const { payload } = action;
+
+  const update = getUpdater(
+    state,
+    action,
+    getValidater(state, action),
+  );
+
+  return update(payload);
 }
