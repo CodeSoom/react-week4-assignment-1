@@ -16,10 +16,11 @@ function getValidater(state, action) {
   })[type] || defaultValidater;
 }
 
-function getUpdater(state, action, validate) {
+function getUpdater(state, action) {
   const { newId, tasks, taskTitle } = state;
   const { type, payload } = action;
 
+  const validate = getValidater(state, action);
   const defaultUpdater = () => state;
 
   if (!validate(payload)) {
@@ -47,11 +48,7 @@ function getUpdater(state, action, validate) {
 export default function reducer(state = initialState, action = { type: 'default' }) {
   const { payload } = action;
 
-  const update = getUpdater(
-    state,
-    action,
-    getValidater(state, action),
-  );
+  const update = getUpdater(state, action);
 
   return update(payload);
 }
