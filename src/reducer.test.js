@@ -21,7 +21,7 @@ describe('reducer', () => {
     context('with invalid taskTitle', () => {
       const newTaskTitle = 0.555;
 
-      it('returns previous state with unchanged title', () => {
+      it('returns previous state', () => {
         const previousState = {
           taskTitle: 'prevTitle',
         };
