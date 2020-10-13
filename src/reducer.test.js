@@ -59,6 +59,7 @@ describe('reducer', () => {
         id: previousState.newId,
         title: previousState.taskTitle,
       });
+      expect(newState.taskTitle).toBe('');
     });
   });
 });
