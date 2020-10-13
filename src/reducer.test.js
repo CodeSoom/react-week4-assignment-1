@@ -75,4 +75,17 @@ describe('reducer', () => {
       });
     });
   });
+
+  context('without existed action type', () => {
+    const action = () => ({
+      type: 'notExistedActionType',
+    });
+    it('return state', () => {
+      const state = reducer(undefined, action());
+
+      expect(state.newId).toBe(100);
+      expect(state.taskTitle).toBe('');
+      expect(state.tasks).toHaveLength(0);
+    });
+  });
 });
