@@ -1,5 +1,9 @@
 import reducer from './reducer';
 
+import {
+  updateTaskTitle,
+} from './actions';
+
 describe('reducer', () => {
   describe('updateTaskTitle', () => {
     it('changes task title', () => {
