@@ -18,7 +18,6 @@ export function addTask(state) {
 }
 
 export function deleteTask(state, id) {
-
   const { tasks } = state;
 
   return {
