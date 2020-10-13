@@ -60,6 +60,7 @@ describe('reducer', () => {
         title: previousState.taskTitle,
       });
       expect(newState.taskTitle).toBe('');
+      expect(newState.newId).toBe(previousState.newId + 1);
     });
   });
 });
