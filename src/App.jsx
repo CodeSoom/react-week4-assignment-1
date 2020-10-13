@@ -4,12 +4,6 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import Page from './Page';
 
-const initialState = {
-  newId: 100,
-  taskTitle: '',
-  tasks: [],
-};
-
 function updateTaskTitle(taskTitle) {
   return {
     type: 'updateTaskTitle',
@@ -19,21 +13,18 @@ function updateTaskTitle(taskTitle) {
   };
 }
 
-function addTask(state) {
-  const { newId, taskTitle, tasks } = state;
+function addTask() {
   return {
-    ...state,
-    newId: newId + 1,
-    taskTitle: '',
-    tasks: [...tasks, { id: newId, title: taskTitle }],
+    type: 'addTask',
   };
 }
 
-function deleteTask(state, id) {
-  const { tasks } = state;
+function deleteTask(id) {
   return {
-    ...state,
-    tasks: tasks.filter((task) => task.id !== id),
+    type: 'deleteTask',
+    payload: {
+      id,
+    },
   };
 }
 
@@ -50,11 +41,11 @@ export default function App() {
   }
 
   function handleClickAddTask() {
-    dispatch(addTask(state));
+    dispatch(addTask());
   }
 
   function handleClickDeleteTask(id) {
-    dispatch(deleteTask(state, id));
+    dispatch(deleteTask(id));
   }
 
   return (
