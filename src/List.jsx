@@ -12,7 +12,7 @@ export default function List({ tasks, onClickComplete }) {
   return (
     <ol>
       {tasks.map((task) => (
-        <Item key={task.id} task={task} onClickDelete={onClickComplete} />
+        <Item key={task.id} task={task} onClickComplete={onClickComplete} />
       ))}
     </ol>
   );
