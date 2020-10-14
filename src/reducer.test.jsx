@@ -7,8 +7,8 @@ import {
 } from './actions';
 
 describe('reducer', () => {
-  describe('initialState', () => {
-    it('set the inital state', () => {
+  describe('undefined action', () => {
+    it('changes nothing', () => {
       const state = reducer();
 
       expect(state.taskTitle).toBe('');
