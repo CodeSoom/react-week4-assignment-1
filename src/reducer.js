@@ -4,48 +4,54 @@ const initialState = ({
   tasks: [],
 });
 
-function getValidater(state, action) {
-  const { taskTitle } = state;
-  const { type } = action;
+const reducers = {
+  updateTaskTitle(state, action) {
+    const { taskTitle } = action.payload;
 
-  const defaultValidater = () => true;
+    const isString = (value) => typeof value === 'string';
 
-  const isString = (value) => typeof value === 'string';
-  const isBlank = (string) => string.trim().length === 0;
+    if (!isString(taskTitle)) {
+      return state;
+    }
 
-  return ({
-    updateTaskTitle: ({ taskTitle: newTitle }) => isString(newTitle),
-    addTask: () => !isBlank(taskTitle),
-  })[type] || defaultValidater;
-}
-
-export default function reducer(state = initialState, action = { type: 'default' }) {
-  const { newId, tasks, taskTitle } = state;
-  const { type, payload } = action;
-
-  const validate = getValidater(state, action);
-
-  if (!validate(payload)) {
-    return state;
-  }
-
-  const newStates = {
-    updateTaskTitle: ({ taskTitle: newTitle }) => ({
+    return ({
       ...state,
-      taskTitle: newTitle,
-    }),
-    addTask: () => ({
+      taskTitle,
+    });
+  },
+  addTask(state) {
+    const { newId, tasks, taskTitle } = state;
+
+    const isBlank = (string) => string.trim().length === 0;
+
+    if (isBlank(taskTitle)) {
+      return state;
+    }
+
+    return ({
       ...state,
       newId: newId + 1,
       taskTitle: '',
       tasks: [...tasks, { id: newId, title: taskTitle }],
-    }),
-    deleteTask: ({ id }) => ({
+    });
+  },
+  deleteTask(state, action) {
+    const { tasks } = state;
+    const { id } = action.payload;
+
+    return ({
       ...state,
       tasks: tasks.filter((task) => task.id !== id),
-    }),
-    default: () => state,
-  };
+    });
+  },
+};
 
-  return newStates[type](payload);
+export default function reducer(state = initialState, action = {}) {
+  const reduce = reducers[action.type];
+
+  if (!reduce) {
+    return state;
+  }
+
+  return reduce(state, action);
 }
