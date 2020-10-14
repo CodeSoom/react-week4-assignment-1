@@ -17,12 +17,11 @@ test('ListContainer', () => {
   ];
 
   const dispatch = jest.fn();
+  useDispatch.mockImplementation(() => dispatch);
 
   useSelector.mockImplementation((selector) => selector({
     tasks,
   }));
-
-  useDispatch.mockImplementation(() => dispatch);
 
   const { getByText, getAllByText } = render((
     <ListContainer />
