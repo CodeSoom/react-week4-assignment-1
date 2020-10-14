@@ -7,35 +7,47 @@ import {
 } from './actions';
 
 describe('reducer', () => {
-  describe('updateTaskTitle', () => {
-    it('changes task title', ()=> {
-      const state = reducer({
-        taskTitle: '',
-      }, updateTaskTitle('New Title'));
+  context('with task title', () => {
+    describe('updateTaskTitle', () => {
+      it('changes task title', ()=> {
+        const state = reducer({
+          taskTitle: '',
+        }, updateTaskTitle('New Title'));
+    
+        expect(state.taskTitle).toBe('New Title');
+      });
+    });
   
-      expect(state.taskTitle).toBe('New Title');
+    describe('addTask', () => {
+      it('appends a new task into tasks', ()=> {
+        const state = reducer({
+          taskTitle: 'New Task',
+          tasks: [],
+        }, addTask());
+    
+        expect(state.tasks).toHaveLength(1);
+        expect(state.tasks[0].title).toBe('New Task');
+      });
+  
+      it('clears task title', ()=> {
+        const state = reducer({
+          taskTitle: 'New Task',
+          tasks: [],
+        }, addTask());
+  
+        expect(state.tasks[0].title).toBe('');
+      });
+    });
+
+    context('without task title', () => {
+      it("doesn't work", ()=> {
+        const state = reducer({
+          taskTitle: '',
+          tasks: [],
+        }, addTask());
+    
+        expect(state.tasks).toHaveLength(0);
+      });
     });
   });
-
-  describe('addTask', () => {
-    it('appends a new task into tasks', ()=> {
-      const state = reducer({
-        taskTitle: 'New Task',
-        tasks: [],
-      }, addTask());
-  
-      expect(state.tasks).toHaveLength(1);
-      expect(state.tasks[0].title).toBe('New Task');
-    });
-
-    it('clears task title', ()=> {
-      const state = reducer({
-        taskTitle: 'New Task',
-        tasks: [],
-      }, addTask());
-
-      expect(state.tasks[0].title).toBe('');
-    });
-  });
-  
 });
