@@ -8,25 +8,26 @@ function reducer(state = initialState, action = { type: 'initialState' }) {
   const taskTitle = action.payload ? action.payload.title : '';
   const actions = {
     updateTaskTitle: { taskTitle },
+    addTask: {
+      newId: state.newId + 1,
+      taskTitle: '',
+      tasks: [...state.tasks, { id: state.newId, title: state.taskTitle }],
+    }
   };
 
   if (action.type === 'updateTaskTitle') {
     return {
       ...state,
-     ...actions[action.type],
+      ...actions[action.type],
     };
   }
 
   if (action.type === 'addTask') {
-    const { newId, taskTitle, tasks } = state;
-
-    if (!taskTitle) return state;
+    if (!state.taskTitle) return state;
 
     return {
       ...state,
-      newId: newId + 1,
-      taskTitle: '',
-      tasks: [...tasks, { id: newId, title: taskTitle }],
+      ...actions[action.type],
     };
   }
 
