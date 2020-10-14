@@ -16,30 +16,9 @@ function reducer(state = initialState, action = { type: 'initialState' }) {
     },
     deleteTask: {
       tasks: state.tasks.filter((task) => task.id !== id),
-    }
+    },
   };
-
-  if (action.type === 'updateTaskTitle') {
-    return {
-      ...state,
-      ...actions[action.type],
-    };
-  }
-
-  if (action.type === 'addTask') {
-    return {
-      ...state,
-      ...actions[action.type],
-    };
-  }
-
-  if (action.type === 'deleteTask') {
-    return {
-      ...state,
-      ...actions[action.type],
-    };
-  }
-  return state;
+  return { ...state, ...actions[action.type]};
 }
 
 export default reducer;
