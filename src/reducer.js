@@ -24,15 +24,11 @@ const actionType = {
 };
 
 export default function reducer(state = initialState, action) {
-  const { taskTitle } = state;
+  if (action.type === 'updateTaskTitle') return actionType[action.type](state, action);
 
-  const { type } = action;
+  if (action.type === 'addTask') return state.taskTitle ? actionType[action.type](state) : state;
 
-  if (type === 'updateTaskTitle') return actionType[type](state, action);
-
-  if (type === 'addTask') return taskTitle ? actionType[type](state) : state;
-
-  if (type === 'deleteTask') return actionType[type](state, action);
+  if (action.type === 'deleteTask') return actionType[action.type](state, action);
 
   return state;
 }

@@ -8,7 +8,7 @@ import InputContainer from './InputContainer';
 
 jest.mock('react-redux');
 
-test('InputContainer', () => {
+describe('InputContainer', () => {
   const dispatch = jest.fn();
 
   useDispatch.mockImplementation(() => dispatch);
@@ -17,16 +17,34 @@ test('InputContainer', () => {
     taskTitle: 'New Title',
   }));
 
-  const { getByText } = render((
-    <InputContainer />
-  ));
+  beforeEach(() => jest.clearAllMocks());
 
-  expect(getByText(/추가/)).not.toBeNull();
+  it("click '추가' button return add dispatch function to be called", () => {
+    const { getByText } = render((
+      <InputContainer />
+    ));
+    expect(getByText(/추가/)).not.toBeNull();
 
-  fireEvent.click(getByText(/추가/));
+    fireEvent.click(getByText(/추가/));
 
-  expect(dispatch).toBeCalledWith({ type: 'addTask' });
+    expect(dispatch).toBeCalledWith({ type: 'addTask' });
+  });
 
-  // TODO: 통합 테스트 코드 작성
-  // CodeceptJS => 실제 브라우저에서 사용자 테스트 실행 가능.
+  it('change title return update dispatch function to be called', () => {
+    const { getByDisplayValue } = render((
+      <InputContainer />
+    ));
+
+    expect(getByDisplayValue(/New Title/)).not.toBeNull();
+
+    fireEvent.change(getByDisplayValue(/New Title/),
+      { target: { value: 'changed Title' } });
+
+    expect(dispatch).toBeCalledWith({
+      type: 'updateTaskTitle',
+      payload: { taskTitle: 'changed Title' },
+    });
+  });
 });
+// TODO: 통합 테스트 코드 작성
+// CodeceptJS => 실제 브라우저에서 사용자 테스트 실행 가능.

@@ -53,6 +53,7 @@ describe('reducer', () => {
       return reducer({
         tasks: [
           { id: 1, title: '할일 #1' },
+          { id: 2, title: '할일 #2' },
         ],
       }, deleteTask(id));
     }
@@ -61,7 +62,7 @@ describe('reducer', () => {
       it('remove the task in tasks', () => {
         const state = deleteReducer(1);
 
-        expect(state.tasks).toHaveLength(0);
+        expect(state.tasks).toHaveLength(1);
       });
     });
 
@@ -69,8 +70,22 @@ describe('reducer', () => {
       it("doesn't work", () => {
         const state = deleteReducer(100);
 
-        expect(state.tasks).toHaveLength(1);
+        expect(state.tasks).toHaveLength(2);
       });
+    });
+  });
+
+  describe('Unhandled action type', () => {
+    it('returns initial state', () => {
+      const state = reducer({
+        newId: 100,
+        taskTitle: '',
+        tasks: [],
+      }, { type: 'Unhandled type' });
+
+      expect(state.newId).toBe(100);
+      expect(state.taskTitle).toBe('');
+      expect(state.tasks).toHaveLength(0);
     });
   });
 });
