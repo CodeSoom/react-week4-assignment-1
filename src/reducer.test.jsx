@@ -34,18 +34,18 @@ describe('reducer', () => {
 
   describe('addTask', () => {
     function reduceAddTask(taskTitle) {
-      return {
+      return reducer({
         newId: 100,
         taskTitle,
         tasks: [],
-      };
+      }, addTask());
     }
 
     context('with task title', () => {
       const taskTitle = '첫번째 할 일';
 
       it('appends task into tasks', () => {
-        const state = reducer(reduceAddTask(taskTitle), addTask());
+        const state = reduceAddTask(taskTitle);
 
         expect(state.tasks).toHaveLength(1);
         expect(state.tasks[0].title).toBe(taskTitle);
@@ -53,7 +53,7 @@ describe('reducer', () => {
       });
 
       it('clear task title', () => {
-        const state = reducer(reduceAddTask(taskTitle), addTask());
+        const state = reduceAddTask(taskTitle);
 
         expect(state.taskTitle).toBe('');
       });
@@ -63,7 +63,7 @@ describe('reducer', () => {
       it('appends nothing', () => {
         const taskTitle = '';
 
-        const state = reducer(reduceAddTask(taskTitle), addTask());
+        const state = reduceAddTask(taskTitle);
 
         expect(state.tasks).toHaveLength(0);
       });
