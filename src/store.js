@@ -1,11 +1,13 @@
 import { createStore } from 'redux';
 
-function reducer() {
-  return {
-    newId: 100,
-    taskTitle: '',
-    tasks: [],
-  };
+const initialState = {
+  newId: 100,
+  taskTitle: '',
+  tasks: [],
+};
+
+function reducer(state = initialState, action) {
+  return state;
 }
 
 const store = createStore(reducer);
