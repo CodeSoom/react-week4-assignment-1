@@ -33,7 +33,7 @@ export default function reducer(state = initialState, action) {
     },
   };
 
-  if(!actions[action.type]){
+  if (!actions[action.type]) {
     return state;
   }
 
