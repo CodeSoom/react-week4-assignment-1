@@ -19,16 +19,15 @@ describe('reducer', () => {
 
   describe('updateTaskTitle', () => {
     it('changes task title', () => {
-      const taskTitle = '';
       const newTaskTitle = 'New title';
 
       const state = reducer({
         newId: 100,
-        taskTitle,
+        taskTitle: '',
         tasks: [],
       }, updateTaskTitle(newTaskTitle));
 
-      expect(state.taskTitle).toBe('New title');
+      expect(state.taskTitle).toBe(newTaskTitle);
     });
   });
 
