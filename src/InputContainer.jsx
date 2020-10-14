@@ -8,7 +8,6 @@ import Input from './Input';
 export default function App() {
   const { taskTitle } = useSelector((state) => ({
     taskTitle: state.taskTitle,
-    tasks: state.tasks,
   }));
   const dispatch = useDispatch();
 
@@ -22,7 +21,7 @@ export default function App() {
 
   return (
     <Input
-      taskTitle={taskTitle}
+      value={taskTitle}
       onChange={handleChangeTitle}
       onClick={handleClickAddTask}
     />
