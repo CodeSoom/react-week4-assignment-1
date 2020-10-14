@@ -5,20 +5,21 @@ const initialState = {
 };
 
 function reducer(state = initialState, action = { type: 'initialState' }) {
-  const taskTitle = action.payload ? action.payload.title : '';
-  const id = action.payload ? action.payload.id : 0;
+  const { newId, taskTitle, tasks } = state;
+  const { title, id } = action.payload || { title: '', id: 0 };
+
   const actions = {
-    updateTaskTitle: { taskTitle },
+    updateTaskTitle: { taskTitle: title },
     addTask: {
-      newId: state.newId + 1,
+      newId: newId + 1,
       taskTitle: '',
-      tasks: state.taskTitle ? [...state.tasks, { id: state.newId, title: state.taskTitle }] : [],
+      tasks: taskTitle ? [...tasks, { id: newId, title: taskTitle }] : [],
     },
     deleteTask: {
       tasks: state.tasks.filter((task) => task.id !== id),
     },
   };
-  return { ...state, ...actions[action.type]};
+  return { ...state, ...actions[action.type] };
 }
 
 export default reducer;
