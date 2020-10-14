@@ -28,11 +28,11 @@ export default function reducer(state = initialState, action) {
 
   const { type } = action;
 
-  if (action.type === 'updateTaskTitle') return actionType[type](state, action);
+  if (type === 'updateTaskTitle') return actionType[type](state, action);
 
-  if (action.type === 'addTask') return taskTitle ? actionType[type](state) : state;
+  if (type === 'addTask') return taskTitle ? actionType[type](state) : state;
 
-  if (action.type === 'deleteTask') return actionType[type](state, action);
+  if (type === 'deleteTask') return actionType[type](state, action);
 
   return state;
 }
