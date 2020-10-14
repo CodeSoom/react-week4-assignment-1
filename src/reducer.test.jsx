@@ -40,19 +40,17 @@ describe('reducer', () => {
     }
 
     context('with task title', () => {
-      it('appends task into tasks', () => {
-        const taskTitle = '첫번째 할 일';
+      const taskTitle = '첫번째 할 일';
 
+      it('appends task into tasks', () => {
         const state = reducer(reduceAddTask(taskTitle), addTask());
 
         expect(state.tasks).toHaveLength(1);
-        expect(state.tasks[0].title).toBe('첫번째 할 일');
+        expect(state.tasks[0].title).toBe(taskTitle);
         expect(state.tasks[0].id).not.toBeUndefined();
       });
 
       it('clear task title', () => {
-        const taskTitle = '첫번째 할 일';
-
         const state = reducer(reduceAddTask(taskTitle), addTask());
 
         expect(state.taskTitle).toBe('');
