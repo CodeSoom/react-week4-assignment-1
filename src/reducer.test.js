@@ -24,18 +24,16 @@ describe('reducer', () => {
         { id: 2, title: '아무 것도 하지 않기 2' },
       ],
     }, addTask());
+    const taskValue = '아무것도 하지 않기';
 
     context('with taskTitle', () => {
       it('할 일을 추가한다.', () => {
-        const state = addReducer('아무 것도 하지 않기');
+        const { tasks, taskTitle } = addReducer(taskValue);
 
-        expect(state.tasks).toHaveLength(3);
-        expect(state.tasks[0].id).not.toBeUndefined();
-      });
-      it('할 일을 추가 후 "taskTitle" 비워지는지 확인한다.', () => {
-        const state = addReducer('아무 것도 하지 않기');
-
-        expect(state.taskTitle).toBe('');
+        expect(tasks).toHaveLength(3);
+        expect(tasks[tasks.length - 1].title).toBe(taskValue);
+        expect(tasks[0].id).not.toBeUndefined();
+        expect(taskTitle).toBe('');
       });
     });
 
@@ -51,10 +49,7 @@ describe('reducer', () => {
   describe('deleteTask', () => {
     const deleteReducer = (id) => reducer({
       tasks: [
-        {
-          id,
-          title: '아무 것도 하지 않기 1',
-        },
+        { id, title: '아무 것도 하지 않기 1' },
       ],
     }, deleteTask(1));
 
