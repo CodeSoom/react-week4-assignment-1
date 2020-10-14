@@ -1,9 +1,5 @@
 import configureStore from 'redux-mock-store';
-import {
-  updateTaskTitle,
-  addTask,
-  deleteTask,
-} from './actions';
+import { updateTaskTitle, addTask, deleteTask } from './actions';
 
 describe('actions', () => {
   const middlewares = [];
