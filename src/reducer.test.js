@@ -51,13 +51,17 @@ describe('reducer', () => {
   });
 
   describe('deleteTask', () => {
+    function reducerDeleteTask(deleteId) {
+      return reducer({
+        tasks: [
+          { id: 1, title: 'Task' },
+        ],
+      }, deleteTask(deleteId));
+    }
+
     context('with existed task ID', () => {
       it('remove a task from tasks', () => {
-        const state = reducer({
-          tasks: [
-            { id: 1, title: 'Task' },
-          ],
-        }, deleteTask(1));
+        const state = reducerDeleteTask(1);
 
         expect(state.tasks).toHaveLength(0);
       });
@@ -65,11 +69,7 @@ describe('reducer', () => {
 
     context('without existed task ID', () => {
       it('remove a task from tasks', () => {
-        const state = reducer({
-          tasks: [
-            { id: 1, title: 'Task' },
-          ],
-        }, deleteTask(2));
+        const state = reducerDeleteTask(2);
 
         expect(state.tasks).toHaveLength(1);
       });
