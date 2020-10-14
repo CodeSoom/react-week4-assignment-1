@@ -18,7 +18,9 @@ test('InputContainer', () => {
     <InputContainer />
   ));
 
-  fireEvent.click(getByText('추가'));
+  expect(dispatch).not.toBeCalled();
 
-  expect(dispatch).toBeCalled();
+  fireEvent.click(getByText(/추가/));
+
+  expect(dispatch).toBeCalledWith({ type: 'addTask' });
 });
