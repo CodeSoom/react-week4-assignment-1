@@ -20,13 +20,13 @@ test('App', () => {
     tasks,
   }));
 
-  const { getByText } = render((
+  const { container, getByText } = render((
     <App />
   ));
 
   expect(getByText(/추가/)).not.toBeNull();
 
   tasks.forEach((task) => {
-    expect(getByText(task.title)).not.toBeNull();
+    expect(container).toHaveTextContent(task.title);
   });
 });
