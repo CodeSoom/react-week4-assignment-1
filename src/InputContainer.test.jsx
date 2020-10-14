@@ -14,7 +14,7 @@ test('InputContainer', () => {
 
   useDispatch.mockImplementation(() => dispatch);
 
-  const { getByText } = render((
+  const { getByText, getByLabelText } = render((
     <InputContainer />
   ));
 
@@ -23,4 +23,17 @@ test('InputContainer', () => {
   fireEvent.click(getByText(/추가/));
 
   expect(dispatch).toBeCalledWith({ type: 'addTask' });
+
+  fireEvent.change(getByLabelText('할 일'), ({
+    target: {
+      value: '아무것도 안하기',
+    },
+  }));
+
+  expect(dispatch).toBeCalledWith({
+    type: 'updateTaskTitle',
+    payload: {
+      taskTitle: '아무것도 안하기',
+    },
+  });
 });
