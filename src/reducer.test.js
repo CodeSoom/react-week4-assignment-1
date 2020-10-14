@@ -3,6 +3,7 @@ import reducer from './reducer';
 
 import {
   updateTaskTitle,
+  addTask,
 } from './actions';
 
 describe('reducer', () => {
@@ -13,6 +14,18 @@ describe('reducer', () => {
       }, updateTaskTitle('New Title'));
   
       expect(state.taskTitle).toBe('New Title');
+    });
+  });
+
+  describe('addTask', () => {
+    it('returns new state with a new task', ()=> {
+      const state = reducer({
+        taskTitle: 'New Task',
+        tasks: [],
+      }, addTask());
+  
+      expect(state.tasks).toHaveLength(1);
+      expect(state.tasks[0].title).toBe('New Task');
     });
   });
 });
