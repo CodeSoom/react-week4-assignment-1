@@ -84,7 +84,7 @@ describe('reducer', () => {
       }, deleteTask(tasks[0].id));
 
       expect(state.tasks).not.toContain({ id: tasks[0].id });
-      expect(state.tasks).toHaveLength(1);
+      expect(state.tasks).toHaveLength(tasks.length - 1);
     });
   });
 });
