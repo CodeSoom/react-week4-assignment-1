@@ -41,7 +41,7 @@ describe('reducer', () => {
       });
     });
 
-    context('without task title', () => {
+    context('with empty task title', () => {
       it("doesn't work", () => {
         const state = reduceAddTask('');
 
@@ -63,7 +63,7 @@ describe('reducer', () => {
       });
     });
 
-    context('without existed task ID', () => {
+    context('with not existed task ID', () => {
       it("doesn't work", () => {
         const state = reducer({
           tasks: [
@@ -76,7 +76,7 @@ describe('reducer', () => {
     });
   });
 
-  context('without existed action type', () => {
+  context('with not existed action type', () => {
     const action = () => ({
       type: 'notExistedActionType',
     });
