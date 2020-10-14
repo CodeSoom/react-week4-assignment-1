@@ -5,12 +5,15 @@ const initialState = {
 };
 
 function reducer(state = initialState, action = { type: 'initialState' }) {
-  if (action.type === 'updateTaskTitle') {
-    const { title } = action.payload;
+  const taskTitle = action.payload ? action.payload.title : '';
+  const actions = {
+    updateTaskTitle: { taskTitle },
+  };
 
+  if (action.type === 'updateTaskTitle') {
     return {
       ...state,
-      taskTitle: title,
+     ...actions[action.type],
     };
   }
 
