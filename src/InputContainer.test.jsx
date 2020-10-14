@@ -5,7 +5,7 @@ import { render, fireEvent } from '@testing-library/react';
 
 import InputContainer from './InputContainer';
 
-test('Page', () => {
+test('InputContainer', () => {
   const dispatch = jest.fn();
 
   useSelector.mockImplementation((selector) => selector({
