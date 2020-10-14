@@ -7,11 +7,11 @@ describe('reducer', () => {
     it('할 일을 입력한다.', () => {
       const taskValue = '아무것도 하지 않기';
 
-      const state = reducer({
+      const { taskTitle } = reducer({
         taskTitle: '',
       }, updateTaskTitle(taskValue));
 
-      expect(state.taskTitle).toBe(taskValue);
+      expect(taskTitle).toBe(taskValue);
     });
   });
 
@@ -39,9 +39,9 @@ describe('reducer', () => {
 
     context('without taskTitle', () => {
       it('할 일이 추가되지 않는다.', () => {
-        const state = addReducer('');
+        const { tasks } = addReducer('');
 
-        expect(state.tasks).toHaveLength(2);
+        expect(tasks).toHaveLength(2);
       });
     });
   });
@@ -55,17 +55,45 @@ describe('reducer', () => {
 
     context('with task id', () => {
       it('할 일을 삭제한다.', () => {
-        const state = deleteReducer(1);
+        const { tasks } = deleteReducer(1);
 
-        expect(state.tasks).toHaveLength(0);
+        expect(tasks).toHaveLength(0);
       });
     });
 
     context('without task id', () => {
       it('할 일이 삭제되지 않는다.', () => {
-        const state = deleteReducer(2);
+        const { tasks } = deleteReducer(2);
 
-        expect(state.tasks).toHaveLength(1);
+        expect(tasks).toHaveLength(1);
+      });
+    });
+  });
+
+  describe('undefined action', () => {
+    context('with state', () => {
+      it('tasks가 존재할 때', () => {
+        const { tasks } = reducer(
+          {
+            tasks: [
+              { id: 1, title: 'Task' },
+            ],
+          },
+          { type: 'undefined', payload: {} },
+        );
+
+        expect(tasks).toHaveLength(1);
+      });
+    });
+
+    context('without state', () => {
+      it('tasks가 없을 때', () => {
+        const { tasks } = reducer(
+          undefined,
+          { type: 'undefined', payload: {} },
+        );
+
+        expect(tasks).toHaveLength(0);
       });
     });
   });
