@@ -58,7 +58,7 @@ describe('reducer', () => {
         tasks: [],
       };
 
-      it('할 일을 추가한다.', () => {
+      it('할 일이 추가되지 않는다.', () => {
         const action = {
           type: 'addTask',
         };
@@ -66,6 +66,50 @@ describe('reducer', () => {
         const state = reducer(initialState, action);
 
         expect(state.tasks).toHaveLength(0);
+      });
+    });
+  });
+
+  describe('deleteTask', () => {
+    context('with task id', () => {
+      it('할 일을 삭제한다.', () => {
+        const initialState = {
+          tasks: [
+            { id: 1, title: '아무 것도 하지 않기 1' },
+          ],
+        };
+
+        const action = {
+          type: 'deleteTask',
+          payload: {
+            id: 1,
+          },
+        };
+
+        const state = reducer(initialState, action);
+
+        expect(state.tasks).toHaveLength(0);
+      });
+    });
+
+    context('without task id', () => {
+      it('할 일이 삭제되지 않는다.', () => {
+        const initialState = {
+          tasks: [
+            { id: 1, title: '아무 것도 하지 않기 1' },
+          ],
+        };
+
+        const action = {
+          type: 'deleteTask',
+          payload: {
+            id: 2,
+          },
+        };
+
+        const state = reducer(initialState, action);
+
+        expect(state.tasks).toHaveLength(1);
       });
     });
   });
