@@ -23,7 +23,9 @@ describe('reducer', () => {
       const newTaskTitle = 'New title';
 
       const state = reducer({
+        newId: 100,
         taskTitle,
+        tasks: [],
       }, updateTaskTitle(newTaskTitle));
 
       expect(state.taskTitle).toBe('New title');
@@ -76,6 +78,8 @@ describe('reducer', () => {
       ];
 
       const state = reducer({
+        newId: 100,
+        taskTitle: '',
         tasks,
       }, deleteTask(tasks[0].id));
 
