@@ -23,7 +23,7 @@ describe('InputContainer', () => {
   const dispatch = jest.fn();
   useDispatch.mockImplementation(() => dispatch);
 
-  it('render inputbox', () => {
+  it('dispatch updateTaskTitle action', () => {
     const newTaskTitle = 'next task';
 
     const { getByLabelText } = renderInputContainer();
@@ -35,7 +35,7 @@ describe('InputContainer', () => {
     expect(dispatch).toBeCalledWith(updateTaskTitle(newTaskTitle));
   });
 
-  it('renders "추가" button', () => {
+  it('dispatch addTask action', () => {
     const { getByText } = renderInputContainer();
 
     expect(getByText(/추가/)).not.toBeNull();
