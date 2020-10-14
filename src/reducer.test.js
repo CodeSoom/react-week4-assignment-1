@@ -4,9 +4,17 @@ import reducer from './reducer';
 import {
   updateTaskTitle,
   addTask,
+  deleteTask,
 } from './actions';
 
 describe('reducer', () => {
+  function reduceAddTask(taskTitle) {
+    return reducer({
+      newId: 100,
+      taskTitle,
+      tasks: [],
+    }, addTask());
+  }
   context('with task title', () => {
     describe('updateTaskTitle', () => {
       it('changes task title', ()=> {
@@ -19,13 +27,7 @@ describe('reducer', () => {
     });
   
     describe('addTask', () => {
-      function reduceAddTask(taskTitle) {
-        return reducer({
-          newId: 100,
-          taskTitle,
-          tasks: [],
-        }, addTask());
-      }
+      
       it('appends a new task into tasks', ()=> {
         const state = reduceAddTask('New Task');
     
@@ -47,5 +49,29 @@ describe('reducer', () => {
         expect(state.tasks).toHaveLength(0);
       });
     });
+
+    describe('deleteTask', () => {
+      context('with existed task ID', () => {
+        it('remove the task from tasks', ()=> {
+          const state = reducer({
+            tasks: [
+              { id: 1, title: 'Task' },
+            ],
+          }, deleteTask(1));
+      
+          expect(state.tasks).toHaveLength(0);
+        });
+      });
+      context('without existed task ID', () => {
+        it("doesn't work", () => {
+          const state = reducer({
+            tasks: [
+              { id: 1, title: 'Task' },
+            ],
+          }, deleteTask(100));
+      
+          expect(state.tasks).toHaveLength(1);
+        })
+      });
+    });
   });
-});
