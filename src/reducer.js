@@ -1,4 +1,4 @@
-import { CHANGE_TITLE, ADD_TASK } from './actions';
+import { CHANGE_TITLE, ADD_TASK, REMOVE_TASK } from './actions';
 
 const initialState = {
   newId: 100,
@@ -28,6 +28,15 @@ export default function reducer(state = initialState, action) {
       tasks: [
         ...tasks, { id: newId, title: taskTitle },
       ],
+    };
+  }
+
+  if (action.type === REMOVE_TASK) {
+    const { tasks } = state;
+
+    return {
+      ...state,
+      tasks: tasks.filter((task) => task.id !== action.payload),
     };
   }
 

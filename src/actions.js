@@ -1,5 +1,6 @@
 export const CHANGE_TITLE = 'CHANGE_TITLE';
 export const ADD_TASK = 'ADD_TASK';
+export const REMOVE_TASK = 'REMOVE_TASK';
 
 function changeTitle(value) {
   return {
@@ -14,7 +15,15 @@ function addTask() {
   };
 }
 
+function removeTask(id) {
+  return {
+    type: REMOVE_TASK,
+    payload: id,
+  };
+}
+
 export default {
   changeTitle,
   addTask,
+  removeTask,
 };
