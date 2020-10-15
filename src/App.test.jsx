@@ -26,7 +26,7 @@ test('App', () => {
 
   expect(getByText(/추가/)).not.toBeNull();
 
-  tasks.forEach((task) => {
-    expect(container).toHaveTextContent(task.title);
+  tasks.forEach(({ title }) => {
+    expect(container).toHaveTextContent(title);
   });
 });
