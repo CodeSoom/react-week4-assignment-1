@@ -26,7 +26,7 @@ describe('reducer', () => {
       }, addTask());
     }
 
-    context('with task title', () => {
+    context('with existed task title', () => {
       it('appends a new task into tasks', () => {
         const state = reduceAddTask('New Task');
 
@@ -42,8 +42,8 @@ describe('reducer', () => {
       });
     });
 
-    context('without task title', () => {
-      it('doesn\'t work', () => {
+    context('with no existed task title', () => {
+      it('doesn\'t work add into tasks', () => {
         const state = reduceAddTask('');
 
         expect(state.tasks).toHaveLength(0);
@@ -68,8 +68,8 @@ describe('reducer', () => {
       });
     });
 
-    context('without existed task ID', () => {
-      it('remove a task from tasks', () => {
+    context('with no existed task ID', () => {
+      it('doesn\'t work remove a task from tasks', () => {
         const state = reducerDeleteTask(2);
 
         expect(state.tasks).toHaveLength(1);
