@@ -61,4 +61,37 @@ describe('reducer', () => {
       expect(state.tasks).toMatchObject([{ id: 102, title: '운동하기' }]);
     });
   });
+
+  context('without matched action', () => {
+    // Given
+    const previousState = {
+      newId: 102,
+      taskTitle: '',
+      tasks: [
+        { id: 101, title: '청소하기' },
+        { id: 102, title: '운동하기' },
+      ],
+    };
+    const action = { type: null };
+
+    it('return state', () => {
+      // When
+      const state = reducer(previousState, action);
+
+      // Then
+      expect(state).toMatchObject(previousState);
+    });
+  });
+
+  context('with undefined state', () => {
+    // When
+    const state = reducer(undefined, { type: null });
+
+    // Then
+    expect(state).toMatchObject({
+      newId: 100,
+      taskTitle: '',
+      tasks: [],
+    });
+  });
 });
