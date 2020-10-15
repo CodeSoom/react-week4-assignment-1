@@ -43,7 +43,7 @@ describe('List', () => {
       expect(getByText(/Task-2/)).not.toBeNull();
     });
 
-    it('renders “완료” button to delete a task', () => {
+    it('renders complete button to delete a task', () => {
       const { getAllByText } = renderList(tasks);
 
       const buttons = getAllByText('완료');
