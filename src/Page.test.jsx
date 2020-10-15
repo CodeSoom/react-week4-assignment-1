@@ -1,31 +1,36 @@
 import React from 'react';
 
 import { render, fireEvent } from '@testing-library/react';
+import { useSelector } from 'react-redux';
 
 import Page from './Page';
 
+jest.mock('react-redux');
+
 test('Page', () => {
+  const tasks = [
+    { id: 1, title: '아무 것도 하지 않기 1' },
+    { id: 2, title: '아무 것도 하지 않기 2' },
+  ];
+
+  useSelector.mockImplementation((selector) => selector({
+    tasks,
+  }));
+
   const handleChangeTitle = jest.fn();
   const handleClickAddTask = jest.fn();
-  const handleClickDeleteTask = jest.fn();
-
-  const tasks = [
-    { id: 1, title: 'Task-1' },
-    { id: 2, title: 'Task-2' },
-  ];
 
   const { getByText } = render((
     <Page
       taskTitle=""
       onChangeTitle={handleChangeTitle}
       onClickAddTask={handleClickAddTask}
-      tasks={tasks}
-      onClickDeleteTask={handleClickDeleteTask}
+
     />
   ));
 
-  expect(getByText(/Task-1/)).not.toBeNull();
-  expect(getByText(/Task-2/)).not.toBeNull();
+  expect(getByText(/아무 것도 하지 않기 1/)).not.toBeNull();
+  expect(getByText(/아무 것도 하지 않기 2/)).not.toBeNull();
 
   fireEvent.click(getByText('추가'));
 
