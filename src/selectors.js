@@ -1,3 +1,3 @@
-export const getState = (state) => state;
-export const getTaskTitle = (state) => state.taskTitle;
-export const getTasks = (state) => state.tasks;
+const getState = (state) => state;
+
+export default { getState };

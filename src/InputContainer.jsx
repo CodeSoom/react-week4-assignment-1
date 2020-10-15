@@ -1,14 +1,14 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { getState } from './selectors';
+import selectors from './selectors';
 import actions from './actions';
 
 import Input from './Input';
 
 export default function InputContainer() {
   const dispatch = useDispatch();
-  const { taskTitle } = useSelector(getState);
+  const { taskTitle } = useSelector(selectors.getState);
 
   function handleChangeTitle(event) {
     dispatch(actions.changeTitle(event.target.value));
