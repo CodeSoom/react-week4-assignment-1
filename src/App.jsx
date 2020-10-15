@@ -1,11 +1,14 @@
 import React from 'react';
 
-import { useDispatch, useSelector } from 'react-redux';
-
-import Page from './Page';
+import InputContainer from './InputContainer';
+import ListContainer from './ListContainer';
 
 export default function App() {
   return (
-    <Page />
+    <div>
+      <h1>To-do</h1>
+      <InputContainer />
+      <ListContainer />
+    </div>
   );
 }
