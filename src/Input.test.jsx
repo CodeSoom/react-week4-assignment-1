@@ -8,6 +8,10 @@ describe('Input', () => {
   const handleChange = jest.fn();
   const handleClick = jest.fn();
 
+  beforeEach(() => {
+    jest.clearAllMocks();
+  });
+
   function renderInput() {
     return render((
       <Input
@@ -30,7 +34,7 @@ describe('Input', () => {
     expect(handleChange).toBeCalled();
   });
 
-  it('renders "추가" button', () => {
+  it('renders add task button', () => {
     const { getByText } = renderInput();
 
     fireEvent.click(getByText('추가'));
