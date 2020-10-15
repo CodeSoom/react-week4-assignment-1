@@ -9,6 +9,13 @@ import { addTask, updateTaskTitle } from './actions';
 
 jest.mock('react-redux');
 
+const dispatch = jest.fn();
+
+beforeEach(() => {
+  jest.clearAllMocks();
+  useDispatch.mockImplementation(() => dispatch);
+});
+
 function renderInputContainer() {
   return render((
     <InputContainer />
@@ -19,9 +26,6 @@ describe('InputContainer', () => {
   const { taskTitle } = useSelector.mockImplementation((selector) => selector({
     taskTitle,
   }));
-
-  const dispatch = jest.fn();
-  useDispatch.mockImplementation(() => dispatch);
 
   it('dispatch updateTaskTitle action', () => {
     const newTaskTitle = 'next task';
