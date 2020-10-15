@@ -5,7 +5,9 @@ const initialState = {
 };
 
 export default function reducer(state = initialState, action) {
-  const { type } = action;
+  if (!action) {
+    return state;
+  }
 
   const reduceAction = {
     updateTaskTitle() {
@@ -40,5 +42,5 @@ export default function reducer(state = initialState, action) {
     },
   };
 
-  return reduceAction[type]();
+  return reduceAction[action.type]();
 }
