@@ -10,10 +10,40 @@ describe('reducer', () => {
 
       expect(taskTitle).toBe('New Title');
     });
+
+    it('should update action', () => {
+      expect(
+        reducer(undefined, {}),
+      ).toEqual({
+        newId: 100,
+        taskTitle: '',
+        tasks: [],
+      });
+
+      expect(
+        reducer(undefined, updateTaskTitle('New Title')),
+      ).toEqual({
+        newId: 100,
+        taskTitle: 'New Title',
+        tasks: [],
+      });
+
+      expect(
+        reducer({
+          newId: 100,
+          taskTitle: 'New Title',
+          tasks: [],
+        }, updateTaskTitle('Second Title')),
+      ).toEqual({
+        newId: 100,
+        taskTitle: 'Second Title',
+        tasks: [],
+      });
+    });
   });
 
   describe('addTask', () => {
-    context('when there is a task title', () => {
+    context('with existed task title', () => {
       it('add new task', () => {
         const state = reducer({
           taskTitle: 'New Title',
@@ -25,7 +55,7 @@ describe('reducer', () => {
       });
     });
 
-    context('when there is a no task title', () => {
+    context('with empty task title', () => {
       it('add new task', () => {
         const state = reducer({
           taskTitle: '',
@@ -50,7 +80,7 @@ describe('reducer', () => {
       });
     });
 
-    context('without existed task ID', () => {
+    context('with not existed task ID', () => {
       it('remove the task from tasks', () => {
         const state = reducer({
           tasks: [
