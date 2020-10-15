@@ -4,13 +4,12 @@ import { render } from '@testing-library/react';
 
 import { useSelector } from 'react-redux';
 
-import App from './App';
+import ListContainer from './ListContainer';
 
 jest.mock('react-redux');
 
-test('App', () => {
+test('ListContainer', () => {
   useSelector.mockImplementation((selector) => selector({
-    taskTitle: '',
     tasks: [
       { id: 1, title: '아무 것도 하지 않기 #1' },
       { id: 2, title: '아무 것도 하지 않기 #2' },
@@ -18,9 +17,8 @@ test('App', () => {
   }));
 
   const { getByText } = render((
-    <App />
+    <ListContainer />
   ));
 
-  expect(getByText(/추가/)).not.toBeNull();
   expect(getByText(/아무 것도 하지 않기 #1/)).not.toBeNull();
 });

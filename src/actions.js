@@ -18,6 +18,6 @@ export function deleteTask(id) {
     type: 'deleteTask',
     payload: {
       id,
-    }
+    },
   };
 }
