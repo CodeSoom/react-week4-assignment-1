@@ -17,7 +17,7 @@ export function addTask() {
 export function deleteTask(id) {
   return {
     type: 'deleteTask',
-    payloa: {
+    payload: {
       id,
     },
   };
