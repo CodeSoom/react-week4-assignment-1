@@ -1,6 +1,6 @@
 import reducer from './reducer';
 
-import actions, { CHANGE_TITLE, ADD_TASK } from './actions';
+import actions, { CHANGE_TITLE, ADD_TASK, REMOVE_TASK } from './actions';
 
 describe('reducer', () => {
   describe(CHANGE_TITLE, () => {
@@ -38,6 +38,27 @@ describe('reducer', () => {
 
       // Then
       expect(state.taskTitle).toBe('');
+    });
+  });
+
+  describe(REMOVE_TASK, () => {
+    // Given
+    const previousState = {
+      newId: 102,
+      taskTitle: '',
+      tasks: [
+        { id: 101, title: '청소하기' },
+        { id: 102, title: '운동하기' },
+      ],
+    };
+    const action = actions.removeTask(101);
+
+    it('remove task in the list', () => {
+      // When
+      const state = reducer(previousState, action);
+
+      // Then
+      expect(state.tasks).toMatchObject([{ id: 102, title: '운동하기' }]);
     });
   });
 });
