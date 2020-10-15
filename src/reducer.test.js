@@ -25,6 +25,7 @@ describe('reducer', () => {
         tasks: [],
       }, addTask());
     }
+
     context('with task title', () => {
       it('appends a new task into tasks', () => {
         const state = reduceAddTask('New Task');
@@ -73,6 +74,16 @@ describe('reducer', () => {
 
         expect(state.tasks).toHaveLength(1);
       });
+    });
+  });
+
+  describe('none of all', () => {
+    const state = reducer({
+      undefined,
+    }, { type: undefined });
+
+    it('return state and nothing change', () => {
+      expect(state).toBe(state);
     });
   });
 });
