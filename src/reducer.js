@@ -42,7 +42,7 @@ const reduce = {
 };
 
 export default function reducer(state = initialState, action = { type: 'initTask' }) {
-  if (action.type === 'initTask') {
+  if (!reduce[action.type] || action.type === 'initTask') {
     return state;
   }
 
