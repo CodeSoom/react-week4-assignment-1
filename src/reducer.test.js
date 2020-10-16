@@ -1,14 +1,16 @@
 import reducer from './reducer';
 
-import { updateTaskTitle, updateTaskTitleAction } from './actions/updateTaskTitle';
-import { addTask, addTaskAction } from './actions/addTask';
-import { deleteTask, deleteTaskAction } from './actions/deleteTask';
+import {
+  updateTaskTitle,
+  addTask,
+  deleteTask,
+} from './actions';
 
 describe('reducer', () => {
   describe('updateTaskTitle', () => {
     context('changes new task title', () => {
       it('from initial state', () => {
-        const state = reducer(undefined, updateTaskTitleAction('new task'))(updateTaskTitle);
+        const state = reducer(undefined, updateTaskTitle('new task'));
 
         expect(state.taskTitle).toBe('new task');
       });
@@ -19,8 +21,8 @@ describe('reducer', () => {
         {
           taskTitle: 'task-1',
         },
-        updateTaskTitleAction('new task'),
-      )(updateTaskTitle);
+        updateTaskTitle('new task'),
+      );
 
       expect(state.taskTitle).toBe('new task');
     });
@@ -35,8 +37,8 @@ describe('reducer', () => {
             taskTitle: 'new task',
             tasks: [],
           },
-          addTaskAction(),
-        )(addTask);
+          addTask(),
+        );
 
         expect(state.tasks).toHaveLength(1);
       });
@@ -50,8 +52,8 @@ describe('reducer', () => {
             taskTitle: '',
             tasks: [],
           },
-          addTaskAction(),
-        )(addTask);
+          addTask(),
+        );
 
         expect(state.tasks).toHaveLength(0);
       });
@@ -68,8 +70,8 @@ describe('reducer', () => {
               { id: 2, title: 'task-2' },
             ],
           },
-          deleteTaskAction(1),
-        )(deleteTask);
+          deleteTask(1),
+        );
 
         expect(state.tasks).toHaveLength(1);
       });
@@ -84,8 +86,8 @@ describe('reducer', () => {
               { id: 2, title: 'task-2' },
             ],
           },
-          deleteTaskAction(5),
-        )(deleteTask);
+          deleteTask(5),
+        );
 
         expect(state.tasks).toHaveLength(2);
       });

@@ -4,8 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import Input from './Input';
 
-import { updateTaskTitleAction } from './actions/updateTaskTitle';
-import { addTaskAction } from './actions/addTask';
+import { updateTaskTitle, addTask } from './actions';
 
 export default function InputContainer() {
   const { taskTitle } = useSelector((state) => ({
@@ -16,11 +15,11 @@ export default function InputContainer() {
   const dispatch = useDispatch();
 
   function handleChangeTitle(event) {
-    dispatch(updateTaskTitleAction(event.target.value));
+    dispatch(updateTaskTitle(event.target.value));
   }
 
   function handleClickAddTask() {
-    dispatch(addTaskAction());
+    dispatch(addTask());
   }
 
   return (
