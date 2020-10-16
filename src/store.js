@@ -35,6 +35,7 @@ function reducer(state = initialState, action) {
       tasks: tasks.filter((task) => task.id !== action.payload.id),
     };
   }
+  return state;
 }
 
 const store = createStore(reducer);
