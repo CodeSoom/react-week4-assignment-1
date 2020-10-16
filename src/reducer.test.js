@@ -2,7 +2,7 @@ import reducer from './reducer';
 
 import { updateTaskTitle, updateTaskTitleAction } from './actions/updateTaskTitle';
 import { addTask, addTaskAction } from './actions/addTask';
-import { deleteTask, deletTaskAction } from '';
+import { deleteTask, deleteTaskAction } from './actions/deleteTask';
 
 describe('reducer', () => {
   describe('updateTaskTitle', () => {
@@ -68,7 +68,7 @@ describe('reducer', () => {
               { id: 2, title: 'task-2' },
             ],
           },
-          deletTaskAction(1),
+          deleteTaskAction(1),
         )(deleteTask);
 
         expect(state.tasks).toHaveLength(1);
@@ -84,11 +84,15 @@ describe('reducer', () => {
               { id: 2, title: 'task-2' },
             ],
           },
-          deletTaskAction(5),
+          deleteTaskAction(5),
         )(deleteTask);
 
         expect(state.tasks).toHaveLength(2);
       });
     });
+  });
+
+  describe('undefined action', () => {
+
   });
 });
