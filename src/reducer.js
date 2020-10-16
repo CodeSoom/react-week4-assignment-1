@@ -26,7 +26,9 @@ const reducers = {
 };
 
 function reducer(state = initialState, action = { type: 'initialState' }) {
-  if (!reducers[action.type]) return state;
+  if (!reducers[action.type]) {
+    return state;
+  }
 
   return reducers[action.type](state, action.payload);
 }
