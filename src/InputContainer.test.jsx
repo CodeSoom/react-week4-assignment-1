@@ -14,10 +14,10 @@ describe('InputContainer', () => {
       taskTitle: '아무것도 안 하기',
     }));
 
-    const { getByText } = render((
+    const { getByDisplayValue } = render((
       <InputContainer />
     ));
 
-    expect(getByText(/아무것도 안 하기/)).not.toBeNull();
+    expect(getByDisplayValue(/아무것도 안 하기/)).not.toBeNull();
   });
 });
