@@ -1,55 +1,55 @@
-import React, { useState } from 'react';
+import React from 'react';
+
+import { useDispatch, useSelector } from 'react-redux';
 
 import Page from './Page';
 
 // 상태에 대한 관심사 분리
 // 새로운 상태를 리턴하는 reducer() 생성
-const initialState = {
-  newId: 100,
-  taskTitle: '',
-  tasks: [],
-};
 
-function updateTaskTitle(state, newTaskTitle) {
+// Action creator
+function updateTaskTitle(taskTitle) {
   return {
-    ...state,
-    taskTitle: newTaskTitle,
+    type: 'updateTaskTitle',
+    payload: {
+      taskTitle,
+    },
   };
 }
 
-function addTask(state) {
-  const { newId, taskTitle, tasks } = state;
+function addTask() {
   return {
-    ...state,
-    newId: newId + 1,
-    taskTitle: '',
-    tasks: [...tasks, { id: newId, title: taskTitle }],
+    type: 'addTask',
   };
 }
 
-function deleteTask(state, id) {
-  const { tasks } = state;
+function deleteTask(id) {
   return {
-    ...state,
-    tasks: tasks.filter((task) => task.id !== id),
+    type: 'deleteTask',
+    payload: {
+      id,
+    },
   };
 }
 
 export default function App() {
-  const [state, setState] = useState(initialState);
+  const { taskTitle, tasks } = useSelector((state) => ({
+    taskTitle: state.taskTitle,
+    tasks: state.tasks,
+  }));
 
-  const { taskTitle, tasks } = state;
+  const dispatch = useDispatch();
 
   function handleChangeTitle(event) {
-    setState(updateTaskTitle(state, event.target.value));
+    dispatch(updateTaskTitle(event.target.value));
   }
 
   function handleClickAddTask() {
-    setState(addTask(state));
+    dispatch(addTask());
   }
 
   function handleClickDeleteTask(id) {
-    setState(deleteTask(state, id));
+    dispatch(deleteTask(id));
   }
 
   return (
