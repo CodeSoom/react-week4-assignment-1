@@ -2,7 +2,7 @@
 // - type   : String)
 // - payload: Object
 
-export const initialState = {
+const initialState = {
   newId: 100,
   taskTitle: '',
   tasks: [],
@@ -11,13 +11,13 @@ export const initialState = {
 // 상태에 대한 관심사 분리
 // 새로운 상태를 리턴하는 reducer() 생성
 export default function reducer(state = initialState, action) {
-  if (action === 'updateTaskTitle') {
+  if (action.type === 'updateTaskTitle') {
     return {
       ...state,
       taskTitle: action.payload.taskTitle,
     };
   }
-  if (action === 'addTask') {
+  if (action.type === 'addTask') {
     const { newId, taskTitle, tasks } = state;
     return {
       ...state,
@@ -26,7 +26,7 @@ export default function reducer(state = initialState, action) {
       tasks: [...tasks, { id: newId, title: taskTitle }],
     };
   }
-  if (action === 'deleteTask') {
+  if (action.type === 'deleteTask') {
     const { tasks } = state;
     return {
       ...state,
