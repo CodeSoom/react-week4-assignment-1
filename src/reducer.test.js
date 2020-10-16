@@ -76,12 +76,14 @@ describe('reducer', () => {
   });
 
   describe('Unhandled action type', () => {
-    it('returns initial state', () => {
-      const state = reducer(undefined, { type: 'Unhandled type' });
+    context('with unhandled action type', () => {
+      it('returns initial state', () => {
+        const state = reducer(undefined, { type: 'Unhandled type' });
 
-      expect(state.newId).toBe(100);
-      expect(state.taskTitle).toBe('');
-      expect(state.tasks).toHaveLength(0);
+        expect(state.newId).toBe(100);
+        expect(state.taskTitle).toBe('');
+        expect(state.tasks).toHaveLength(0);
+      });
     });
   });
 });
