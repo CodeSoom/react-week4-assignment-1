@@ -6,10 +6,9 @@ import Page from './Page';
 
 import { updateTaskTitleAction } from './actions/updateTaskTitle';
 import { addTaskAction } from './actions/addTask';
-import { deleteTaskAction } from './actions/deleteTask';
 
 export default function App() {
-  const { taskTitle, tasks } = useSelector((state) => ({
+  const { taskTitle } = useSelector((state) => ({
     taskTitle: state.taskTitle,
     tasks: state.tasks,
   }));
@@ -24,17 +23,12 @@ export default function App() {
     dispatch(addTaskAction());
   }
 
-  function handleClickDeleteTask(id) {
-    dispatch(deleteTaskAction(id));
-  }
-
   return (
     <Page
       taskTitle={taskTitle}
       onChangeTitle={handleChangeTitle}
       onClickAddTask={handleClickAddTask}
-      tasks={tasks}
-      onClickDeleteTask={handleClickDeleteTask}
     />
+
   );
 }
