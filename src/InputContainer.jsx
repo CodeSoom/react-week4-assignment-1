@@ -9,7 +9,7 @@ import {
   addTask,
 } from './actions';
 
-export default function App() {
+export default function InputContainer() {
   const { taskTitle } = useSelector((state) => ({
     taskTitle: state.taskTitle,
   }));
