@@ -93,6 +93,21 @@ describe('reducer', () => {
   });
 
   describe('undefined action', () => {
+    it('doesn\'t work', () => {
+      const previoutState = {
+        newId: 1,
+        taskTitle: '',
+        tasks: [],
+      };
 
+      const state = reducer(
+        previoutState,
+        {
+          type: undefined,
+        },
+      );
+
+      expect(state).toEqual(previoutState);
+    });
   });
 });

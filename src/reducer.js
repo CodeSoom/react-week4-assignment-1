@@ -5,7 +5,7 @@ const initialState = {
 };
 
 export default function reducer(state = initialState, action) {
-  if (action) {
+  if (action.type) {
     return (converter) => converter({ state, action });
   }
 
