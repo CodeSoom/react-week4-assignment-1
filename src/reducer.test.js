@@ -38,7 +38,7 @@ describe('reducer', () => {
 
     context('without task title', () => {
       it('nothing happens', () => {
-        const state = reduceAddTask('아무것도 안 하기');
+        const state = reduceAddTask();
 
         expect(state.tasks).toHaveLength(0);
       });
