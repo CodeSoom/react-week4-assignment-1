@@ -7,7 +7,7 @@ export function updateTaskTitleAction(taskTitle) {
   };
 }
 
-export const updateTaskTitle = (state, action) => ({
+export const updateTaskTitle = ({ state, action }) => ({
   ...state,
   taskTitle: action.payload.taskTitle,
 });
