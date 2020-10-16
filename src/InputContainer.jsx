@@ -9,9 +9,9 @@ import Input from './Input';
 export default function App() {
   const dispatch = useDispatch();
 
-  const { taskTitle } = useSelector((state) => {
+  const { taskTitle } = useSelector((state) => ({
     taskTitle: state.taskTitle,
-  });
+  }));
 
   function handleChangeTitle(event) {
     dispatch(updateTaskTitle(event.target.value));
