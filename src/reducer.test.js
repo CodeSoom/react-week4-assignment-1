@@ -77,12 +77,12 @@ describe('reducer', () => {
     });
   });
 
-  describe('none of all', () => {
-    const state = reducer({
-      undefined,
-    }, { type: undefined });
+  describe('exception', () => {
+    const state = reducer(
+      undefined, { type: '', payload: {} },
+    );
 
-    it('return state and nothing change', () => {
+    it('return state', () => {
       expect(state).toBe(state);
     });
   });
