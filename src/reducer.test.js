@@ -2,6 +2,7 @@ import reducer from './reducer';
 
 import { updateTaskTitle, updateTaskTitleAction } from './actions/updateTaskTitle';
 import { addTask, addTaskAction } from './actions/addTask';
+import { deleteTask, deletTaskAction } from '';
 
 describe('reducer', () => {
   describe('updateTaskTitle', () => {
@@ -53,6 +54,40 @@ describe('reducer', () => {
         )(addTask);
 
         expect(state.tasks).toHaveLength(0);
+      });
+    });
+  });
+
+  describe('deleteTask', () => {
+    context('with existed id', () => {
+      it('remove from tasks', () => {
+        const state = reducer(
+          {
+            tasks: [
+              { id: 1, title: 'task-1' },
+              { id: 2, title: 'task-2' },
+            ],
+          },
+          deletTaskAction(1),
+        )(deleteTask);
+
+        expect(state.tasks).toHaveLength(1);
+      });
+    });
+
+    context('without existed id', () => {
+      it('doesn\'t work', () => {
+        const state = reducer(
+          {
+            tasks: [
+              { id: 1, title: 'task-1' },
+              { id: 2, title: 'task-2' },
+            ],
+          },
+          deletTaskAction(5),
+        )(deleteTask);
+
+        expect(state.tasks).toHaveLength(2);
       });
     });
   });
