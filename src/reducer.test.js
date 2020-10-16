@@ -77,11 +77,7 @@ describe('reducer', () => {
 
   describe('Unhandled action type', () => {
     it('returns initial state', () => {
-      const state = reducer({
-        newId: 100,
-        taskTitle: '',
-        tasks: [],
-      }, { type: 'Unhandled type' });
+      const state = reducer(undefined, { type: 'Unhandled type' });
 
       expect(state.newId).toBe(100);
       expect(state.taskTitle).toBe('');

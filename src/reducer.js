@@ -4,7 +4,7 @@ const initialState = {
   tasks: [],
 };
 
-const actionType = {
+const reducerChangeStates = {
   updateTaskTitle: (state, action) => ({
     ...state,
     taskTitle: action.payload.taskTitle,
@@ -24,11 +24,8 @@ const actionType = {
 };
 
 export default function reducer(state = initialState, action) {
-  if (action.type === 'updateTaskTitle') return actionType[action.type](state, action);
-
-  if (action.type === 'addTask') return state.taskTitle ? actionType[action.type](state) : state;
-
-  if (action.type === 'deleteTask') return actionType[action.type](state, action);
-
-  return state;
+  if (action.type === 'addTask') {
+    return state.taskTitle ? reducerChangeStates[action.type](state) : state;
+  }
+  return reducerChangeStates[action.type] ? reducerChangeStates[action.type](state, action) : state;
 }
