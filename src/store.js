@@ -10,6 +10,8 @@ const initialState = {
   tasks: [],
 };
 
+// 상태에 대한 관심사 분리
+// 새로운 상태를 리턴하는 reducer() 생성
 function reducer(state = initialState, action) {
   if (action === 'updateTaskTitle') {
     return {
