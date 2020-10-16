@@ -2,21 +2,21 @@ import React, { useState } from 'react';
 
 import Page from './Page';
 
-const initialState ={
+const initialState = {
   newId: 100,
   taskTitle: '',
   tasks: [],
-}
+};
 
-function updateTaskTitle(state, taskTitle){
+function updateTaskTitle(state, taskTitle) {
   return {
     ...state,
-    taskTitle
-  }
-} 
+    taskTitle,
+  };
+}
 
-function addTask(state){
-  const {tasks, newId, taskTitle } = state
+function addTask(state) {
+  const { tasks, newId, taskTitle } = state;
   return {
     ...state,
     newId: newId + 1,
@@ -25,21 +25,18 @@ function addTask(state){
   };
 }
 
-function deleteTask(state, id){
-  const {tasks} = state
+function deleteTask(state, id) {
+  const { tasks } = state;
   return {
     ...state,
     tasks: tasks.filter((task) => task.id !== id),
   };
 }
 
-
-
-
 export default function App() {
   const [state, setState] = useState(initialState);
 
-  const {tasks, taskTitle} = state
+  const { tasks, taskTitle } = state;
 
   function handleChangeTitle(event) {
     setState(updateTaskTitle(state, event.target.value));
