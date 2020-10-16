@@ -1,18 +1,20 @@
 import React from 'react';
 
-import { render } from '@testing-library/react';
+import { fireEvent, render } from '@testing-library/react';
 
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
 import ListContainer from './ListContainer';
 
 jest.mock('react-redux');
 
 test('ListContainer', () => {
+  const dispatch = jest.fn();
+  useDispatch.mockImplementation(() => dispatch);
+
   useSelector.mockImplementation((selector) => selector({
     tasks: [
       { id: 1, title: 'Task-1' },
-      { id: 2, title: 'Task-2' },
     ],
   }));
 
@@ -22,6 +24,12 @@ test('ListContainer', () => {
 
   expect(getByText(/Task-1/)).not.toBeNull();
 
-  // TODO: 통합 테스트 코드 작성
-  // CodeceptJS => 실제 브라우저에서 사용자 테스트 실행 가능.
+  fireEvent.click(getByText(/완료/));
+
+  expect(dispatch).toBeCalledWith({
+    type: 'deleteTask',
+    payload: {
+      id: 1,
+    },
+  });
 });

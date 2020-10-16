@@ -7,6 +7,12 @@ import {
 
 describe('reducer', () => {
   describe('updateTaskTitle', () => {
+    it('changes new task title initial value', () => {
+      const state = reducer(undefined, updateTaskTitle('new title'));
+
+      expect(state.taskTitle).toBe('new title');
+    });
+
     it('changes new task title', () => {
       const previousState = {
         taskTitle: '',
@@ -35,7 +41,6 @@ describe('reducer', () => {
 
         expect(state.tasks).toHaveLength(1);
         expect(state.tasks[0].id).not.toBeUndefined();
-        expect(state.tasks[0].title).toBe('new task');
       });
 
       it('clear task title', () => {
@@ -83,6 +88,22 @@ describe('reducer', () => {
 
         expect(state.tasks).toHaveLength(1);
       });
+    });
+  });
+
+  describe('not existed action', () => {
+    it("doesn't work", () => {
+      const previousState = {
+        taskTitle: '',
+        tasks: [
+          { id: 1, title: 'completed task' },
+        ],
+      };
+      const state = reducer(previousState, {
+        type: 'noAction',
+      });
+
+      expect(state).toEqual(previousState);
     });
   });
 });

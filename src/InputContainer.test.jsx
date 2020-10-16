@@ -11,24 +11,25 @@ jest.mock('react-redux');
 test('InputContainer', () => {
   const dispatch = jest.fn();
   useDispatch.mockImplementation(() => dispatch);
+
   useSelector.mockImplementation((selector) => selector({
     taskTitle: 'new  title',
   }));
 
-  const { getByText, getByDisplayValue } = render((
+  const { getByText, getByDisplayValue, getByLabelText } = render((
     <InputContainer />
   ));
 
+  fireEvent.change(getByLabelText('할 일'), { target: { value: 'new title' } });
+
+  expect(getByDisplayValue(/new title/)).not.toBeNull();
+
   expect(getByText(/추가/)).not.toBeNull();
   expect(getByDisplayValue(/new title/)).not.toBeNull();
+
   fireEvent.click(getByText(/추가/));
 
   expect(dispatch).toBeCalledWith({
     type: 'addTask',
   });
-
-  // expect(getByText(/new title/)).not.toBeNull();
-
-  // TODO: 통합 테스트 코드 작성
-  // CodeceptJS => 실제 브라우저에서 사용자 테스트 실행 가능.
 });
