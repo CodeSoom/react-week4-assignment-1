@@ -19,30 +19,35 @@ describe('InputContainer', () => {
 
   beforeEach(() => jest.clearAllMocks());
 
-  it("click '추가' button return add dispatch function to be called", () => {
-    const { getByText } = render((
-      <InputContainer />
-    ));
-    expect(getByText(/추가/)).not.toBeNull();
+  describe("click '추가'button", () => {
+    it('calls add dispatch', () => {
+      const { getByText } = render((
+        <InputContainer />
+      ));
 
-    fireEvent.click(getByText(/추가/));
+      expect(getByText(/추가/)).not.toBeNull();
 
-    expect(dispatch).toBeCalledWith({ type: 'addTask' });
+      fireEvent.click(getByText(/추가/));
+
+      expect(dispatch).toBeCalledWith({ type: 'addTask' });
+    });
   });
 
-  it('change title return update dispatch function to be called', () => {
-    const { getByDisplayValue } = render((
-      <InputContainer />
-    ));
+  describe('change title', () => {
+    it('calls update dispatch', () => {
+      const { getByDisplayValue } = render((
+        <InputContainer />
+      ));
 
-    expect(getByDisplayValue(/New Title/)).not.toBeNull();
+      expect(getByDisplayValue(/New Title/)).not.toBeNull();
 
-    fireEvent.change(getByDisplayValue(/New Title/),
-      { target: { value: 'changed Title' } });
+      fireEvent.change(getByDisplayValue(/New Title/),
+        { target: { value: 'changed Title' } });
 
-    expect(dispatch).toBeCalledWith({
-      type: 'updateTaskTitle',
-      payload: { taskTitle: 'changed Title' },
+      expect(dispatch).toBeCalledWith({
+        type: 'updateTaskTitle',
+        payload: { taskTitle: 'changed Title' },
+      });
     });
   });
 });
