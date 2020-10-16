@@ -10,14 +10,13 @@ const initialState = {
 
 // 상태에 대한 관심사 분리
 // 새로운 상태를 리턴하는 reducer() 생성
-export default function reducer(state = initialState, action) {
-  if (action.type === 'updateTaskTitle') {
-    return {
-      ...state,
-      taskTitle: action.payload.taskTitle,
-    };
-  }
-  if (action.type === 'addTask') {
+const reduce = {
+  updateTaskTitle: (state, action) => ({
+    ...state,
+    taskTitle: action.payload.taskTitle,
+  }),
+
+  addTask: (state) => {
     const { newId, taskTitle, tasks } = state;
 
     if (!taskTitle) {
@@ -30,13 +29,22 @@ export default function reducer(state = initialState, action) {
       taskTitle: '',
       tasks: [...tasks, { id: newId, title: taskTitle }],
     };
-  }
-  if (action.type === 'deleteTask') {
+  },
+
+  deleteTask: (state, action) => {
     const { tasks } = state;
+
     return {
       ...state,
       tasks: tasks.filter((task) => task.id !== action.payload.id),
     };
+  },
+};
+
+export default function reducer(state = initialState, action = { type: 'initTask' }) {
+  if (action.type === 'initTask') {
+    return state;
   }
-  return state;
+
+  return reduce[action.type](state, action);
 }

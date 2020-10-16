@@ -70,4 +70,12 @@ describe('reducer', () => {
       });
     });
   });
+
+  it('initialState', () => {
+    const state = reducer();
+
+    expect(state.newId).toBe(100);
+    expect(state.taskTitle).toBe('');
+    expect(state.tasks).toHaveLength(0);
+  });
 });
