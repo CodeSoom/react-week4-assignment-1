@@ -11,11 +11,13 @@ jest.mock('react-redux');
 describe('InputContainer', () => {
   const dispatch = jest.fn();
 
-  useDispatch.mockImplementation(() => dispatch);
+  beforeEach(() => {
+    useDispatch.mockImplementation(() => dispatch);
 
-  useSelector.mockImplementation((selector) => selector({
-    taskTitle: 'New Title',
-  }));
+    useSelector.mockImplementation((selector) => selector({
+      taskTitle: 'New Title',
+    }));
+  });
 
   beforeEach(() => jest.clearAllMocks());
 

@@ -4,7 +4,7 @@ const initialState = {
   tasks: [],
 };
 
-const reducerChangeStates = {
+const reducers = {
   updateTaskTitle: (state, action) => ({
     ...state,
     taskTitle: action.payload.taskTitle,
@@ -14,7 +14,10 @@ const reducerChangeStates = {
     ...state,
     newId: state.newId + 1,
     taskTitle: '',
-    tasks: [...state.tasks, { id: state.newId, title: state.taskTitle }],
+    tasks: [...state.tasks, {
+      id: state.newId,
+      title: (state.taskTitle ? state.taskTitle : state),
+    }],
   }),
 
   deleteTask: (state, action) => ({
@@ -24,8 +27,5 @@ const reducerChangeStates = {
 };
 
 export default function reducer(state = initialState, action) {
-  if (action.type === 'addTask') {
-    return state.taskTitle ? reducerChangeStates[action.type](state) : state;
-  }
-  return reducerChangeStates[action.type] ? reducerChangeStates[action.type](state, action) : state;
+  return reducers[action.type] ? reducers[action.type](state, action) : state;
 }
