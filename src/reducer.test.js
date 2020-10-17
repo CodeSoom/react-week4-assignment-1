@@ -70,31 +70,27 @@ describe('reducer', () => {
     });
   });
 
-  describe('undefined action', () => {
-    context('with state', () => {
-      it('tasks가 존재할 때', () => {
-        const { tasks } = reducer(
-          {
-            tasks: [
-              { id: 1, title: 'Task' },
-            ],
-          },
-          { type: 'undefined', payload: {} },
-        );
+  describe('with undefined action', () => {
+    it('returns previous state', () => {
+      const { tasks } = reducer(
+        {
+          tasks: [
+            { id: 1, title: 'Task' },
+          ],
+        },
+        { type: 'undefined', payload: {} },
+      );
 
-        expect(tasks).toHaveLength(1);
-      });
+      expect(tasks).toHaveLength(1);
     });
 
-    context('without state', () => {
-      it('tasks가 없을 때', () => {
-        const { tasks } = reducer(
-          undefined,
-          { type: 'undefined', payload: {} },
-        );
+    it("don't returns previous state", () => {
+      const { tasks } = reducer(
+        undefined,
+        { type: 'undefined', payload: {} },
+      );
 
-        expect(tasks).toHaveLength(0);
-      });
+      expect(tasks).toHaveLength(0);
     });
   });
 });

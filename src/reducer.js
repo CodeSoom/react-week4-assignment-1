@@ -4,7 +4,7 @@ const initialState = {
   tasks: [],
 };
 
-const reducer = {
+const reducers = {
   updateTaskTitle: (state, { taskTitle }) => ({
     ...state,
     taskTitle,
@@ -29,12 +29,12 @@ const reducer = {
   }),
 };
 
-const createAction = (state = initialState, { type, payload }) => {
-  if (!reducer[type]) {
+const reducer = (state = initialState, { type, payload }) => {
+  if (!reducers[type]) {
     return state;
   }
 
-  return reducer[type](state, payload);
+  return reducers[type](state, payload);
 };
 
-export default createAction;
+export default reducer;

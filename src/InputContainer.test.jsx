@@ -22,10 +22,12 @@ describe('InputContainer', () => {
 
   it('할 일을 추가한다.', () => {
     const { getByDisplayValue, getByText } = renderInputContainer();
-    expect(getByDisplayValue(/아무것도 하지 않기 3/)).not.toBeNull();
-    expect(getByText(/추가/)).not.toBeNull();
+    const addButton = getByText(/추가/);
 
-    fireEvent.click(getByText(/추가/));
+    expect(getByDisplayValue(/아무것도 하지 않기 3/)).not.toBeNull();
+    expect(addButton).not.toBeNull();
+
+    fireEvent.click(addButton);
 
     expect(dispatch).toBeCalledWith({ type: 'addTask' });
   });
