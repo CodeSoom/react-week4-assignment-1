@@ -27,9 +27,11 @@ describe('InputContainer', () => {
         <InputContainer />
       ));
 
-      expect(getByText(/추가/)).not.toBeNull();
+      const addButton = getByText(/추가/);
 
-      fireEvent.click(getByText(/추가/));
+      expect(addButton).not.toBeNull();
+
+      fireEvent.click(addButton);
 
       expect(dispatch).toBeCalledWith({ type: 'addTask' });
     });

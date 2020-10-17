@@ -11,18 +11,21 @@ const reducers = {
   }),
 
   addTask: (state) => {
-    if (state.taskTitle) {
-      return {
-        ...state,
-        newId: state.newId + 1,
-        taskTitle: '',
-        tasks: [...state.tasks, {
-          id: state.newId,
-          title: state.taskTitle,
-        }],
-      };
+    const { taskTitle: title, newId, tasks } = state;
+
+    if (!title) {
+      return state;
     }
-    return state;
+
+    return {
+      ...state,
+      newId: newId + 1,
+      taskTitle: '',
+      tasks: [...tasks, {
+        id: newId,
+        title,
+      }],
+    };
   },
 
   deleteTask: (state, action) => ({
