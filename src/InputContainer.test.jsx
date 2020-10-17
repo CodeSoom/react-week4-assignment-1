@@ -17,9 +17,9 @@ describe('InputContainer', () => {
     useSelector.mockImplementation((selector) => selector({
       taskTitle: 'New Title',
     }));
-  });
 
-  beforeEach(() => jest.clearAllMocks());
+    jest.clearAllMocks();
+  });
 
   describe("click '추가'button", () => {
     it('calls add dispatch', () => {

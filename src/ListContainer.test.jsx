@@ -11,14 +11,18 @@ jest.mock('react-redux');
 test('ListContainer', () => {
   const dispatch = jest.fn();
 
-  useDispatch.mockImplementation(() => dispatch);
+  beforeEach(() => {
+    useDispatch.mockImplementation(() => dispatch);
 
-  useSelector.mockImplementation((selector) => selector({
-    tasks: [
-      { id: 1, title: '할일 #1' },
-      { id: 2, title: '할일 #2' },
-    ],
-  }));
+    useSelector.mockImplementation((selector) => selector({
+      tasks: [
+        { id: 1, title: '할일 #1' },
+        { id: 2, title: '할일 #2' },
+      ],
+    }));
+
+    jest.clearAllMocks();
+  });
 
   const { getByText, getAllByText } = render((
     <ListContainer />
