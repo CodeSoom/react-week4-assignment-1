@@ -7,6 +7,15 @@ import {
 } from './actions';
 
 describe('reducer', () => {
+  describe('undefined action', () => {
+    it("doesn't work", () => {
+      const state = reducer();
+
+      expect(state.newId).toBe(100);
+      expect(state.taskTitle).toBe('');
+      expect(state.tasks.length).toBe(0);
+    });
+  });
   describe('updateTaskTitle', () => {
     it('changes a task title', () => {
       const state = reducer({
@@ -35,7 +44,7 @@ describe('reducer', () => {
         expect(state.tasks[0].title).toBe('New Task');
       });
 
-      it('clears task title', () => {
+      it('clears task title in inputbox', () => {
         const state = reduceAddTask('New Task');
 
         expect(state.taskTitle).toBe('');
