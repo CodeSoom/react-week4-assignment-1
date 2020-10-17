@@ -10,15 +10,20 @@ const reducers = {
     taskTitle: action.payload.taskTitle,
   }),
 
-  addTask: (state) => ({
-    ...state,
-    newId: state.newId + 1,
-    taskTitle: '',
-    tasks: [...state.tasks, {
-      id: state.newId,
-      title: (state.taskTitle ? state.taskTitle : state),
-    }],
-  }),
+  addTask: (state) => {
+    if (state.taskTitle) {
+      return {
+        ...state,
+        newId: state.newId + 1,
+        taskTitle: '',
+        tasks: [...state.tasks, {
+          id: state.newId,
+          title: state.taskTitle,
+        }],
+      };
+    }
+    return state;
+  },
 
   deleteTask: (state, action) => ({
     ...state,
