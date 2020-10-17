@@ -14,26 +14,20 @@ describe('reducer', () => {
   });
 
   describe('updateTaskTitle', () => {
-    const previousState = { taskTitle: 'prevTitle' };
+    it('update title with valid taskTitle', () => {
+      const state = reducer({
+        taskTitle: '',
+      }, updateTaskTitle('new title'));
 
-    context('with valid taskTitle', () => {
-      const newTaskTitle = 'New Task';
-
-      it('update', () => {
-        const newState = reducer(previousState, updateTaskTitle(newTaskTitle));
-
-        expect(newState.taskTitle).toBe(newTaskTitle);
-      });
+      expect(state.taskTitle).toBe('new title');
     });
 
-    context('with invalid taskTitle', () => {
-      const newTaskTitle = 0.555;
+    it('doesn\'t update with invalid taskTitle', () => {
+      const state = reducer({
+        taskTitle: '',
+      }, updateTaskTitle(0.555));
 
-      it('doesn`t update', () => {
-        const newState = reducer(previousState, updateTaskTitle(newTaskTitle));
-
-        expect(newState.taskTitle).toBe(previousState.taskTitle);
-      });
+      expect(state.taskTitle).toBe('');
     });
   });
 
@@ -45,15 +39,15 @@ describe('reducer', () => {
         tasks: [],
       };
 
-      it('add new task, empty title and update id', () => {
-        const newState = reducer(previousState, addTask());
+      it('add task, empty title and update id', () => {
+        const { newId, tasks, taskTitle } = reducer(previousState, addTask());
 
-        expect(newState.tasks).toContainEqual({
+        expect(tasks).toContainEqual({
           id: previousState.newId,
           title: previousState.taskTitle,
         });
-        expect(newState.newId).toBe(previousState.newId + 1);
-        expect(newState.taskTitle).toBe('');
+        expect(newId).toBe(previousState.newId + 1);
+        expect(taskTitle).toBe('');
       });
     });
 
@@ -65,9 +59,9 @@ describe('reducer', () => {
       };
 
       it('doesn\'t add', () => {
-        const newState = reducer(previousState, addTask());
+        const state = reducer(previousState, addTask());
 
-        expect(newState).toEqual(previousState);
+        expect(state).toEqual(previousState);
       });
     });
   });
@@ -80,30 +74,15 @@ describe('reducer', () => {
       ],
     };
 
-    context('with existing id', () => {
-      const targetId = 101;
+    it('delete task with existing id', () => {
+      const { id: existingId } = previousState.tasks[0];
+      const state = reducer(previousState, deleteTask(existingId));
 
-      it('delete existing task', () => {
-        const newState = reducer(previousState, deleteTask(targetId));
-
-        expect(newState.tasks.find(({ id }) => id === targetId)).toBeUndefined();
-      });
+      expect(state.tasks.find(({ id }) => id === existingId)).toBeUndefined();
     });
 
-    context('with non-existing id', () => {
-      const targetId = 404;
-
-      it('doesn\'t delete', () => {
-        expect(reducer(previousState, deleteTask(targetId))).toEqual(previousState);
-      });
-    });
-
-    context('with invalid id', () => {
-      const targetId = 'xxo';
-
-      it('doesn\'t delete', () => {
-        expect(reducer(previousState, deleteTask(targetId))).toEqual(previousState);
-      });
+    it('doesn\'t delete with non-existing id', () => {
+      expect(reducer(previousState, deleteTask(404))).toEqual(previousState);
     });
   });
 });
