@@ -19,13 +19,13 @@ import List from './List';
 // TDD cycle: Red - Green - Refactoring
 
 describe('List', () => {
-  const handleClickDelete = jest.fn();
+  const handleClickCompleteTask = jest.fn();
 
   function renderList(tasks) {
     return render((
       <List
         tasks={tasks}
-        onClickDelete={handleClickDelete}
+        onClickComplete={handleClickCompleteTask}
       />
     ));
   }
@@ -43,14 +43,14 @@ describe('List', () => {
       expect(getByText(/Task-2/)).not.toBeNull();
     });
 
-    it('renders “완료” button to delete a task', () => {
+    it('renders complete button to delete a task', () => {
       const { getAllByText } = renderList(tasks);
 
       const buttons = getAllByText('완료');
 
       fireEvent.click(buttons[0]);
 
-      expect(handleClickDelete).toBeCalledWith(1);
+      expect(handleClickCompleteTask).toBeCalledWith(1);
     });
   });
 
