@@ -17,8 +17,18 @@ function change(target, { value }) {
 }
 
 describe('InputContainer', () => {
+  const tasks = [
+    { id: 1, title: '쉬기' },
+    { id: 2, title: '놀기' },
+  ];
+  const dispatch = jest.fn();
+
   beforeEach(() => {
     jest.clearAllMocks();
+    useSelector.mockImplementation((selector) => selector({
+      tasks,
+    }));
+    useDispatch.mockReturnValue(dispatch);
   });
 
   function renderInputContainer() {
@@ -34,18 +44,6 @@ describe('InputContainer', () => {
       buttonAdd: getByText(/추가/),
     };
   }
-
-  const tasks = [
-    { id: 1, title: '쉬기' },
-    { id: 2, title: '놀기' },
-  ];
-
-  const dispatch = jest.fn();
-
-  useSelector.mockImplementation((selector) => selector({
-    tasks,
-  }));
-  useDispatch.mockReturnValue(dispatch);
 
   describe('handleChangeTitle', () => {
     it('changes task title', () => {

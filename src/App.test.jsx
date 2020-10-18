@@ -19,11 +19,11 @@ describe('App', () => {
   ];
 
   const mockDispatch = jest.fn();
+  useDispatch.mockReturnValue(mockDispatch);
 
   useSelector.mockImplementation((selector) => selector({
     tasks,
   }));
-  useDispatch.mockReturnValue(mockDispatch);
 
   it('renders', () => {
     const { container } = render((

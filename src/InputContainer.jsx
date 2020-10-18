@@ -13,7 +13,7 @@ function selector(state) {
   };
 }
 
-export default function Page() {
+export default function InputContainer() {
   const { taskTitle } = useSelector(selector);
 
   const dispatch = useDispatch();

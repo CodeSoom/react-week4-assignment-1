@@ -13,7 +13,7 @@ function selector(state) {
   };
 }
 
-export default function App() {
+export default function ListContainer() {
   const { tasks } = useSelector(selector);
 
   const dispatch = useDispatch();
