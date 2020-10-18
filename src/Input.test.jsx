@@ -8,6 +8,10 @@ test('Input', () => {
   const handleChange = jest.fn();
   const handleClick = jest.fn();
 
+  beforeEach(() => {
+    jest.clearAllMocks();
+  });
+
   const { getByDisplayValue, getByLabelText, getByText } = render((
     <Input
       value="기존 할 일"
