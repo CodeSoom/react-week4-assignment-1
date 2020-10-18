@@ -8,13 +8,19 @@ import InputContainer from './InputContainer';
 jest.mock('react-redux');
 
 describe('InputContainer', () => {
+  beforeEach(() => {
+    jest.clearAllMocks();
+  });
+
   const dispatch = jest.fn();
 
-  useDispatch.mockImplementation(() => dispatch);
+  beforeEach(() => {
+    useDispatch.mockImplementation(() => dispatch);
 
-  useSelector.mockImplementation((selector) => selector({
-    taskTitle: '아무것도 하지 않기 3',
-  }));
+    useSelector.mockImplementation((selector) => selector({
+      taskTitle: '아무것도 하지 않기 3',
+    }));
+  });
 
   const renderInputContainer = () => render((
     <InputContainer />
