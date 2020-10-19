@@ -9,7 +9,6 @@ import { changeTaskTitle, addTask } from './actions';
 function selector(state) {
   return {
     taskTitle: state.taskTitle,
-    tasks: state.tasks,
   };
 }
 
