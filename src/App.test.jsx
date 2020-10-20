@@ -2,15 +2,34 @@ import React from 'react';
 
 import { render } from '@testing-library/react';
 
+import { useSelector, useDispatch } from 'react-redux';
+
 import App from './App';
 
-test('App', () => {
-  const { getByText } = render((
-    <App />
-  ));
+jest.mock('react-redux');
 
-  expect(getByText(/추가/)).not.toBeNull();
+describe('App', () => {
+  beforeEach(() => {
+    jest.clearAllMocks();
+  });
 
-  // TODO: 통합 테스트 코드 작성
-  // CodeceptJS => 실제 브라우저에서 사용자 테스트 실행 가능.
+  const tasks = [
+    { id: 1, title: '쉬기' },
+    { id: 2, title: '놀기' },
+  ];
+
+  const mockDispatch = jest.fn();
+  useDispatch.mockReturnValue(mockDispatch);
+
+  useSelector.mockImplementation((selector) => selector({
+    tasks,
+  }));
+
+  it('renders', () => {
+    const { container } = render((
+      <App />
+    ));
+
+    expect(container).toHaveTextContent(/To-do/);
+  });
 });
