@@ -1,5 +1,5 @@
 const initailState = {
-  newId: 100,
+  id: 100,
   taskTitle: '',
   tasks: [],
 };
