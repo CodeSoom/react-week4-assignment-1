@@ -36,7 +36,7 @@ describe('reducer는', () => {
 
     const state = reducer(preveState, {
       type: 'deleteCompleteTask',
-      payload: { id: '100' },
+      payload: { id: 100 },
     });
     expect(state.tasks).toHaveLength(1);
   });
