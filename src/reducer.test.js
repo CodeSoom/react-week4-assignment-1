@@ -40,4 +40,14 @@ describe('reducer는', () => {
     });
     expect(state.tasks).toHaveLength(1);
   });
+
+  it('입력이 공백이면 추가하지 않는다.', () => {
+    const preveState = {
+      taskTitle: '',
+      tasks: [],
+    };
+    const state = reducer(preveState, { type: 'addNewTask' });
+
+    expect(state.tasks).toHaveLength(0);
+  });
 });
