@@ -1,4 +1,4 @@
-export function uopdateTaskTitle(taskTitle) {
+export function updateTaskTitle(taskTitle) {
   return {
     type: 'updateTaskTitle',
     payload: {
