@@ -12,6 +12,7 @@ describe('reducer', () => {
       const state = reducer({
         taskTitle: '',
       }, updateTaskTitle('New Title'));
+
       expect(state.taskTitle).toBe('New Title');
     });
   });
@@ -22,7 +23,6 @@ describe('reducer', () => {
         newId: 100,
         taskTitle,
         tasks: [],
-
       }, addTask());
     }
 
