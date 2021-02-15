@@ -10,14 +10,22 @@ export default function InputContainer() {
     taskTitle: state.taskTitle,
   }));
 
+  function handleChange(e) {
+    dispatch({
+      type: 'updateInput',
+      payload: { taskTitle: e.target.value },
+    });
+  }
+
+  function handleClick() {
+    dispatch({ type: 'addNewTask' });
+  }
+
   return (
     <Input
       value={taskTitle}
-      onChange={(e) => dispatch({
-        type: 'updateInput',
-        payload: { taskTitle: e.target.value },
-      })}
-      onClick={() => dispatch({ type: 'addNewTask' })}
+      onChange={handleChange}
+      onClick={handleClick}
     />
   );
 }
