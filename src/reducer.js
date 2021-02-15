@@ -1,10 +1,13 @@
 export default function reducer(state, action) {
   if (action.type === 'addNewTask') {
-    return ({
-      ...state,
-      taskTitle: '',
-      tasks: [...state.tasks, state.taskTitle],
-    });
+    return (
+      state.taskTitle ? ({
+        ...state,
+        taskTitle: '',
+        tasks: [...state.tasks, state.taskTitle],
+      })
+        : state
+    );
   }
 
   if (action.type === 'updateInput') {
