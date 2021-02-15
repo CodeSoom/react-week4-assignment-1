@@ -1,10 +1,9 @@
 import React from 'react';
 
+import Page from './Page';
+
 export default function App() {
   return (
-    <div>
-      <p>추가</p>
-      <p>할 일이 없어요!</p>
-    </div>
+    <Page tasks={[]} />
   );
 }
