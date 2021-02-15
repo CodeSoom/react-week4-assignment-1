@@ -9,8 +9,9 @@ export default function reducer(state = initailState, action) {
     return (
       state.taskTitle ? ({
         ...state,
+        id: state.id + 1,
         taskTitle: '',
-        tasks: [...state.tasks, state.taskTitle],
+        tasks: [...state.tasks, { id: state.id, title: state.taskTitle }],
       })
         : state
     );
