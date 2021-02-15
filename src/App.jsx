@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 
 import Page from './Page';
 
+// Refactor To-do-list using Redux
+
 export default function App() {
   const [state, setState] = useState({
     newId: 100,
