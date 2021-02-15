@@ -17,7 +17,7 @@ describe('ListContainer에서', () => {
 
       const { getByText } = render(<ListContainer />);
 
-      expect(getByText('할 일이 없어요')).toBeInTheDocument();
+      expect(getByText('할 일이 없어요!')).toBeInTheDocument();
     });
   });
 
