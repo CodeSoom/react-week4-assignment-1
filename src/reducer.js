@@ -16,7 +16,7 @@ export default function reducer(state = initialState, action) {
   }
 
   if (action.type === 'UPDATE_TASK') {
-    return { taskTitle: '두번째 할일' };
+    return { ...state, taskTitle: action.payload };
   }
   return state;
 }
