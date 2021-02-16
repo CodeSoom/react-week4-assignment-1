@@ -6,14 +6,16 @@ import ListContainer from './ListContainer';
 
 jest.mock('react-redux');
 
-test('ListContainer', () => {
-  useSelector.mockImplementation((selector) => selector({
-    tasks: [{ id: 1, title: '할일1' }],
-  }));
+describe('ListContainer', () => {
+  it('should render tasks', () => {
+    useSelector.mockImplementation((selector) => selector({
+      tasks: [{ id: 1, title: '할일1' }],
+    }));
 
-  const { queryByText } = render((
-    <ListContainer />
-  ));
+    const { queryByText } = render((
+      <ListContainer />
+    ));
 
-  expect(queryByText('할일1')).toBeInTheDocument();
+    expect(queryByText('할일1')).toBeInTheDocument();
+  });
 });
