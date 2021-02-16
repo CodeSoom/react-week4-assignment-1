@@ -14,5 +14,9 @@ export default function reducer(state = initialState, action) {
       tasks: [...tasks, { id: newId, title: taskTitle }],
     };
   }
+
+  if (action.type === 'UPDATE_TASK') {
+    return { taskTitle: '두번째 할일' };
+  }
   return state;
 }
