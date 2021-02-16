@@ -1,9 +1,9 @@
 const initialState = {
-
+  newId: 100,
+  taskTitle: '',
+  tasks: [],
 };
 
-function reducer(state = initialState, action) {
-  return initialState;
+export default function reducer(state = initialState, action) {
+  return state;
 }
-
-export default reducer;
