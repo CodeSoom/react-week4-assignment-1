@@ -9,6 +9,7 @@ TODO
 - App shows "추가"
 - App updates task title
 - App adds task
+- App deletes task
 */
 
 describe('App', () => {
@@ -44,5 +45,21 @@ describe('App', () => {
     fireEvent.click(getByText(/추가/));
 
     expect(getByText('task-1')).not.toBeNull();
+  });
+
+  it('deletes task', () => {
+    const { container, getByLabelText, getByText } = render((
+      <App />
+    ));
+
+    fireEvent.change(getByLabelText('할 일'), {
+      target: { value: 'task-1' },
+    });
+
+    fireEvent.click(getByText(/추가/));
+
+    fireEvent.click(getByText(/완료/));
+
+    expect(container).not.toHaveTextContent('task-1');
   });
 });
