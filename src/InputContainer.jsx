@@ -8,12 +8,12 @@ function InputContainer() {
   const dispatch = useDispatch();
   const taskTitle = useSelector((state) => (state.taskTitle));
 
-  function handleChangeTitle(e) {
-    dispatch(updateTask(e.target.value));
+  function handleChangeTitle(event) {
+    dispatch(updateTask(event.target.value));
   }
 
   function handleClickAddTask() {
-    dispatch(addTask());
+    dispatch({ type: 'ADD_TASK' });
   }
 
   return (
