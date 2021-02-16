@@ -15,22 +15,28 @@ function updateTaskTitle(state, taskTitle) {
   };
 }
 
+function addTask(state) {
+  const { newId, tasks, taskTitle } = state;
+
+  return {
+    ...state,
+    newId: newId + 1,
+    taskTitle: '',
+    tasks: [...tasks, { id: newId, title: taskTitle }],
+  };
+}
+
 export default function App() {
   const [state, setState] = useState(initialState);
 
-  const { newId, taskTitle, tasks } = state;
+  const { taskTitle, tasks } = state;
 
   function handleChangeTitle(event) {
     setState(updateTaskTitle(state, event.target.value));
   }
 
   function handleClickAddTask() {
-    setState({
-      ...state,
-      newId: newId + 1,
-      taskTitle: '',
-      tasks: [...tasks, { id: newId, title: taskTitle }],
-    });
+    setState(addTask(state));
   }
 
   function handleClickDeleteTask(id) {
