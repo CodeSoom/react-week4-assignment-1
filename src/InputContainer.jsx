@@ -4,28 +4,27 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import Input from './Input';
 
+import { updateAction, addAction } from './actions';
+
 export default function InputContainer() {
   const dispatch = useDispatch();
   const { taskTitle } = useSelector((state) => ({
     taskTitle: state.taskTitle,
   }));
 
-  function handleChange(e) {
-    dispatch({
-      type: 'updateInput',
-      payload: { taskTitle: e.target.value },
-    });
+  function handleChangeInput(e) {
+    dispatch(updateAction(e.target.value));
   }
 
-  function handleClick() {
-    dispatch({ type: 'addNewTask' });
+  function handleClickAdd() {
+    dispatch(addAction());
   }
 
   return (
     <Input
       value={taskTitle}
-      onChange={handleChange}
-      onClick={handleClick}
+      onChange={handleChangeInput}
+      onClick={handleClickAdd}
     />
   );
 }

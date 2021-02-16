@@ -8,24 +8,28 @@ import InputContainer from './InputContainer';
 
 jest.mock('react-redux');
 
-describe('InputContainer에서', () => {
-  it('인풋을 보여준다.', () => {
-    useSelector.mockImplementation((selector) => selector({
-      taskTitle: '밥 먹기',
-    }));
+function mockImplementation(taskTitle = '', dispatch = null) {
+  if (dispatch) {
+    useDispatch.mockImplementation(() => (dispatch));
+  }
+  useSelector.mockImplementation((selector) => selector({
+    taskTitle,
+  }));
+}
+
+describe('InputContainer는', () => {
+  const dispatch = jest.fn();
+
+  it('입력값(인풋)을 화면에 그린다.', () => {
+    mockImplementation('밥 먹기');
 
     const { getByDisplayValue } = render(<InputContainer />);
 
     expect(getByDisplayValue('밥 먹기')).toBeInTheDocument();
   });
 
-  it('추가버튼을 누르면 dispatch함수가 실행된다.', () => {
-    const dispatch = jest.fn();
-
-    useDispatch.mockImplementation(() => (dispatch));
-    useSelector.mockImplementation((selector) => selector({
-      taskTitle: '밥 먹기',
-    }));
+  it('추가버튼을 누르면 할 일을 추가하는 함수를 실행한다.', () => {
+    mockImplementation('밥 먹기', dispatch);
 
     const { getByText } = render(<InputContainer />);
 
@@ -34,18 +38,15 @@ describe('InputContainer에서', () => {
     expect(dispatch).toBeCalled();
   });
 
-  it('입력을 하면 dispatch함수가 실행된다.', () => {
-    const dispatch = jest.fn();
-
-    useDispatch.mockImplementation(() => (dispatch));
-    useSelector.mockImplementation((selector) => selector({
-      taskTitle: '',
-    }));
+  it('입력을 하면 입력을 반영하는 함수가 실행된다.', () => {
+    mockImplementation();
 
     const { getByLabelText } = render(<InputContainer />);
 
     fireEvent.change(getByLabelText('할 일'), {
-      target: { value: '무언가 하기' },
+      target: {
+        value: '무언가 하기',
+      },
     });
 
     expect(dispatch).toBeCalled();

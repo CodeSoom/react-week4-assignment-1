@@ -7,13 +7,16 @@ import { render, fireEvent } from '@testing-library/react';
 import ListContainer from './ListContainer';
 
 jest.mock('react-redux');
+function mockImplementation(tasks = []) {
+  useSelector.mockImplementation((selector) => selector({ tasks }));
+}
 
 describe('ListContainer에서', () => {
+  const dispatch = jest.fn();
+
   context('할 일 목록이 없을 때', () => {
     it('할 일이 없다는 것을 보여준다.', () => {
-      useSelector.mockImplementation((selector) => selector({
-        tasks: [],
-      }));
+      mockImplementation();
 
       const { getByText } = render(<ListContainer />);
 
@@ -23,29 +26,22 @@ describe('ListContainer에서', () => {
 
   context('할 일 목록이 있을 때', () => {
     it('할 일을 보여준다.', () => {
-      useSelector.mockImplementation((selector) => selector({
-        tasks: [
-          { id: 100, title: '밥 먹기' },
-          { id: 101, title: '누워있기' },
-        ],
-      }));
+      mockImplementation([
+        { id: 100, title: '밥 먹기' },
+        { id: 101, title: '누워있기' },
+      ]);
 
-      const { getByText } = render(<ListContainer />);
+      const { queryByText } = render(<ListContainer />);
 
-      expect(getByText('밥 먹기')).toBeInTheDocument();
-      expect(getByText('밥 먹기')).toBeInTheDocument();
+      expect(queryByText('밥 먹기')).toBeInTheDocument();
+      expect(queryByText('누워있기')).toBeInTheDocument();
     });
   });
 
-  it('완료버튼을 클릭하면 dispatch가 실행된다.', () => {
-    const dispatch = jest.fn();
-
+  it('완료버튼을 클릭하면 완료한 것을 제거하는 함수가 실행된다.', () => {
     useDispatch.mockImplementation(() => (dispatch));
-    useSelector.mockImplementation((selector) => selector({
-      tasks: [
-        { id: 100, title: '밥 먹기' },
-      ],
-    }));
+
+    mockImplementation([{ id: 100, title: '밥 먹기' }]);
 
     const { getByText } = render(<ListContainer />);
 
