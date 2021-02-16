@@ -13,18 +13,20 @@ TODO
 */
 
 describe('App', () => {
-  it('shows "추가" text', () => {
-    const { getByText } = render((
+  function renderApp() {
+    return render((
       <App />
     ));
+  }
+
+  it('shows "추가" text', () => {
+    const { getByText } = renderApp();
 
     expect(getByText(/추가/)).not.toBeNull();
   });
 
   it('updates task title', () => {
-    const { getByLabelText, getByDisplayValue } = render((
-      <App />
-    ));
+    const { getByLabelText, getByDisplayValue } = renderApp();
 
     fireEvent.change(getByLabelText('할 일'), {
       target: { value: 'task-1' },
@@ -34,9 +36,7 @@ describe('App', () => {
   });
 
   it('adds task', () => {
-    const { getByLabelText, getByText } = render((
-      <App />
-    ));
+    const { getByLabelText, getByText } = renderApp();
 
     fireEvent.change(getByLabelText('할 일'), {
       target: { value: 'task-1' },
@@ -48,9 +48,7 @@ describe('App', () => {
   });
 
   it('deletes task', () => {
-    const { container, getByLabelText, getByText } = render((
-      <App />
-    ));
+    const { container, getByLabelText, getByText } = renderApp();
 
     fireEvent.change(getByLabelText('할 일'), {
       target: { value: 'task-1' },
