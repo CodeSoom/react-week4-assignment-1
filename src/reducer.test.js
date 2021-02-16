@@ -79,4 +79,12 @@ describe('reducer', () => {
       expect(changedState.tasks).toHaveLength(1);
     });
   });
+
+  describe('default state', () => {
+    it('should be return default state', () => {
+      const defaultState = reducer(undefined, '');
+      expect(defaultState.tasks).toHaveLength(0);
+      expect(defaultState.taskTitle).toBe('');
+    });
+  });
 });
