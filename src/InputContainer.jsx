@@ -13,7 +13,7 @@ function InputContainer() {
   }
 
   function handleClickAddTask() {
-    dispatch({ type: 'ADD_TASK' });
+    dispatch(addTask());
   }
 
   return (
