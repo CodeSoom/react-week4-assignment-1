@@ -1,4 +1,4 @@
-import reducer from './reducer';
+import reducer, { initialState } from './reducer';
 
 import { addAction, deleteAction, updateAction } from './actions';
 
@@ -50,5 +50,11 @@ describe('reducer는', () => {
 
       expect(state.tasks).toHaveLength(0);
     });
+  });
+
+  it('기본값을 반영한다.', () => {
+    const state = reducer();
+
+    expect(state).toBe(initialState);
   });
 });
