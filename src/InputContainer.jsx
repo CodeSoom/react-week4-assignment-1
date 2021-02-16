@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { ADD_TASK } from './actions';
+import { ADD_TASK, UPDATE_TASK } from './actions';
 
 import Input from './Input';
 
@@ -12,8 +12,8 @@ function InputContainer() {
     dispatch({ type: ADD_TASK });
   }
 
-  function handleClickTaskTitle() {
-    dispatch({ payload: '손씻기', type: 'UPDATE_TASK' });
+  function handleClickTaskTitle(event) {
+    dispatch({ type: UPDATE_TASK, payload: event.target.value });
   }
   return (
     <Input
