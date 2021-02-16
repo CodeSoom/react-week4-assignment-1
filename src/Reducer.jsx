@@ -1,6 +1,5 @@
-
-function AppReducer() {
+function reducer() {
 
 }
 
-export default AppReducer;
+export default reducer;
