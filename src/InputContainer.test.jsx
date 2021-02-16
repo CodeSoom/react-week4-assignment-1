@@ -3,7 +3,7 @@ import { render, fireEvent } from '@testing-library/react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import InputContainer from './InputContainer';
-import { ADD_TASK } from './actions';
+import { ADD_TASK, UPDATE_TASK } from './actions';
 
 jest.mock('react-redux');
 
@@ -33,5 +33,20 @@ describe('InputContainer', () => {
     fireEvent.click(getByText('추가'));
 
     expect(dispatch).toHaveBeenCalledWith({ type: ADD_TASK });
+  });
+
+  it('should dispatch UPDATE_TASK when input text', () => {
+    const dispatch = jest.fn();
+    useDispatch.mockImplementationOnce(() => dispatch);
+
+    const { getByPlaceholderText } = render((
+      <InputContainer />
+    ));
+
+    fireEvent.change(getByPlaceholderText('할 일을 입력해 주세요'), {
+      target: { value: '손씻기' },
+    });
+
+    expect(dispatch).toHaveBeenCalledWith({ type: UPDATE_TASK, payload: '손씻기' });
   });
 });
