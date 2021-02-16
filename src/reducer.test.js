@@ -10,7 +10,7 @@ describe('reducer', () => {
           taskTitle: '첫번째 할일',
           tasks: [],
         },
-        addTask()
+        addTask(),
       );
 
       expect(changedState.tasks).toHaveLength(1);
