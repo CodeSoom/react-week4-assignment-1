@@ -1,4 +1,4 @@
-import { addTask } from './actions';
+import { addTask, updateTask } from './actions';
 import reducer from './reducer';
 
 describe('reducer', () => {
@@ -18,7 +18,19 @@ describe('reducer', () => {
     });
   });
 
-  describe('updateTask', () => {});
+  describe('updateTask', () => {
+    it('taskTitle should be changed', () => {
+      const previousState = {
+        taskTitle: '',
+      };
+      const changedState = reducer(
+        previousState,
+        updateTask('두번째 할일'),
+      );
+
+      expect(changedState.taskTitle).toBe('두번째 할일');
+    });
+  });
 
   describe('deleteTask', () => {});
 });
