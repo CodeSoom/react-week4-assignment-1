@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "webpack-dev-server",
-    "test:unit": "jest",
+    "test:unit": "jest --watchAll",
     "coverage": "npm run test:unit -- --coverage",
     "test:e2e": "codeceptjs run --steps",
     "test": "npm run coverage && start-server-and-test start http://localhost:8080 test:e2e",
@@ -41,6 +41,8 @@
   "dependencies": {
     "@codeceptjs/configure": "^0.5.2",
     "react": "^16.13.1",
-    "react-dom": "^16.13.1"
+    "react-dom": "^16.13.1",
+    "react-redux": "^7.2.2",
+    "redux": "^4.0.5"
   }
 }
