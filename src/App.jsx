@@ -2,20 +2,26 @@ import React, { useState } from 'react';
 
 import Page from './Page';
 
+const initialState = {
+  newId: 100,
+  taskTitle: '',
+  tasks: [],
+};
+
+function updateTaskTitle(state, taskTitle) {
+  return {
+    ...state,
+    taskTitle,
+  };
+}
+
 export default function App() {
-  const [state, setState] = useState({
-    newId: 100,
-    taskTitle: '',
-    tasks: [],
-  });
+  const [state, setState] = useState(initialState);
 
   const { newId, taskTitle, tasks } = state;
 
   function handleChangeTitle(event) {
-    setState({
-      ...state,
-      taskTitle: event.target.value,
-    });
+    setState(updateTaskTitle(state, event.target.value));
   }
 
   function handleClickAddTask() {
