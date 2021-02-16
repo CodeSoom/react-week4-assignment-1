@@ -1,4 +1,4 @@
-import { addTask, updateTask } from './actions';
+import { addTask, updateTask, deleteTask } from './actions';
 import reducer from './reducer';
 
 describe('reducer', () => {
@@ -32,5 +32,20 @@ describe('reducer', () => {
     });
   });
 
-  describe('deleteTask', () => {});
+  describe('deleteTask', () => {
+    it('should be deleted seleted task', () => {
+      const previousState = {
+        newId: 100,
+        taskTitle: '',
+        tasks: [{ id: 1, title: '첫번째 할일' }, { id: 2, title: '두번째 할일' }],
+      };
+
+      const changedState = reducer(
+        previousState,
+        deleteTask(2),
+      );
+
+      expect(changedState.tasks).toHaveLength(1);
+    });
+  });
 });
