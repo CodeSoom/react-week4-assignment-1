@@ -1,5 +1,11 @@
 describe('reducer', () => {
-  const reducer = jest.fn();
+  const reducer = jest.fn((state, action) => {
+    const { taskTitle } = action;
+    return ({
+      ...state,
+      taskTitle,
+    });
+  });
 
   describe('should update task title', () => {
     const previousState = [{
