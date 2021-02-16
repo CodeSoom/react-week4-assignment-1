@@ -14,7 +14,7 @@ function ListContainer() {
 
   return (
     <List
-      tasks={[{ id: 1, title: '할일1' }]}
+      tasks={tasks}
       onClickDelete={handleClickDeleteTask}
     />
   );
