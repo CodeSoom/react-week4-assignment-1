@@ -5,7 +5,7 @@ const initialState = {
 };
 
 export default function reducer(state = initialState, action) {
-  return reducer.actionType[action.type](state, action) || reducer.actionType.default(state);
+  return reducer.actionType[action.type] ? reducer.actionType[action.type](state, action) : state;
 }
 
 reducer.actionType = {
@@ -33,5 +33,4 @@ reducer.actionType = {
       tasks: tasks.filter((task) => task.id !== id),
     };
   },
-  defalut: (state) => state,
 };
