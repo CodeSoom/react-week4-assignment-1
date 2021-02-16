@@ -1,16 +1,33 @@
 import React from 'react';
 
-import { render } from '@testing-library/react';
+import { render, fireEvent } from '@testing-library/react';
 
 import App from './App';
 
-test('App', () => {
-  const { getByText } = render((
-    <App />
-  ));
+/*
+TODO
+- App shows "추가"
+- App updates task title
+*/
 
-  expect(getByText(/추가/)).not.toBeNull();
+describe('App', () => {
+  it('shows "추가" text', () => {
+    const { getByText } = render((
+      <App />
+    ));
 
-  // TODO: 통합 테스트 코드 작성
-  // CodeceptJS => 실제 브라우저에서 사용자 테스트 실행 가능.
+    expect(getByText(/추가/)).not.toBeNull();
+  });
+
+  it('updates task title', () => {
+    const { getByLabelText, getByDisplayValue } = render((
+      <App />
+    ));
+
+    fireEvent.change(getByLabelText('할 일'), {
+      target: { value: 'task-1' },
+    });
+
+    expect(getByDisplayValue('task-1')).not.toBeNull();
+  });
 });
