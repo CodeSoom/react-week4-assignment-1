@@ -1,7 +1,8 @@
 describe('reducer', () => {
   it('should update task title', () => {
     const reducer = jest.fn((state, action) => {
-      const { taskTitle } = action;
+      const { payload } = action;
+      const { taskTitle } = payload;
       return ({
         ...state,
         taskTitle,
@@ -19,13 +20,17 @@ describe('reducer', () => {
 
     const action = {
       type: 'updateTaskTitle',
-      taskTitle: '늦게 잠들기',
+      payload: {
+        taskTitle: '늦게 잠들기',
+      },
     };
 
     const state = reducer(previousState, action);
 
-    console.log(state)
-
     expect(state.taskTitle).toBe('늦게 잠들기');
+  });
+
+  it('should add task', () => {
+    expect([{ id: 1, title: '일기 쓰기' }, { id: 2, title: '여행 가기' }]).toEqual(expect.arrayContaining(state.tasks));
   });
 });
