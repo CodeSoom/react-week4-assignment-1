@@ -3,18 +3,49 @@ import reducer from './reducer';
 
 describe('reducer', () => {
   describe('addtask', () => {
-    it('new task should be added to tasks ', () => {
-      const changedState = reducer(
-        {
-          newId: 100,
-          taskTitle: '첫번째 할일',
-          tasks: [],
-        },
-        addTask(),
-      );
+    context('with taskTitle', () => {
+      it('new task should be added to tasks ', () => {
+        const changedState = reducer(
+          {
+            newId: 100,
+            taskTitle: '첫번째 할일',
+            tasks: [],
+          },
+          addTask(),
+        );
 
-      expect(changedState.tasks).toHaveLength(1);
-      expect(changedState.tasks[0].title).toBe('첫번째 할일');
+        expect(changedState.tasks).toHaveLength(1);
+        expect(changedState.tasks[0].id).not.toBeUndefined();
+        expect(changedState.tasks[0].title).toBe('첫번째 할일');
+      });
+
+      it('taskTitle should be removed when added new tasks ', () => {
+        const changedState = reducer(
+          {
+            newId: 100,
+            taskTitle: '첫번째 할일',
+            tasks: [],
+          },
+          addTask(),
+        );
+
+        expect(changedState.taskTitle).toBe('');
+      });
+    });
+
+    context('without taskTitle', () => {
+      it('should not change nothing', () => {
+        const changedState = reducer(
+          {
+            newId: 100,
+            taskTitle: '',
+            tasks: [],
+          },
+          addTask(),
+        );
+
+        expect(changedState.tasks).toHaveLength(0);
+      });
     });
   });
 
