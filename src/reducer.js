@@ -21,11 +21,8 @@ export default function reducer(state = initialState, action) {
     return { ...state, taskTitle: action.payload };
   }
   if (action.type === DELETE_TASK) {
-    return {
-      newId: 100,
-      taskTitle: '',
-      tasks: [{ id: 1, title: '첫번째 할일' }],
-    };
+    const { tasks } = state;
+    return { ...state, tasks: tasks.filter((task) => task.id !== action.payload) };
   }
   return state;
 }
