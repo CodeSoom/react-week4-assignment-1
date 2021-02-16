@@ -12,10 +12,13 @@ function InputContainer() {
     dispatch({ type: ADD_TASK });
   }
 
+  function handleClickTaskTitle() {
+    dispatch({ payload: '손씻기', type: 'UPDATE_TASK' });
+  }
   return (
     <Input
       value={taskTitle}
-      onChange={() => {}}
+      onChange={handleClickTaskTitle}
       onClick={handleClickAddTask}
     />
   );
