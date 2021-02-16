@@ -4,14 +4,6 @@ import { render, fireEvent } from '@testing-library/react';
 
 import App from './App';
 
-/*
-TODO
-- App shows "추가"
-- App updates task title
-- App adds task
-- App deletes task
-*/
-
 describe('App', () => {
   function renderApp() {
     return render((
