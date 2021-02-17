@@ -15,6 +15,7 @@ test('App', () => {
   ];
 
   useSelector.mockImplementation((selector) => selector({
+    taskTitle: '',
     tasks,
   }));
 
@@ -23,4 +24,5 @@ test('App', () => {
   ));
 
   expect(getByText(/추가/)).not.toBeNull();
+  expect(getByText(/뭐라도 하기 #1/)).not.toBeNull();
 });
