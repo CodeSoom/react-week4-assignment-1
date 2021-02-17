@@ -16,16 +16,24 @@ describe('InputContainer', () => {
 
     useSelector.mockImplementation((selector) => selector({ taskTitle: '할일 입력값' }));
 
-    const { getByPlaceholderText } = render((
-      <InputContainer />
-    ));
+    const { getByPlaceholderText } = render(
+      <InputContainer />,
+    );
 
-    fireEvent.change(getByPlaceholderText(/할 일을 입력해 주세요/),
+    fireEvent.change(getByPlaceholderText('할 일을 입력해 주세요'), {
+      target: {
+        value: '커버리지 채우기',
+      },
+    });
+
+    expect(dispatch).toBeCalledWith(
       {
-        terget: {
-          value: '수영하기',
+        type: 'updateTaskTitle',
+        payload: {
+          taskTitle: '커버리지 채우기',
         },
-      });
+      },
+    );
   });
 
   it(' 할일을 추가한다. ', () => {
