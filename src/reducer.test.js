@@ -20,7 +20,8 @@ describe('reducer', () => {
       taskTitle: '',
       tasks: [],
     };
-    it('returns new state with new task title', () => {
+
+    it('changes task title', () => {
       const state = reducer(previousState, updateTaskTitle('new-title'));
 
       expect(state.taskTitle).toBe('new-title');
@@ -33,6 +34,7 @@ describe('reducer', () => {
       taskTitle: '',
       tasks: [],
     };
+
     it('adds new task', () => {
       const state = reducer(previousState, addTask());
 
@@ -48,6 +50,7 @@ describe('reducer', () => {
         { id: 1, taskTitle: 'task to be deleted' },
       ],
     };
+
     it('deletes new task', () => {
       const state = reducer(previousState, deleteTask(1));
 
