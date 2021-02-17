@@ -8,7 +8,7 @@ import ListContainer from './ListContainer';
 
 jest.mock('react-redux');
 
-describe('deleteTask', () => {
+describe('ListContainer', () => {
   const dispatch = jest.fn();
 
   beforeEach(() => jest.clearAllMocks());
