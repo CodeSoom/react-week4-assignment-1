@@ -10,4 +10,26 @@ describe('reducer', () => {
 
     expect(state.taskTitle).toBe('할 일');
   });
+
+  it('할 일을 추가합니다.', () => {
+    const state = reducer({
+      newId: 0,
+      taskTitle: '',
+      tasks: [],
+    },
+    {
+      type: 'addTask',
+      payload: {
+        newId: 1,
+        taskTitle: '할 일1',
+        tasks: [{
+          id: this.newId,
+          title: this.taskTitle,
+        }],
+      },
+    });
+
+    expect(state.taskTitle).toBe('할 일1');
+    expect(state.tasks).toHaveLength(1);
+  });
 });
