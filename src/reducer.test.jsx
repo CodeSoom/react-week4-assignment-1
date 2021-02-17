@@ -28,13 +28,17 @@ describe('reducer', () => {
   });
 
   describe('addTask', () => {
+    function reduceAddTask(taskTitle) {
+      return reducer({
+        newId: 100,
+        taskTitle,
+        tasks: [],
+      }, addTask());
+    }
+
     context('taskTitle이 있을 때', () => {
       it(' 할일을 추가한다. ', () => {
-        const state = reducer({
-          newId: 100,
-          taskTitle: 'New Title',
-          tasks: [],
-        }, addTask());
+        const state = reduceAddTask('New Title');
 
         expect(state.tasks).toHaveLength(1);
         expect(state.tasks[0].id).not.toBeUndefined();
@@ -45,11 +49,7 @@ describe('reducer', () => {
 
     context('taskTitle이 없을 때', () => {
       it(' 아무일도 일어나지 않는다. ', () => {
-        const state = reducer({
-          newId: 100,
-          taskTitle: '',
-          tasks: [],
-        }, addTask());
+        const state = reduceAddTask('');
 
         expect(state.tasks).toHaveLength(0);
       });
