@@ -71,4 +71,23 @@ describe('reducer', () => {
       expect(state.tasks).toHaveLength(0);
     });
   });
+
+  describe('unregisteredAction', () => {
+    const previousState = {
+      newId: 100,
+      taskTitle: '',
+      tasks: [],
+    };
+
+    it('does nothing', () => {
+      const state = reducer(previousState, {
+        type: 'unregistered',
+        payload: {
+          id: 100,
+        },
+      });
+
+      expect(state).toEqual(previousState);
+    });
+  });
 });
