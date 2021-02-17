@@ -11,4 +11,17 @@ describe('reducer', () => {
       expect(state.taskTitle).toBe('홈트하기');
     });
   });
+
+  describe('addTask', () => {
+    it('returns new state with new task title', () => {
+      const state = reducer({
+        taskTitle: 'New Task',
+        tasks: [],
+      }, {
+        type: 'addTask',
+      });
+
+      expect(state.tasks).toHaveLength(1);
+    });
+  });
 });

@@ -39,5 +39,7 @@ describe('InputContainer', () => {
     expect(dispatch).toBeCalledWith({
       type: 'addTask',
     });
+
+    expect(getByText('New Title')).not.toBeNull();
   });
 });
