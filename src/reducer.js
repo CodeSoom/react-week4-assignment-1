@@ -5,16 +5,13 @@ export const initialState = {
 };
 
 export default function reducer(state = initialState, action = { type: '' }) {
-  if (action.type === 'addNewTask') {
-    return (
-      state.taskTitle ? ({
-        ...state,
-        id: state.id + 1,
-        taskTitle: '',
-        tasks: [...state.tasks, { id: state.id, title: state.taskTitle }],
-      })
-        : state
-    );
+  if (action.type === 'addNewTask' && state.taskTitle) {
+    return ({
+      ...state,
+      id: state.id + 1,
+      taskTitle: '',
+      tasks: [...state.tasks, { id: state.id, title: state.taskTitle }],
+    });
   }
 
   if (action.type === 'updateInput') {

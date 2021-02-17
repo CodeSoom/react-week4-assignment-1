@@ -1,15 +1,15 @@
-export function addAction() {
+export function addTask() {
   return { type: 'addNewTask' };
 }
 
-export function deleteAction(id) {
+export function deleteTask(id) {
   return {
     type: 'deleteCompleteTask',
     payload: { id },
   };
 }
 
-export function updateAction(taskTitle) {
+export function updateTaskTitle(taskTitle) {
   return {
     type: 'updateInput',
     payload: { taskTitle },

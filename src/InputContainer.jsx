@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import Input from './Input';
 
-import { updateAction, addAction } from './actions';
+import { updateTaskTitle, addTask } from './actions';
 
 export default function InputContainer() {
   const dispatch = useDispatch();
@@ -13,11 +13,11 @@ export default function InputContainer() {
   }));
 
   function handleChangeInput(e) {
-    dispatch(updateAction(e.target.value));
+    dispatch(updateTaskTitle(e.target.value));
   }
 
   function handleClickAdd() {
-    dispatch(addAction());
+    dispatch(addTask());
   }
 
   return (
