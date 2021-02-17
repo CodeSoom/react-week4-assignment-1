@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { render, fireEvent, getByDisplayValue } from '@testing-library/react';
+import { render, fireEvent } from '@testing-library/react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -16,7 +16,7 @@ test('InputContainer', () => {
   useSelector.mockImplementation((selector) => selector({
     taskTitle: 'New Title',
   }));
-  const { getByText } = render((
+  const { getByText, getByDisplayValue } = render((
     <InputContainer />
   ));
 
