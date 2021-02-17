@@ -8,7 +8,8 @@ import {
 
 describe('reducer', () => {
   it('sets state as default parameter', () => {
-    const state = reducer(undefined, addTask());
+    const state = reducer();
+
     const { newId, taskTitle, tasks } = state;
 
     expect(newId).toBe(100);
@@ -16,11 +17,11 @@ describe('reducer', () => {
     expect(tasks).toHaveLength(0);
   });
 
-  context('when action type is null', () => {
+  context('without action type', () => {
     it("doesn't change state", () => {
       const state = reducer({
         taskTitle: '안녕',
-      }, { type: null });
+      }, undefined);
 
       expect(state.taskTitle).toBe('안녕');
     });
