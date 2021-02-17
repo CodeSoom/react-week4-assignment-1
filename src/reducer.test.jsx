@@ -37,7 +37,7 @@ describe('reducer', () => {
     }
 
     context('taskTitle이 있을 때', () => {
-      it(' 할일을 추가한다. ', () => {
+      it(' 할일을 추가하고 taskTitle을 지운다. ', () => {
         const state = reduceAddTask('New Title');
 
         expect(state.tasks).toHaveLength(1);
