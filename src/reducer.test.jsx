@@ -1,22 +1,38 @@
 describe('reducer', () => {
-  it('should update task title', () => {
-    const reducer = jest.fn((state, action) => {
-      const { payload } = action;
+  function reducer(state, action) {
+    const { type, payload } = action;
+
+    if (type === 'updateTaskTitle') {
       const { taskTitle } = payload;
       return ({
         ...state,
         taskTitle,
       });
-    });
+    }
 
-    const previousState = [{
-      newId: 100,
+    if (type === 'addTask') {
+      const { newId, tasks } = state;
+      const { newTitle } = payload;
+      return ({
+        ...state,
+        newId: newId + 1,
+        taskTitle: '',
+        tasks: [...tasks, { id: newId + 1, title: newTitle }],
+      });
+    }
+
+    return state;
+  }
+
+  it('should update task title', () => {
+    const previousState = {
+      newId: 1,
       taskTitle: '',
       tasks: [{
         id: 0,
         title: '일찍 잠들기',
       }],
-    }];
+    };
 
     const action = {
       type: 'updateTaskTitle',
@@ -31,6 +47,24 @@ describe('reducer', () => {
   });
 
   it('should add task', () => {
+    const previousState = {
+      newId: 1,
+      taskTitle: '',
+      tasks: [{
+        id: 1,
+        title: '일기 쓰기',
+      }],
+    };
+
+    const action = {
+      type: 'addTask',
+      payload: {
+        newTitle: '여행 가기',
+      },
+    };
+
+    const state = reducer(previousState, action);
+
     expect([{ id: 1, title: '일기 쓰기' }, { id: 2, title: '여행 가기' }]).toEqual(expect.arrayContaining(state.tasks));
   });
 });
