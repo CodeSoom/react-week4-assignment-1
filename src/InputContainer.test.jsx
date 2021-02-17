@@ -20,11 +20,12 @@ describe('InputContainer', () => {
       <InputContainer />
     ));
 
-    fireEvent.change(getByPlaceholderText(/할 일을 입력해 주세요/),{
-      terget: {
-        value: '수영하기',
-      },
-    });
+    fireEvent.change(getByPlaceholderText(/할 일을 입력해 주세요/),
+      {
+        terget: {
+          value: '수영하기',
+        },
+      });
   });
 
   it(' 할일을 추가한다. ', () => {

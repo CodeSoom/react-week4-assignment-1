@@ -34,7 +34,7 @@ describe('ListContainer', () => {
 
   it(' 할일을 삭제한다. ', () => {
     useDispatch.mockImplementationOnce(() => dispatch);
-    useSelector.mockImplementation((selector) => selector({ 
+    useSelector.mockImplementation((selector) => selector({
       tasks: [{ id: 1, taskTitle: '할일' }],
     }));
 
