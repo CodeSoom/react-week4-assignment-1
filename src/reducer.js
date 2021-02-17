@@ -29,8 +29,9 @@ const reducers = {
       tasks: tasks.filter((task) => task.id !== id),
     };
   },
+  default: (state) => state,
 };
 
-export default function reducer(state = initialState, action = { type: undefined }) {
-  return reducers[action.type] ? reducers[action.type](state, action) : state;
+export default function reducer(state = initialState, action = { type: 'default' }) {
+  return reducers[action.type](state, action);
 }
