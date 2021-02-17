@@ -1,16 +1,8 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { updateTaskTitle } from './action';
 
 import Page from './Page';
-
-function updateTaskTitle(taskTitle) {
-  return {
-    type: 'updateTaskTitle',
-    payload: {
-      taskTitle,
-    },
-  };
-}
 
 function addTask(state) {
   const { newId, tasks, taskTitle } = state;
