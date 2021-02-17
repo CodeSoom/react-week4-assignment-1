@@ -4,20 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import Input from './Input';
 
-function updateTaskTitle(taskTitle) {
-  return {
-    type: 'updateTaskTitle',
-    payload: {
-      taskTitle,
-    },
-  };
-}
-
-function addTask() {
-  return {
-    type: 'addTask',
-  };
-}
+import { updateTaskTitle, addTask } from './actions';
 
 export default function InputContainer() {
   const { taskTitle } = useSelector((state) => ({
