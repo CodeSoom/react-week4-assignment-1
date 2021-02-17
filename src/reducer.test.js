@@ -27,7 +27,7 @@ describe('reducer', () => {
     it('returns new state with a new task', () => {
       const state = reducer({
         tasks: [{ id: 1, title: 'Task-1' }],
-      }, deleteTask());
+      }, deleteTask(1));
 
       expect(state.tasks).toHaveLength(0);
     });
