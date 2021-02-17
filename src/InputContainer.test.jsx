@@ -13,11 +13,15 @@ describe('InputContainer', () => {
 
   const dispatch = jest.fn();
 
-  useSelector.mockImplementation((selector) => selector({
-    taskTitle: 'TDD는 언제나 새롭다',
-  }));
+  beforeEach(() => {
+    jest.clearAllMocks();
 
-  beforeEach(() => jest.clearAllMocks());
+    useSelector.mockImplementation((selector) => selector({
+      taskTitle: 'TDD는 언제나 새롭다',
+    }));
+
+    useDispatch.mockImplementation(() => dispatch);
+  });
 
   it('renders title', () => {
     const { getByDisplayValue } = renderInputContainer();
@@ -26,18 +30,17 @@ describe('InputContainer', () => {
   });
 
   it('updates value upon changing of input value', () => {
-    useDispatch.mockImplementation(() => dispatch);
-
     const { getByDisplayValue } = renderInputContainer();
 
-    fireEvent.change(getByDisplayValue(/TDD는 언제나 새롭다/), { target: { value: '거짓말 아님' } });
+    fireEvent.change(getByDisplayValue(/TDD는 언제나 새롭다/),
+      {
+        target: { value: '거짓말 아님' },
+      });
 
     expect(dispatch).toBeCalledWith(updateTaskTitle('거짓말 아님'));
   });
 
   it('adds a task to tasks upon Clicking 추가 button', () => {
-    useDispatch.mockImplementation(() => dispatch);
-
     const { getByText } = renderInputContainer();
 
     fireEvent.click(getByText(/추가/));
