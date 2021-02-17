@@ -9,8 +9,11 @@ import ListContainer from './ListContainer';
 jest.mock('react-redux');
 
 describe('deleteTask', () => {
+  const dispatch = jest.fn();
+
+  beforeEach(() => jest.clearAllMocks());
+
   it(' 할일을 보여준다. ', () => {
-    const dispatch = jest.fn();
     useDispatch.mockImplementation(() => (dispatch));
 
     const tasks = [
@@ -29,17 +32,18 @@ describe('deleteTask', () => {
     expect(getByText(/뭐라도 하기 #1/)).not.toBeNull();
   });
 
-  // it(' 할일을 삭제한다. ', () => {
-  //   const dispatch = jest.fn();
-  //   useDispatch.mockImplementationOnce(() => dispatch);
-  //   useSelector.mockImplementation((selector) => selector({ 
-  //     tasks: [{ id: 1, taskTitle: '할일' }],
-  //   }));
+  it(' 할일을 삭제한다. ', () => {
+    useDispatch.mockImplementationOnce(() => dispatch);
+    useSelector.mockImplementation((selector) => selector({ 
+      tasks: [{ id: 1, taskTitle: '할일' }],
+    }));
 
-  //   const { getByText } = render(<ListContainer />);
+    const { getByText } = render(<ListContainer />);
 
-  //   fireEvent.click(getByText('완료'));
+    expect(getByText(/완료/)).not.toBeNull();
 
-  //   expect(dispatch).toBeCalled();
-  // });
+    fireEvent.click(getByText(/완료/));
+
+    expect(dispatch).toBeCalled();
+  });
 });
