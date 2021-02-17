@@ -47,12 +47,24 @@ describe('reducer', () => {
   });
 
   describe('deleteTask', () => {
-    it('returns new state with a new task', () => {
-      const state = reducer({
-        tasks: [{ id: 1, title: 'Task-1' }],
-      }, deleteTask(1));
+    context('with existed task ID', () => {
+      it('remove the task from task', () => {
+        const state = reducer({
+          tasks: [{ id: 1, title: 'Task-1' }],
+        }, deleteTask(1));
 
-      expect(state.tasks).toHaveLength(0);
+        expect(state.tasks).toHaveLength(0);
+      });
+    });
+
+    context('without existed task ID', () => {
+      it("doesn't work", () => {
+        const state = reducer({
+          tasks: [{ id: 1, title: 'Task-1' }],
+        }, deleteTask(100));
+
+        expect(state.tasks).toHaveLength(1);
+      });
     });
   });
 });
