@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { render, fireEvent } from '@testing-library/react';
+import { render } from '@testing-library/react';
 
 import { useSelector, useDispatch } from 'react-redux';
 
@@ -31,57 +31,5 @@ describe('App', () => {
     const { getByText } = renderApp();
 
     expect(getByText(/추가/)).not.toBeNull();
-  });
-
-  it('updates task title', () => {
-    const { getByLabelText } = render((
-      <App />
-    ));
-
-    fireEvent.change(getByLabelText('할 일'), {
-      target: { value: 'task-1' },
-    });
-
-    expect(dispatch).toBeCalledWith(
-      {
-        type: 'updateTaskTitle',
-        payload: {
-          taskTitle: 'task-1',
-        },
-      },
-    );
-  });
-
-  it('adds task', () => {
-    const { getByLabelText, getByText } = render((
-      <App />
-    ));
-
-    fireEvent.change(getByLabelText('할 일'), {
-      target: { value: 'task-1' },
-    });
-
-    fireEvent.click(getByText(/추가/));
-
-    expect(dispatch).toBeCalledWith({ type: 'addTask' });
-  });
-
-  it('deletes task', () => {
-    const { getByLabelText, getByText } = render((
-      <App />
-    ));
-
-    fireEvent.change(getByLabelText('할 일'), {
-      target: { value: 'task-1' },
-    });
-
-    fireEvent.click(getByText(/추가/));
-
-    fireEvent.click(getByText(/완료/));
-
-    expect(dispatch).toBeCalledWith({
-      type: 'deleteTask',
-      payload: { id: 1 },
-    });
   });
 });
