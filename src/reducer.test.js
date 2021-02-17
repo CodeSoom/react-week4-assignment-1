@@ -29,16 +29,30 @@ describe('reducer', () => {
   });
 
   describe('addTask', () => {
-    const previousState = {
-      newId: 100,
-      taskTitle: '',
-      tasks: [],
-    };
-
     it('adds new task', () => {
+      const previousState = {
+        newId: 100,
+        taskTitle: 'new-title',
+        tasks: [],
+      };
+
       const state = reducer(previousState, addTask());
 
       expect(state.tasks).toHaveLength(1);
+    });
+
+    context('with empty task title', () => {
+      const previousState = {
+        newId: 100,
+        taskTitle: '',
+        tasks: [],
+      };
+
+      it('does not add new task', () => {
+        const state = reducer(previousState, addTask());
+
+        expect(state.tasks).toHaveLength(0);
+      });
     });
   });
 
