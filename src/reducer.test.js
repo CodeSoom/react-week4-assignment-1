@@ -2,11 +2,13 @@ import reducer from './reducer';
 
 import {
   updateTaskTitle,
+  addTask,
 } from './actions';
 
 /*
 TODO
-- update task title =>
+- update task title
+- add task
 */
 
 describe('reducer', () => {
@@ -20,6 +22,19 @@ describe('reducer', () => {
       const state = reducer(previousState, updateTaskTitle('new-title'));
 
       expect(state.taskTitle).toBe('new-title');
+    });
+  });
+
+  describe('addTask', () => {
+    const previousState = {
+      newId: 100,
+      taskTitle: '',
+      tasks: [],
+    };
+    it('adds new task', () => {
+      const state = reducer(previousState, addTask());
+
+      expect(state.tasks).toHaveLength(1);
     });
   });
 });
