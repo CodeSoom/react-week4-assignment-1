@@ -5,35 +5,36 @@ const initialState = {
 };
 
 export default function reducer(state = initialState, action) {
-  if (action.type === 'updateTaskTitle') {
-    return {
-      ...state,
-      taskTitle: action.payload.taskTitle,
-    };
-  }
-
-  if (action.type === 'addTask') {
-    const { newId, taskTitle, tasks } = state;
-
-    if (!taskTitle) {
-      return state;
+  if (action) {
+    if (action.type === 'updateTaskTitle') {
+      return {
+        ...state,
+        taskTitle: action.payload.taskTitle,
+      };
     }
 
-    return {
-      ...state,
-      newId: newId + 1,
-      taskTitle: '',
-      tasks: [...tasks, { id: newId, title: taskTitle }],
-    };
-  }
+    if (action.type === 'addTask') {
+      const { newId, taskTitle, tasks } = state;
 
-  if (action.type === 'deleteTask') {
-    const { tasks } = state;
-    return {
-      ...state,
-      tasks: tasks.filter((task) => task.id !== action.payload.id),
-    };
-  }
+      if (!taskTitle) {
+        return state;
+      }
 
+      return {
+        ...state,
+        newId: newId + 1,
+        taskTitle: '',
+        tasks: [...tasks, { id: newId, title: taskTitle }],
+      };
+    }
+
+    if (action.type === 'deleteTask') {
+      const { tasks } = state;
+      return {
+        ...state,
+        tasks: tasks.filter((task) => task.id !== action.payload.id),
+      };
+    }
+  }
   return state;
 }
