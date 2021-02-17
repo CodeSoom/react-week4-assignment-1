@@ -2,25 +2,30 @@ import React from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
-import List from './List';
+import Input from './Input';
 
-import { deleteTask } from './actions';
+import { updateTaskTitle, addTask } from './actions';
 
-export default function ListContainer() {
+export default function InputContainer() {
   const dispatch = useDispatch();
 
-  const { tasks } = useSelector((state) => ({
-    tasks: state.tasks,
+  const { taskTitle } = useSelector((state) => ({
+    taskTitle: state.taskTitle,
   }));
 
-  function handleClickDeleteTask(id) {
-    dispatch(deleteTask(id));
+  function handleChangeTitle(event) {
+    dispatch(updateTaskTitle(event.target.value));
+  }
+
+  function handleClickAddTask() {
+    dispatch(addTask());
   }
 
   return (
-    <List
-      tasks={tasks}
-      onClickDeleteTask={handleClickDeleteTask}
+    <Input
+      value={taskTitle}
+      onChange={handleChangeTitle}
+      onClick={handleClickAddTask}
     />
   );
 }
