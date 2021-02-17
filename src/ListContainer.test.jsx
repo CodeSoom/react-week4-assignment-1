@@ -20,15 +20,9 @@ describe('ListContainer', () => {
   }));
 
   it('deletes task', () => {
-    const { getByLabelText, getByText } = render((
+    const { getByText } = render((
       <ListContainer />
     ));
-
-    fireEvent.change(getByLabelText('할 일'), {
-      target: { value: 'task-1' },
-    });
-
-    fireEvent.click(getByText(/추가/));
 
     fireEvent.click(getByText(/완료/));
 
