@@ -8,23 +8,41 @@ import InputContainer from './InputContainer';
 
 jest.mock('react-redux');
 
-test('InputContainer', () => {
+describe('InputContainer', () => {
   const dispatch = jest.fn();
 
-  useDispatch.mockImplementation(() => (dispatch));
+  it(' 할일을 입력한다. ', () => {
+    useDispatch.mockImplementation(() => (dispatch));
 
-  useSelector.mockImplementation((selector) => selector({ taskTitle: '할일 입력' }));
+    useSelector.mockImplementation((selector) => selector({ taskTitle: '할일 입력값' }));
 
-  const { getByText, getByDisplayValue } = render((
-    <InputContainer />
-  ));
+    const { getByPlaceholderText } = render((
+      <InputContainer />
+    ));
 
-  expect(getByText(/추가/)).not.toBeNull();
-  expect(getByDisplayValue(/할일 입력/)).not.toBeNull();
+    fireEvent.change(getByPlaceholderText(/할 일을 입력해 주세요/),{
+      terget: {
+        value: '수영하기',
+      },
+    });
+  });
 
-  fireEvent.click(getByText(/추가/));
+  it(' 할일을 추가한다. ', () => {
+    useDispatch.mockImplementation(() => (dispatch));
 
-  expect(dispatch).toBeCalledWith({ type: 'addTask' });
+    useSelector.mockImplementation((selector) => selector({ taskTitle: '할일 입력' }));
 
-  expect(getByDisplayValue('할일 입력')).toBeInTheDocument();
+    const { getByText, getByDisplayValue } = render((
+      <InputContainer />
+    ));
+
+    expect(getByText(/추가/)).not.toBeNull();
+    expect(getByDisplayValue(/할일 입력/)).not.toBeNull();
+
+    fireEvent.click(getByText(/추가/));
+
+    expect(dispatch).toBeCalledWith({ type: 'addTask' });
+
+    expect(getByDisplayValue('할일 입력')).toBeInTheDocument();
+  });
 });
