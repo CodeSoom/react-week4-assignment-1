@@ -1,4 +1,4 @@
-import { updateTaskTitle } from './action';
+import { addTask, updateTaskTitle } from './action';
 import reducer from './reducer';
 
 describe('reducer', () => {
@@ -17,9 +17,7 @@ describe('reducer', () => {
       const state = reducer({
         taskTitle: 'New Task',
         tasks: [],
-      }, {
-        type: 'addTask',
-      });
+      }, addTask());
 
       expect(state.tasks).toHaveLength(1);
     });
