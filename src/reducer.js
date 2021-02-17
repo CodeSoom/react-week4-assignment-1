@@ -10,11 +10,19 @@ export default function reducer(state = initialState, action) {
       ...state,
       taskTitle: action.payload.taskTitle,
     }),
-    addTask: () => ({
-      newId: state.newId + 1,
-      taskTitle: '',
-      tasks: [...state.tasks, { id: state.newId, title: state.taskTitle }],
-    }),
+
+    addTask: () => {
+      if (!state.taskTitle) {
+        return state;
+      }
+
+      return {
+        newId: state.newId + 1,
+        taskTitle: '',
+        tasks: [...state.tasks, { id: state.newId, title: state.taskTitle }],
+      };
+    },
+
     deleteTask: () => ({
       ...state,
       tasks: state.tasks.filter((task) => task.id !== action.payload.id),

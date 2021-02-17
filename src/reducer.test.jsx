@@ -31,11 +31,13 @@ describe('reducer', () => {
     context('taskTitle이 있을 때', () => {
       it(' 할일을 추가한다. ', () => {
         const state = reducer({
+          newId: 100,
           taskTitle: 'New Title',
           tasks: [],
         }, addTask());
 
         expect(state.tasks).toHaveLength(1);
+        expect(state.tasks[0].id).not.toBeUndefined();
         expect(state.tasks[0].title).toBe('New Title');
         expect(state.taskTitle).toBe('');
       });
@@ -44,6 +46,7 @@ describe('reducer', () => {
     context('taskTitle이 없을 때', () => {
       it(' 아무일도 일어나지 않는다. ', () => {
         const state = reducer({
+          newId: 100,
           taskTitle: '',
           tasks: [],
         }, addTask());
