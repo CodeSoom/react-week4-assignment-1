@@ -6,13 +6,6 @@ import {
   deleteTask,
 } from './actions';
 
-/*
-TODO
-- update task title
-- add task
-- delete task
-*/
-
 describe('reducer', () => {
   describe('updateTaskTitle', () => {
     const previousState = {
