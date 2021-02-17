@@ -13,7 +13,7 @@ describe('reducer', () => {
   });
 
   describe('addTask', () => {
-    it('returns new state with new task title', () => {
+    it('returns new state with a new task', () => {
       const state = reducer({
         taskTitle: 'New Task',
         tasks: [],
