@@ -23,13 +23,36 @@ describe('reducer', () => {
         newId: 1,
         taskTitle: '할 일1',
         tasks: [{
-          id: this.newId,
-          title: this.taskTitle,
+          id: 1,
+          title: '할 일1',
         }],
       },
     });
 
+    expect(state.newId).toBe(1);
     expect(state.taskTitle).toBe('할 일1');
     expect(state.tasks).toHaveLength(1);
+  });
+
+  it('완료한 일을 삭제합니다.', () => {
+    const state = reducer({
+      newId: 1,
+      taskTitle: '할 일1',
+      tasks: [{
+        id: 1,
+        title: '할 일1',
+      }],
+    },
+    {
+      type: 'delteTask',
+      payload: {
+        newId: 0,
+        taskTitle: '',
+        tasks: [],
+      },
+    });
+
+    expect(state.taskTitle).toBe('할 일1');
+    expect(state.tasks).toHaveLength(0);
   });
 });
