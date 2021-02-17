@@ -4,11 +4,7 @@ const initialState = {
   tasks: [],
 };
 
-export default function reducer(state = initialState, action) {
-  return reducer.actionType[action.type] ? reducer.actionType[action.type](state, action) : state;
-}
-
-reducer.actionType = {
+const reducers = {
   updateTaskTitle: (state, { payload: { taskTitle } }) => ({
     ...state,
     taskTitle,
@@ -34,3 +30,7 @@ reducer.actionType = {
     };
   },
 };
+
+export default function reducer(state = initialState, action) {
+  return reducers[action.type] ? reducers[action.type](state, action) : state;
+}
