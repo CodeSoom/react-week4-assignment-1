@@ -10,7 +10,7 @@ jest.mock('react-redux');
 
 describe('App', () => {
   context('with no tasks', () => {
-    it('show "할 일이 없어요".', () => {
+    it('shows "할 일이 없어요".', () => {
       useSelector.mockImplementation((selector) => selector({
         tasks: [],
       }));
@@ -23,16 +23,16 @@ describe('App', () => {
   });
 
   context('with tasks', () => {
-    it('show tasks', () => {
+    it('shows tasks', () => {
       useSelector.mockImplementation((selector) => selector({
         tasks: [
           { id: 1, title: '기모찌' },
         ],
       }));
-      const { getByText } = render((
+      const { queryByText } = render((
         <App />
       ));
-      expect(getByText(/기모찌/)).not.toBeNull();
+      expect(queryByText(/기모찌/)).not.toBeNull();
     });
   });
 });
