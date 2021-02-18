@@ -1,32 +1,14 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
 import Page from './Page';
 
-function updateTaskTitle(state, taskTitle) {
-  return {
-    type: 'updateTaskTitle',
-    payload: {
-      taskTitle,
-    },
-  };
-}
-
-function addTask() {
-  return {
-    type: 'addTask',
-  };
-}
-
-function deleteTask(id) {
-  return {
-    type: 'deleteTask',
-    payload: {
-      id,
-    },
-  };
-}
+import {
+  updateTaskTitle,
+  addTask,
+  deleteTask,
+} from './actions';
 
 export default function App() {
   const dispatch = useDispatch();
