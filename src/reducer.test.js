@@ -34,9 +34,7 @@ describe('reducer', () => {
         newId: 0,
         taskTitle: '',
         tasks: [],
-      }, {
-        type: 'addTask',
-      });
+      }, addTask());
 
       expect(state.tasks).toHaveLength(0);
     });
