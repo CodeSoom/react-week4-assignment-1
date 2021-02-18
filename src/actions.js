@@ -9,6 +9,15 @@ export function updateTaskTitle(taskTitle) {
 
 export function addTask() {
   return {
-    type: 'taskTitle',
+    type: 'addTask',
+  };
+}
+
+export function deleteTask(id) {
+  return {
+    type: 'deleteTask',
+    payload: {
+      id,
+    },
   };
 }
