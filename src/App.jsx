@@ -8,16 +8,20 @@ const initalState = {
   tasks: [],
 };
 
+function updateTaskTitle(state, taskTitle) {
+  return {
+    ...state,
+    taskTitle,
+  };
+}
+
 export default function App() {
   const [state, setState] = useState(initalState);
 
   const { newId, taskTitle, tasks } = state;
 
   function handleChangeTitle(event) {
-    setState({
-      ...state,
-      taskTitle: event.target.value,
-    });
+    setState(updateTaskTitle(state, event.target.value));
   }
 
   function handleClickAddTask() {
