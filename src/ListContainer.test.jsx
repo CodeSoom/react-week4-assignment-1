@@ -8,6 +8,8 @@ import ListContainer from './ListContainer';
 jest.mock('react-redux');
 
 beforeEach(() => {
+  jest.clearAllMocks();
+
   const tasks = [
     { id: 1, title: 'Task-1' },
   ];
@@ -15,8 +17,6 @@ beforeEach(() => {
   useSelector.mockImplementation((selector) => selector({
     tasks,
   }));
-
-  jest.clearAllMocks();
 });
 
 describe('ListContainer', () => {
