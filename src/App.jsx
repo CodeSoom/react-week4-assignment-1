@@ -2,12 +2,14 @@ import React, { useState } from 'react';
 
 import Page from './Page';
 
+const initalState = {
+  newId: 100,
+  taskTitle: '',
+  tasks: [],
+};
+
 export default function App() {
-  const [state, setState] = useState({
-    newId: 100,
-    taskTitle: '',
-    tasks: [],
-  });
+  const [state, setState] = useState(initalState);
 
   const { newId, taskTitle, tasks } = state;
 
