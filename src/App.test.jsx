@@ -8,17 +8,26 @@ import App from './App';
 
 jest.mock('react-redux');
 
-test('App', () => {
-  useSelector.mockImplementation((selector) => selector({
-    tasks: [
-      { id: 1, tasks: 'TDD 졸잼...' },
-      { id: 2, tasks: 'TDD 진짜 재밌다...' },
-    ],
-  }));
+describe('App', () => {
+  const renderApp = () => (render(<App />));
 
-  const { getByText } = render((
-    <App />
-  ));
+  beforeEach(() => {
+    jest.clearAllMocks();
 
-  expect(getByText(/추가/)).not.toBeNull();
+    useSelector.mockImplementation((selector) => selector({
+      taskTitle: 'PDD',
+      tasks: [
+        { id: 1, title: 'TDD 졸잼...' },
+        { id: 2, title: 'TDD 진짜 재밌다...' },
+      ],
+    }));
+  });
+
+  it('renders state', () => {
+    const { getByText, getByDisplayValue } = renderApp();
+
+    expect(getByDisplayValue(/PDD/)).not.toBeNull();
+    expect(getByText(/TDD 졸잼.../)).not.toBeNull();
+    expect(getByText(/TDD 진짜 재밌다.../)).not.toBeNull();
+  });
 });
