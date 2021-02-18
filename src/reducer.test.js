@@ -1,7 +1,15 @@
 import { addTask, deleteTask, updateTaskTitle } from './action';
-import reducer from './reducer';
+import reducer, { initialState } from './reducer';
 
 describe('reducer', () => {
+  describe('noType', () => {
+    it('returns initail state', () => {
+      const state = reducer();
+
+      expect(state).toBe(initialState);
+    });
+  });
+
   describe('updateTaskTitle', () => {
     it('changes task title', () => {
       const state = reducer({
@@ -13,7 +21,7 @@ describe('reducer', () => {
   });
 
   describe('addTask', () => {
-    function reduceAddTask(taskTitle) {
+    function addTaskReducer(taskTitle) {
       return reducer({
         taskTitle,
         tasks: [],
@@ -23,7 +31,7 @@ describe('reducer', () => {
 
     context('with task title', () => {
       it('appends a new task into tasks', () => {
-        const state = reduceAddTask('New Task');
+        const state = addTaskReducer('New Task');
 
         expect(state.tasks).toHaveLength(1);
         expect(state.tasks[0].title).toBe('New Task');
@@ -31,7 +39,7 @@ describe('reducer', () => {
       });
 
       it('clears task title', () => {
-        const state = reduceAddTask('New Task');
+        const state = addTaskReducer('New Task');
 
         expect(state.taskTitle).toBe('');
       });
@@ -39,7 +47,7 @@ describe('reducer', () => {
 
     context('without task title', () => {
       it("doesn't work", () => {
-        const state = reduceAddTask('');
+        const state = addTaskReducer('');
 
         expect(state.tasks).toHaveLength(0);
       });
