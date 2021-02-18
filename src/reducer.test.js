@@ -14,14 +14,14 @@ describe('reducer', () => {
   it('할 일을 추가합니다.', () => {
     const state = reducer({
       newId: 0,
-      taskTitle: '',
+      taskTitle: '할 일1',
       tasks: [],
     },
     {
       type: 'addTask',
       payload: {
         newId: 1,
-        taskTitle: '할 일1',
+        taskTitle: '',
         tasks: [{
           id: 1,
           title: '할 일1',
@@ -30,7 +30,7 @@ describe('reducer', () => {
     });
 
     expect(state.newId).toBe(1);
-    expect(state.taskTitle).toBe('할 일1');
+    expect(state.taskTitle).toBe('');
     expect(state.tasks).toHaveLength(1);
     expect(state.tasks[0].title).toBe('할 일1');
   });
