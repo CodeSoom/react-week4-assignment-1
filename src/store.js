@@ -1,6 +1,12 @@
 import { createStore } from 'redux';
 
-function reducer(state, action) {
+const initalState = {
+  newId: 100,
+  taskTitle: '',
+  tasks: [],
+};
+
+function reducer(state = initalState, action) {
   if (action.type === 'updateTaskTitle') {
     return {
       ...state,
