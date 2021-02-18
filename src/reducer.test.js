@@ -44,7 +44,7 @@ describe('reducer', () => {
       }],
     },
     {
-      type: 'delteTask',
+      type: 'deleteTask',
       payload: {
         newId: 0,
         taskTitle: '',
@@ -52,7 +52,7 @@ describe('reducer', () => {
       },
     });
 
-    expect(state.taskTitle).toBe('할 일1');
+    expect(state.taskTitle).toBe('');
     expect(state.tasks).toHaveLength(0);
   });
 });
