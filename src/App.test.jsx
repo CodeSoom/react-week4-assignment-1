@@ -11,23 +11,29 @@ jest.mock('react-redux');
 describe('App', () => {
   const renderApp = () => (render(<App />));
 
+  const taskTitle = 'PDD';
+
+  const tasks = [
+    { id: 1, title: 'TDD 졸잼...' },
+    { id: 2, title: 'TDD 진짜 재밌다...' },
+  ];
+
   beforeEach(() => {
     jest.clearAllMocks();
 
     useSelector.mockImplementation((selector) => selector({
-      taskTitle: 'PDD',
-      tasks: [
-        { id: 1, title: 'TDD 졸잼...' },
-        { id: 2, title: 'TDD 진짜 재밌다...' },
-      ],
+      taskTitle,
+      tasks,
     }));
   });
 
   it('renders state', () => {
     const { getByText, getByDisplayValue } = renderApp();
 
-    expect(getByDisplayValue(/PDD/)).not.toBeNull();
-    expect(getByText(/TDD 졸잼.../)).not.toBeNull();
-    expect(getByText(/TDD 진짜 재밌다.../)).not.toBeNull();
+    expect(getByDisplayValue(taskTitle)).not.toBeNull();
+
+    tasks.forEach(({ title }) => {
+      expect(getByText(title)).not.toBeNull();
+    });
   });
 });
