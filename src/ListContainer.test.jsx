@@ -13,14 +13,16 @@ describe('ListContainer', () => {
 
   const dispatch = jest.fn();
 
+  const tasks = [
+    { id: 1, title: '와 너무 재밌다!' },
+    { id: 2, title: '와 너무 즐겁다!' },
+    { id: 3, title: '와 너무 신난다!' },
+  ];
+
   beforeEach(() => {
     jest.clearAllMocks();
 
-    useSelector.mockImplementation((selector) => selector({
-      tasks: [
-        { id: 1, title: '와 너무 재밌다!' },
-      ],
-    }));
+    useSelector.mockImplementation((selector) => selector({ tasks }));
 
     useDispatch.mockImplementation(() => dispatch);
   });
@@ -28,14 +30,22 @@ describe('ListContainer', () => {
   it('renders tasks', () => {
     const { getByText } = renderListContainer();
 
-    expect(getByText(/와 너무 재밌다!/)).not.toBeNull();
+    tasks.forEach(({ title }) => {
+      expect(getByText(title)).not.toBeNull();
+    });
   });
 
   it('removes the task from tasks upon clicking 완료 button along the task', () => {
-    const { getByText } = renderListContainer();
+    const { getAllByText } = renderListContainer();
 
-    fireEvent.click(getByText(/완료/));
+    const completeButton = getAllByText(/완료/);
 
-    expect(dispatch).toBeCalledWith(deleteTask(1));
+    completeButton.forEach((button) => {
+      fireEvent.click(button);
+    });
+
+    tasks.forEach(({ id }) => {
+      expect(dispatch).toBeCalledWith(deleteTask(id));
+    });
   });
 });
