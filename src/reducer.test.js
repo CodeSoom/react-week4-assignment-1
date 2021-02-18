@@ -3,7 +3,7 @@ import reducer, { initialState } from './reducer';
 
 describe('reducer', () => {
   describe('noType', () => {
-    it('returns initail state', () => {
+    it('returns initial state', () => {
       const state = reducer();
 
       expect(state).toBe(initialState);
