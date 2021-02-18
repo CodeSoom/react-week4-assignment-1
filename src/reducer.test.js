@@ -2,7 +2,7 @@ import reducer, { initialState } from './reducer';
 
 import { addTask, deleteTask, updateTaskTitle } from './actions';
 
-describe('reducer는', () => {
+describe('reducer', () => {
   context('입력이 있을 때는', () => {
     it('새로운 할 일을 추가한다.', () => {
       const preveState = {

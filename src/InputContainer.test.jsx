@@ -8,7 +8,7 @@ import InputContainer from './InputContainer';
 
 jest.mock('react-redux');
 
-describe('InputContainer는', () => {
+describe('InputContainer', () => {
   const dispatch = jest.fn();
 
   beforeEach(() => jest.clearAllMocks());
