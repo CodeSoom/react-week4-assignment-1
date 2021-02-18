@@ -18,10 +18,7 @@ describe('reducer', () => {
         newId: 0,
         taskTitle: '할 일1',
         tasks: [],
-      },
-      {
-        type: 'addTask',
-      });
+      }, addTask());
 
       expect(state.newId).toBe(1);
       expect(state.taskTitle).toBe('');
@@ -51,13 +48,7 @@ describe('reducer', () => {
         id: 1,
         title: '할 일1',
       }],
-    },
-    {
-      type: 'deleteTask',
-      payload: {
-        id: 1,
-      },
-    });
+    }, deleteTask(1));
 
     expect(state.tasks).toHaveLength(0);
   });
