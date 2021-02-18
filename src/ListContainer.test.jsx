@@ -13,13 +13,17 @@ describe('ListContainer', () => {
 
   const dispatch = jest.fn();
 
-  useSelector.mockImplementation((selector) => selector({
-    tasks: [
-      { id: 1, title: '와 너무 재밌다!' },
-    ],
-  }));
+  beforeEach(() => {
+    jest.clearAllMocks();
 
-  beforeEach(() => jest.clearAllMocks());
+    useSelector.mockImplementation((selector) => selector({
+      tasks: [
+        { id: 1, title: '와 너무 재밌다!' },
+      ],
+    }));
+
+    useDispatch.mockImplementation(() => dispatch);
+  });
 
   it('renders tasks', () => {
     const { getByText } = renderListContainer();
@@ -28,8 +32,6 @@ describe('ListContainer', () => {
   });
 
   it('removes the task from tasks upon clicking 완료 button along the task', () => {
-    useDispatch.mockImplementation(() => dispatch);
-
     const { getByText } = renderListContainer();
 
     fireEvent.click(getByText(/완료/));
