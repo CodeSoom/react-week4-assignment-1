@@ -7,21 +7,21 @@ export default function reducer(state, action) {
   }
 
   if (action.type === 'addTask') {
+    const { newId, taskTitle, tasks } = state;
     return {
       ...state,
-      newId: action.payload.newId,
-      taskTitle: action.payload.taskTitle,
-      tasks: action.payload.tasks,
+      newId: newId + 1,
+      taskTitle: '',
+      tasks: [...tasks, { id: newId, title: taskTitle }],
     };
   }
 
   if (action.type === 'deleteTask') {
     return {
       ...state,
-      newId: action.payload.newId,
-      taskTitle: action.payload.taskTitle,
-      tasks: action.payload.tasks,
+      tasks: state.tasks.filter((task) => task.id !== action.payload.id),
     };
   }
+
   return state;
 }

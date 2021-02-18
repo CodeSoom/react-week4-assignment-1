@@ -1,5 +1,5 @@
-import updateTaskTitle from './actions';
 import reducer from './reducer';
+import updateTaskTitle from './actions';
 
 describe('reducer', () => {
   it('사용자 입력을 반영합니다.', () => {
@@ -18,19 +18,12 @@ describe('reducer', () => {
       },
       {
         type: 'addTask',
-        payload: {
-          newId: 1,
-          taskTitle: '',
-          tasks: [{
-            id: 1,
-            title: '할 일1',
-          }],
-        },
       });
 
       expect(state.newId).toBe(1);
       expect(state.taskTitle).toBe('');
       expect(state.tasks).toHaveLength(1);
+      expect(state.tasks[0].id).not.toBeUndefined();
       expect(state.tasks[0].title).toBe('할 일1');
     });
   });
@@ -43,15 +36,8 @@ describe('reducer', () => {
         tasks: [],
       }, {
         type: 'addTask',
-        payload: {
-          newId: 0,
-          taskTitle: '',
-          tasks: [],
-        },
       });
 
-      expect(state.newId).toBe(0);
-      expect(state.taskTitle).toBe('');
       expect(state.tasks).toHaveLength(0);
     });
   });
@@ -68,14 +54,10 @@ describe('reducer', () => {
     {
       type: 'deleteTask',
       payload: {
-        newId: 0,
-        taskTitle: '',
-        tasks: [],
+        id: 1,
       },
     });
 
-    expect(state.newId).toBe(0);
-    expect(state.taskTitle).toBe('');
     expect(state.tasks).toHaveLength(0);
   });
 });
