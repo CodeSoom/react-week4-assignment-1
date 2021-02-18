@@ -13,12 +13,12 @@ describe('InputContainer', () => {
 
   const dispatch = jest.fn();
 
+  const taskTitle = 'TDD는 언제나 새롭다';
+
   beforeEach(() => {
     jest.clearAllMocks();
 
-    useSelector.mockImplementation((selector) => selector({
-      taskTitle: 'TDD는 언제나 새롭다',
-    }));
+    useSelector.mockImplementation((selector) => selector({ taskTitle }));
 
     useDispatch.mockImplementation(() => dispatch);
   });
