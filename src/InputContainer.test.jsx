@@ -21,9 +21,7 @@ describe('InputContainer', () => {
   });
 
   function InputContainerMaker() {
-    return render((
-      <InputContainer />
-    ));
+    return render(<InputContainer />);
   }
 
   it('renders tasks', () => {
