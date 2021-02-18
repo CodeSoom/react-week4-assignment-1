@@ -32,6 +32,7 @@ describe('reducer', () => {
     expect(state.newId).toBe(1);
     expect(state.taskTitle).toBe('할 일1');
     expect(state.tasks).toHaveLength(1);
+    expect(state.tasks[0].title).toBe('할 일1');
   });
 
   it('완료한 일을 삭제합니다.', () => {
@@ -52,6 +53,7 @@ describe('reducer', () => {
       },
     });
 
+    expect(state.newId).toBe(0);
     expect(state.taskTitle).toBe('');
     expect(state.tasks).toHaveLength(0);
   });
