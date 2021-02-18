@@ -1,13 +1,10 @@
 const initialState = {
   newId: 100,
   taskTitle: '',
-  tasks: [
-    { id: 1, title: '아무것도 하지 않기 #1' },
-    { id: 2, title: '아무것도 하지 않기 #2' },
-  ],
+  tasks: [],
 };
 
-export default function reducer(state = initialState, action) {
+export default function reducer(state = initialState, action = { type: '' }) {
   if (action.type === 'updateTaskTitle') {
     return {
       ...state,
