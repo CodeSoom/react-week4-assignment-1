@@ -8,21 +8,23 @@ import App from './App';
 
 jest.mock('react-redux');
 
-test('App', () => {
-  const tasks = [
-    { id: 1, title: '뭐라도 하기 #1' },
-    { id: 2, title: '뭐라도 하기 #2' },
-  ];
+describe('App', () => {
+  it('요소들을 보여준다.', () => {
+    const tasks = [
+      { id: 1, title: '뭐라도 하기 #1' },
+      { id: 2, title: '뭐라도 하기 #2' },
+    ];
 
-  useSelector.mockImplementation((selector) => selector({
-    taskTitle: '',
-    tasks,
-  }));
+    useSelector.mockImplementation((selector) => selector({
+      taskTitle: '',
+      tasks,
+    }));
 
-  const { getByText } = render((
-    <App />
-  ));
+    const { queryByText } = render((
+      <App />
+    ));
 
-  expect(getByText(/추가/)).not.toBeNull();
-  expect(getByText(/뭐라도 하기 #1/)).not.toBeNull();
+    expect(queryByText(/추가/)).not.toBeNull();
+    expect(queryByText(/뭐라도 하기 #1/)).not.toBeNull();
+  });
 });

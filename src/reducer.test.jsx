@@ -17,7 +17,7 @@ describe('reducer', () => {
     });
   });
 
-  describe('updateTaskTitle', () => {
+  describe('updateTaskTitle를 실행하면 ', () => {
     it(' taskTitle을 변경한다 ', () => {
       const state = reducer({
         taskTitle: '',
@@ -27,7 +27,7 @@ describe('reducer', () => {
     });
   });
 
-  describe('addTask', () => {
+  describe('addTask를 실행하면', () => {
     function reduceAddTask(taskTitle) {
       return reducer({
         newId: 100,
@@ -56,7 +56,7 @@ describe('reducer', () => {
     });
   });
 
-  describe('deleteTask', () => {
+  describe('deleteTask를 실행하면', () => {
     it(' 할일을 삭제한다. ', () => {
       const state = reducer({
         tasks: [
