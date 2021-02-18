@@ -1,5 +1,8 @@
 import reducer from './reducer';
-import updateTaskTitle from './actions';
+import {
+  updateTaskTitle,
+  addTask,
+} from './actions';
 
 describe('reducer', () => {
   it('사용자 입력을 반영합니다.', () => {
