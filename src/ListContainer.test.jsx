@@ -20,7 +20,4 @@ test('ListContainer', () => {
   ));
 
   expect(getByText(/TDD연습하기/)).not.toBeNull();
-
-  // TODO: 통합 테스트 코드 작성
-  // CodeceptJS => 실제 브라우저에서 사용자 테스트 실행 가능.
 });

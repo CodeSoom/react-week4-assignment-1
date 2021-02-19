@@ -15,14 +15,20 @@ test('App', () => {
     taskTitle: '할 일1',
   }));
 
-  const { getByText } = render((
-    <InputContainer />
-  ));
+  it('입력된 값을 출력합니다.', () => {
+    const { getByText } = render((
+      <InputContainer />
+    ));
+    expect(getByText(/추가/)).not.toBeNull();
+    expect(getByText(/할 일1/)).not.toBeNull();
+  });
 
-  expect(getByText(/추가/)).not.toBeNull();
-  expect(getByText(/할 일1/)).not.toBeNull();
-
-  fireEvent.click(getByText(/추가/));
-
-  expect(dispatch).toBeCalledWith({ type: 'addTask' });
+  it('일정을 추가하는 함수가 실행됩니다.', () => {
+    const { getByText } = render((
+      <InputContainer />
+    ));
+    expect(dispatch).not.toBeCalled();
+    fireEvent.click(getByText(/추가/));
+    expect(dispatch).toBeCalledWith({ type: 'addTask' });
+  });
 });
