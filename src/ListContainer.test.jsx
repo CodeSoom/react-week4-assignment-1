@@ -51,13 +51,15 @@ describe('ListContainer', () => {
         ],
       }));
 
-      const { getByText } = render((
+      const { getAllByText } = render((
         <ListContainer />
       ));
 
       expect(dispatch).not.toBeCalled();
-      fireEvent.click(getByText(/완료/));
-      expect(dispatch).toBeCalledWith('1');
+      getAllByText(/완료/).forEach((task) => {
+        fireEvent.click(task);
+        expect(dispatch).toBeCalled();
+      });
     });
   });
 });
