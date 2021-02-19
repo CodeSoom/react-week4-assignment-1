@@ -1,12 +1,12 @@
 import React from 'react';
 
-import { render } from '@testing-library/react';
+import { fireEvent, render } from '@testing-library/react';
 
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import ListContainer from './ListContainer';
 
-jest.mock('reat-redux');
+jest.mock('react-redux');
 
 describe('ListContainer', () => {
   context('할 일이 없는 경우', () => {
@@ -37,6 +37,27 @@ describe('ListContainer', () => {
       ));
 
       expect(getByText(/TDD연습하기/)).not.toBeNull();
+    });
+  });
+
+  describe('완료 버튼을 누른 경우', () => {
+    it('선택된 할 일을 제거하는 함수를 호출합니다.', () => {
+      const dispatch = jest.fn();
+      useDispatch.mockImplementation(() => (dispatch));
+      useSelector.mockImplementation((selector) => selector({
+        tasks: [
+          { id: '1', title: 'TDD연습하기' },
+          { id: '2', title: 'TDD연습 두번하기' },
+        ],
+      }));
+
+      const { getByText } = render((
+        <ListContainer />
+      ));
+
+      expect(dispatch).not.toBeCalled();
+      fireEvent.click(getByText(/완료/));
+      expect(dispatch).toBeCalledWith('1');
     });
   });
 });
