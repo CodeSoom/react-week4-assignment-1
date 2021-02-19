@@ -1,10 +1,7 @@
 const initialState = {
   newId: 0,
   taskTitle: '',
-  tasks: [
-    { id: '1', title: 'TDD연습하기' },
-    { id: '2', title: 'TDD연습 두번하기' },
-  ],
+  tasks: [],
 };
 
 export default function reducer(state = initialState, action) {
