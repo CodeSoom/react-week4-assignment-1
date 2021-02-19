@@ -8,14 +8,14 @@ import InputContainer from './InputContainer';
 
 jest.mock('react-redux');
 
-function renderInputContainer() {
-  return render((
-    <InputContainer />
-  ));
-}
-
 describe('InputContainer', () => {
   const dispatch = jest.fn();
+
+  function renderInputContainer() {
+    return render((
+      <InputContainer />
+    ));
+  }
 
   beforeEach(() => {
     jest.clearAllMocks();
