@@ -15,20 +15,38 @@ test('App', () => {
     taskTitle: '할 일1',
   }));
 
-  it('입력된 값을 출력합니다.', () => {
-    const { getByText } = render((
+  it('입력된 값과 element들을 출력합니다.', () => {
+    const { getByText, getByLabelText, getByPlaceholderText } = render((
       <InputContainer />
     ));
     expect(getByText(/추가/)).not.toBeNull();
+    expect(getByLabelText('할 일')).not.toBeNull();
+    expect(getByPlaceholderText('할 일을 입력해 주세요')).not.toBeNull();
+
     expect(getByText(/할 일1/)).not.toBeNull();
   });
 
-  it('일정을 추가하는 함수가 실행됩니다.', () => {
+  it('일정을 추가하는 함수가 실행합니다.', () => {
     const { getByText } = render((
       <InputContainer />
     ));
+
     expect(dispatch).not.toBeCalled();
     fireEvent.click(getByText(/추가/));
     expect(dispatch).toBeCalledWith({ type: 'addTask' });
+  });
+
+  it('입력값을 업데이트 하는 함수를 실행합니다.', () => {
+    const { getByPlaceholderText } = render((
+      <InputContainer />
+    ));
+
+    expect(dispatch).not.toBeCalled();
+    fireEvent.change(getByPlaceholderText('할 일을 입력해 주세요'), {
+      target: {
+        value: '쉬기',
+      },
+    });
+    expect(dispatch).toBeCalled();
   });
 });
