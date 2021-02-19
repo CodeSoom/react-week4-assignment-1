@@ -4,15 +4,12 @@ const initialState = {
   tasks: [],
 };
 
-export default function reducer(state = initialState, action) {
-  if (action.type === 'updateTaskTitle') {
-    return {
-      ...state,
-      taskTitle: action.payload.taskTitle,
-    };
-  }
-
-  if (action.type === 'addTask') {
+const actionTypeFunctions = {
+  updateTaskTitle: (state, action) => ({
+    ...state,
+    taskTitle: action.payload.taskTitle,
+  }),
+  addTask: (state) => {
     const { newId, tasks, taskTitle } = state;
 
     if (taskTitle === '') {
@@ -25,16 +22,19 @@ export default function reducer(state = initialState, action) {
       taskTitle: '',
       tasks: [...tasks, { id: newId, title: taskTitle }],
     };
-  }
-
-  if (action.type === 'deleteTask') {
+  },
+  deleteTask: (state, action) => {
     const { tasks } = state;
 
     return {
       ...state,
       tasks: tasks.filter((task) => task.id !== action.payload.id),
     };
-  }
+  },
+};
 
-  return state;
+const defaultFunction = (state) => (state);
+
+export default function reducer(state = initialState, action) {
+  return (actionTypeFunctions[action.type] || defaultFunction)(state, action);
 }
