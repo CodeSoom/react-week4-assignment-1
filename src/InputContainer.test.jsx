@@ -4,11 +4,9 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { fireEvent, render } from '@testing-library/react';
 
-import InputContainer from './InputContainer';
-
 jest.mock('react-redux');
 
-test('App', () => {
+describe('InputContainer', () => {
   const dispatch = jest.fn();
   useDispatch.mockImplementation(() => dispatch);
   useSelector.mockImplementation((selector) => selector({
@@ -19,6 +17,7 @@ test('App', () => {
     const { getByText, getByLabelText, getByPlaceholderText } = render((
       <InputContainer />
     ));
+
     expect(getByText(/추가/)).not.toBeNull();
     expect(getByLabelText('할 일')).not.toBeNull();
     expect(getByPlaceholderText('할 일을 입력해 주세요')).not.toBeNull();
