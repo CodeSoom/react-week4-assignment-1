@@ -41,7 +41,7 @@ describe('reducer', () => {
         const state = reduceAddTask('New Task');
 
         expect(state.tasks).toHaveLength(1);
-        expect(state.tasks[0].id).not.toBeUndefined();
+        expect(state.tasks[0].id).toBe(100);
         expect(state.tasks[0].title).toBe('New Task');
       });
 

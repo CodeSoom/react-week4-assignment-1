@@ -11,27 +11,27 @@ jest.mock('react-redux');
 describe('ListContainer', () => {
   const dispatch = jest.fn();
 
-  useDispatch.mockImplementation(() => dispatch);
+  beforeEach(() => {
+    dispatch.mockClear();
 
-  useSelector.mockImplementation((selector) => selector({
-    tasks: [
-      { id: 1, title: '아무 것도 하지 않기 #1' },
-      { id: 2, title: '아무 것도 하지 않기 #2' },
-    ],
-  }));
+    useDispatch.mockImplementation(() => dispatch);
 
-  function renderListContainer() {
-    return render(<ListContainer />);
-  }
-
-  it('renders task', () => {
-    const { getByText } = renderListContainer();
-
-    expect(getByText(/아무 것도 하지 않기 #1/)).not.toBeNull();
+    useSelector.mockImplementation((selector) => selector({
+      tasks: [
+        { id: 1, title: '아무 것도 하지 않기 #1' },
+        { id: 2, title: '아무 것도 하지 않기 #2' },
+      ],
+    }));
   });
 
-  it('renders click "완료" button event', () => {
-    const { getAllByText } = renderListContainer();
+  it('renders task', () => {
+    const { queryByText } = render(<ListContainer />);
+
+    expect(queryByText(/아무 것도 하지 않기 #1/)).not.toBeNull();
+  });
+
+  it('renders click event', () => {
+    const { getAllByText } = render(<ListContainer />);
 
     fireEvent.click(getAllByText('완료')[0]);
 

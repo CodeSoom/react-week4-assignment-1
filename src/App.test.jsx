@@ -8,7 +8,7 @@ import App from './App';
 
 jest.mock('react-redux');
 
-test('App', () => {
+beforeEach(() => {
   useSelector.mockImplementation((selector) => selector({
     taskTitle: '',
     tasks: [
@@ -16,11 +16,13 @@ test('App', () => {
       { id: 2, title: '아무 것도 하지 않기 #2' },
     ],
   }));
+});
 
-  const { getByText } = render((
-    <App />
-  ));
+describe('App', () => {
+  it('renders tasks', () => {
+    const { getByText } = render(<App />);
 
-  expect(getByText(/추가/)).not.toBeNull();
-  expect(getByText(/아무 것도 하지 않기 #1/)).not.toBeNull();
+    expect(getByText(/추가/)).not.toBeNull();
+    expect(getByText(/아무 것도 하지 않기 #1/)).not.toBeNull();
+  });
 });

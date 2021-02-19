@@ -43,7 +43,7 @@ describe('InputContainer', () => {
     });
   });
 
-  it('listens click "추가" button event', () => {
+  it('listens click event', () => {
     const { getByText } = renderInputContainer();
 
     fireEvent.click(getByText(/추가/));
