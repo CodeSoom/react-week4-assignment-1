@@ -21,11 +21,11 @@ describe('InputContainer', () => {
     jest.clearAllMocks();
 
     useDispatch.mockImplementation(() => dispatch);
+
+    useSelector.mockImplementation((selector) => selector({ taskTitle: '할일 입력값' }));
   });
 
   it(' 할일을 입력하면, 입력함수가 실행된다 . ', () => {
-    useSelector.mockImplementation((selector) => selector({ taskTitle: '할일 입력값' }));
-
     const { getByPlaceholderText } = renderInputContainer();
 
     fireEvent.change(getByPlaceholderText('할 일을 입력해 주세요'), {
@@ -45,8 +45,6 @@ describe('InputContainer', () => {
   });
 
   it(' 추가버튼을 누르면, 할일을 추가하는 함수가 실행되고, 할일이 추가된다. ', () => {
-    useSelector.mockImplementation((selector) => selector({ taskTitle: '할일 입력' }));
-
     const { queryByText, getByText, getByDisplayValue } = renderInputContainer();
 
     expect(queryByText(/추가/)).not.toBeNull();
@@ -56,6 +54,6 @@ describe('InputContainer', () => {
 
     expect(dispatch).toBeCalledWith({ type: 'addTask' });
 
-    expect(getByDisplayValue('할일 입력')).toBeInTheDocument();
+    expect(getByDisplayValue('할일 입력값')).toBeInTheDocument();
   });
 });
