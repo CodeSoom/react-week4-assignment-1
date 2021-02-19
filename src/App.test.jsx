@@ -27,7 +27,7 @@ describe('App', () => {
     ));
   }
 
-  it('shows "추가" text', () => {
+  it('renders "추가" button', () => {
     const { getByText } = renderApp();
 
     expect(getByText(/추가/)).not.toBeNull();
