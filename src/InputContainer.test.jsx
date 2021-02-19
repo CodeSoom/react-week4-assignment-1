@@ -8,8 +8,10 @@ import InputContainer from './InputContainer';
 
 jest.mock('react-redux');
 
-describe('InputContainer', () => {
-  const dispatch = jest.fn();
+const dispatch = jest.fn();
+
+beforeEach(() => {
+  jest.clearAllMocks();
 
   useDispatch.mockImplementation(() => dispatch);
 
@@ -17,14 +19,16 @@ describe('InputContainer', () => {
     newId: 100,
     taskTitle: '',
   }));
+});
 
+describe('InputContainer', () => {
   function renderInputContainer() {
     return render((
       <InputContainer />
     ));
   }
 
-  it('shows "추가" text', () => {
+  it('renders "추가" button', () => {
     const { getByText } = renderInputContainer();
 
     expect(getByText(/추가/)).not.toBeNull();
