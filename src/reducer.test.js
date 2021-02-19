@@ -15,6 +15,7 @@ describe('reducer', () => {
       expect(state.taskTitle).toBe('New Title');
     });
   });
+
   describe('addTask', () => {
     function reduceAddTask(taskTitle) {
       return reducer({
