@@ -4,6 +4,8 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { fireEvent, render } from '@testing-library/react';
 
+import InputContainer from './InputContainer';
+
 jest.mock('react-redux');
 
 describe('InputContainer', () => {

@@ -2,6 +2,8 @@ import React from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
+import Input from './Input';
+
 import {
   updateTaskTitle,
   addTask,
@@ -22,7 +24,7 @@ export default function InputContainer() {
   }
 
   return (
-    <InputContainer
+    <Input
       value={taskTitle}
       onChange={handleChangeTitle}
       onClick={handleClickAddTask}
