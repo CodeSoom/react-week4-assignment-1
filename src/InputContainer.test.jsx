@@ -13,43 +13,46 @@ jest.mock('react-redux');
 describe('InputContainer', () => {
   const dispatch = jest.fn();
 
-  useDispatch.mockImplementation(() => dispatch);
-
-  given("state's taskTitle", () => ({ taskTitle: given.taskTitle }));
+  given('tasktitle', () => ({ taskTitle: given.taskTitle }));
 
   beforeEach(() => {
+    useDispatch.mockImplementation(() => dispatch);
     useSelector.mockImplementation((selector) => selector({
       taskTitle: given.taskTitle,
     }));
   });
 
-  it('handleClick works when clicked', () => {
-    given('taskTitle', () => 'New Title');
+  describe('handleClick', () => {
+    it('works when clicked', () => {
+      given('taskTitle', () => 'New Title');
 
-    const { queryByText, getByDisplayValue } = render((<InputContainer />));
+      const { queryByText, queryByDisplayValue } = render((<InputContainer />));
 
-    expect(queryByText(/추가/)).not.toBeNull();
-    expect(getByDisplayValue(/New Title/)).not.toBeNull();
+      expect(queryByText(/추가/)).not.toBeNull();
+      expect(queryByDisplayValue(/New Title/)).not.toBeNull();
 
-    fireEvent.click(queryByText(/추가/));
+      fireEvent.click(queryByText(/추가/));
 
-    expect(dispatch).toBeCalledWith({ type: 'addTask' });
+      expect(dispatch).toBeCalledWith({ type: 'addTask' });
+    });
   });
 
-  it('handleChangeTitle works when input filled', () => {
-    given('tasksTitle', () => '');
+  describe('handleChangeTitle', () => {
+    it('works when input filled', () => {
+      given('tasksTitle', () => '');
 
-    const { queryByLabelText } = render((<InputContainer />));
+      const { queryByLabelText } = render((<InputContainer />));
 
-    expect(queryByLabelText(/할 일/).value).toEqual('');
+      expect(queryByLabelText(/할 일/).value).toEqual('');
 
-    fireEvent.change(queryByLabelText(/할 일/), {
-      target: { value: '변했어요' },
-    });
+      fireEvent.change(queryByLabelText(/할 일/), {
+        target: { value: '변했어요' },
+      });
 
-    expect(dispatch).toBeCalledWith({
-      type: 'updateTaskTitle',
-      payload: { taskTitle: '변했어요' },
+      expect(dispatch).toBeCalledWith({
+        type: 'updateTaskTitle',
+        payload: { taskTitle: '변했어요' },
+      });
     });
   });
 });
