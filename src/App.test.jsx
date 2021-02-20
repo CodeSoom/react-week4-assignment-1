@@ -11,7 +11,7 @@ import App from './App';
 jest.mock('react-redux');
 
 describe('App', () => {
-  given("state's tasks", () => ({ tasks: given.tasks }));
+  given('tasks', () => ({ tasks: given.tasks }));
 
   beforeEach(() => {
     useSelector.mockImplementation((selector) => selector({
@@ -20,9 +20,8 @@ describe('App', () => {
   });
 
   context('with no tasks', () => {
+    given('tasks', () => []);
     it('shows "할 일이 없어요".', () => {
-      given('tasks', () => []);
-
       const { queryByText } = render((<App />));
 
       expect(queryByText(/추가/)).not.toBeNull();
@@ -31,9 +30,8 @@ describe('App', () => {
   });
 
   context('with tasks', () => {
+    given('tasks', () => [{ id: 1, title: '기모찌' }]);
     it('shows tasks', () => {
-      given('tasks', () => [{ id: 1, title: '기모찌' }]);
-
       const { queryByText } = render((<App />));
 
       expect(queryByText(/기모찌/)).not.toBeNull();
