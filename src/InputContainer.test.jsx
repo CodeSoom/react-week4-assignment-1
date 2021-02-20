@@ -8,7 +8,7 @@ import InputContainer from './InputContainer';
 
 jest.mock('react-redux');
 
-test('InputContainer', () => {
+describe('InputContainer', () => {
   const dispatch = jest.fn();
 
   useDispatch.mockImplementation(() => dispatch);
@@ -17,14 +17,35 @@ test('InputContainer', () => {
     taskTitle: 'New Title',
   }));
 
-  const { getByText, getByDisplayValue } = render((
-    <InputContainer />
-  ));
+  it('updates task title', () => {
+    const { getByLabelText } = render((
+      <InputContainer />
+    ));
 
-  expect(getByText(/추가/)).not.toBeNull();
-  expect(getByDisplayValue(/New Title/)).not.toBeNull();
+    fireEvent.change(getByLabelText('할 일'), {
+      target: { value: 'task-1' },
+    });
 
-  fireEvent.click(getByText(/추가/));
+    expect(dispatch).toBeCalledWith(
+      {
+        type: 'updateTaskTitle',
+        payload: {
+          taskTitle: 'task-1',
+        },
+      },
+    );
+  });
 
-  expect(dispatch).toBeCalledWith({ type: 'addTask' });
+  it('add task', () => {
+    const { getByText, getByDisplayValue } = render((
+      <InputContainer />
+    ));
+
+    expect(getByText(/추가/)).not.toBeNull();
+    expect(getByDisplayValue(/New Title/)).not.toBeNull();
+
+    fireEvent.click(getByText(/추가/));
+
+    expect(dispatch).toBeCalledWith({ type: 'addTask' });
+  });
 });

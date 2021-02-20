@@ -75,5 +75,17 @@ describe('reducer', () => {
         expect(state.tasks).toHaveLength(1);
       });
     });
+
+    context('undefined action type', () => {
+      it('nothing changes', () => {
+        const state = reducer({
+          tasks: [
+            { id: 1, title: 'Task' },
+          ],
+        }, { type: 'noTask' });
+
+        expect(state.tasks).toHaveLength(1);
+      });
+    });
   });
 });
