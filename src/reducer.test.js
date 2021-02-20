@@ -7,7 +7,7 @@ import {
 
 describe('reducer', () => {
   describe('updateTaskTitle', () => {
-    it('returns new state with new task title', () => {
+    it('changes new task title', () => {
       const state = reducer({
         taskTitle: '',
       }, updateTaskTitle('New Title'));
@@ -17,7 +17,7 @@ describe('reducer', () => {
   });
 
   describe('addTask', () => {
-    it('returns new state with a new task', () => {
+    it('appends a new task into tasks', () => {
       const state = reducer({
         taskTitle: 'New Task',
         tasks: [],
@@ -27,7 +27,7 @@ describe('reducer', () => {
       expect(state.tasks[0].title).toBe('New Task');
     });
 
-    it('returns new state with blank task title', () => {
+    it('clears task title', () => {
       const state = reducer({
         taskTitle: 'New Task',
         tasks: [],
