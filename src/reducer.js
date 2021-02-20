@@ -7,7 +7,7 @@ const initalState = {
   ],
 };
 
-export default function reducer(state = initalState, action) {
+export default function reducer(state = initalState, action = { type: '' }) {
   if (action.type === 'updateTaskTitle') {
     return {
       ...state,
