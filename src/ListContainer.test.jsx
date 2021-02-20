@@ -8,7 +8,7 @@ import ListContainer from './ListContainer';
 
 jest.mock('react-redux');
 
-test('App', () => {
+test('ListContainer', () => {
   const tasks = [
     { id: 1, title: '아무것도 하지 않기 1' },
     { id: 2, title: '아무것도 하지 않기 2' },
