@@ -4,13 +4,22 @@ import { useDispatch, useSelector } from 'react-redux';
 import InputContainer from './InputContainer';
 
 jest.mock('react-redux');
+
+const dispatch = jest.fn();
+
+beforeEach(() => {
+  jest.clearAllMocks();
+
+  useDispatch.mockImplementation(() => dispatch);
+
+  useSelector.mockImplementation((selector) => selector({
+    newId: 100,
+    taskTitle: 'New Title',
+  }));
+});
+
 describe('InputContainer', () => {
   it('adds task', () => {
-    const dispatch = jest.fn();
-    useDispatch.mockImplementation(() => dispatch);
-    useSelector.mockImplementation((selector) => selector({
-      taskTitle: 'New Title',
-    }));
     const { getByText } = render((
       <InputContainer />
     ));
@@ -20,11 +29,6 @@ describe('InputContainer', () => {
   });
 
   it('changes task title', () => {
-    const dispatch = jest.fn();
-    useDispatch.mockImplementation(() => dispatch);
-    useSelector.mockImplementation((selector) => selector({
-      taskTitle: 'New Title',
-    }));
     const { getByLabelText } = render((
       <InputContainer />
     ));
