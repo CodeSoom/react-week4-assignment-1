@@ -1,4 +1,4 @@
-const initalState = {
+const initialState = {
   newId: 100,
   taskTitle: '',
   tasks: [
@@ -7,7 +7,7 @@ const initalState = {
   ],
 };
 
-export default function reducer(state = initalState, action = { type: '' }) {
+export default function reducer(state = initialState, action = { type: '' }) {
   if (action.type === 'updateTaskTitle') {
     return {
       ...state,
