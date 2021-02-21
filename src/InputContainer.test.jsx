@@ -11,11 +11,15 @@ jest.mock('react-redux');
 describe('InputContainer', () => {
   const dispatch = jest.fn();
 
-  useDispatch.mockImplementation(() => dispatch);
+  beforeEach(() => {
+    dispatch.mockClear();
 
-  useSelector.mockImplementation((selector) => selector({
-    taskTitle: 'New Title',
-  }));
+    useDispatch.mockImplementation(() => dispatch);
+
+    useSelector.mockImplementation((selector) => selector({
+      taskTitle: 'New Title',
+    }));
+  });
 
   it('updates task title', () => {
     const { getByLabelText } = render((
@@ -36,13 +40,13 @@ describe('InputContainer', () => {
     );
   });
 
-  it('add task', () => {
-    const { getByText, getByDisplayValue } = render((
+  it('adds task', () => {
+    const { getByText, queryByText, queryByDisplayValue } = render((
       <InputContainer />
     ));
 
-    expect(getByText(/추가/)).not.toBeNull();
-    expect(getByDisplayValue(/New Title/)).not.toBeNull();
+    expect(queryByText(/추가/)).not.toBeNull();
+    expect(queryByDisplayValue(/New Title/)).not.toBeNull();
 
     fireEvent.click(getByText(/추가/));
 
