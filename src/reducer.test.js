@@ -7,14 +7,16 @@ import {
 } from './actions';
 
 describe('reducer', () => {
-  it('returns initialState', () => {
-    const state = reducer();
+  context('when default state', () => {
+    it('returns initialState', () => {
+      const state = reducer();
 
-    const { newId, taskTitle, tasks } = state;
+      const { newId, taskTitle, tasks } = state;
 
-    expect(newId).toBe(100);
-    expect(taskTitle).toBe('');
-    expect(tasks).toHaveLength(0);
+      expect(newId).toBe(100);
+      expect(taskTitle).toBe('');
+      expect(tasks).toHaveLength(0);
+    });
   });
 
   describe('updateTaskTitle', () => {
