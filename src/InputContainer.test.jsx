@@ -21,15 +21,15 @@ describe('InputContainer', () => {
   });
 
   it('입력된 값과 element들을 출력합니다.', () => {
-    const { getByText, getByLabelText, getByPlaceholderText } = render((
+    const { queryByText, getByLabelText, getByPlaceholderText } = render((
       <InputContainer />
     ));
 
-    expect(getByText(/추가/)).not.toBeNull();
+    expect(queryByText(/추가/)).not.toBeNull();
     expect(getByLabelText('할 일')).not.toBeNull();
     expect(getByPlaceholderText('할 일을 입력해 주세요')).not.toBeNull();
 
-    expect(getByText('할 일1')).not.toBeNull();
+    expect(queryByText('할 일1')).not.toBeNull();
   });
 
   it('일정을 추가하는 함수가 실행합니다.', () => {
