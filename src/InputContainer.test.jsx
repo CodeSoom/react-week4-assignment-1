@@ -10,12 +10,15 @@ jest.mock('react-redux');
 
 describe('InputContainer', () => {
   const dispatch = jest.fn();
-  beforeEach(() => jest.clearAllMocks());
+  beforeEach(() => {
+    jest.clearAllMocks();
 
-  useDispatch.mockImplementation(() => dispatch);
-  useSelector.mockImplementation((selector) => selector({
-    taskTitle: '할 일1',
-  }));
+    useDispatch.mockImplementation(() => dispatch);
+
+    useSelector.mockImplementation((selector) => selector({
+      taskTitle: '할 일1',
+    }));
+  });
 
   it('입력된 값과 element들을 출력합니다.', () => {
     const { getByText, getByLabelText, getByPlaceholderText } = render((
