@@ -17,7 +17,9 @@ describe('InputContainer', () => {
     taskTitle: 'New Title',
   }));
 
-  beforeEach(() => jest.clearAllMocks());
+  beforeEach(() => useSelector.mockImplementation((selector) => selector({
+    taskTitle: 'New Title',
+  })));
 
   it('title render test', () => {
     const { getByText, getByDisplayValue } = render((<InputContainer />));
