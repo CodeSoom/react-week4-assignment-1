@@ -2,6 +2,8 @@ import React from 'react';
 
 import { fireEvent, render } from '@testing-library/react';
 
+import given from 'given2';
+
 import { useDispatch, useSelector } from 'react-redux';
 
 import ListContainer from './ListContainer';
@@ -9,10 +11,12 @@ import ListContainer from './ListContainer';
 jest.mock('react-redux');
 
 describe('ListContainer', () => {
+  given('tasks', () => (given.tasks));
+
   context('할 일이 없는 경우', () => {
     it('할 일이 없음을 출력합니다.', () => {
       useSelector.mockImplementation((selector) => selector({
-        tasks: [],
+        tasks: given.tasks,
       }));
 
       const { getByText } = render((
