@@ -48,14 +48,6 @@ describe('reducer', () => {
 
           expect(state.taskTitle).toBe('new-title');
         });
-
-        context('without previous state offered', () => {
-          it('changes task title using initalState', () => {
-            const state = reducer(undefined, updateTaskTitle('new-title'));
-
-            expect(state.taskTitle).toBe('new-title');
-          });
-        });
       });
     });
 
