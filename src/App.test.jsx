@@ -18,11 +18,9 @@ describe('App', () => {
     ],
   }));
 
-  const { getByText } = render((
-    <App />
-  ));
+  const { queryByText } = render(<App />);
 
   it('element를 출력합니다.', () => {
-    expect(getByText(/추가/)).not.toBeNull();
+    expect(queryByText(/추가/)).not.toBeNull();
   });
 });

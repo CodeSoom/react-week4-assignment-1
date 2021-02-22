@@ -19,11 +19,9 @@ describe('ListContainer', () => {
         tasks: given.tasks,
       }));
 
-      const { getByText } = render((
-        <ListContainer />
-      ));
+      const { queryByText } = render(<ListContainer />);
 
-      expect(getByText(/할 일이 없어요/)).not.toBeNull();
+      expect(queryByText(/할 일이 없어요/)).not.toBeNull();
     });
   });
 
@@ -36,11 +34,9 @@ describe('ListContainer', () => {
         ],
       }));
 
-      const { getByText } = render((
-        <ListContainer />
-      ));
+      const { queryByText } = render(<ListContainer />);
 
-      expect(getByText(/TDD연습하기/)).not.toBeNull();
+      expect(queryByText(/TDD연습하기/)).not.toBeNull();
     });
   });
 
@@ -55,9 +51,7 @@ describe('ListContainer', () => {
         ],
       }));
 
-      const { getAllByText } = render((
-        <ListContainer />
-      ));
+      const { getAllByText } = render(<ListContainer />);
 
       expect(dispatch).not.toBeCalled();
       getAllByText(/완료/).forEach((task) => {
