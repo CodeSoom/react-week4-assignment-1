@@ -8,7 +8,7 @@ const initialState = {
   tasks: [],
 };
 
-function updateTitle(oldState, newTitle) {
+function updateTaskTitle(oldState, newTitle) {
   return {
     ...oldState,
     taskTitle: newTitle,
@@ -41,7 +41,7 @@ export default function App() {
   const { taskTitle, tasks } = state;
 
   function handleChangeTitle(event) {
-    setState(updateTitle(state, event.target.value));
+    setState(updateTaskTitle(state, event.target.value));
   }
 
   function handleClickAddTask() {

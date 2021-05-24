@@ -1,7 +1,7 @@
 import reducer from './reducer';
 
 describe('reducer', () => {
-  describe('updateTitle', () => {
+  describe('updateTaskTitle', () => {
 
   });
   describe('addTask', () => {
