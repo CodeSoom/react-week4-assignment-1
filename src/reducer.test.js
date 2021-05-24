@@ -1,4 +1,4 @@
-import reducer from './reducer';
+import reducer, { initialState } from './reducer';
 import {
   updateTaskTitle,
   addTask,
@@ -81,5 +81,10 @@ describe('reducer', () => {
       const { tasks } = newState;
       expect(tasks).toHaveLength(1);
     });
+  });
+
+  context('when invalid action is given', () => {
+    const newState = reducer(undefined, { type: 'invaild' });
+    expect(initialState).toEqual(newState);
   });
 });
