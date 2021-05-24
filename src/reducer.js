@@ -21,5 +21,13 @@ const reducer = (state = initialState, action) => {
       tasks: [...tasks, { id: newId, title: taskTitle }],
     };
   }
+  if (action.type === 'DeleteTask') {
+    const { tasks } = state;
+
+    return {
+      ...state,
+      tasks: tasks.filter((task) => task.id !== action.payload.id),
+    };
+  }
 };
 export default reducer;
