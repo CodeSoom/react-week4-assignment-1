@@ -11,5 +11,15 @@ const reducer = (state = initialState, action) => {
       taskTitle: action.payload.taskTitle,
     };
   }
+  if (action.type === 'AddTask') {
+    const { newId, tasks, taskTitle } = state;
+
+    return {
+      ...state,
+      newId: newId + 1,
+      taskTitle: '',
+      tasks: [...tasks, { id: newId, title: taskTitle }],
+    };
+  }
 };
 export default reducer;
