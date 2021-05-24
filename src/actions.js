@@ -4,7 +4,7 @@ export function updateTaskTitle(taskTitle) {
     payload: {
       taskTitle,
     },
-  }
+  };
 }
 
 export function addTask() {

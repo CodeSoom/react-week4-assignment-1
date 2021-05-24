@@ -1,6 +1,6 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from 'react-redux';
 
-import { updateTaskTitle, addTask, deleteTask } from "./actions";
+import { updateTaskTitle, addTask, deleteTask } from './actions';
 
 import Page from './Page';
 

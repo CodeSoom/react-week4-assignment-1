@@ -4,7 +4,7 @@ import {
   updateTaskTitle,
   addTask,
   deleteTask,
-} from "./actions";
+} from './actions';
 
 describe('reducer', () => {
   describe('updateTaskTitle', () => {
@@ -67,7 +67,7 @@ describe('reducer', () => {
         }, deleteTask(100));
 
         expect(state.tasks).toHaveLength(1);
-      })
-    })
+      });
+    });
   });
 });

@@ -13,7 +13,7 @@ export default function reducer(state = initialState, action) {
   }
 
   if (action.type === 'addTask') {
-    const {newId, taskTitle, tasks} = state;
+    const { newId, taskTitle, tasks } = state;
 
     if (!taskTitle) {
       return state;
@@ -23,12 +23,12 @@ export default function reducer(state = initialState, action) {
       ...state,
       newId: newId + 1,
       taskTitle: '',
-      tasks: [...tasks, {id: newId, title: taskTitle}],
+      tasks: [...tasks, { id: newId, title: taskTitle }],
     };
   }
 
   if (action.type === 'deleteTask') {
-    const {tasks} = state;
+    const { tasks } = state;
 
     return {
       ...state,
