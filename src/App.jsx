@@ -26,10 +26,19 @@ function addTask(state) {
   };
 }
 
+function deleteTask(state, id) {
+  const { tasks } = state;
+
+  return {
+    ...state,
+    tasks: tasks.filter((task) => task.id !== id),
+  };
+}
+
 export default function App() {
   const [state, setState] = useState(initialState);
 
-  const { newId, taskTitle, tasks } = state;
+  const { taskTitle, tasks } = state;
 
   function handleChangeTitle(event) {
     setState(updateTaskTitle(state, event.target.value));
@@ -40,10 +49,7 @@ export default function App() {
   }
 
   function handleClickDeleteTask(id) {
-    setState({
-      ...state,
-      tasks: tasks.filter((task) => task.id !== id),
-    });
+    setState(deleteTask(state, id));
   }
 
   return (
