@@ -20,7 +20,23 @@ describe('reducer', () => {
     });
   });
   describe('addTask', () => {
+    it('adds new task to tasks', () => {
+      const state = {
+        taskTitle: 'new Title',
+        newId: 100,
+        tasks: [],
+      };
 
+      const action = {
+        type: 'AddTask',
+      };
+
+      const newState = reducer(state, action);
+
+      const { tasks } = newState;
+      expect(tasks).toHaveLength(1);
+      expect(tasks[0]).toEqual({ id: 100, title: 'new Title' });
+    });
   });
   describe('deleteTask', () => {
 
