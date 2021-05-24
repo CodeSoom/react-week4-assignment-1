@@ -39,6 +39,24 @@ describe('reducer', () => {
     });
   });
   describe('deleteTask', () => {
+    it('delete task from tasks', () => {
+      const state = {
+        taskTitle: 'new Title',
+        newId: 100,
+        tasks: [{ id: 1, title: 'codeSoom' }],
+      };
 
+      const action = {
+        type: 'DeleteTask',
+        payload: {
+          id: 1,
+        },
+      };
+
+      const newState = reducer(state, action);
+
+      const { tasks } = newState;
+      expect(tasks).toHaveLength(0);
+    });
   });
 });
