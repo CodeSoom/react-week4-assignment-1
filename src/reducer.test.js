@@ -49,7 +49,6 @@ describe('reducer', () => {
 
       const { tasks } = newState;
       expect(tasks).toHaveLength(0);
-      expect(tasks).toEqual([]);
     });
   });
 
