@@ -25,6 +25,7 @@ module.exports = {
     Feature: 'readonly',
     Scenario: 'readonly',
     context: 'readonly',
+    given: 'readonly',
   },
   rules: {
     indent: ['error', 2],
