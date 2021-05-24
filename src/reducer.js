@@ -4,7 +4,7 @@ const initialState = {
   tasks: [],
 };
 
-const reducer = (state = initialState, action) => {
+export default function reducer(state = initialState, action) {
   const { newId, tasks, taskTitle } = state;
 
   switch (action.type) {
@@ -34,5 +34,4 @@ const reducer = (state = initialState, action) => {
   default:
     return state;
   }
-};
-export default reducer;
+}
