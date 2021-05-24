@@ -6,75 +6,71 @@ import App from './App';
 
 jest.mock('react-redux');
 
-it('renders tasks', () => {
-  useSelector.mockImplementation((selector) => selector({
-    taskTitle: 'new Title',
-    tasks: [{ id: 1, title: 'codesoom' }],
-  }));
-
-  const { getByText } = render(<App />);
-  expect(getByText('codesoom')).toBeInTheDocument();
-});
-
-it('adds task to tasks with 추가 button', () => {
-  useSelector.mockImplementation((selector) => selector({
-    taskTitle: 'new Title',
-    tasks: [{ id: 1, title: 'codesoom' }],
-  }));
-
-  const dispatch = jest.fn();
-  useDispatch.mockImplementation(() => dispatch);
-
-  const { getByRole } = render(<App />);
-  userEvent.click(getByRole('button', { name: '추가' }));
-
-  expect(dispatch).toBeCalledWith({ type: 'AddTask' });
-});
-
-it('deletes task from tasks with 완료 button', () => {
-  useSelector.mockImplementation((selector) => selector({
-    taskTitle: 'new Title',
-    tasks: [{ id: 1, title: 'codesoom' }],
-  }));
-
-  const dispatch = jest.fn();
-  useDispatch.mockImplementation(() => dispatch);
-
-  const { getByRole, getByText } = render(<App />);
-  userEvent.click(getByRole('button', { name: '완료' }));
-
-  userEvent.click(
-    within(getByText('codesoom'))
-      .getByRole('button', { name: '완료' }),
-  );
-
-  expect(dispatch).toBeCalledWith({
-    type: 'DeleteTask',
-    payload: {
-      id: 1,
-    },
+describe('App', () => {
+  let dispatch;
+  beforeEach(() => {
+    dispatch = jest.fn();
+    useDispatch.mockImplementation(() => dispatch);
   });
-});
 
-it('updates taskTitle', () => {
-  useSelector.mockImplementation((selector) => selector({
-    taskTitle: '',
-    tasks: [],
-  }));
+  it('renders tasks', () => {
+    useSelector.mockImplementation((selector) => selector(
+      { tasks: [{ id: 1, title: 'codesoom' }] },
+    ));
 
-  const dispatch = jest.fn();
-  useDispatch.mockImplementation(() => dispatch);
-  const { getByRole } = render(<App />);
+    const { getByText } = render(<App />);
+    expect(getByText('codesoom')).toBeInTheDocument();
+  });
 
-  userEvent.type(
-    getByRole('textbox', { name: '할 일' }),
-    'codesoom',
-  );
+  it('adds task to tasks with 추가 button', () => {
+    useSelector.mockImplementation((selector) => selector(
+      { tasks: [{ id: 1, title: 'codesoom' }] },
+    ));
 
-  expect(dispatch).toHaveBeenLastCalledWith({
-    type: 'UpdateTaskTitle',
-    payload: {
-      taskTitle: 'm',
-    },
+    const { getByRole } = render(<App />);
+    userEvent.click(getByRole('button', { name: '추가' }));
+
+    expect(dispatch).toBeCalledWith({ type: 'AddTask' });
+  });
+
+  it('deletes task from tasks with 완료 button', () => {
+    useSelector.mockImplementation((selector) => selector(
+      { tasks: [{ id: 1, title: 'codesoom' }] },
+    ));
+
+    const { getByRole, getByText } = render(<App />);
+    userEvent.click(getByRole('button', { name: '완료' }));
+
+    userEvent.click(
+      within(getByText('codesoom'))
+        .getByRole('button', { name: '완료' }),
+    );
+
+    expect(dispatch).toBeCalledWith({
+      type: 'DeleteTask',
+      payload: {
+        id: 1,
+      },
+    });
+  });
+
+  it('updates taskTitle wiht input control', () => {
+    useSelector.mockImplementation((selector) => selector(
+      { taskTitle: '', tasks: [] },
+    ));
+
+    const { getByRole } = render(<App />);
+
+    userEvent.type(
+      getByRole('textbox', { name: '할 일' }),
+      'codesoom',
+    );
+
+    expect(dispatch).toHaveBeenLastCalledWith({
+      type: 'UpdateTaskTitle',
+      payload: {
+        taskTitle: 'm',
+      },
+    });
   });
 });
