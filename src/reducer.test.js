@@ -7,6 +7,13 @@ import {
 } from './actions';
 
 describe('reducer', () => {
+  describe('initialState', () => {
+    it('초깃값 확인', () => {
+      const state = reducer(undefined, { type: 'initState_test' });
+      expect(state).not.toBeUndefined();
+    });
+  });
+
   describe('updateTaskTitle', () => {
     it('changes', () => {
       const state = reducer({
@@ -58,6 +65,7 @@ describe('reducer', () => {
         expect(state.tasks).toHaveLength(0);
       });
     });
+
     context('without existed task ID', () => {
       it('doesnt work', () => {
         const state = reducer({
