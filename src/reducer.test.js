@@ -1,4 +1,9 @@
 import reducer from './reducer';
+import {
+  updateTaskTitle,
+  addTask,
+  deleteTask,
+} from './actions';
 
 describe('reducer', () => {
   describe('updateTaskTitle', () => {
@@ -7,14 +12,7 @@ describe('reducer', () => {
         taskTitle: '',
       };
 
-      const action = {
-        type: 'UpdateTaskTitle',
-        payload: {
-          taskTitle: 'newTitle',
-        },
-      };
-
-      const newState = reducer(state, action);
+      const newState = reducer(state, updateTaskTitle('newTitle'));
 
       expect(newState.taskTitle).toBe('newTitle');
     });
@@ -28,11 +26,7 @@ describe('reducer', () => {
           tasks: [],
         };
 
-        const action = {
-          type: 'AddTask',
-        };
-
-        const newState = reducer(state, action);
+        const newState = reducer(state, addTask());
 
         const { tasks } = newState;
         expect(tasks).toHaveLength(1);
@@ -68,14 +62,7 @@ describe('reducer', () => {
           tasks: [{ id: 1, title: 'codeSoom' }],
         };
 
-        const action = {
-          type: 'DeleteTask',
-          payload: {
-            id: 1,
-          },
-        };
-
-        const newState = reducer(state, action);
+        const newState = reducer(state, deleteTask(1));
 
         const { tasks } = newState;
         expect(tasks).toHaveLength(0);
@@ -89,14 +76,7 @@ describe('reducer', () => {
         tasks: [{ id: 1, title: 'codeSoom' }],
       };
 
-      const action = {
-        type: 'DeleteTask',
-        payload: {
-          id: 2,
-        },
-      };
-
-      const newState = reducer(state, action);
+      const newState = reducer(state, deleteTask(2));
 
       const { tasks } = newState;
       expect(tasks).toHaveLength(1);
