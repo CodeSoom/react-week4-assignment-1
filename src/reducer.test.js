@@ -83,6 +83,23 @@ describe('reducer', () => {
     });
 
     context('with non-existing id', () => {
+      const state = {
+        taskTitle: 'new Title',
+        newId: 100,
+        tasks: [{ id: 1, title: 'codeSoom' }],
+      };
+
+      const action = {
+        type: 'DeleteTask',
+        payload: {
+          id: 2,
+        },
+      };
+
+      const newState = reducer(state, action);
+
+      const { tasks } = newState;
+      expect(tasks).toHaveLength(1);
     });
   });
 });
