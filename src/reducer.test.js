@@ -41,8 +41,24 @@ describe('reducer', () => {
     });
 
     context('without title', () => {
+      const state = {
+        taskTitle: '',
+        newId: 100,
+        tasks: [],
+      };
+
+      const action = {
+        type: 'AddTask',
+      };
+
+      const newState = reducer(state, action);
+
+      const { tasks } = newState;
+      expect(tasks).toHaveLength(0);
+      expect(tasks).toEqual([]);
     });
   });
+
   describe('deleteTask', () => {
     context('with existing id', () => {
       it('delete task from tasks', () => {
