@@ -10,6 +10,7 @@ describe('reducer', () => {
   describe('initialState', () => {
     it('초깃값 확인', () => {
       const state = reducer(undefined, { type: 'initState_test' });
+
       expect(state).not.toBeUndefined();
     });
   });
@@ -17,7 +18,6 @@ describe('reducer', () => {
   describe('updateTaskTitle', () => {
     it('changes', () => {
       const state = reducer({
-        newId: 100,
         taskTitle: '',
       }, updateTaskTitle('New Task'));
 
@@ -54,13 +54,17 @@ describe('reducer', () => {
   });
 
   describe('deleteTask', () => {
+    function reduceDeleteTask(id) {
+      return reducer({
+        tasks: [
+          { id: 1, title: 'Task' },
+        ],
+      }, deleteTask(id));
+    }
+
     context('with existed task ID', () => {
       it('clears', () => {
-        const state = reducer({
-          tasks: [
-            { id: 1, title: 'Task' },
-          ],
-        }, deleteTask(1));
+        const state = reduceDeleteTask(1);
 
         expect(state.tasks).toHaveLength(0);
       });
@@ -68,11 +72,7 @@ describe('reducer', () => {
 
     context('without existed task ID', () => {
       it('doesnt work', () => {
-        const state = reducer({
-          tasks: [
-            { id: 1, title: 'Task' },
-          ],
-        }, deleteTask(100));
+        const state = reduceDeleteTask(100);
 
         expect(state.tasks).toHaveLength(1);
       });
