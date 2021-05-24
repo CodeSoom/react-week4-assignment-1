@@ -20,43 +20,53 @@ describe('reducer', () => {
     });
   });
   describe('addTask', () => {
-    it('adds new task to tasks', () => {
-      const state = {
-        taskTitle: 'new Title',
-        newId: 100,
-        tasks: [],
-      };
+    context('with title', () => {
+      it('adds new task to tasks', () => {
+        const state = {
+          taskTitle: 'new Title',
+          newId: 100,
+          tasks: [],
+        };
 
-      const action = {
-        type: 'AddTask',
-      };
+        const action = {
+          type: 'AddTask',
+        };
 
-      const newState = reducer(state, action);
+        const newState = reducer(state, action);
 
-      const { tasks } = newState;
-      expect(tasks).toHaveLength(1);
-      expect(tasks[0]).toEqual({ id: 100, title: 'new Title' });
+        const { tasks } = newState;
+        expect(tasks).toHaveLength(1);
+        expect(tasks[0]).toEqual({ id: 100, title: 'new Title' });
+      });
+    });
+
+    context('without title', () => {
     });
   });
   describe('deleteTask', () => {
-    it('delete task from tasks', () => {
-      const state = {
-        taskTitle: 'new Title',
-        newId: 100,
-        tasks: [{ id: 1, title: 'codeSoom' }],
-      };
+    context('with existing id', () => {
+      it('delete task from tasks', () => {
+        const state = {
+          taskTitle: 'new Title',
+          newId: 100,
+          tasks: [{ id: 1, title: 'codeSoom' }],
+        };
 
-      const action = {
-        type: 'DeleteTask',
-        payload: {
-          id: 1,
-        },
-      };
+        const action = {
+          type: 'DeleteTask',
+          payload: {
+            id: 1,
+          },
+        };
 
-      const newState = reducer(state, action);
+        const newState = reducer(state, action);
 
-      const { tasks } = newState;
-      expect(tasks).toHaveLength(0);
+        const { tasks } = newState;
+        expect(tasks).toHaveLength(0);
+      });
+    });
+
+    context('with non-existing id', () => {
     });
   });
 });
