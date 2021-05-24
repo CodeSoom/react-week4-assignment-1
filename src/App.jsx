@@ -2,16 +2,27 @@ import { useState } from 'react';
 
 import Page from './Page';
 
-const initialState = ({
+const initialState = {
   newId: 100,
   taskTitle: '',
   tasks: [],
-});
+};
 
 function updateTaskTitle(state, taskTitle) {
   return {
     ...state,
     taskTitle,
+  };
+}
+
+function addTask(state) {
+  const { newId, taskTitle, tasks } = state;
+
+  return {
+    ...state,
+    newId: newId + 1,
+    taskTitle: '',
+    tasks: [...tasks, { id: newId, title: taskTitle }],
   };
 }
 
@@ -25,12 +36,7 @@ export default function App() {
   }
 
   function handleClickAddTask() {
-    setState({
-      ...state,
-      newId: newId + 1,
-      taskTitle: '',
-      tasks: [...tasks, { id: newId, title: taskTitle }],
-    });
+    setState(addTask(state));
   }
 
   function handleClickDeleteTask(id) {
