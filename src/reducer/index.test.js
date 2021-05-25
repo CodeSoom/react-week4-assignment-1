@@ -2,7 +2,7 @@ import reducer from '.';
 
 describe('reducer', () => {
   describe('updateTaskTitle', () => {
-    it('returns new state with new task title', () => {
+    it('changes new task title', () => {
       const previousState = {
         taskTitle: '',
       };
@@ -21,7 +21,7 @@ describe('reducer', () => {
   });
 
   describe('addTask', () => {
-    it('returns new state with new task', () => {
+    it('appends a new task into tasks', () => {
       const previousState = {
         newId: 100,
         taskTitle: '',
