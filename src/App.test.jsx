@@ -38,8 +38,7 @@ describe('App', () => {
       { tasks: [{ id: 1, title: 'codesoom' }] },
     ));
 
-    const { getByRole, getByText } = render(<App />);
-    userEvent.click(getByRole('button', { name: '완료' }));
+    const { getByText } = render(<App />);
 
     userEvent.click(
       within(getByText('codesoom'))
