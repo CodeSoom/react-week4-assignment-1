@@ -27,5 +27,15 @@ export default function reducer(state, action) {
     };
   }
 
+  if (type === 'deleteTask') {
+    const { tasks } = state;
+    const { id } = payload;
+
+    return {
+      ...state,
+      tasks: tasks.filter((task) => task.id !== id),
+    };
+  }
+
   return { ...state };
 }
