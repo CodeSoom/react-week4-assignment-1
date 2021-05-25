@@ -51,5 +51,45 @@ describe('reducer 관련 테스트 코드', () => {
         });
       });
     });
+
+    describe('deleteTask', () => {
+      context('task id 있을 경우', () => {
+        it('tasks에 task가 삭제된다', () => {
+        // given
+          const previouState = {
+            tasks: [{ id: 1, title: '뭐라도 하기' }],
+          };
+
+          const action = {
+            type: 'deleteTask',
+            payload: {
+              id: 1,
+            },
+          };
+          // when
+          const state = reducer(previouState, action);
+          // then
+          expect(state.tasks).toHaveLength(0);
+        });
+
+        context('task id 없을 경우', () => {
+          it('변화가 일어나지 않는다', () => {
+          // given
+            const previouState = {
+              tasks: [],
+            };
+
+            const action = {
+              type: 'deleteTask',
+              payload: {},
+            };
+            // when
+            const state = reducer(previouState, action);
+            // then
+            expect(state.tasks).toHaveLength(0);
+          });
+        });
+      });
+    });
   });
 });
