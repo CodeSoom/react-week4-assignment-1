@@ -1,4 +1,4 @@
-import { render, within } from '@testing-library/react';
+import { fireEvent, render, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -61,15 +61,15 @@ describe('App', () => {
 
     const { getByRole } = render(<App />);
 
-    userEvent.type(
+    fireEvent.change(
       getByRole('textbox', { name: '할 일' }),
-      'codesoom',
+      { target: { value: 'codesoom' } },
     );
 
-    expect(dispatch).toHaveBeenLastCalledWith({
+    expect(dispatch).toBeCalledWith({
       type: 'UpdateTaskTitle',
       payload: {
-        taskTitle: 'm',
+        taskTitle: 'codesoom',
       },
     });
   });
