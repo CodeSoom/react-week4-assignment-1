@@ -29,22 +29,13 @@ describe('reducer', () => {
           tasks: [],
         };
 
-        const { newId, tasks } = previousState;
+        const action = { type: 'addTask' };
 
-        const action = {
-          type: 'addTask',
-          payload: {
-            newId: newId + 1,
-            taskTitle: '뭐라도 하기',
-            tasks,
-          },
-        };
+        const { tasks } = reducer(previousState, action);
 
-        const { tasks: todos } = reducer(previousState, action);
-
-        expect(todos).toHaveLength(1);
-        expect(todos[0].id).not.toBeUndefined();
-        expect(todos[0].title).toBe('뭐라도 하기');
+        expect(tasks).toHaveLength(1);
+        expect(tasks[0].id).not.toBeUndefined();
+        expect(tasks[0].title).toBe('뭐라도 하기');
       });
 
       it('clears taskTitle', () => {
@@ -54,16 +45,7 @@ describe('reducer', () => {
           tasks: [],
         };
 
-        const { newId, tasks } = previousState;
-
-        const action = {
-          type: 'addTask',
-          payload: {
-            newId: newId + 1,
-            taskTitle: '뭐라도 하기',
-            tasks,
-          },
-        };
+        const action = { type: 'addTask' };
 
         const { taskTitle } = reducer(previousState, action);
 
@@ -79,20 +61,11 @@ describe('reducer', () => {
           tasks: [],
         };
 
-        const { newId, tasks } = previousState;
+        const action = { type: 'addTask' };
 
-        const action = {
-          type: 'addTask',
-          payload: {
-            newId: newId + 1,
-            taskTitle: '',
-            tasks,
-          },
-        };
+        const { tasks } = reducer(previousState, action);
 
-        const { tasks: todos } = reducer(previousState, action);
-
-        expect(todos).toHaveLength(0);
+        expect(tasks).toHaveLength(0);
       });
     });
   });
