@@ -1,4 +1,4 @@
-import { render, fireEvent } from '@testing-library/react';
+import { render } from '@testing-library/react';
 
 import List from './List';
 
@@ -44,11 +44,7 @@ describe('List', () => {
     it('renders “완료” button to delete a task', () => {
       const { getAllByText } = renderList(tasks);
 
-      const buttons = getAllByText('완료');
-
-      fireEvent.click(buttons[0]);
-
-      expect(handleClickDelete).toBeCalledWith(1);
+      expect(getAllByText(/완료/)).toHaveLength(tasks.length);
     });
   });
 
