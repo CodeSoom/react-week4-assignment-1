@@ -17,22 +17,21 @@ describe('App', () => {
   beforeEach(() => {
     dispatch.mockClear();
     useDispatch.mockImplementation(() => dispatch);
+
+    useSelector.mockImplementation((selector) => selector(
+      {
+        taskTitle: '',
+        tasks: [{ id: 1, title: 'codesoom' }],
+      },
+    ));
   });
 
   it('renders tasks', () => {
-    useSelector.mockImplementation((selector) => selector(
-      { tasks: [{ id: 1, title: 'codesoom' }] },
-    ));
-
     const { getByText } = render(<App />);
     expect(getByText('codesoom')).toBeInTheDocument();
   });
 
   it('adds task to tasks with 추가 button', () => {
-    useSelector.mockImplementation((selector) => selector(
-      { tasks: [{ id: 1, title: 'codesoom' }] },
-    ));
-
     const { getByRole } = render(<App />);
     userEvent.click(getByRole('button', { name: '추가' }));
 
@@ -40,10 +39,6 @@ describe('App', () => {
   });
 
   it('deletes task from tasks with 완료 button', () => {
-    useSelector.mockImplementation((selector) => selector(
-      { tasks: [{ id: 1, title: 'codesoom' }] },
-    ));
-
     const { getByText } = render(<App />);
 
     userEvent.click(
@@ -55,10 +50,6 @@ describe('App', () => {
   });
 
   it('updates taskTitle with input control', () => {
-    useSelector.mockImplementation((selector) => selector(
-      { taskTitle: '', tasks: [] },
-    ));
-
     const { getByRole } = render(<App />);
 
     fireEvent.change(
