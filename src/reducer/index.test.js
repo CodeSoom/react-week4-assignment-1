@@ -44,6 +44,29 @@ describe('reducer', () => {
       expect(todos).toHaveLength(1);
       expect(todos[0].title).toBe('뭐라도 하기');
     });
+
+    it('clears taskTitle', () => {
+      const previousState = {
+        newId: 100,
+        taskTitle: '',
+        tasks: [],
+      };
+
+      const { newId, tasks } = previousState;
+
+      const action = {
+        type: 'addTask',
+        payload: {
+          newId: newId + 1,
+          taskTitle: '뭐라도 하기',
+          tasks,
+        },
+      };
+
+      const { taskTitle } = reducer(previousState, action);
+
+      expect(taskTitle).toBe('');
+    });
   });
 
   describe('deleteTask', () => {
