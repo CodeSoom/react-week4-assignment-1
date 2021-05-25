@@ -35,7 +35,7 @@ describe('reducer', () => {
           type: 'addTask',
           payload: {
             newId: newId + 1,
-            taskTitle: '',
+            taskTitle: '뭐라도 하기',
             tasks,
           },
         };
@@ -59,7 +59,7 @@ describe('reducer', () => {
           type: 'addTask',
           payload: {
             newId: newId + 1,
-            taskTitle: '',
+            taskTitle: '뭐라도 하기',
             tasks,
           },
         };
@@ -70,7 +70,30 @@ describe('reducer', () => {
       });
     });
 
-    context('without taskTitle', () => {});
+    context('without taskTitle', () => {
+      it('doesn\'t work', () => {
+        const previousState = {
+          newId: 100,
+          taskTitle: '',
+          tasks: [],
+        };
+
+        const { newId, tasks } = previousState;
+
+        const action = {
+          type: 'addTask',
+          payload: {
+            newId: newId + 1,
+            taskTitle: '',
+            tasks,
+          },
+        };
+
+        const { tasks: todos } = reducer(previousState, action);
+
+        expect(todos).toHaveLength(0);
+      });
+    });
   });
 
   describe('deleteTask', () => {
