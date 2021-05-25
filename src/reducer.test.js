@@ -20,5 +20,27 @@ describe('reducer 관련 테스트 코드', () => {
       // then
       expect(state.taskTitle).toBe('뭐라도 하기');
     });
+
+    describe('addTask', () => {
+      it('새로운 task title이 있으면 tasks에 새로운 task가 추가되어야 한다', () => {
+        // given
+        const previousState = {
+          newId: 100,
+          taskTitle: '',
+          tasks: [],
+        };
+
+        const action = {
+          type: 'addTask',
+          payload: {
+            taskTitle: '뭐라도 하기',
+          },
+        };
+        // when
+        const state = reducer(previousState, action);
+        // then
+        expect(state.tasks[0]).toBe({ id: 1, title: '뭐라도 하기' });
+      });
+    });
   });
 });
