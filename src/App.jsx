@@ -8,13 +8,6 @@ const initialState = {
   tasks: [],
 };
 
-function updateTaskTitle(state, taskTitle) {
-  return {
-    ...state,
-    taskTitle,
-  };
-}
-
 function addTask(state) {
   const { newId, taskTitle, tasks } = state;
 
