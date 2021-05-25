@@ -1,16 +1,16 @@
 export const updateTaskTitle = (newTitle) => ({
-  type: 'UpdateTaskTitle',
+  type: 'tasks/updateTitle',
   payload: {
     taskTitle: newTitle,
   },
 });
 
 export const addTask = () => ({
-  type: 'AddTask',
+  type: 'tasks/addNewTask',
 });
 
 export const deleteTask = (id) => ({
-  type: 'DeleteTask',
+  type: 'tasks/deleteTask',
   payload: {
     id,
   },

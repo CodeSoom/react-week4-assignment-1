@@ -8,13 +8,13 @@ export default function reducer(state = initialState, action) {
   const { newId, tasks, taskTitle } = state;
 
   switch (action.type) {
-  case ('UpdateTaskTitle'):
+  case ('tasks/updateTitle'):
     return {
       ...state,
       taskTitle: action.payload.taskTitle,
     };
 
-  case ('AddTask'):
+  case ('tasks/addNewTask'):
     if (taskTitle === '') {
       return state;
     }
@@ -25,7 +25,7 @@ export default function reducer(state = initialState, action) {
       tasks: [...tasks, { id: newId, title: taskTitle }],
     };
 
-  case ('DeleteTask'):
+  case ('tasks/deleteTask'):
     return {
       ...state,
       tasks: tasks.filter((task) => task.id !== action.payload.id),
