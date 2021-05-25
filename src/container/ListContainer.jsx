@@ -4,7 +4,7 @@ import List from '../presentational/List';
 import { deleteTask } from '../redux/actions';
 
 export default function ListContainer() {
-  const { tasks } = useSelector((state) => state);
+  const tasks = useSelector((state) => state.tasks);
   const dispatch = useDispatch();
 
   function handleClickDeleteTask(id) {

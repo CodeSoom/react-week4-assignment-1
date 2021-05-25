@@ -7,7 +7,7 @@ import {
 } from '../redux/actions';
 
 export default function InputContainer() {
-  const { taskTitle } = useSelector((state) => state);
+  const taskTitle = useSelector((state) => state.taskTitle);
   const dispatch = useDispatch();
 
   function handleChangeTitle(e) {
