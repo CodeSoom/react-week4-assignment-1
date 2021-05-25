@@ -6,24 +6,22 @@ import { deleteTask } from '../redux/actions';
 
 jest.mock('react-redux');
 
-describe('ListContainer', () => {
-  it('deletes task from tasks with 완료 button', () => {
-    const dispatch = jest.fn();
-    useDispatch.mockImplementation(() => dispatch);
-    useSelector.mockImplementation((selector) => selector(
-      {
-        taskTitle: '',
-        tasks: [{ id: 1, title: 'codesoom' }],
-      },
-    ));
+it('deletes task from tasks with 완료 button', () => {
+  const dispatch = jest.fn();
+  useDispatch.mockImplementation(() => dispatch);
+  useSelector.mockImplementation((selector) => selector(
+    {
+      taskTitle: '',
+      tasks: [{ id: 1, title: 'codesoom' }],
+    },
+  ));
 
-    const { getByText } = render(<ListContainer />);
+  const { getByText } = render(<ListContainer />);
 
-    fireEvent.click(
-      within(getByText('codesoom'))
-        .getByRole('button', { name: '완료' }),
-    );
+  fireEvent.click(
+    within(getByText('codesoom'))
+      .getByRole('button', { name: '완료' }),
+  );
 
-    expect(dispatch).toBeCalledWith(deleteTask(1));
-  });
+  expect(dispatch).toBeCalledWith(deleteTask(1));
 });
