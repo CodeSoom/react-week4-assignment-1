@@ -1,9 +1,8 @@
-import { fireEvent, render, within } from '@testing-library/react';
+import { render, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { useDispatch, useSelector } from 'react-redux';
 
 import {
-  updateTaskTitle,
   addTask,
   deleteTask,
 } from './redux/actions';
@@ -47,16 +46,5 @@ describe('App', () => {
     );
 
     expect(dispatch).toBeCalledWith(deleteTask(1));
-  });
-
-  it('updates taskTitle with input control', () => {
-    const { getByRole } = render(<App />);
-
-    fireEvent.change(
-      getByRole('textbox', { name: '할 일' }),
-      { target: { value: 'codesoom' } },
-    );
-
-    expect(dispatch).toBeCalledWith(updateTaskTitle('codesoom'));
   });
 });
