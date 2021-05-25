@@ -53,7 +53,7 @@ describe('App', () => {
     });
   });
 
-  it('updates taskTitle wiht input control', () => {
+  it('updates taskTitle with input control', () => {
     useSelector.mockImplementation((selector) => selector(
       { taskTitle: '', tasks: [] },
     ));
