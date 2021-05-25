@@ -44,4 +44,32 @@ describe('reducer', () => {
       expect(todos).toHaveLength(1);
     });
   });
+
+  describe('deleteTask', () => {
+    it('remove the task from tasks', () => {
+      const previousState = {
+        newId: 100,
+        taskTitle: '',
+        tasks: [
+          {
+            id: 1,
+            title: 'Task',
+          },
+        ],
+      };
+
+      const { newId } = previousState;
+
+      const action = {
+        type: 'deleteTask',
+        payload: {
+          newId,
+        },
+      };
+
+      const { tasks } = reducer(previousState, action);
+
+      expect(tasks).toHaveLength(0);
+    });
+  });
 });
