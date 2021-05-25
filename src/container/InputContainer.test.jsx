@@ -9,26 +9,31 @@ import {
 
 jest.mock('react-redux');
 
-it('updates taskTitle with input control', () => {
+describe('InputContainer', () => {
   const dispatch = jest.fn();
-  useDispatch.mockImplementation(() => dispatch);
-  useSelector.mockImplementation((selector) => selector({ taskTitle: '' }));
+  beforeEach(() => {
+    dispatch.mockClear();
+    useDispatch.mockImplementation(() => dispatch);
+  });
 
-  const { getByRole } = render(<InputContainer />);
+  it('updates taskTitle with input control', () => {
+    useSelector.mockImplementation((selector) => selector({ taskTitle: '' }));
 
-  fireEvent.change(
-    getByRole('textbox', { name: '할 일' }),
-    { target: { value: 'codesoom' } },
-  );
+    const { getByRole } = render(<InputContainer />);
 
-  expect(dispatch).toBeCalledWith(updateTaskTitle('codesoom'));
-});
+    fireEvent.change(
+      getByRole('textbox', { name: '할 일' }),
+      { target: { value: 'codesoom' } },
+    );
 
-it('adds task to tasks with 추가 button', () => {
-  const dispatch = jest.fn();
-  useDispatch.mockImplementation(() => dispatch);
-  const { getByRole } = render(<InputContainer />);
-  fireEvent.click(getByRole('button', { name: '추가' }));
+    expect(dispatch).toBeCalledWith(updateTaskTitle('codesoom'));
+  });
 
-  expect(dispatch).toBeCalledWith(addTask());
+  it('adds task to tasks with 추가 button', () => {
+    const { getByRole } = render(<InputContainer />);
+
+    fireEvent.click(getByRole('button', { name: '추가' }));
+
+    expect(dispatch).toBeCalledWith(addTask());
+  });
 });
