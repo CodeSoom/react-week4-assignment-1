@@ -22,8 +22,8 @@ test('Page', () => {
     />
   ));
 
-  expect(getByText(/Task-1/)).not.toBeNull();
-  expect(getByText(/Task-2/)).not.toBeNull();
+  expect(getByText(/Task-1/)).toBeInTheDocument();
+  expect(getByText(/Task-2/)).toBeInTheDocument();
 
   fireEvent.click(getByText('추가'));
 
