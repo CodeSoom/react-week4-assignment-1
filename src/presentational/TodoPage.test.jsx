@@ -1,6 +1,6 @@
 import { render, fireEvent } from '@testing-library/react';
 
-import Page from './Page';
+import TodoPage from './TodoPage';
 
 test('Page', () => {
   const handleChangeTitle = jest.fn();
@@ -13,7 +13,7 @@ test('Page', () => {
   ];
 
   const { getByText } = render((
-    <Page
+    <TodoPage
       taskTitle=""
       onChangeTitle={handleChangeTitle}
       onClickAddTask={handleClickAddTask}

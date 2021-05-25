@@ -1,7 +1,7 @@
-import Page from './presentational/Page';
+import TodoPage from './presentational/TodoPage';
 
 export default function App() {
   return (
-    <Page />
+    <TodoPage />
   );
 }
