@@ -1,31 +1,15 @@
-import { render, fireEvent } from '@testing-library/react';
+import { render } from '@testing-library/react';
+import { useSelector } from 'react-redux';
 
 import TodoPage from './TodoPage';
 
-test('Page', () => {
-  const handleChangeTitle = jest.fn();
-  const handleClickAddTask = jest.fn();
-  const handleClickDeleteTask = jest.fn();
+jest.mock('react-redux');
 
-  const tasks = [
-    { id: 1, title: 'Task-1' },
-    { id: 2, title: 'Task-2' },
-  ];
+it('renders header', () => {
+  const initialState = { taskTitle: '', tasks: [] };
+  useSelector.mockImplementation((selector) => selector(initialState));
 
-  const { getByText } = render((
-    <TodoPage
-      taskTitle=""
-      onChangeTitle={handleChangeTitle}
-      onClickAddTask={handleClickAddTask}
-      tasks={tasks}
-      onClickDeleteTask={handleClickDeleteTask}
-    />
-  ));
+  const { getByText } = render(<TodoPage />);
 
-  expect(getByText(/Task-1/)).toBeInTheDocument();
-  expect(getByText(/Task-2/)).toBeInTheDocument();
-
-  fireEvent.click(getByText('추가'));
-
-  expect(handleClickAddTask).toBeCalled();
+  expect(getByText('To-do')).toBeInTheDocument();
 });
