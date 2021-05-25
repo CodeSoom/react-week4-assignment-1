@@ -3,6 +3,7 @@ import reducer from './reducer';
 import {
   updateTaskTitle,
   addTask,
+  deleteTask,
 } from './actions';
 
 describe('reducer 관련 테스트 코드', () => {
@@ -59,15 +60,8 @@ describe('reducer 관련 테스트 코드', () => {
           const previouState = {
             tasks: [{ id: 1, title: '뭐라도 하기' }],
           };
-
-          const action = {
-            type: 'deleteTask',
-            payload: {
-              id: 1,
-            },
-          };
           // when
-          const state = reducer(previouState, action);
+          const state = reducer(previouState, deleteTask(1));
           // then
           expect(state.tasks).toHaveLength(0);
         });
@@ -78,13 +72,8 @@ describe('reducer 관련 테스트 코드', () => {
             const previouState = {
               tasks: [],
             };
-
-            const action = {
-              type: 'deleteTask',
-              payload: {},
-            };
             // when
-            const state = reducer(previouState, action);
+            const state = reducer(previouState, deleteTask());
             // then
             expect(state.tasks).toHaveLength(0);
           });
