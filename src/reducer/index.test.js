@@ -42,6 +42,7 @@ describe('reducer', () => {
       const { tasks: todos } = reducer(previousState, action);
 
       expect(todos).toHaveLength(1);
+      expect(todos[0].title).toBe('뭐라도 하기');
     });
   });
 
