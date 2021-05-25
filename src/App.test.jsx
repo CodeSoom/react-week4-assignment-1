@@ -3,7 +3,6 @@ import userEvent from '@testing-library/user-event';
 import { useDispatch, useSelector } from 'react-redux';
 
 import {
-  addTask,
   deleteTask,
 } from './redux/actions';
 
@@ -28,13 +27,6 @@ describe('App', () => {
   it('renders tasks', () => {
     const { getByText } = render(<App />);
     expect(getByText('codesoom')).toBeInTheDocument();
-  });
-
-  it('adds task to tasks with 추가 button', () => {
-    const { getByRole } = render(<App />);
-    userEvent.click(getByRole('button', { name: '추가' }));
-
-    expect(dispatch).toBeCalledWith(addTask());
   });
 
   it('deletes task from tasks with 완료 button', () => {
