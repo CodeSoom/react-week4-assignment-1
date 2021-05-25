@@ -16,7 +16,7 @@ export default function reducer(state, action) {
     return {
       ...state,
       newId,
-      taskTitle,
+      taskTitle: '',
       tasks: [
         ...tasks,
         {
