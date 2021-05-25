@@ -1,28 +1,12 @@
-import { render, fireEvent } from '@testing-library/react';
-
+import { render } from '@testing-library/react';
 import Input from './Input';
 
-test('Input', () => {
-  const handleChange = jest.fn();
-  const handleClick = jest.fn();
+it('renders input control', () => {
+  const { getByPlaceholderText } = render(<Input />);
+  expect(getByPlaceholderText('할 일을 입력해 주세요')).toBeInTheDocument();
+});
 
-  const { getByDisplayValue, getByLabelText, getByText } = render((
-    <Input
-      value="기존 할 일"
-      onChange={handleChange}
-      onClick={handleClick}
-    />
-  ));
-
-  expect(getByDisplayValue('기존 할 일')).toBeInTheDocument();
-
-  fireEvent.change(getByLabelText('할 일'), {
-    target: { value: '무언가 하기' },
-  });
-
-  expect(handleChange).toBeCalled();
-
-  fireEvent.click(getByText('추가'));
-
-  expect(handleClick).toBeCalled();
+it('renders 추가 button', () => {
+  const { getByRole } = render(<Input />);
+  expect(getByRole('button', { name: '추가' })).toBeInTheDocument();
 });
