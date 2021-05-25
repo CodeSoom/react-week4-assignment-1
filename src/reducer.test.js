@@ -14,13 +14,17 @@ describe('reducer', () => {
   });
 
   describe('addTask', () => {
+    function reduceAddTask(taskTitle) {
+      return reducer({
+        newId: 100,
+        taskTitle,
+        tasks: [],
+      }, addTask());
+    }
+
     context('with task title', () => {
       it('appends a new task into tasks', () => {
-        const state = reducer({
-          newId: 100,
-          taskTitle: 'New Task',
-          tasks: [],
-        }, addTask());
+        const state = reduceAddTask('New Task');
 
         expect(state.tasks).toHaveLength(1);
         expect(state.tasks[0].id).not.toBeUndefined();
@@ -28,11 +32,7 @@ describe('reducer', () => {
       });
 
       it('clears task title', () => {
-        const state = reducer({
-          newId: 100,
-          taskTitle: 'New Task',
-          tasks: [],
-        }, addTask());
+        const state = reduceAddTask('New Task');
 
         expect(state.taskTitle).toBe('');
       });
@@ -40,11 +40,7 @@ describe('reducer', () => {
 
     context('without task title', () => {
       it("doesn't work", () => {
-        const state = reducer({
-          newId: 100,
-          taskTitle: '',
-          tasks: [],
-        }, addTask());
+        const state = reduceAddTask('');
 
         expect(state.tasks).toHaveLength(0);
       });
