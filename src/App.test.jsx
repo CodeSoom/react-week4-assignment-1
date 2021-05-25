@@ -7,9 +7,9 @@ import App from './App';
 jest.mock('react-redux');
 
 describe('App', () => {
-  let dispatch;
+  const dispatch = jest.fn();
   beforeEach(() => {
-    dispatch = jest.fn();
+    dispatch.mockClear();
     useDispatch.mockImplementation(() => dispatch);
   });
 
