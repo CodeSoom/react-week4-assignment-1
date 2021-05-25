@@ -2,6 +2,12 @@ import { fireEvent, render, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { useDispatch, useSelector } from 'react-redux';
 
+import {
+  updateTaskTitle,
+  addTask,
+  deleteTask,
+} from './actions';
+
 import App from './App';
 
 jest.mock('react-redux');
@@ -30,7 +36,7 @@ describe('App', () => {
     const { getByRole } = render(<App />);
     userEvent.click(getByRole('button', { name: '추가' }));
 
-    expect(dispatch).toBeCalledWith({ type: 'AddTask' });
+    expect(dispatch).toBeCalledWith(addTask());
   });
 
   it('deletes task from tasks with 완료 button', () => {
@@ -45,12 +51,7 @@ describe('App', () => {
         .getByRole('button', { name: '완료' }),
     );
 
-    expect(dispatch).toBeCalledWith({
-      type: 'DeleteTask',
-      payload: {
-        id: 1,
-      },
-    });
+    expect(dispatch).toBeCalledWith(deleteTask(1));
   });
 
   it('updates taskTitle with input control', () => {
@@ -65,11 +66,6 @@ describe('App', () => {
       { target: { value: 'codesoom' } },
     );
 
-    expect(dispatch).toBeCalledWith({
-      type: 'UpdateTaskTitle',
-      payload: {
-        taskTitle: 'codesoom',
-      },
-    });
+    expect(dispatch).toBeCalledWith(updateTaskTitle('codesoom'));
   });
 });

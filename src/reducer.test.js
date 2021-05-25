@@ -49,11 +49,7 @@ describe('reducer', () => {
           tasks: [],
         };
 
-        const action = {
-          type: 'AddTask',
-        };
-
-        const newState = reducer(state, action);
+        const newState = reducer(state, addTask());
 
         const { tasks } = newState;
         expect(tasks).toHaveLength(0);
