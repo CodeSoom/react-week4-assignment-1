@@ -7,31 +7,30 @@ export const initialState = {
 export default function reducer(state = initialState, action) {
   const { newId, tasks, taskTitle } = state;
 
-  switch (action.type) {
-  case ('tasks/updateTitle'):
-    return {
-      ...state,
+  const operatorOnState = {
+    'tasks/updateTitle': (oldState) => ({
+      ...oldState,
       taskTitle: action.payload.taskTitle,
-    };
+    }),
 
-  case ('tasks/addNewTask'):
-    if (taskTitle === '') {
-      return state;
-    }
-    return {
-      ...state,
-      newId: newId + 1,
-      taskTitle: '',
-      tasks: [...tasks, { id: newId, title: taskTitle }],
-    };
+    'tasks/addNewTask': (oldState) => {
+      if (taskTitle === '') {
+        return oldState;
+      }
+      return {
+        ...oldState,
+        newId: newId + 1,
+        taskTitle: '',
+        tasks: [...tasks, { id: newId, title: taskTitle }],
+      };
+    },
 
-  case ('tasks/deleteTask'):
-    return {
-      ...state,
+    'tasks/deleteTask': (oldState) => ({
+      ...oldState,
       tasks: tasks.filter((task) => task.id !== action.payload.id),
-    };
+    }),
+  };
 
-  default:
-    return state;
-  }
+  const getNewState = operatorOnState[action.type];
+  return getNewState ? getNewState(state) : state;
 }
