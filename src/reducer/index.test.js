@@ -58,18 +58,18 @@ describe('reducer', () => {
         ],
       };
 
-      const { newId } = previousState;
+      const { tasks } = previousState;
 
       const action = {
         type: 'deleteTask',
         payload: {
-          newId,
+          id: tasks[0].id,
         },
       };
 
-      const { tasks } = reducer(previousState, action);
+      const { tasks: todos } = reducer(previousState, action);
 
-      expect(tasks).toHaveLength(0);
+      expect(todos).toHaveLength(0);
     });
   });
 });
