@@ -4,9 +4,9 @@ import {
   updateTaskTitle,
   addTask,
   deleteTask,
-} from './actions';
+} from './redux/actions';
 
-import Page from './Page';
+import Page from './presentational/Page';
 
 export default function App() {
   const { taskTitle, tasks } = useSelector((state) => state);

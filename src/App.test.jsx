@@ -6,7 +6,7 @@ import {
   updateTaskTitle,
   addTask,
   deleteTask,
-} from './actions';
+} from './redux/actions';
 
 import App from './App';
 
