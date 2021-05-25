@@ -28,17 +28,8 @@ describe('reducer 관련 테스트 코드', () => {
           tasks: [],
         };
 
-<<<<<<< HEAD
         // when
         const state = reducer(setState, addTask());
-=======
-        const action = {
-          type: 'addTask',
-          payload: {},
-        };
-        // when
-        const state = reducer(setState, action);
->>>>>>> 2ae82ba639a7e71e33b9d95491a5566813618656
         // then
         expect(state.tasks[0].title).toBe('뭐라도 하기');
       });
