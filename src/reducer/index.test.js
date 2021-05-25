@@ -19,4 +19,29 @@ describe('reducer', () => {
       expect(taskTitle).toBe('New Title');
     });
   });
+
+  describe('addTask', () => {
+    it('returns new state with new task', () => {
+      const previousState = {
+        newId: 100,
+        taskTitle: '',
+        tasks: [],
+      };
+
+      const { newId, tasks } = previousState;
+
+      const action = {
+        type: 'addTask',
+        payload: {
+          newId: newId + 1,
+          taskTitle: '뭐라도 하기',
+          tasks,
+        },
+      };
+
+      const { tasks: todos } = reducer(previousState, action);
+
+      expect(todos).toHaveLength(1);
+    });
+  });
 });
