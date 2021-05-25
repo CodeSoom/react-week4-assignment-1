@@ -21,52 +21,56 @@ describe('reducer', () => {
   });
 
   describe('addTask', () => {
-    it('appends a new task into tasks', () => {
-      const previousState = {
-        newId: 100,
-        taskTitle: '',
-        tasks: [],
-      };
+    context('with taskTitle', () => {
+      it('appends a new task into tasks', () => {
+        const previousState = {
+          newId: 100,
+          taskTitle: '',
+          tasks: [],
+        };
 
-      const { newId, tasks } = previousState;
+        const { newId, tasks } = previousState;
 
-      const action = {
-        type: 'addTask',
-        payload: {
-          newId: newId + 1,
-          taskTitle: '뭐라도 하기',
-          tasks,
-        },
-      };
+        const action = {
+          type: 'addTask',
+          payload: {
+            newId: newId + 1,
+            taskTitle: '',
+            tasks,
+          },
+        };
 
-      const { tasks: todos } = reducer(previousState, action);
+        const { tasks: todos } = reducer(previousState, action);
 
-      expect(todos).toHaveLength(1);
-      expect(todos[0].title).toBe('뭐라도 하기');
+        expect(todos).toHaveLength(1);
+        expect(todos[0].title).toBe('뭐라도 하기');
+      });
+
+      it('clears taskTitle', () => {
+        const previousState = {
+          newId: 100,
+          taskTitle: '',
+          tasks: [],
+        };
+
+        const { newId, tasks } = previousState;
+
+        const action = {
+          type: 'addTask',
+          payload: {
+            newId: newId + 1,
+            taskTitle: '',
+            tasks,
+          },
+        };
+
+        const { taskTitle } = reducer(previousState, action);
+
+        expect(taskTitle).toBe('');
+      });
     });
 
-    it('clears taskTitle', () => {
-      const previousState = {
-        newId: 100,
-        taskTitle: '',
-        tasks: [],
-      };
-
-      const { newId, tasks } = previousState;
-
-      const action = {
-        type: 'addTask',
-        payload: {
-          newId: newId + 1,
-          taskTitle: '뭐라도 하기',
-          tasks,
-        },
-      };
-
-      const { taskTitle } = reducer(previousState, action);
-
-      expect(taskTitle).toBe('');
-    });
+    context('without taskTitle', () => {});
   });
 
   describe('deleteTask', () => {
