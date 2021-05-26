@@ -69,5 +69,21 @@ describe('InputContainer', () => {
         },
       });
     });
+
+    it('추가 버튼 클릭할 경우', () => {
+      useDispatch.mockImplementation(() => dispatch);
+
+      useSelector.mockImplementation((selector) => selector({
+        taskTitle: '',
+      }));
+
+      const { getByText } = render((
+        <InputContainer />
+      ));
+
+      fireEvent.click(getByText(/추가/));
+
+      expect(dispatch).not.toBeCalled();
+    });
   });
 });
