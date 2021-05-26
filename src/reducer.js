@@ -1,10 +1,7 @@
 const initailState = {
   newId: 100,
   taskTitle: '',
-  tasks: [
-    { id: 1, title: '아무 것도 하지 않기 #1' },
-    { id: 2, title: '아무 것도 하지 않기 #2' },
-  ],
+  tasks: [],
 };
 
 // Redux action
