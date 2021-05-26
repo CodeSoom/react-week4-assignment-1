@@ -13,24 +13,22 @@ describe('InputContainer', () => {
 
   useDispatch.mockImplementation(() => dispatch);
 
-  useSelector.mockImplementation((selector) => selector({
-    taskTitle: 'New Title',
-  }));
+  useSelector.mockImplementation((selector) => selector({}));
 
   it('adds task', () => {
     const { getByText } = render((<InputContainer />));
 
-    expect(getByText(/추가/)).not.toBeNull();
-    fireEvent.click(getByText(/추가/));
+    expect(getByText('추가')).not.toBeNull();
+    fireEvent.click(getByText('추가'));
     expect(dispatch).toBeCalledWith({ type: 'addTask' });
   });
 
   it('changes task title', () => {
-    const { getByLabelText } = render((<InputContainer />));
+    const { getByPlaceholderText } = render((<InputContainer />));
 
-    fireEvent.change(getByLabelText(/할 일/), { target: { value: 'Task-1' } });
+    fireEvent.change(getByPlaceholderText('할 일을 입력해 주세요'), { target: { value: 'Task-1' } });
 
     expect(dispatch).toBeCalled();
-    expect(getByLabelText(/할 일/).value).not.toBeNull();
+    expect(getByPlaceholderText('할 일을 입력해 주세요')).toHaveValue('Task-1');
   });
 });
