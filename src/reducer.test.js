@@ -35,7 +35,7 @@ describe('reducer', () => {
     }
 
     context('with task title', () => {
-      it('add', () => {
+      it('adds', () => {
         const state = reduceAddTask('New Task');
 
         expect(state.tasks).toHaveLength(1);

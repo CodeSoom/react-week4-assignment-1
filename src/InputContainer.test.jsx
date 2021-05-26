@@ -17,7 +17,7 @@ describe('InputContainer', () => {
     taskTitle: 'New Title',
   }));
 
-  it('add task', () => {
+  it('adds task', () => {
     const { getByText } = render((<InputContainer />));
 
     expect(getByText(/추가/)).not.toBeNull();
