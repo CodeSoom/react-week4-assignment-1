@@ -17,14 +17,8 @@ describe('InputContainer', () => {
     taskTitle: 'New Title',
   }));
 
-  function renderInputContainer() {
-    return render((
-      <InputContainer />
-    ));
-  }
-
   it('add task', () => {
-    const { getByText } = renderInputContainer();
+    const { getByText } = render((<InputContainer />));
 
     expect(getByText(/추가/)).not.toBeNull();
     fireEvent.click(getByText(/추가/));
@@ -32,7 +26,7 @@ describe('InputContainer', () => {
   });
 
   it('changes task title', () => {
-    const { getByLabelText } = renderInputContainer();
+    const { getByLabelText } = render((<InputContainer />));
 
     fireEvent.change(getByLabelText(/할 일/), { target: { value: 'Task-1' } });
 
