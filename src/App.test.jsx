@@ -1,20 +1,15 @@
 import { render } from '@testing-library/react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import App from './App';
 
 jest.mock('react-redux');
 
-it('renders To-do tasks', () => {
-  const dispatch = jest.fn();
-  useDispatch.mockImplementation(() => dispatch);
+it('renders header', () => {
+  const initialState = { taskTitle: '', tasks: [] };
+  useSelector.mockImplementation((selector) => selector(initialState));
 
-  useSelector.mockImplementation((selector) => selector(
-    {
-      taskTitle: '',
-      tasks: [{ id: 1, title: 'codesoom' }],
-    },
-  ));
   const { getByText } = render(<App />);
-  expect(getByText('codesoom')).toBeInTheDocument();
+
+  expect(getByText('To-do')).toBeInTheDocument();
 });
