@@ -76,4 +76,14 @@ describe('reducer', () => {
       });
     });
   });
+
+  describe('undefined action type', () => {
+    it("doesn't work", () => {
+      const state = reducer({
+        taskTitle: 'New Title',
+      }, 'undefined');
+
+      expect(state.taskTitle).toBe('New Title');
+    });
+  });
 });
