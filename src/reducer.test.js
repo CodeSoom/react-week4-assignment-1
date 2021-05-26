@@ -81,9 +81,18 @@ describe('reducer', () => {
     it("doesn't work", () => {
       const state = reducer({
         taskTitle: 'New Title',
+        tasks: [],
       }, 'undefined');
 
       expect(state.taskTitle).toBe('New Title');
+    });
+  });
+
+  describe('undefined state', () => {
+    it("doesn't work", () => {
+      const state = reducer(undefined, addTask());
+
+      expect(state).not.toBeUndefined();
     });
   });
 });
