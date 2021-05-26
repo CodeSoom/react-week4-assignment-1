@@ -78,4 +78,27 @@ describe('reducer 관련 테스트 코드', () => {
       });
     });
   });
+
+  describe('no action type', () => {
+    it('상태값이 그대로 반환된다', () => {
+      // given
+      const previouState = {
+        taskTitle: '',
+        tasks: [],
+      };
+      const action = {};
+      // when
+      const state = reducer(previouState, action);
+      // then
+      expect(state.taskTitle).toBe('');
+    });
+
+    it('상태값이 없으면 초기값이 그대로 반환된다', () => {
+      // given
+      // when
+      const state = reducer();
+      // then
+      expect(state.taskTitle).toBe('');
+    });
+  });
 });
