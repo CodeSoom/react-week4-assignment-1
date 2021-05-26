@@ -2,12 +2,15 @@ import { useState } from 'react';
 
 import Page from './Page';
 
+const initialState = {
+  newId: 100,
+  taskTitle: '',
+  tasks: [],
+};
+
+// 1. 관심사의 분리
 export default function App() {
-  const [state, setState] = useState({
-    newId: 100,
-    taskTitle: '',
-    tasks: [],
-  });
+  const [state, setState] = useState(initialState);
 
   const { newId, taskTitle, tasks } = state;
 
