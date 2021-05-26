@@ -14,70 +14,67 @@ describe('reducer 관련 테스트 코드', () => {
         taskTitle: '',
         tasks: [],
       };
-
       // when
       const state = reducer(initialState, updateTaskTitle('뭐라도 하기'));
       // then
       expect(state.taskTitle).toBe('뭐라도 하기');
     });
+  });
 
-    describe('addTask', () => {
-      context('새로운 task title 있을 경우', () => {
-        it('tasks에 새로운 task가 추가되어야 한다', () => {
+  describe('addTask', () => {
+    context('새로운 task title 있을 경우', () => {
+      it('tasks에 새로운 task가 추가되어야 한다', () => {
         // given
-          const setState = {
-            taskTitle: '뭐라도 하기',
-            tasks: [],
-          };
-
-          // when
-          const state = reducer(setState, addTask());
-          // then
-          expect(state.tasks[0].title).toBe('뭐라도 하기');
-        });
-      });
-
-      context('새로운 task title 없을 경우', () => {
-        it('변화가 일어나지 않는다', () => {
-        // given
-          const setState = {
-            taskTitle: '',
-            tasks: [],
-          };
-
-          // when
-          const state = reducer(setState, addTask());
-          // then
-          expect(state.tasks).toHaveLength(0);
-        });
+        const setState = {
+          taskTitle: '뭐라도 하기',
+          tasks: [],
+        };
+        // when
+        const state = reducer(setState, addTask());
+        // then
+        expect(state.tasks[0].title).toBe('뭐라도 하기');
       });
     });
 
-    describe('deleteTask', () => {
-      context('task id 있을 경우', () => {
-        it('tasks에 task가 삭제된다', () => {
+    context('새로운 task title 없을 경우', () => {
+      it('변화가 일어나지 않는다', () => {
         // given
-          const previouState = {
-            tasks: [{ id: 1, title: '뭐라도 하기' }],
-          };
-          // when
-          const state = reducer(previouState, deleteTask(1));
-          // then
-          expect(state.tasks).toHaveLength(0);
-        });
+        const setState = {
+          taskTitle: '',
+          tasks: [],
+        };
+        // when
+        const state = reducer(setState, addTask());
+        // then
+        expect(state.tasks).toHaveLength(0);
+      });
+    });
+  });
 
-        context('task id 없을 경우', () => {
-          it('변화가 일어나지 않는다', () => {
-          // given
-            const previouState = {
-              tasks: [],
-            };
-            // when
-            const state = reducer(previouState, deleteTask());
-            // then
-            expect(state.tasks).toHaveLength(0);
-          });
-        });
+  describe('deleteTask', () => {
+    context('task id 있을 경우', () => {
+      it('tasks에 task가 삭제된다', () => {
+        // given
+        const previouState = {
+          tasks: [{ id: 1, title: '뭐라도 하기' }],
+        };
+        // when
+        const state = reducer(previouState, deleteTask(1));
+        // then
+        expect(state.tasks).toHaveLength(0);
+      });
+    });
+
+    context('task id 없을 경우', () => {
+      it('변화가 일어나지 않는다', () => {
+        // given
+        const previouState = {
+          tasks: [],
+        };
+        // when
+        const state = reducer(previouState, deleteTask());
+        // then
+        expect(state.tasks).toHaveLength(0);
       });
     });
   });
