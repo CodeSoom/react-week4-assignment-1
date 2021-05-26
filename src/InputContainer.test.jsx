@@ -45,9 +45,9 @@ describe('InputContainer', () => {
   });
 
   context('without taskTitle', () => {
-    const dispatch = jest.fn();
-
     it('입력 값 변경', () => {
+      const dispatch = jest.fn();
+
       useDispatch.mockImplementation(() => dispatch);
 
       useSelector.mockImplementation((selector) => selector({
@@ -71,6 +71,8 @@ describe('InputContainer', () => {
     });
 
     it('추가 버튼 클릭할 경우', () => {
+      const dispatch = jest.fn();
+
       useDispatch.mockImplementation(() => dispatch);
 
       useSelector.mockImplementation((selector) => selector({

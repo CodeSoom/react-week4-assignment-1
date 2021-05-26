@@ -19,6 +19,10 @@ export default function InputContainer() {
   }
 
   function handleClickAddTask() {
+    if (taskTitle === '') {
+      return;
+    }
+
     dispatch(addTask());
   }
 
