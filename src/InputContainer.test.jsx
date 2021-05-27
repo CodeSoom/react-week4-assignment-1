@@ -7,16 +7,22 @@ import InputContainer from './InputContainer';
 jest.mock('react-redux');
 
 describe('InputContainer', () => {
+  let dispatch;
+
+  beforeEach(() => {
+    dispatch = jest.fn();
+
+    useDispatch.mockImplementation(() => dispatch);
+  });
+
   context('with taskTitle', () => {
-    const dispatch = jest.fn();
-
-    it('initial state', () => {
-      useDispatch.mockImplementation(() => dispatch);
-
+    beforeEach(() => {
       useSelector.mockImplementation((selector) => selector({
         taskTitle: 'New Title',
       }));
+    });
 
+    it('initial state', () => {
       const { getByText, getByDisplayValue } = render((
         <InputContainer />
       ));
@@ -26,12 +32,6 @@ describe('InputContainer', () => {
     });
 
     it('추가 버튼 클릭 할 경우', () => {
-      useDispatch.mockImplementation(() => dispatch);
-
-      useSelector.mockImplementation((selector) => selector({
-        taskTitle: 'New Title',
-      }));
-
       const { getByText } = render((
         <InputContainer />
       ));
@@ -45,15 +45,13 @@ describe('InputContainer', () => {
   });
 
   context('without taskTitle', () => {
-    it('입력 값 변경', () => {
-      const dispatch = jest.fn();
-
-      useDispatch.mockImplementation(() => dispatch);
-
+    beforeEach(() => {
       useSelector.mockImplementation((selector) => selector({
         taskTitle: '',
       }));
+    });
 
+    it('입력 값 변경', () => {
       const { getByLabelText } = render((
         <InputContainer />
       ));
@@ -71,14 +69,6 @@ describe('InputContainer', () => {
     });
 
     it('추가 버튼 클릭할 경우', () => {
-      const dispatch = jest.fn();
-
-      useDispatch.mockImplementation(() => dispatch);
-
-      useSelector.mockImplementation((selector) => selector({
-        taskTitle: '',
-      }));
-
       const { getByText } = render((
         <InputContainer />
       ));
