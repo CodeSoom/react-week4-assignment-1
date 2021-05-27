@@ -41,13 +41,13 @@ describe('List', () => {
     });
 
     it('renders “완료” button to delete a task', () => {
-      const { getAllByText } = renderList(tasks);
+      const { getAllByRole } = renderList(tasks);
 
-      const buttons = getAllByText('완료');
+      tasks.forEach((_, index) => {
+        fireEvent.click(getAllByRole('button')[index]);
 
-      fireEvent.click(buttons[0]);
-
-      expect(handleClickDelete).toBeCalledWith(1);
+        expect(handleClickDelete).toBeCalledWith(tasks[index].id);
+      });
     });
   });
 
