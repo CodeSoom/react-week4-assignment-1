@@ -2,9 +2,9 @@ import React from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
-import { updateTaskTitle, addTask } from './actions';
+import { updateTaskTitle, addTask } from '../actions/actions';
 
-import Input from './Input';
+import Input from '../presentational/Input';
 
 export default function InputContainer() {
   const { taskTitle } = useSelector((state) => ({

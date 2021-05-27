@@ -1,5 +1,5 @@
-import reducer from '.';
-import { addTask, deleteTask, updateTaskTitle } from '../actions';
+import reducer from '../../reducers/reducers';
+import { addTask, deleteTask, updateTaskTitle } from '../../actions/actions';
 
 describe('reducer', () => {
   describe('updateTaskTitle', () => {

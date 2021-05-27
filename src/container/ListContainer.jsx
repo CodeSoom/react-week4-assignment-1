@@ -1,8 +1,8 @@
 import { useDispatch, useSelector } from 'react-redux';
 
-import { deleteTask } from './actions';
+import { deleteTask } from '../actions/actions';
 
-import List from './List';
+import List from '../presentational/List';
 
 export default function ListContainer() {
   const { tasks } = useSelector((state) => ({
