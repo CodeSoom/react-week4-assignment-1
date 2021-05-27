@@ -17,10 +17,8 @@ function selector(state) {
   };
 }
 
-//TESt
-
-export default function App() {
-  const { taskTitle, tasks } = useSelector(selector);
+export default function App(){
+  const {taskTitle, tasks } = useSelector(selector);
 
   const dispatch = useDispatch();
 
