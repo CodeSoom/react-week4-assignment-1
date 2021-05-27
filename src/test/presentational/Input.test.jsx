@@ -1,28 +1,48 @@
-import { render, fireEvent } from '@testing-library/react';
+import {
+  screen, render, fireEvent,
+} from '@testing-library/react';
 
 import Input from '../../presentational/Input';
 
-test('Input', () => {
-  const handleChange = jest.fn();
-  const handleClick = jest.fn();
+describe('<Input />', () => {
+  const onChange = jest.fn();
 
-  const { getByDisplayValue, getByLabelText, getByText } = render((
-    <Input
-      value="기존 할 일"
-      onChange={handleChange}
-      onClick={handleClick}
-    />
-  ));
+  const onClick = jest.fn();
 
-  expect(getByDisplayValue('기존 할 일')).not.toBeNull();
+  function setup(value) {
+    render(
+      <Input
+        value={value}
+        onChange={onChange}
+        onClick={onClick}
+      />,
+    );
+  }
 
-  fireEvent.change(getByLabelText('할 일'), {
-    target: { value: '무언가 하기' },
+  it('renders label, input, button', () => {
+    setup();
+
+    expect(screen.getByLabelText('할 일')).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: '추가' })).toBeInTheDocument();
   });
 
-  expect(handleChange).toBeCalled();
+  it('calls onChange when change value', () => {
+    setup();
 
-  fireEvent.click(getByText('추가'));
+    const input = screen.getByLabelText('할 일');
 
-  expect(handleClick).toBeCalled();
+    fireEvent.change(input, { target: { value: '뭐라도 하기' } });
+
+    expect(onChange).toBeCalled();
+  });
+
+  it('calls onClick when click button', () => {
+    setup();
+
+    expect(screen.getByRole('button', { name: '추가' })).toBeInTheDocument();
+
+    fireEvent.click(screen.getByRole('button', { name: '추가' }));
+
+    expect(onClick).toBeCalled();
+  });
 });
