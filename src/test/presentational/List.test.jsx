@@ -1,4 +1,4 @@
-import { render } from '@testing-library/react';
+import { fireEvent, render } from '@testing-library/react';
 
 import List from '../../presentational/List';
 
@@ -45,6 +45,17 @@ describe('List', () => {
 
       tasks.forEach((_, index) => {
         expect(getAllByRole('button', { name: '완료' })[index]).toBeInTheDocument();
+      });
+    });
+
+    it('calls handleClickDelete when click "완료" button', () => {
+      // onClickDelete is not a function이라고 뜨면서 테스트 실패
+      const { getAllByRole } = renderList(tasks);
+
+      tasks.forEach((_, index) => {
+        fireEvent.click(getAllByRole('button', { name: '완료' })[index]);
+
+        expect(handleClickDelete).toBeCalledWith(tasks[index].id);
       });
     });
   });
