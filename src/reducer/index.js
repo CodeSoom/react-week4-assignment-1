@@ -17,7 +17,7 @@ export default function reducer(state = initialState, action) {
 
   if (type === 'addTask') {
     if (!taskTitle) {
-      return { ...state };
+      return state;
     }
 
     return {
@@ -41,5 +41,5 @@ export default function reducer(state = initialState, action) {
     };
   }
 
-  return { ...state };
+  return state;
 }
