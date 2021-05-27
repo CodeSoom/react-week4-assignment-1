@@ -8,14 +8,14 @@ export default function reducer(state = initialState, action) {
   const { type, payload } = action;
   const { newId, taskTitle, tasks } = state;
 
-  if (type === 'updateTaskTitle') {
+  if (type === 'todos/updateTaskTitle') {
     return {
       ...state,
       taskTitle: payload.taskTitle,
     };
   }
 
-  if (type === 'addTask') {
+  if (type === 'todos/addTask') {
     if (!taskTitle) {
       return state;
     }
@@ -34,7 +34,7 @@ export default function reducer(state = initialState, action) {
     };
   }
 
-  if (type === 'deleteTask') {
+  if (type === 'todos/deleteTask') {
     return {
       ...state,
       tasks: tasks.filter((task) => task.id !== payload.id),

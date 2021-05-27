@@ -1,6 +1,6 @@
 export function updateTaskTitle(taskTitle) {
   return {
-    type: 'updateTaskTitle',
+    type: 'todos/updateTaskTitle',
     payload: {
       taskTitle,
     },
@@ -9,13 +9,13 @@ export function updateTaskTitle(taskTitle) {
 
 export function addTask() {
   return {
-    type: 'addTask',
+    type: 'todos/addTask',
   };
 }
 
 export function deleteTask(id) {
   return {
-    type: 'deleteTask',
+    type: 'todos/deleteTask',
     payload: {
       id,
     },
