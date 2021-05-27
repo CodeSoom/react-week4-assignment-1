@@ -1,4 +1,4 @@
-import { render, fireEvent } from '@testing-library/react';
+import { render } from '@testing-library/react';
 
 import List from '../../presentational/List';
 
@@ -44,9 +44,7 @@ describe('List', () => {
       const { getAllByRole } = renderList(tasks);
 
       tasks.forEach((_, index) => {
-        fireEvent.click(getAllByRole('button', { name: '완료' })[index]);
-
-        expect(handleClickDelete).toBeCalledWith(tasks[index].id);
+        expect(getAllByRole('button', { name: '완료' })[index]).toBeInTheDocument();
       });
     });
   });
