@@ -18,9 +18,8 @@ describe('<InputContainer />', () => {
       <InputContainer />
     ));
 
-    expect(getByText(/추가/)).not.toBeNull();
-    // input의 value는 무시하거나 getByText대신 getByDisplayValue같은 것을 이용
-    expect(getByDisplayValue(/New Title/)).not.toBeNull();
+    expect(getByText(/추가/)).toBeInTheDocument();
+    expect(getByDisplayValue(/New Title/)).toBeInTheDocument();
   });
 
   it('called dispatch with "todo/addTask" action', () => {
