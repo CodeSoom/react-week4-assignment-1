@@ -2,7 +2,7 @@ import React from 'react';
 
 import { render, fireEvent } from '@testing-library/react';
 
-import { useDispatch, useSelector  } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import ListContainer from './ListContainer';
 
@@ -28,7 +28,7 @@ test('ListContainer', () => {
   expect(getByText(/아무 것도 하지 않기 #1/)).not.toBeNull();
 
   fireEvent.click(getAllByText(/완료/)[0]);
-  expect(dispatch).toBeCalledWith({ 
+  expect(dispatch).toBeCalledWith({
     type: 'deleteTask',
     payload: {
       id: 1,

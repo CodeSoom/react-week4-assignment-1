@@ -7,6 +7,7 @@ import {
 } from './actions';
 
 describe('reducer', () => {
+  // reducer uncovered line 처리
   describe('', () => {
   });
 
