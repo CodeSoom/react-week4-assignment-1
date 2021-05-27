@@ -51,6 +51,8 @@ describe('List', () => {
     it('calls handleClickDelete when click "완료" button', () => {
       const { getAllByRole } = renderList(tasks);
 
+      expect(handleClickDelete).not.toBeCalled();
+
       tasks.forEach((_, index) => {
         fireEvent.click(getAllByRole('button', { name: '완료' })[index]);
 

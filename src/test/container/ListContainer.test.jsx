@@ -35,6 +35,8 @@ describe('<ListContainer />', () => {
       // onClickDelete is not a function이라고 뜨면서 테스트 실패
       const { getAllByRole } = renderListContainer(tasks);
 
+      expect(dispatch).not.toBeCalled();
+
       tasks.forEach((_, index) => {
         fireEvent.click(getAllByRole('button', { name: '완료' })[index]);
 

@@ -26,9 +26,9 @@ describe('<Input />', () => {
   it('calls onChange when change value', () => {
     const { getByLabelText } = renderInput();
 
-    const input = getByLabelText('할 일');
+    expect(onChange).not.toBeCalled();
 
-    fireEvent.change(input, { target: { value: '뭐라도 하기' } });
+    fireEvent.change(getByLabelText('할 일'), { target: { value: '뭐라도 하기' } });
 
     expect(onChange).toBeCalled();
   });
@@ -36,7 +36,7 @@ describe('<Input />', () => {
   it('calls onClick when click button', () => {
     const { getByRole } = renderInput();
 
-    expect(getByRole('button', { name: '추가' })).toBeInTheDocument();
+    expect(onClick).not.toBeCalled();
 
     fireEvent.click(getByRole('button', { name: '추가' }));
 

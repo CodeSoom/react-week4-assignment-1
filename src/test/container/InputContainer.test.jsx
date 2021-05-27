@@ -29,6 +29,8 @@ describe('<InputContainer />', () => {
   it('calls dispatch with "todo/addTask" action when click "추가" button', () => {
     const { getByText } = renderInput();
 
+    expect(dispatch).not.toBeCalled();
+
     fireEvent.click(getByText(/추가/));
 
     expect(dispatch).toBeCalledWith({
