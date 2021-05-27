@@ -1,10 +1,10 @@
 export function updateTaskTitle(taskTitle) {
-  return ({
+  return {
     type: 'updateTaskTitle',
     payload: {
       taskTitle,
     },
-  });
+  };
 }
 
 export function addTask() {
