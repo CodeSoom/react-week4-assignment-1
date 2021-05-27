@@ -7,6 +7,12 @@ import ListContainer from '../../container/ListContainer';
 jest.mock('react-redux');
 
 describe('<ListContainer />', () => {
+  function renderListContainer() {
+    return render(
+      <ListContainer />,
+    );
+  }
+
   context('with tasks', () => {
     it('renders tasks', () => {
       const tasks = [
@@ -16,9 +22,7 @@ describe('<ListContainer />', () => {
 
       useSelector.mockImplementation((selector) => selector({ tasks }));
 
-      const { getByText } = render((
-        <ListContainer />
-      ));
+      const { getByText } = renderListContainer();
 
       tasks.forEach((task) => expect(getByText(task.title)).toBeInTheDocument());
     });
@@ -30,9 +34,7 @@ describe('<ListContainer />', () => {
 
       useSelector.mockImplementation((selector) => selector({ tasks }));
 
-      const { getByText } = render((
-        <ListContainer />
-      ));
+      const { getByText } = renderListContainer();
 
       expect(getByText(/할 일이 없어요/)).toBeInTheDocument();
     });

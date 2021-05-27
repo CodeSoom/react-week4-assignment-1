@@ -11,21 +11,23 @@ describe('<InputContainer />', () => {
 
   useDispatch.mockImplementation(() => dispatch);
 
+  function renderInput() {
+    return render(
+      <InputContainer />,
+    );
+  }
+
   it('renders input, button', () => {
     useSelector.mockImplementation((selector) => selector({ taskTitle: 'New Title' }));
 
-    const { getByText, getByDisplayValue } = render((
-      <InputContainer />
-    ));
+    const { getByText, getByDisplayValue } = renderInput();
 
     expect(getByText(/추가/)).toBeInTheDocument();
     expect(getByDisplayValue(/New Title/)).toBeInTheDocument();
   });
 
   it('calls dispatch with "todo/addTask" action when click "추가" button', () => {
-    const { getByText } = render((
-      <InputContainer />
-    ));
+    const { getByText } = renderInput();
 
     fireEvent.click(getByText(/추가/));
 
