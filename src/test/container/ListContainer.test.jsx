@@ -29,7 +29,7 @@ describe('<ListContainer />', () => {
   });
 
   context('without tasks', () => {
-    it('renders tasks', () => {
+    it('renders no task message', () => {
       const tasks = [];
 
       useSelector.mockImplementation((selector) => selector({ tasks }));
