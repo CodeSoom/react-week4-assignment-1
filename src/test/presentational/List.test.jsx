@@ -49,7 +49,6 @@ describe('List', () => {
     });
 
     it('calls handleClickDelete when click "완료" button', () => {
-      // onClickDelete is not a function이라고 뜨면서 테스트 실패
       const { getAllByRole } = renderList(tasks);
 
       tasks.forEach((_, index) => {
