@@ -20,7 +20,7 @@ describe('<ListContainer />', () => {
         <ListContainer />
       ));
 
-      expect(getByText(/아무 것도 하지 않기 #1/)).not.toBeNull();
+      tasks.forEach((task) => expect(getByText(task.title)).toBeInTheDocument());
     });
   });
 
@@ -34,7 +34,7 @@ describe('<ListContainer />', () => {
         <ListContainer />
       ));
 
-      expect(getByText(/할 일이 없어요/)).not.toBeNull();
+      expect(getByText(/할 일이 없어요/)).toBeInTheDocument();
     });
   });
 });
