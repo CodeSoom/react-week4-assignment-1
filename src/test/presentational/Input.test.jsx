@@ -1,6 +1,4 @@
-import {
-  screen, render, fireEvent,
-} from '@testing-library/react';
+import { render, fireEvent } from '@testing-library/react';
 
 import Input from '../../presentational/Input';
 
@@ -9,7 +7,7 @@ describe('<Input />', () => {
 
   const onClick = jest.fn();
 
-  function setup(value) {
+  function renderInput(value) {
     render(
       <Input
         value={value}
@@ -20,16 +18,16 @@ describe('<Input />', () => {
   }
 
   it('renders label, input, button', () => {
-    setup();
+    const { getByLabelText, getByRole } = renderInput();
 
-    expect(screen.getByLabelText('할 일')).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: '추가' })).toBeInTheDocument();
+    expect(getByLabelText('할 일')).toBeInTheDocument();
+    expect(getByRole('button', { name: '추가' })).toBeInTheDocument();
   });
 
   it('calls onChange when change value', () => {
-    setup();
+    const { getByLabelText } = renderInput();
 
-    const input = screen.getByLabelText('할 일');
+    const input = getByLabelText('할 일');
 
     fireEvent.change(input, { target: { value: '뭐라도 하기' } });
 
@@ -37,11 +35,11 @@ describe('<Input />', () => {
   });
 
   it('calls onClick when click button', () => {
-    setup();
+    const { getByRole } = renderInput();
 
-    expect(screen.getByRole('button', { name: '추가' })).toBeInTheDocument();
+    expect(getByRole('button', { name: '추가' })).toBeInTheDocument();
 
-    fireEvent.click(screen.getByRole('button', { name: '추가' }));
+    fireEvent.click(getByRole('button', { name: '추가' }));
 
     expect(onClick).toBeCalled();
   });
