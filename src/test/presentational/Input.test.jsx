@@ -4,7 +4,6 @@ import Input from '../../presentational/Input';
 
 describe('<Input />', () => {
   const onChange = jest.fn();
-
   const onClick = jest.fn();
 
   function renderInput(value) {
