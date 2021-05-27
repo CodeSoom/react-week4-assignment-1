@@ -44,7 +44,7 @@ describe('List', () => {
       const { getAllByRole } = renderList(tasks);
 
       tasks.forEach((_, index) => {
-        fireEvent.click(getAllByRole('button')[index]);
+        fireEvent.click(getAllByRole('button', { name: '완료' })[index]);
 
         expect(handleClickDelete).toBeCalledWith(tasks[index].id);
       });
