@@ -1,19 +1,31 @@
-import { render } from '@testing-library/react';
+import { fireEvent, render } from '@testing-library/react';
 
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import InputContainer from './InputContainer';
 
 jest.mock('react-redux');
 
 describe('<InputContainer />', () => {
-  it('renders tasks', () => {
+  const dispatch = jest.fn();
+
+  useDispatch.mockImplementation(() => dispatch);
+
+  it('renders input, button', () => {
     useSelector.mockImplementation((selector) => selector({ taskTitle: 'New Title' }));
 
-    const { getByText } = render((
+    const { getByText, getByDisplayValue } = render((
       <InputContainer />
     ));
 
-    expect(getByText(/New Title/)).not.toBeNull();
+    expect(getByText(/추가/)).not.toBeNull();
+    // input의 value는 무시하거나 getByText대신 getByDisplayValue같은 것을 이용
+    expect(getByDisplayValue(/New Title/)).not.toBeNull();
+
+    fireEvent.click(getByText(/추가/));
+
+    expect(dispatch).toBeCalledWith({
+      type: 'todos/addTask',
+    });
   });
 });
