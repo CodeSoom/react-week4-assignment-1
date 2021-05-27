@@ -59,22 +59,44 @@ describe('reducer', () => {
   });
 
   describe('deleteTask', () => {
-    it('remove the task from tasks', () => {
-      const { tasks } = reducer(
-        {
-          newId: 100,
-          taskTitle: '',
-          tasks: [
-            {
-              id: 1,
-              title: 'Task',
-            },
-          ],
-        },
-        deleteTask(1),
-      );
+    context('with existed task ID', () => {
+      it('remove the task from tasks', () => {
+        const { tasks } = reducer(
+          {
+            newId: 100,
+            taskTitle: '',
+            tasks: [
+              {
+                id: 1,
+                title: 'Task',
+              },
+            ],
+          },
+          deleteTask(1),
+        );
 
-      expect(tasks).toHaveLength(0);
+        expect(tasks).toHaveLength(0);
+      });
+    });
+
+    context('without existed task ID', () => {
+      it('doesn\'t work', () => {
+        const { tasks } = reducer(
+          {
+            newId: 100,
+            taskTitle: '',
+            tasks: [
+              {
+                id: 1,
+                title: 'Task',
+              },
+            ],
+          },
+          deleteTask(100),
+        );
+
+        expect(tasks).toHaveLength(1);
+      });
     });
   });
 });
