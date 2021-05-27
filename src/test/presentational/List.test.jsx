@@ -37,8 +37,7 @@ describe('List', () => {
     it('renders tasks', () => {
       const { getByText } = renderList(tasks);
 
-      expect(getByText(/Task-1/)).toBeInTheDocument();
-      expect(getByText(/Task-2/)).toBeInTheDocument();
+      tasks.forEach((task) => expect(getByText(task.title)).toBeInTheDocument());
     });
 
     it('renders “완료” button to delete a task', () => {
