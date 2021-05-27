@@ -8,7 +8,7 @@ describe('<Input />', () => {
   const onClick = jest.fn();
 
   function renderInput(value) {
-    render(
+    return render(
       <Input
         value={value}
         onChange={onChange}
