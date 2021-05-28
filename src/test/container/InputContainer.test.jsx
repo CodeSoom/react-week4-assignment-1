@@ -9,7 +9,11 @@ jest.mock('react-redux');
 describe('<InputContainer />', () => {
   const dispatch = jest.fn();
 
-  useDispatch.mockImplementation(() => dispatch);
+  beforeEach(() => {
+    dispatch.mockClear();
+
+    useDispatch.mockImplementation(() => dispatch);
+  });
 
   function renderInput() {
     return render(
