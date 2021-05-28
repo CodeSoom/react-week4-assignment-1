@@ -14,7 +14,7 @@ describe('<Item />', () => {
     return render(
       <Item
         task={task}
-        onClickDelete={handleClick}
+        onClickDeleteTask={handleClick}
       />,
     );
   }
