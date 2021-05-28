@@ -36,7 +36,7 @@ describe('ListContainer', () => {
       tasks.forEach((task) => expect(getByText(task.title)).toBeInTheDocument());
     });
 
-    it('calls dispatch with "todos/deleteTask" action when click "완료" button', () => {
+    it('passes "todos/deleteTask" action when click "완료" button', () => {
       const { getAllByRole } = renderListContainer(tasks);
 
       expect(dispatch).not.toBeCalled();

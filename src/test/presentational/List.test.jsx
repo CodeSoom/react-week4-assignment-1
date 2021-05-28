@@ -48,7 +48,7 @@ describe('List', () => {
       });
     });
 
-    it('calls handleClickDelete when click "완료" button', () => {
+    it('listens click event when click "완료" button', () => {
       const { getAllByRole } = renderList(tasks);
 
       expect(handleClickDelete).not.toBeCalled();

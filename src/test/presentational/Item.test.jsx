@@ -26,7 +26,7 @@ describe('Item', () => {
     expect(getByRole('button', { name: '완료' })).toBeInTheDocument();
   });
 
-  it('calls handleClick when click "완료" button', () => {
+  it('listens click event when click "완료" button', () => {
     const { getByRole } = renderItem();
 
     expect(handleClick).not.toBeCalled();

@@ -30,7 +30,7 @@ describe('InputContainer', () => {
     expect(getByDisplayValue(/New Title/)).toBeInTheDocument();
   });
 
-  it('calls dispatch with "todo/addTask" action when click "추가" button', () => {
+  it('passes "todo/addTask" action when click "추가" button', () => {
     const { getByText } = renderInput();
 
     expect(dispatch).not.toBeCalled();

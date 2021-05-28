@@ -23,7 +23,7 @@ describe('Input', () => {
     expect(getByRole('button', { name: '추가' })).toBeInTheDocument();
   });
 
-  it('calls onChange when change value', () => {
+  it('listens change event when change input value', () => {
     const { getByLabelText } = renderInput();
 
     expect(onChange).not.toBeCalled();
@@ -33,7 +33,7 @@ describe('Input', () => {
     expect(onChange).toBeCalled();
   });
 
-  it('calls onClick when click button', () => {
+  it('listens click event when click "추가" button', () => {
     const { getByRole } = renderInput();
 
     expect(onClick).not.toBeCalled();
