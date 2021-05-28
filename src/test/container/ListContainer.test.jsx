@@ -6,7 +6,7 @@ import ListContainer from '../../container/ListContainer';
 
 jest.mock('react-redux');
 
-describe('<ListContainer />', () => {
+describe('ListContainer', () => {
   const dispatch = jest.fn();
 
   beforeEach(() => {

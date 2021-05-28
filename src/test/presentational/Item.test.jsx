@@ -2,7 +2,7 @@ import { render, fireEvent } from '@testing-library/react';
 
 import Item from '../../presentational/Item';
 
-describe('<Item />', () => {
+describe('Item', () => {
   const handleClick = jest.fn();
 
   const task = {
