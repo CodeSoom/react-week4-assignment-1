@@ -32,7 +32,6 @@ describe('<ListContainer />', () => {
     });
 
     it('calls dispatch with "todos/deleteTask" action when click "완료" button', () => {
-      // onClickDelete is not a function이라고 뜨면서 테스트 실패
       const { getAllByRole } = renderListContainer(tasks);
 
       expect(dispatch).not.toBeCalled();
