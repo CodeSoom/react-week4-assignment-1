@@ -9,7 +9,7 @@ export default function ListContainer() {
     tasks: state.tasks,
   }));
 
-  const dispatch = useDispatch;
+  const dispatch = useDispatch();
 
   function handleClickDeleteTask(id) {
     dispatch(deleteTask(id));
