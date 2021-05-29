@@ -24,11 +24,15 @@ describe('InputContainer', () => {
   });
 
   it('changes task title', () => {
-    const { getByPlaceholderText } = render((<InputContainer />));
+    const { getByLabelText } = render((<InputContainer />));
 
-    fireEvent.change(getByPlaceholderText('할 일을 입력해 주세요'), { target: { value: 'Task-1' } });
+    const taskTitle = 'Task-1';
 
-    expect(dispatch).toBeCalled();
-    expect(getByPlaceholderText('할 일을 입력해 주세요')).toHaveValue('Task-1');
+    expect(getByLabelText('할 일')).toHaveValue('');
+
+    fireEvent.change(getByLabelText('할 일'), { target: { value: taskTitle} });
+
+    expect(getByLabelText('할 일')).toHaveValue('Task-1');
+    expect(dispatch).toBeCalledWith({ type: 'updateTaskTitle', payload: { taskTitle } });
   });
 });
