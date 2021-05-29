@@ -29,5 +29,9 @@ test('ListContainer', () => {
 
   fireEvent.click(buttons[0]);
 
+  expect(dispatch).toBeCalledWith({
+    type: 'deleteTask',
+    payload: { id: 1 },
+  });
   // CodeceptJS => 실제 브라우저에서 사용자 테스트 실행 가능.
 });
