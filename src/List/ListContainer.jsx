@@ -14,7 +14,7 @@ const ListContainer = () => {
 
   const handleClickDeleteTask = (id) => dispatch(deleteTask(id));
 
-  return <List tasks={tasks} onClickDeleteTask={handleClickDeleteTask} />;
+  return <List tasks={tasks} onClickDelete={handleClickDeleteTask} />;
 };
 
 export default ListContainer;
