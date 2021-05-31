@@ -11,7 +11,10 @@ export default function Input({ value, onChange, onClick }) {
         value={value}
         onChange={onChange}
       />
-      <button type="button" onClick={onClick}>
+      <button
+        type="button"
+        onClick={(event) => onClick(event.target.value)}
+      >
         추가
       </button>
     </p>

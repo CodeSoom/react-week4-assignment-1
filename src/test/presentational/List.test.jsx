@@ -1,6 +1,6 @@
-import { render, fireEvent } from '@testing-library/react';
+import { fireEvent, render } from '@testing-library/react';
 
-import List from './List';
+import List from '../../presentational/List';
 
 // test('테스트 #1')
 //
@@ -23,7 +23,7 @@ describe('List', () => {
     return render((
       <List
         tasks={tasks}
-        onClickDelete={handleClickDelete}
+        onClickDeleteTask={handleClickDelete}
       />
     ));
   }
@@ -37,18 +37,27 @@ describe('List', () => {
     it('renders tasks', () => {
       const { getByText } = renderList(tasks);
 
-      expect(getByText(/Task-1/)).not.toBeNull();
-      expect(getByText(/Task-2/)).not.toBeNull();
+      tasks.forEach((task) => expect(getByText(task.title)).toBeInTheDocument());
     });
 
     it('renders “완료” button to delete a task', () => {
-      const { getAllByText } = renderList(tasks);
+      const { getAllByRole } = renderList(tasks);
 
-      const buttons = getAllByText('완료');
+      tasks.forEach((_, index) => {
+        expect(getAllByRole('button', { name: '완료' })[index]).toBeInTheDocument();
+      });
+    });
 
-      fireEvent.click(buttons[0]);
+    it('listens click event when click "완료" button', () => {
+      const { getAllByRole } = renderList(tasks);
 
-      expect(handleClickDelete).toBeCalledWith(1);
+      expect(handleClickDelete).not.toBeCalled();
+
+      tasks.forEach((_, index) => {
+        fireEvent.click(getAllByRole('button', { name: '완료' })[index]);
+
+        expect(handleClickDelete).toBeCalledWith(tasks[index].id);
+      });
     });
   });
 
@@ -58,7 +67,7 @@ describe('List', () => {
 
       const { getByText } = renderList(tasks);
 
-      expect(getByText(/할 일이 없어요/)).not.toBeNull();
+      expect(getByText(/할 일이 없어요/)).toBeInTheDocument();
     });
   });
 });
