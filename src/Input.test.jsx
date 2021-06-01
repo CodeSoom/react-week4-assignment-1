@@ -20,7 +20,7 @@ test('Input', () => {
     target: { value: '무언가 하기' },
   });
 
-  expect(handleChange).toBeCalled();
+  expect(handleChange).toBeCalledWith('무언가 하기');
 
   fireEvent.click(getByText('추가'));
 
