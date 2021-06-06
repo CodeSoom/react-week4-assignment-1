@@ -17,6 +17,10 @@ export default function reducer(state = initialState, action) {
   }
   if (action.type === 'addTask') {
     const { taskTitle, tasks } = state;
+    if (!taskTitle) { // 예외처리 추가 : 입력값이 없을 경우 할일 목록을 처리하지 않음
+      return state;
+    }
+
     const newId = state.newId + 1;
     return {
       ...state,
