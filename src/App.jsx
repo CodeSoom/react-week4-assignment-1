@@ -1,6 +1,3 @@
-import { useDispatch, useSelector } from 'react-redux';
-import { updateTaskTitle, addTask, deleteTask } from './actions';
-
 import Page from './Page';
 
 /* 목표 : hook을 제거하고, redux를 사용하라.
@@ -18,35 +15,12 @@ import Page from './Page';
 4. deleteTask 리팩토링하기
 5. action파일 분리하기
 6. reducer파일 분리하기
+7. reducer test 추가 하기
+8. app 컴포넌트 리팩토링 => 컴포넌트에서 state 값 관리하도록 관심사 분리
 */
 
 export default function App() {
-  const { taskTitle, tasks } = useSelector((reduxState) => ({
-    taskTitle: reduxState.taskTitle,
-    tasks: reduxState.tasks,
-  }));
-
-  const dispatch = useDispatch();
-
-  function handleChangeTitle(event) {
-    dispatch(updateTaskTitle(event.target.value));
-  }
-
-  function handleClickAddTask() {
-    dispatch(addTask());
-  }
-
-  function handleClickDeleteTask(id) {
-    dispatch(deleteTask(id));
-  }
-
   return (
-    <Page
-      taskTitle={taskTitle}
-      onChangeTitle={handleChangeTitle}
-      onClickAddTask={handleClickAddTask}
-      tasks={tasks}
-      onClickDeleteTask={handleClickDeleteTask}
-    />
+    <Page />
   );
 }

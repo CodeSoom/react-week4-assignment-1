@@ -1,15 +1,15 @@
-import reducer from './reducer';
+import reducer, { initialState } from './reducer';
 
 import { addTask, updateTaskTitle, deleteTask } from './actions';
 
 describe('reducer', () => {
   describe('updateTaskTitle', () => {
     it('changes task title', () => {
-      const previousSate = {
+      const previousState = {
         taskTitle: '',
       };
 
-      const state = reducer(previousSate, updateTaskTitle('new title'));
+      const state = reducer(previousState, updateTaskTitle('new title'));
       expect(state.taskTitle).toBe('new title');
     });
   });
@@ -69,6 +69,35 @@ describe('reducer', () => {
 
         expect(state.tasks).toHaveLength(1);
       });
+    });
+  });
+
+  context('undefined action type', () => {
+    it('returns now state', () => {
+      const previousState = {
+        newId: 100,
+        taskTitle: '',
+        tasks: [],
+      };
+      const undefinedAction = {
+        type: 'no ation',
+      };
+      const state = reducer(
+        previousState,
+        undefinedAction,
+      );
+
+      expect(state === previousState);
+    });
+  });
+
+  context('when previousState is undefined', () => {
+    it('returns initialState', () => {
+      const undefinedAction = {
+        type: 'no ation',
+      };
+      const state = reducer(undefined, undefinedAction);
+      expect(state === initialState);
     });
   });
 });

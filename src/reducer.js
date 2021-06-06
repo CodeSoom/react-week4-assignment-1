@@ -2,7 +2,7 @@
 /* "무슨 일이 일어 났는지"를 설명하는 액션 객체이며 새로운 상태 값을 반환합니다.
  * 감속기의 함수 시그니처는 다음과 같습니다 : (state, action) => newState
 */
-const initialState = {
+export const initialState = {
   newId: 100,
   taskTitle: '',
   tasks: [],
