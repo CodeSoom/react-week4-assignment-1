@@ -6,9 +6,9 @@ import {
   deleteTask,
 } from './actions';
 
-describe('reducer 관련 테스트 코드', () => {
+describe('reducer', () => {
   describe('updateTaskTitle', () => {
-    it('새로운 state(상태)가 만들어지고 새로운 task title로 변경된다', () => {
+    it('creates new state and changes new task title', () => {
       const initialState = {
         taskTitle: '',
         tasks: [],
@@ -21,8 +21,8 @@ describe('reducer 관련 테스트 코드', () => {
   });
 
   describe('addTask', () => {
-    context('새로운 task title 있을 경우', () => {
-      it('tasks에 새로운 task가 추가되어야 한다', () => {
+    context('with new task title', () => {
+      it('adds tasks into new task', () => {
         const setState = {
           taskTitle: '뭐라도 하기',
           tasks: [],
@@ -34,8 +34,8 @@ describe('reducer 관련 테스트 코드', () => {
       });
     });
 
-    context('새로운 task title 없을 경우', () => {
-      it('변화가 일어나지 않는다', () => {
+    context('without new task title', () => {
+      it('no changes', () => {
         const setState = {
           taskTitle: '',
           tasks: [],
@@ -49,8 +49,8 @@ describe('reducer 관련 테스트 코드', () => {
   });
 
   describe('deleteTask', () => {
-    context('task id 있을 경우', () => {
-      it('tasks에 task가 삭제된다', () => {
+    context('with task id', () => {
+      it('deletes tasks', () => {
         const previouState = {
           tasks: [{ id: 1, title: '뭐라도 하기' }],
         };
@@ -61,8 +61,8 @@ describe('reducer 관련 테스트 코드', () => {
       });
     });
 
-    context('task id 없을 경우', () => {
-      it('변화가 일어나지 않는다', () => {
+    context('without task id', () => {
+      it('no changes', () => {
         const previouState = {
           tasks: [],
         };
@@ -75,7 +75,7 @@ describe('reducer 관련 테스트 코드', () => {
   });
 
   describe('no action type', () => {
-    it('상태값이 그대로 반환된다', () => {
+    it('returns previouState', () => {
       const previouState = {
         taskTitle: '',
         tasks: [],
@@ -87,7 +87,7 @@ describe('reducer 관련 테스트 코드', () => {
       expect(state.taskTitle).toBe('');
     });
 
-    it('상태값이 없으면 초기값이 그대로 반환된다', () => {
+    it('returns initialState without state', () => {
       const state = reducer();
 
       expect(state.taskTitle).toBe('');

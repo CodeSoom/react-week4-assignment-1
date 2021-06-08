@@ -8,16 +8,19 @@ import { addTask, updateTaskTitle } from './actions';
 
 jest.mock('react-redux');
 
-describe('InputContainer 관련 테스트', () => {
+describe('InputContainer', () => {
   const dispatch = jest.fn();
 
-  useDispatch.mockImplementation(() => dispatch);
+  beforeEach(() => {
+    dispatch.mockClear();
+    useDispatch.mockImplementation(() => dispatch);
 
-  useSelector.mockImplementation((selector) => selector({
-    taskTitle: 'New Title',
-  }));
+    useSelector.mockImplementation((selector) => selector({
+      taskTitle: 'New Title',
+    }));
+  });
 
-  it('handleClickAddTask가 호출되는지 확인하는 테스트입니다', () => {
+  it('renders handleClickAddTask', () => {
     const { getByText, getByDisplayValue } = render(<InputContainer />);
 
     expect(getByText(/추가/)).not.toBeNull();
@@ -28,7 +31,7 @@ describe('InputContainer 관련 테스트', () => {
     expect(dispatch).toBeCalledWith(addTask());
   });
 
-  it('handleChangeTitle이 호출되는지 확인하는 테스트입니다', () => {
+  it('renders handleChangeTitle', () => {
     const { getByPlaceholderText } = render(<InputContainer />);
 
     fireEvent.change(

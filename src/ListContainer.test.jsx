@@ -8,7 +8,7 @@ import { deleteTask } from './actions';
 
 jest.mock('react-redux');
 
-describe('ListContainer 관련 테스트', () => {
+describe('ListContainer', () => {
   it('tasks', () => {
     useSelector.mockImplementation((selector) => selector({
       tasks: [
@@ -22,15 +22,15 @@ describe('ListContainer 관련 테스트', () => {
     expect(getByText(/Task-1/)).not.toBeNull();
   });
 
-  it('handleClickDeleteTask가 호출되는지 확인하는 테스트입니다', () => {
+  it('renders handleClickDeleteTask', () => {
     const dispatch = jest.fn();
-
-    useDispatch.mockImplementation(() => dispatch);
     useSelector.mockImplementation((selector) => selector({
       tasks: [
         { id: 1, title: 'Task-1' },
       ],
     }));
+
+    useDispatch.mockImplementation(() => dispatch);
 
     const { getByText } = render(<ListContainer />);
 
