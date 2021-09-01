@@ -77,10 +77,10 @@ describe('reducer', () => {
     });
   });
 
-  describe('default', () => {
-    it('returns default state', () => {
+  describe('no action', () => {
+    it('returns original state', () => {
       const state = reducer(
-        undefined, { type: 'default' },
+        undefined, { type: 'no action' },
       );
 
       expect(state).toBe(state);
