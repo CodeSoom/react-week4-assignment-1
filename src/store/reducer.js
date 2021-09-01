@@ -13,6 +13,10 @@ export default function reducer(state = initialState, action) {
       taskTitle: action.payload.taskTitle,
     };
   case 'addTask':
+    if (!taskTitle) {
+      break;
+    }
+
     return {
       ...state,
       newId: newId + 1,
