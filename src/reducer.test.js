@@ -62,6 +62,7 @@ describe('reducer', () => {
         expect(state.tasks).toHaveLength(0);
       });
     });
+
     context('with ID that not existed', () => {
       it('does not remove the task from tasks', () => {
         const state = reducer({
@@ -70,6 +71,53 @@ describe('reducer', () => {
           ],
         }, deleteTask(2));
 
+        expect(state.tasks).toHaveLength(1);
+      });
+    });
+  });
+  describe('parameter', () => {
+    context('without parameter', () => {
+      it('nothing happens', () => {
+        const state = reducer();
+
+        expect(state.newId).toBe(100);
+        expect(state.taskTitle).toBe('');
+        expect(state.tasks).toHaveLength(0);
+      });
+    });
+
+    context('with wrong actions', () => {
+      const notExistedAction = jest.fn();
+
+      notExistedAction.mockImplementation(() => ({
+        type: 'notExistedAction',
+      }));
+
+      it('returns state not changed', () => {
+        const state = reducer({
+          newId: 100,
+          taskTitle: '',
+          tasks: [],
+        }, notExistedAction());
+
+        expect(state.newId).toBe(100);
+        expect(state.taskTitle).toBe('');
+        expect(state.tasks).toHaveLength(0);
+      });
+    });
+
+    context('action is undefined', () => {
+      it('returns state not changed', () => {
+        const state = reducer({
+          newId: 300,
+          taskTitle: '',
+          tasks: [
+            { id: 1, title: 'Task' },
+          ],
+        });
+
+        expect(state.newId).toBe(300);
+        expect(state.taskTitle).toBe('');
         expect(state.tasks).toHaveLength(1);
       });
     });

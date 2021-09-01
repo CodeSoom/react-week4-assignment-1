@@ -5,6 +5,10 @@ const initialState = {
 };
 
 export default function reducer(state = initialState, action) {
+  if (action === undefined) {
+    return state;
+  }
+
   if (action.type === 'updateTaskTitle') {
     return {
       ...state,

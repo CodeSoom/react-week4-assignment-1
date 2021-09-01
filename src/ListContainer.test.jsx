@@ -1,18 +1,20 @@
-import { render } from '@testing-library/react';
+import { render, fireEvent } from '@testing-library/react';
 
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import ListContainer from './ListContainer';
 
 jest.mock('react-redux');
 
 test('ListContainer', () => {
-  const tasks = [
-    { id: 1, title: 'Do Nothing' },
-  ];
+  const dispath = jest.fn();
+
+  useDispatch.mockImplementation(() => dispath);
 
   useSelector.mockImplementation((selector) => selector({
-    tasks,
+    tasks: [
+      { id: 1, title: 'Do Nothing' },
+    ],
   }));
 
   const { getByText } = render((
@@ -20,4 +22,13 @@ test('ListContainer', () => {
   ));
 
   expect(getByText(/Do Nothing/)).not.toBeNull();
+
+  fireEvent.click(getByText(/완료/));
+
+  expect(dispath).toBeCalledWith({
+    type: 'deleteTask',
+    payload: {
+      id: 1,
+    },
+  });
 });

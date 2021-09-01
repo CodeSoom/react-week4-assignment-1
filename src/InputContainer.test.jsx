@@ -15,17 +15,23 @@ test('InputContainer', () => {
     taskTitle: 'New Title',
   }));
 
-  const { getByText, getByDisplayValue } = render((
+  const { getByText, getByDisplayValue, getByLabelText } = render((
     <InputContainer />
   ));
 
   expect(getByText(/추가/)).not.toBeNull();
   expect(getByDisplayValue(/New Title/)).not.toBeNull();
 
-  // fireEvent.change(getByLabelText(/할 일/));
+  fireEvent.change(getByLabelText(/할 일/), {
+    target: { value: 'New Thing' },
+  });
 
-  // expect(dispath).toBeCalled();
-  // 안되는 이유 찾는 중
+  expect(dispath).toBeCalledWith({
+    type: 'updateTaskTitle',
+    payload: {
+      taskTitle: 'New Thing',
+    },
+  });
 
   fireEvent.click(getByText(/추가/));
 
