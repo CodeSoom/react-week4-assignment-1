@@ -3,6 +3,20 @@ import reducer from './reducer';
 import { updateTaskTitle, addTask, deleteTask } from './actions';
 
 describe('reducer', () => {
+  describe('action type', () => {
+    it('일치하는 action type이 없으면 이전 state를 반환한다.', () => {
+      const previouseState = {
+        newId: 100,
+        taskTitle: 'New Title',
+        tasks: [],
+      };
+
+      const state = reducer(previouseState, { type: 'mockActionType' });
+
+      expect(state).toBe(previouseState);
+    });
+  });
+
   describe('updateTaskTitle', () => {
     it('taskTitle이 New Title로 업데이트 된다.', () => {
       const state = reducer({
@@ -14,24 +28,25 @@ describe('reducer', () => {
   });
 
   describe('addTask', () => {
-    context('taskTitle이 비어있있지 않으면', () => {
-      it('task가 추가된다.', () => {
-        const state = reducer({
-          nextId: 100,
-          taskTitle: 'New Task',
-          tasks: [],
-        }, addTask());
+    function reduceAddTask(taskTitle) {
+      return reducer({
+        newId: 100,
+        taskTitle,
+        tasks: [],
+      }, addTask());
+    }
 
+    context('taskTitle이 비어있지 않으면', () => {
+      it('task가 추가된다.', () => {
+        const state = reduceAddTask('New Task');
+
+        expect(state.tasks).toHaveLength(1);
         expect(state.tasks[0].id).not.toBeUndefined();
         expect(state.tasks[0].title).toBe('New Task');
       });
 
       it('taskTitle이 비워진다.', () => {
-        const state = reducer({
-          nextId: 100,
-          taskTitle: 'New Task',
-          tasks: [],
-        }, addTask());
+        const state = reduceAddTask('New Task');
 
         expect(state.taskTitle).toBe('');
       });
@@ -39,11 +54,7 @@ describe('reducer', () => {
 
     context('taskTitle가 비어있다면', () => {
       it('task가 추가되지 않는다.', () => {
-        const state = reducer({
-          nextId: 100,
-          taskTitle: '',
-          tasks: [],
-        }, addTask());
+        const state = reduceAddTask('');
 
         expect(state.tasks).toHaveLength(0);
       });
