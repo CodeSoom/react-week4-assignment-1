@@ -77,4 +77,13 @@ describe('reducer', () => {
       });
     });
   });
+
+  describe('defaultTask', () => {
+    const state = reducer(
+      undefined, { type: '', payload: {} },
+    );
+    it('returns default state', () => {
+      expect(state).toBe(state);
+    });
+  });
 });
