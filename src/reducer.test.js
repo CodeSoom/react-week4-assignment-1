@@ -68,4 +68,18 @@ describe('reducer', () => {
       });
     });
   });
+
+  it("returns previous state when action doesn't exist", () => {
+    const clearAllTask = () => ({
+      type: 'clearAllTask',
+    });
+
+    const previousState = {
+      tasks: [{ id: 1, title: 'Task' }],
+    };
+
+    const nextState = reducer(previousState, clearAllTask());
+
+    expect(previousState).toEqual(nextState);
+  });
 });
