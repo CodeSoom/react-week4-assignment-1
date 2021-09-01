@@ -76,4 +76,14 @@ describe('reducer', () => {
       });
     });
   });
+
+  describe('default', () => {
+    it('returns default state', () => {
+      const state = reducer(
+        undefined, { type: 'default' },
+      );
+
+      expect(state).toBe(state);
+    });
+  });
 });
