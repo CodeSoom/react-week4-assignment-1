@@ -1,5 +1,5 @@
-import InputContainer from './InputContainer';
-import ListContainer from './ListContainer';
+import InputContainer from './container/InputContainer';
+import ListContainer from './container/ListContainer';
 
 export default function App() {
   return (
