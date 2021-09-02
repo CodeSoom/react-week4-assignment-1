@@ -1,14 +1,15 @@
 import { render, fireEvent } from '@testing-library/react';
 
 import { useSelector, useDispatch } from 'react-redux';
-import { deleteTask } from './actions';
 
 import ListContainer from './ListContainer';
+import { deleteTask } from './actions';
 
 jest.mock('react-redux');
 
 describe('ListContainer', () => {
   const dispatch = jest.fn();
+
   useDispatch.mockImplementation(() => dispatch);
   useSelector.mockImplementation((selector) => selector({
     tasks: [
@@ -17,25 +18,29 @@ describe('ListContainer', () => {
     ],
   }));
 
-  const { getByText, getAllByText, getByRole } = render((
-    <ListContainer />
-  ));
-
   it('renders tasks', () => {
+    const { getByText } = render((
+      <ListContainer />
+    ));
+
     expect(getByText(/아무 것도 하지 않기 #1/)).not.toBeNull();
     expect(getByText(/아무 것도 하지 않기 #2/)).not.toBeNull();
   });
 
   it('deletes the task', () => {
-    // 이것도 오류가 나는데 왜 descirbe 안에 있는 내용이 위 test에서는 되고,
-    // 이 test에서는...
-    // expect(getByText(/아무 것도 하지 않기 #1/)).not.toBeNull();
+    const { getAllByText } = render((
+      <ListContainer />
+    ));
 
-    // fireEvent.click(getByText(/완료/));
-    // fireEvent.click(getByRole('button', { name: /완료/ }));
-    // fireEvent.click(getByAllText(/완료/)[0]);
+    fireEvent.click(getAllByText(/완료/)[0]);
 
-    // expect(dispatch).toBeCalledWith({ type: 'deleteTask' });
-    // expect(dispatch).toBeCalledWith(deleteTask(1));
+    // 아래 코드에서 나는 에러,
+    // TypeError: onClickDelete is not a function ????
+    // ...
+    // expect(jest.fn()).toBeCalledWith(...expected)
+    // Expected: {"payload": {"id": 1}, "type": "deleteTask"}
+    // Number of calls: 0
+
+    expect(dispatch).toBeCalledWith(deleteTask(1));
   });
 });
