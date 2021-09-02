@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 
-import Page from './Page';
+import Page from './Container/Page/Page';
 
 import {
   updateTaskTitle,
