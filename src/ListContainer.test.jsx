@@ -18,6 +18,10 @@ describe('ListContainer', () => {
     ],
   }));
 
+  beforeEach(() => {
+    dispatch.mockClear();
+  });
+
   it('renders tasks', () => {
     const { getByText } = render((
       <ListContainer />
@@ -34,6 +38,7 @@ describe('ListContainer', () => {
 
     fireEvent.click(getAllByText(/완료/)[0]);
 
+    // TODO: 에러 해결
     // 아래 코드에서 나는 에러,
     // TypeError: onClickDelete is not a function ????
     // ...
