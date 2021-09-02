@@ -15,7 +15,7 @@ test('InputContainer', () => {
     taskTitle: 'New Title',
   }));
 
-  const { getByText, getByDisplayValue } = render((
+  const { getByText, getByDisplayValue, getByLabelText } = render((
     <InputContainer />
   ));
 
@@ -25,4 +25,10 @@ test('InputContainer', () => {
   fireEvent.click(getByText(/추가/));
 
   expect(dispatch).toBeCalledWith({ type: 'addTask' });
+
+  fireEvent.change(getByLabelText('할 일'), {
+    target: { value: '무언가 하기' },
+  });
+
+  expect(dispatch).toBeCalledWith({ type: 'updateTaskTitle', payload: { taskTitle: '무언가 하기' } });
 });
