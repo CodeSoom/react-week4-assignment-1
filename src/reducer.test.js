@@ -78,11 +78,11 @@ describe('reducer', () => {
     });
   });
 
-  describe('defaultTask', () => {
+  describe('empty Task', () => {
     const state = reducer(
       undefined, { type: '', payload: {} },
     );
-    it('returns default state', () => {
+    it('returns empty state', () => {
       expect(state).toBe(state);
     });
   });
