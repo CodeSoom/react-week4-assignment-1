@@ -13,7 +13,7 @@ export default function reducer(state = initialState, action) {
   }
 
   if (action.type === 'addTask') {
-    const { newId, taskTitle, tasks } = state;
+    const { nextId, taskTitle, tasks } = state;
 
     if (!taskTitle) {
       return state;
@@ -21,9 +21,9 @@ export default function reducer(state = initialState, action) {
 
     return {
       ...state,
-      newId: newId + 1,
+      nextId: nextId + 1,
       taskTitle: '',
-      tasks: [...tasks, { id: newId, title: taskTitle }],
+      tasks: [...tasks, { id: nextId, title: taskTitle }],
     };
   }
 

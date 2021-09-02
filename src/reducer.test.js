@@ -5,7 +5,7 @@ import { updateTaskTitle, addTask, deleteTask } from './actions';
 describe('reducer', () => {
   it('일치하는 action type이 없으면 이전 state를 반환한다.', () => {
     const previouseState = {
-      newId: 100,
+      nextId: 100,
       taskTitle: 'New Title',
       tasks: [],
     };
@@ -40,7 +40,7 @@ describe('reducer', () => {
   describe('addTask', () => {
     function reduceAddTask(taskTitle) {
       return reducer({
-        newId: 100,
+        nextId: 100,
         taskTitle,
         tasks: [],
       }, addTask());
