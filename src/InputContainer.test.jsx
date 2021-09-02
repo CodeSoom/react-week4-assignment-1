@@ -6,36 +6,49 @@ import InputContainer from './InputContainer';
 
 jest.mock('react-redux');
 
-test('InputContainer', () => {
-  const dispath = jest.fn();
+describe('InputContainer', () => {
+  describe('useSelector', () => {
+    it('shows input-value after get it from store', () => {
+      useSelector.mockImplementation((selector) => selector({
+        taskTitle: 'New Title',
+      }));
 
-  useDispatch.mockImplementation(() => dispath);
+      const { getByText, getByDisplayValue } = render((
+        <InputContainer />
+      ));
 
-  useSelector.mockImplementation((selector) => selector({
-    taskTitle: 'New Title',
-  }));
-
-  const { getByText, getByDisplayValue, getByLabelText } = render((
-    <InputContainer />
-  ));
-
-  expect(getByText(/추가/)).not.toBeNull();
-  expect(getByDisplayValue(/New Title/)).not.toBeNull();
-
-  fireEvent.change(getByLabelText(/할 일/), {
-    target: { value: 'New Thing' },
+      expect(getByText(/추가/)).not.toBeNull();
+      expect(getByDisplayValue(/New Title/)).not.toBeNull();
+    });
   });
+  describe('useDispatch', () => {
+    const dispath = jest.fn();
+    useDispatch.mockImplementation(() => dispath);
 
-  expect(dispath).toBeCalledWith({
-    type: 'updateTaskTitle',
-    payload: {
-      taskTitle: 'New Thing',
-    },
-  });
+    it('updates taskTitle with an action', () => {
+      const { getByLabelText } = render((
+        <InputContainer />
+      ));
+      fireEvent.change(getByLabelText(/할 일/), {
+        target: { value: 'New Thing' },
+      });
+      expect(dispath).toBeCalledWith({
+        type: 'updateTaskTitle',
+        payload: {
+          taskTitle: 'New Thing',
+        },
+      });
+    });
 
-  fireEvent.click(getByText(/추가/));
+    it('adds tasks with an action', () => {
+      const { getByText } = render((
+        <InputContainer />
+      ));
+      fireEvent.click(getByText(/추가/));
 
-  expect(dispath).toBeCalledWith({
-    type: 'addTask',
+      expect(dispath).toBeCalledWith({
+        type: 'addTask',
+      });
+    });
   });
 });

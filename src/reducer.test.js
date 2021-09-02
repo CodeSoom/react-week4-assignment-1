@@ -7,118 +7,89 @@ import {
 } from './actions';
 
 describe('reducer', () => {
-  describe('updateTaskTitle', () => {
-    it('changes a task title', () => {
-      const state = reducer({
-        taskTitle: '',
-      }, updateTaskTitle('New Title'));
-      expect(state.taskTitle).toBe('New Title');
+  context('with an action not existed', () => {
+    const notExistedAction = jest.fn();
+
+    notExistedAction.mockImplementation(() => ({
+      type: 'notExistedAction',
+    }));
+
+    it('returns state not changed', () => {
+      const state = reducer(undefined, notExistedAction());
+
+      expect(state.newId).toBe(100);
+      expect(state.taskTitle).toBe('');
+      expect(state.tasks).toHaveLength(0);
     });
   });
 
-  describe('addTask', () => {
-    function reduceAddTask(taskTitle) {
-      return reducer({
-        newId: 100,
-        taskTitle,
-        tasks: [],
-      }, addTask());
-    }
-
-    context('with task title', () => {
-      it('appends a new task into tasks', () => {
-        const state = reduceAddTask('New Task');
-
-        expect(state.tasks).toHaveLength(1);
-        expect(state.tasks[0].id).not.toBeUndefined();
-        expect(state.tasks[0].title).toBe('New Task');
-      });
-
-      it('clears task title', () => {
-        const state = reduceAddTask('New Task');
-
-        expect(state.taskTitle).toBe('');
-      });
-    });
-
-    context('without task title', () => {
-      it('Nothing happends', () => {
-        const state = reduceAddTask('');
-
-        expect(state.tasks).toHaveLength(0);
-      });
-    });
-  });
-
-  describe('deleteTask', () => {
-    context('with ID that existed', () => {
-      it('remove the task from tasks', () => {
+  context('with an action existed', () => {
+    describe('updateTaskTitle', () => {
+      it('changes a task title', () => {
         const state = reducer({
-          tasks: [
-            { id: 1, title: 'Task' },
-          ],
-        }, deleteTask(1));
-
-        expect(state.tasks).toHaveLength(0);
+          taskTitle: '',
+        }, updateTaskTitle('New Title'));
+        expect(state.taskTitle).toBe('New Title');
       });
     });
 
-    context('with ID that not existed', () => {
-      it('does not remove the task from tasks', () => {
-        const state = reducer({
-          tasks: [
-            { id: 1, title: 'Task' },
-          ],
-        }, deleteTask(2));
-
-        expect(state.tasks).toHaveLength(1);
-      });
-    });
-  });
-  describe('parameter', () => {
-    context('without parameter', () => {
-      it('nothing happens', () => {
-        const state = reducer();
-
-        expect(state.newId).toBe(100);
-        expect(state.taskTitle).toBe('');
-        expect(state.tasks).toHaveLength(0);
-      });
-    });
-
-    context('with wrong actions', () => {
-      const notExistedAction = jest.fn();
-
-      notExistedAction.mockImplementation(() => ({
-        type: 'notExistedAction',
-      }));
-
-      it('returns state not changed', () => {
-        const state = reducer({
+    describe('addTask', () => {
+      function reduceAddTask(taskTitle) {
+        return reducer({
           newId: 100,
-          taskTitle: '',
+          taskTitle,
           tasks: [],
-        }, notExistedAction());
+        }, addTask());
+      }
 
-        expect(state.newId).toBe(100);
-        expect(state.taskTitle).toBe('');
-        expect(state.tasks).toHaveLength(0);
-      });
-    });
+      context('with task title', () => {
+        it('appends a new task into tasks', () => {
+          const state = reduceAddTask('New Task');
 
-    context('action is undefined', () => {
-      it('returns state not changed', () => {
-        const state = reducer({
-          newId: 300,
-          taskTitle: '',
-          tasks: [
-            { id: 1, title: 'Task' },
-          ],
+          expect(state.tasks).toHaveLength(1);
+          expect(state.tasks[0].id).not.toBeUndefined();
+          expect(state.tasks[0].title).toBe('New Task');
         });
 
-        expect(state.newId).toBe(300);
-        expect(state.taskTitle).toBe('');
-        expect(state.tasks).toHaveLength(1);
+        it('clears task title', () => {
+          const state = reduceAddTask('New Task');
+
+          expect(state.taskTitle).toBe('');
+        });
+      });
+
+      context('without task title', () => {
+        it('Nothing happends', () => {
+          const state = reduceAddTask('');
+
+          expect(state.tasks).toHaveLength(0);
+        });
+      });
+    });
+
+    describe('deleteTask', () => {
+      context('with ID that existed', () => {
+        it('removes the task from tasks', () => {
+          const state = reducer({
+            tasks: [
+              { id: 1, title: 'Task' },
+            ],
+          }, deleteTask(1));
+
+          expect(state.tasks).toHaveLength(0);
+        });
+      });
+
+      context('with ID that not existed', () => {
+        it('does not remove the task from tasks', () => {
+          const state = reducer({
+            tasks: [
+              { id: 1, title: 'Task' },
+            ],
+          }, deleteTask(2));
+
+          expect(state.tasks).toHaveLength(1);
+        });
       });
     });
   });
