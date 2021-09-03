@@ -78,12 +78,12 @@ describe('reducer', () => {
     });
   });
 
-  describe('empty Task', () => {
+  describe('empty taks', () => {
     const state = reducer(
-      undefined, { type: '', payload: {} },
+      undefined, {type: '', payload: {} },
     );
-    it('returns empty state', () => {
-      expect(state).toBe(state);
-    });
-  });
+      it('returns empty state', () => {
+        expect(state).toBe(state);
+      })
+  })
 });
