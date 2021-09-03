@@ -30,7 +30,7 @@ describe('ListContainer', () => {
     expect(getByText(/아무 것도 하지 않기 #1/)).not.toBeNull();
   });
 
-  it('deletes a list', async () => {
+  it('dispatches deleteTask action', () => {
     const { getAllByText } = render((
       <ListContainer />
     ));
