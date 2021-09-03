@@ -82,4 +82,18 @@ describe('reducer', () => {
       expect(previousState).toEqual(nextState);
     });
   });
+
+  context('with none existed state', () => {
+    it('returns initialState', () => {
+      const initialState = {
+        newId: 100,
+        taskTitle: '',
+        tasks: [],
+      };
+
+      const nextState = reducer(undefined, { type: undefined });
+
+      expect(nextState).toEqual(initialState);
+    });
+  });
 });
