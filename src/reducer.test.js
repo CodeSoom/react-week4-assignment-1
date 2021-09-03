@@ -77,8 +77,8 @@ describe('reducer', () => {
     });
   });
 
-  describe('no action', () => {
-    it('returns original state', () => {
+  context('without intended action', () => {
+    it('returns initial state', () => {
       const state = reducer(
         undefined, { type: 'no action' },
       );
