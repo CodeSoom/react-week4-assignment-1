@@ -6,49 +6,50 @@ import InputContainer from './InputContainer';
 
 jest.mock('react-redux');
 
+beforeEach(() => {
+  jest.clearAllMocks();
+});
+
 describe('InputContainer', () => {
-  describe('useSelector', () => {
-    it('shows input-value after get it from store', () => {
-      useSelector.mockImplementation((selector) => selector({
-        taskTitle: 'New Title',
-      }));
+  const dispath = jest.fn();
+  useDispatch.mockImplementation(() => dispath);
 
-      const { getByText, getByDisplayValue } = render((
-        <InputContainer />
-      ));
+  it('reders task title', () => {
+    useSelector.mockImplementation((selector) => selector({
+      taskTitle: 'New Title',
+    }));
 
-      expect(getByText(/추가/)).not.toBeNull();
-      expect(getByDisplayValue(/New Title/)).not.toBeNull();
+    const { getByText, getByDisplayValue } = render((
+      <InputContainer />
+    ));
+
+    expect(getByText(/추가/)).not.toBeNull();
+    expect(getByDisplayValue(/New Title/)).not.toBeNull();
+  });
+
+  it('updates task title', () => {
+    const { getByLabelText } = render((
+      <InputContainer />
+    ));
+    fireEvent.change(getByLabelText(/할 일/), {
+      target: { value: 'New Thing' },
+    });
+    expect(dispath).toBeCalledWith({
+      type: 'updateTaskTitle',
+      payload: {
+        taskTitle: 'New Thing',
+      },
     });
   });
-  describe('useDispatch', () => {
-    const dispath = jest.fn();
-    useDispatch.mockImplementation(() => dispath);
 
-    it('updates taskTitle with an action', () => {
-      const { getByLabelText } = render((
-        <InputContainer />
-      ));
-      fireEvent.change(getByLabelText(/할 일/), {
-        target: { value: 'New Thing' },
-      });
-      expect(dispath).toBeCalledWith({
-        type: 'updateTaskTitle',
-        payload: {
-          taskTitle: 'New Thing',
-        },
-      });
-    });
+  it('adds a task', () => {
+    const { getByText } = render((
+      <InputContainer />
+    ));
+    fireEvent.click(getByText(/추가/));
 
-    it('adds tasks with an action', () => {
-      const { getByText } = render((
-        <InputContainer />
-      ));
-      fireEvent.click(getByText(/추가/));
-
-      expect(dispath).toBeCalledWith({
-        type: 'addTask',
-      });
+    expect(dispath).toBeCalledWith({
+      type: 'addTask',
     });
   });
 });
