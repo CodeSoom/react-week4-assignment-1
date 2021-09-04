@@ -6,21 +6,21 @@ import ListContainer from './ListContainer';
 
 jest.mock('react-redux');
 
-beforeEach(() => {
-  jest.clearAllMocks();
-});
-
 describe('ListContainer', () => {
   const dispath = jest.fn();
   useDispatch.mockImplementation(() => dispath);
 
-  it('shows tasks after get it from store', () => {
-    useSelector.mockImplementation((selector) => selector({
-      tasks: [
-        { id: 1, title: 'Do Nothing' },
-      ],
-    }));
+  useSelector.mockImplementation((selector) => selector({
+    tasks: [
+      { id: 1, title: 'Do Nothing' },
+    ],
+  }));
 
+  beforeEach(() => {
+    jest.clearAllMocks();
+  });
+
+  it('shows tasks after get it from store', () => {
     const { getByText } = render((
       <ListContainer />
     ));

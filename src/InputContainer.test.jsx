@@ -6,19 +6,20 @@ import InputContainer from './InputContainer';
 
 jest.mock('react-redux');
 
-beforeEach(() => {
-  jest.clearAllMocks();
-});
-
 describe('InputContainer', () => {
   const dispath = jest.fn();
+
   useDispatch.mockImplementation(() => dispath);
 
-  it('reders task title', () => {
-    useSelector.mockImplementation((selector) => selector({
-      taskTitle: 'New Title',
-    }));
+  useSelector.mockImplementation((selector) => selector({
+    taskTitle: 'New Title',
+  }));
 
+  beforeEach(() => {
+    jest.clearAllMocks();
+  });
+
+  it('reders task title', () => {
     const { getByText, getByDisplayValue } = render((
       <InputContainer />
     ));
@@ -31,9 +32,11 @@ describe('InputContainer', () => {
     const { getByLabelText } = render((
       <InputContainer />
     ));
+
     fireEvent.change(getByLabelText(/할 일/), {
       target: { value: 'New Thing' },
     });
+
     expect(dispath).toBeCalledWith({
       type: 'updateTaskTitle',
       payload: {
@@ -46,6 +49,7 @@ describe('InputContainer', () => {
     const { getByText } = render((
       <InputContainer />
     ));
+
     fireEvent.click(getByText(/추가/));
 
     expect(dispath).toBeCalledWith({
