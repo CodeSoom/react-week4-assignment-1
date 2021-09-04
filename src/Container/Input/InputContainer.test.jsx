@@ -11,7 +11,7 @@ describe('InputContainer', () => {
 
   useDispatch.mockImplementation(() => dispatch);
 
-  it('input value is taskTitle of redux state', () => {
+  it('has taskTitle of redux state as a input value', () => {
     useSelector.mockImplementation((selector) => selector({
       taskTitle: 'New Title',
     }));
@@ -23,7 +23,7 @@ describe('InputContainer', () => {
     expect(getByDisplayValue(/New Title/)).not.toBeNull();
   });
 
-  it('updateTaskTitle action is called when input is changed', () => {
+  it('calls updateTaskTitle action when input is changed', () => {
     useSelector.mockImplementation((selector) => selector({
       taskTitle: '',
     }));
@@ -44,7 +44,7 @@ describe('InputContainer', () => {
     });
   });
 
-  it('addTask action is called when add button is clicked', () => {
+  it('calls addTask action when add button is clicked', () => {
     const { getByText } = render((
       <InputContainer />
     ));
