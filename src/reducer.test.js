@@ -7,7 +7,7 @@ import {
 } from './actions';
 
 describe('reducer', () => {
-  context('with an action not existed', () => {
+  context('without an existed action', () => {
     const notExistedAction = jest.fn();
 
     notExistedAction.mockImplementation(() => ({
