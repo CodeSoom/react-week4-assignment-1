@@ -7,21 +7,23 @@ import {
 } from './actions';
 
 describe('reducer', () => {
-  describe('initial state', () => {
-    it('uses initial state and update taskTitle', () => {
-      const state = reducer(undefined, updateTaskTitle('Hello'));
-
-      expect(state.taskTitle).toBe('Hello');
-    });
-  });
-
   describe('updateTaskTitle', () => {
-    it('changes new task title', () => {
-      const state = reducer({
-        taskTitle: '',
-      }, updateTaskTitle('New Title'));
+    context('with initial state', () => {
+      it('changes new task title', () => {
+        const state = reducer(undefined, updateTaskTitle('Hello'));
 
-      expect(state.taskTitle).toBe('New Title');
+        expect(state.taskTitle).toBe('Hello');
+      });
+    });
+
+    context('with new state', () => {
+      it('changes new task title', () => {
+        const state = reducer({
+          taskTitle: '',
+        }, updateTaskTitle('New Title'));
+
+        expect(state.taskTitle).toBe('New Title');
+      });
     });
   });
 
@@ -85,7 +87,7 @@ describe('reducer', () => {
     });
   });
 
-  describe('call action not pre-defined', () => {
+  describe('undefined action', () => {
     it('returns state as given', () => {
       const action = {
         type: 'notDefined',
