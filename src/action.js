@@ -5,4 +5,8 @@ export const updateTaskTitle = (taskTitle) => ({
   },
 });
 
+export const addTask = () => ({
+  type: 'addTask',
+});
+
 export default {};
