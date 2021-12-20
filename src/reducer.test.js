@@ -16,11 +16,13 @@ describe('reducer', () => {
     context('with taskTitle', () => {
       it('append new task into tasks', () => {
         const state = reducer({
+          newId: 1,
           taskTitle: 'New Task',
           tasks: [],
         }, addTask());
 
         expect(state.tasks).toHaveLength(1);
+        console.log(state.tasks[0]);
         expect(state.tasks[0].id).not.toBeUndefined();
       });
     });
