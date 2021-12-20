@@ -1,37 +1,24 @@
-import { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 
 import Page from './Page';
+import actions, { ACTION_TYPES } from './store/actions';
 
 export default function App() {
-  const [state, setState] = useState({
-    newId: 100,
-    taskTitle: '',
-    tasks: [],
-  });
+  const state = useSelector((storeState) => storeState);
+  const dispatch = useDispatch();
 
-  const { newId, taskTitle, tasks } = state;
+  const { taskTitle, tasks } = state;
 
   function handleChangeTitle(event) {
-    setState({
-      ...state,
-      taskTitle: event.target.value,
-    });
+    dispatch(actions[ACTION_TYPES.CHANGE_TITLE](event.target.value));
   }
 
   function handleClickAddTask() {
-    setState({
-      ...state,
-      newId: newId + 1,
-      taskTitle: '',
-      tasks: [...tasks, { id: newId, title: taskTitle }],
-    });
+    dispatch(actions[ACTION_TYPES.ADD_TASK]);
   }
 
   function handleClickDeleteTask(id) {
-    setState({
-      ...state,
-      tasks: tasks.filter((task) => task.id !== id),
-    });
+    dispatch(actions[ACTION_TYPES.DELETE_TASK](id));
   }
 
   return (
