@@ -24,6 +24,16 @@ describe('reducer', () => {
         expect(state.tasks).toHaveLength(1);
         expect(state.tasks[0].id).not.toBeUndefined();
       });
+
+      it('clears taskTitle', () => {
+        const state = reducer({
+          newId: 1,
+          taskTitle: 'New Task',
+          tasks: [],
+        }, addTask());
+
+        expect(state.taskTitle).toBe('');
+      });
     });
 
     context('without taskTitle', () => {
