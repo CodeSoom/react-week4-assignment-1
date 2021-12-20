@@ -14,7 +14,7 @@ export default function App() {
   }
 
   function handleClickAddTask() {
-    dispatch(actions[ACTION_TYPES.ADD_TASK]);
+    dispatch(actions[ACTION_TYPES.ADD_TASK]());
   }
 
   function handleClickDeleteTask(id) {

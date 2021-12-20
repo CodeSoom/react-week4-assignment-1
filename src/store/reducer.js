@@ -1,23 +1,23 @@
 import { ACTION_TYPES } from './actions';
 
-const initialState = {
+export const initialState = {
   newId: 100,
   taskTitle: '',
   tasks: [],
 };
 
-const reudcer = (state = initialState, action) => {
+const reducer = (state = initialState, action) => {
   const { newId, taskTitle, tasks } = state;
   const { type, payload } = action;
   if (type === ACTION_TYPES.CHANGE_TITLE) {
     return {
-      ...payload,
+      ...state,
       taskTitle: payload.taskTitle,
     };
   }
   if (type === ACTION_TYPES.ADD_TASK) {
     return {
-      newId: state.newId + 1,
+      newId: newId + 1,
       taskTitle: '',
       tasks: [...tasks, { id: newId, title: taskTitle }],
     };
@@ -33,4 +33,4 @@ const reudcer = (state = initialState, action) => {
   return state;
 };
 
-export default reudcer;
+export default reducer;
