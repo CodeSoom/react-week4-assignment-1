@@ -22,7 +22,6 @@ describe('reducer', () => {
         }, addTask());
 
         expect(state.tasks).toHaveLength(1);
-        console.log(state.tasks[0]);
         expect(state.tasks[0].id).not.toBeUndefined();
       });
     });
