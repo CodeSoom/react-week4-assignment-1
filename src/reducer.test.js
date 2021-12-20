@@ -21,6 +21,18 @@ describe('reducer', () => {
         }, addTask());
 
         expect(state.tasks).toHaveLength(1);
+        expect(state.tasks[0].id).not.toBeUndefined();
+      });
+    });
+
+    context('without taskTitle', () => {
+      it('not working', () => {
+        const state = reducer({
+          taskTitle: '',
+          tasks: [],
+        }, addTask());
+
+        expect(state.tasks).toHaveLength(0);
       });
     });
   });
