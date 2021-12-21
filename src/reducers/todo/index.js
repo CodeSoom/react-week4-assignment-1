@@ -14,6 +14,20 @@ const todoReducer = (state = initialState, action = {}) => {
     };
   }
 
+  if (action.type === 'COMPLETE_TASK') {
+    const foundIndex = state.tasks.findIndex((task) => task.id === action.payload.id);
+
+    if (foundIndex > -1) {
+      const nextTasks = [...state.tasks];
+      nextTasks.splice(foundIndex, 1);
+
+      return {
+        ...state,
+        tasks: nextTasks,
+      };
+    }
+  }
+
   return state;
 };
 
