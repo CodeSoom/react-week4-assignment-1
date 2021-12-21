@@ -4,11 +4,15 @@ import Page from './Page';
 
 import { updateTaskTitle, addTask, deleteTask } from './actions';
 
-export default function App() {
-  const { taskTitle, tasks } = useSelector((state) => ({
+function selector(state) {
+  return {
     taskTitle: state.taskTitle,
     tasks: state.tasks,
-  }));
+  };
+}
+
+export default function App() {
+  const { taskTitle, tasks } = useSelector(selector);
 
   const dispatch = useDispatch();
 
