@@ -1,6 +1,6 @@
 import { render, fireEvent } from '@testing-library/react';
 
-import Page from './Page';
+import Page from '../src/Page';
 
 test('Page', () => {
   const handleChangeTitle = jest.fn();
