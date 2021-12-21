@@ -2,27 +2,42 @@ import { render, fireEvent } from '@testing-library/react';
 
 import Input from './Input';
 
-test('Input', () => {
+describe('Input', () => {
   const handleChange = jest.fn();
   const handleClick = jest.fn();
 
-  const { getByDisplayValue, getByLabelText, getByText } = render((
+  beforeEach(() => {
+    jest.clearAllMocks();
+  });
+
+  const renderComponent = () => render(
     <Input
       value="기존 할 일"
       onChange={handleChange}
       onClick={handleClick}
-    />
-  ));
+    />,
+  );
 
-  expect(getByDisplayValue('기존 할 일')).not.toBeNull();
+  it('render', () => {
+    const { getByLabelText, getByRole } = renderComponent();
 
-  fireEvent.change(getByLabelText('할 일'), {
-    target: { value: '무언가 하기' },
+    expect(getByLabelText(/할 일/)).toBeInTheDocument();
+    expect(getByRole('button', { name: /추가/ })).toBeInTheDocument();
   });
 
-  expect(handleChange).toBeCalled();
+  it('Input value, calls handleChange', () => {
+    const { getByLabelText } = renderComponent();
 
-  fireEvent.click(getByText('추가'));
+    fireEvent.change(getByLabelText(/할 일/), { target: { value: 'New Task' } });
 
-  expect(handleClick).toBeCalled();
+    expect(handleChange).toBeCalled();
+  });
+
+  it('Click "추가" button, calls handleClick', () => {
+    const { getByRole } = renderComponent();
+
+    fireEvent.click(getByRole('button', { name: /추가/ }));
+
+    expect(handleClick).toBeCalled();
+  });
 });
