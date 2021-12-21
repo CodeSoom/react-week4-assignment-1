@@ -20,6 +20,17 @@ test('InputContainer', () => {
 
   expect(getByText(/추가/)).not.toBeNull();
   expect(getByDisplayValue(/New Title/)).not.toBeNull();
+
   fireEvent.click(getByText(/추가/));
   expect(dispatch).toBeCalledWith({ type: 'addTask' });
+
+  jest.clearAllMocks();
+
+  fireEvent.change(getByDisplayValue(/New Title/), {
+    target: { value: 'Another Title' },
+  });
+  expect(dispatch).toBeCalledWith({
+    type: 'updateTaskTitle',
+    payload: { taskTitle: "Another Title" },
+  });
 });
