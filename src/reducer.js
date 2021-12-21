@@ -1,15 +1,28 @@
-import {change, add, delete} from './actions'
-
-const initialState = {};
+const initialState = {
+  newId: 100,
+  taskTitle: "",
+  tasks: [],
+};
 
 export default function (state = initialState, action) {
   switch (action.type) {
-    case "change":
-      return state;
-    case "add":
-      return state;
-    case "change":
-      return state;
+    case "CHANGE_TODO":
+      return {
+        ...state,
+        taskTitle: action.payload.taskTitle,
+      };
+    case "ADD_TODO":
+      return {
+        ...state,
+        newId: state.newId + 1,
+        taskTitle: "",
+        tasks: [...state.tasks, { id: state.newId, title: state.taskTitle }],
+      };
+    case "DELETE_TODO":
+      return {
+        ...state,
+        tasks: state.tasks.filter((task) => task.id !== action.payload.id),
+      };
     default:
       return state;
   }
