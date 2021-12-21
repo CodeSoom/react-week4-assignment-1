@@ -16,7 +16,7 @@ describe('reducer', () => {
 
       const state = reducer(previousState, action);
 
-      expect(state.taskTitle).toBe(/New task/);
+      expect(state.taskTitle).toBe('New task');
     });
   });
 });

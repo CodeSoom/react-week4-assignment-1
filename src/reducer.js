@@ -8,6 +8,14 @@ const initialState = {
 // - type (string)
 // -payload => object => { taskTitle }
 
-const reducer = (state = initialState, action) => ({});
+const reducer = (state = initialState, action) => {
+  if (action.type === 'updateTaskTitle') {
+    return {
+      taskTitle: 'New task',
+    };
+  }
+
+  return state;
+};
 
 export default reducer;
