@@ -1,5 +1,5 @@
 import reducer from './reducer';
-import { updateTaskTitle, addTask } from './action';
+import { updateTaskTitle, addTask, deleteTask } from './action';
 
 describe('reducer', () => {
   describe('updateTaskTitle', () => {
@@ -39,11 +39,44 @@ describe('reducer', () => {
     context('without taskTitle', () => {
       it('not working', () => {
         const state = reducer({
+          newId: 1,
           taskTitle: '',
           tasks: [],
         }, addTask());
 
         expect(state.tasks).toHaveLength(0);
+      });
+    });
+  });
+
+  describe('deleteTask', () => {
+    context('with valid task Id', () => {
+      it('delete the task into Tasks', () => {
+        const state = reducer({
+          newId: 100,
+          taskTitle: '',
+          tasks: [
+            { id: 1, title: 'Task-1' },
+            { id: 2, title: 'Task-2' },
+          ],
+        }, deleteTask(1));
+
+        expect(state.tasks).toHaveLength(1);
+      });
+    });
+
+    context('with invalid task Id', () => {
+      it('not working', () => {
+        const state = reducer({
+          newId: 100,
+          taskTitle: '',
+          tasks: [
+            { id: 1, title: 'Task-1' },
+            { id: 2, title: 'Task-2' },
+          ],
+        }, deleteTask(200));
+
+        expect(state.tasks).toHaveLength(2);
       });
     });
   });
