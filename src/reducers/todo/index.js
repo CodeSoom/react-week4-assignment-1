@@ -1,6 +1,6 @@
 /* eslint-disable arrow-body-style */
 
-const initialState = {
+export const initialState = {
   tasks: [],
 };
 
