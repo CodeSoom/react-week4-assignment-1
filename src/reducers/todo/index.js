@@ -6,9 +6,11 @@ export const initialState = {
 
 const todoReducer = (state = initialState, action = {}) => {
   if (action.type === 'ADD_TODO') {
+    const lastId = state.tasks.length > 0 ? state.tasks[state.tasks.length - 1].id : -1;
+
     return {
       ...state,
-      tasks: [...state.tasks, action.payload],
+      tasks: [...state.tasks, { ...action.payload, id: lastId + 1 }],
     };
   }
 
