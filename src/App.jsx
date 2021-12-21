@@ -2,37 +2,53 @@ import { useState } from 'react';
 
 import Page from './Page';
 
-export default function App() {
-  const [state, setState] = useState({
-    newId: 100,
-    taskTitle: '',
-    tasks: [],
-  });
+const initialState = {
+  newId: 100,
+  taskTitle: '',
+  tasks: [],
+};
 
+const updateTaskTitle = (state, taskTitle) => (
+  {
+    ...state,
+    taskTitle,
+  }
+);
+
+const addTask = (state) => {
   const { newId, taskTitle, tasks } = state;
+  return {
+    ...state,
+    newId: newId + 1,
+    taskTitle: '',
+    tasks: [...tasks, { id: newId, title: taskTitle }],
+  };
+};
 
-  function handleChangeTitle(event) {
-    setState({
-      ...state,
-      taskTitle: event.target.value,
-    });
-  }
+const deleteTask = (state, id) => {
+  const { tasks } = state;
+  return {
+    ...state,
+    tasks: tasks.filter((task) => task.id !== id),
+  };
+};
 
-  function handleClickAddTask() {
-    setState({
-      ...state,
-      newId: newId + 1,
-      taskTitle: '',
-      tasks: [...tasks, { id: newId, title: taskTitle }],
-    });
-  }
+export default function App() {
+  const [state, setState] = useState(initialState);
 
-  function handleClickDeleteTask(id) {
-    setState({
-      ...state,
-      tasks: tasks.filter((task) => task.id !== id),
-    });
-  }
+  const { taskTitle, tasks } = state;
+
+  const handleChangeTitle = (event) => (
+    setState(updateTaskTitle(state, event.target.value))
+  );
+
+  const handleClickAddTask = () => (
+    setState(addTask(state))
+  );
+
+  const handleClickDeleteTask = (id) => (
+    setState(deleteTask(state, id))
+  );
 
   return (
     <Page
