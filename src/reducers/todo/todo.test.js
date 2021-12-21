@@ -2,11 +2,13 @@ import todoReducer, { initialState } from './index';
 
 describe('todoReducer', () => {
   it('기존 상태와 task를 추가하는 action을 전달하면 tasks에 task가 추가된 새로운 상태를 반환합니다.', () => {
-    const action = { type: 'ADD_TODO', payload: { title: 'foo' } };
+    const title = 'foo';
+    const action = { type: 'ADD_TODO', payload: { title } };
 
     const nextState = todoReducer(initialState, action);
 
     expect(nextState.tasks).toHaveLength(1);
+    expect(nextState.tasks[0].title).toBe(title);
   });
 
   it('tasks에 task를 추가할 때 새로운 id를 함께 추가합니다.', () => {
