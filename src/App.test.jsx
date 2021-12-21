@@ -1,8 +1,22 @@
 import { render } from '@testing-library/react';
 
+import { useSelector } from 'react-redux';
+
 import App from './App';
 
+jest.mock('react-redux');
+
 test('App', () => {
+  // TODO: useSelectore 조작
+  const tasks = [
+    { id: 1, title: '아무것도 할 게 없어요! 1' },
+    { id: 2, title: '아무것도 할 게 없어요! 2' },
+  ];
+
+  useSelector.mockImplementation((selector) => selector({
+    tasks,
+  }));
+
   const { getByText } = render((
     <App />
   ));
