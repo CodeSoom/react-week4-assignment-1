@@ -1,20 +1,13 @@
 import reducer from './reducer';
 
+import {
+  updateTaskTitle,
+} from './actions';
+
 describe('reducer', () => {
   describe('updateTaskTitle', () => {
     it('renders input value', () => {
-      const previousState = {
-        taskTitle: '',
-      };
-
-      const action = {
-        type: 'updateTaskTitle',
-        payload: {
-          taskTitle: 'New task',
-        },
-      };
-
-      const state = reducer(previousState, action);
+      const state = reducer({ taskTitle: '' }, updateTaskTitle('New task'));
 
       expect(state.taskTitle).toBe('New task');
     });
