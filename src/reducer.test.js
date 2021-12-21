@@ -25,7 +25,7 @@ describe('reducer', () => {
     context('without state', () => {
       it('set the initial', () => {
         const state = reducer(undefined, updateTaskTitle('New Title'));
-        
+
         expect(state.tasks).toHaveLength(0);
         expect(state.taskTitle).toBe('New Title');
       });
@@ -61,7 +61,7 @@ describe('reducer', () => {
     context('without state', () => {
       it('set the initial but dosnt work', () => {
         const state = reducer(undefined, addTask());
-        
+
         expect(state.tasks).toHaveLength(0);
       });
     });
@@ -98,7 +98,7 @@ describe('reducer', () => {
     context('without state', () => {
       it('set the initial but dosnt work', () => {
         const state = reducer(undefined, deleteTask(1));
-        
+
         expect(state.tasks).toHaveLength(0);
       });
     });
@@ -114,7 +114,7 @@ describe('reducer', () => {
     context('without state', () => {
       it('set the initial but nothing happen', () => {
         const state = reducer(undefined, { type: 'missingTask' });
-        
+
         expect(state.tasks).toHaveLength(0);
       });
     });

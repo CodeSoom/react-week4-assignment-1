@@ -31,6 +31,6 @@ test('InputContainer', () => {
   });
   expect(dispatch).toBeCalledWith({
     type: 'updateTaskTitle',
-    payload: { taskTitle: "Another Title" },
+    payload: { taskTitle: 'Another Title' },
   });
 });
