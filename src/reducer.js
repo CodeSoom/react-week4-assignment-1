@@ -11,7 +11,8 @@ const initialState = {
 const reducer = (state = initialState, action) => {
   if (action.type === 'updateTaskTitle') {
     return {
-      taskTitle: 'New task',
+      ...state,
+      taskTitle: action.payload.taskTitle,
     };
   }
 

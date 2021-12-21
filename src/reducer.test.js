@@ -10,7 +10,7 @@ describe('reducer', () => {
       const action = {
         type: 'updateTaskTitle',
         payload: {
-          title: 'New task',
+          taskTitle: 'New task',
         },
       };
 
