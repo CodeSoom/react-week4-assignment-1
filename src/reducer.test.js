@@ -23,6 +23,7 @@ describe('reducer', () => {
       }, addTask());
 
       expect(state.tasks).toHaveLength(1);
+      expect(state.tasks[0].title).toBe('New task');
     });
   });
 });
