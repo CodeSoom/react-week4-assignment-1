@@ -12,6 +12,7 @@ export default function (state = initialState, action) {
         taskTitle: action.payload.taskTitle,
       };
     case "ADD_TODO":
+      if (!state.taskTitle) return state;
       return {
         ...state,
         newId: state.newId + 1,
