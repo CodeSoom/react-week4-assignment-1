@@ -8,8 +8,8 @@ const initialState = {
 // - type (string)
 // -payload => object => { taskTitle }
 
-const reducer = (state = initialState, action) => {
-  const { type, payload } = action;
+const reducer = (state = initialState, action = {}) => {
+  const { type = 'none', payload = {} } = action;
 
   if (type === 'updateTaskTitle') {
     return {
@@ -26,7 +26,7 @@ const reducer = (state = initialState, action) => {
       taskTitle: '',
       tasks: [
         ...tasks,
-        { title: taskTitle },
+        { id: newId, title: taskTitle },
       ],
     };
   }

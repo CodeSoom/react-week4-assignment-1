@@ -12,7 +12,6 @@ const InputContainer = () => {
 
   const { taskTitle } = useSelector((state) => ({
     taskTitle: state.taskTitle,
-    tasks: state.tasks,
   }));
 
   const handleChangeTitle = (event) => (
@@ -26,8 +25,8 @@ const InputContainer = () => {
   return (
     <Input
       taskTitle={taskTitle}
-      onChangeTitle={handleChangeTitle}
-      onClickAddTask={handleClickAddTask}
+      onChange={handleChangeTitle}
+      onClick={handleClickAddTask}
     />
   );
 };

@@ -1,4 +1,4 @@
-import { render, fireEvent } from '@testing-library/react';
+import { render } from '@testing-library/react';
 
 import { useSelector } from 'react-redux';
 
@@ -22,6 +22,4 @@ test('Page', () => {
 
   expect(getByText(/Task-1/)).not.toBeNull();
   expect(getByText(/Task-2/)).not.toBeNull();
-
-  fireEvent.click(getByText('추가'));
 });

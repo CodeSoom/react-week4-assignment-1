@@ -49,4 +49,16 @@ describe('reducer', () => {
       expect(state.tasks).toHaveLength(0);
     });
   });
+
+  describe('no action', () => {
+    it('returns state', () => {
+      const state = reducer();
+
+      expect(state).toStrictEqual({
+        newId: 100,
+        taskTitle: '',
+        tasks: [],
+      });
+    });
+  });
 });

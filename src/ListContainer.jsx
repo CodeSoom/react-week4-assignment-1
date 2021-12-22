@@ -21,7 +21,7 @@ const ListContainer = () => {
   return (
     <List
       tasks={tasks}
-      onClickDeleteTask={handleClickDeleteTask}
+      onClickDelete={handleClickDeleteTask}
     />
   );
 };
