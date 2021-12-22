@@ -20,6 +20,5 @@ export function deleteTask(id) {
     payload: {
       id,
     },
-
   };
 }
