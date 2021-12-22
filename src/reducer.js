@@ -19,12 +19,13 @@ const reducer = (state = initialState, action) => {
   }
 
   if (type === 'addTask') {
+    const { newId, taskTitle, tasks } = state;
     return {
       ...state,
-      newId: 101,
+      newId: newId + 1,
       tasks: [
-        ...state.tasks,
-        { title: state.taskTitle },
+        ...tasks,
+        { title: taskTitle },
       ],
     };
   }
