@@ -21,6 +21,7 @@ const reducer = (state = initialState, action) => {
   if (type === 'addTask') {
     return {
       ...state,
+      newId: 101,
       tasks: [
         ...state.tasks,
         { title: state.taskTitle },
