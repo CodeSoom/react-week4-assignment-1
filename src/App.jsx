@@ -4,17 +4,8 @@ import Page from './Page';
 
 import {
   updateTaskTitle,
+  addTask,
 } from './actions';
-
-const addTask = (state) => {
-  const { newId, taskTitle, tasks } = state;
-  return {
-    ...state,
-    newId: newId + 1,
-    taskTitle: '',
-    tasks: [...tasks, { id: newId, title: taskTitle }],
-  };
-};
 
 const deleteTask = (state, id) => {
   const { tasks } = state;
@@ -37,7 +28,7 @@ export default function App() {
   );
 
   const handleClickAddTask = () => (
-    dispatch(addTask(state))
+    dispatch(addTask())
   );
 
   const handleClickDeleteTask = (id) => (

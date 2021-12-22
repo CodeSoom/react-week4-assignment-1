@@ -7,4 +7,8 @@ export const updateTaskTitle = (taskTitle) => ((
   }
 ));
 
-export const addTask = () => ({});
+export const addTask = () => ((
+  {
+    type: 'addTask',
+  }
+));
