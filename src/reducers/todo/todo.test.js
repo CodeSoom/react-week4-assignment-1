@@ -5,6 +5,19 @@ import {
 } from '../../actions/todo';
 
 describe('todoReducer', () => {
+  it('reducer에 아무값도 전달하지 않으면 최초 상태를 반환합니다.', () => {
+    const state = todoReducer();
+
+    expect(state).toEqual(initialState);
+  });
+
+  it('action을 전달하지 않으면 이전 상태를 반환합니다.', () => {
+    const prevState = todoReducer(initialState);
+    const nextState = todoReducer(prevState);
+
+    expect(nextState).toEqual(prevState);
+  });
+
   describe('addTask action', () => {
     it('addTask에 title을 전달하면 tasks에 task가 추가된 새로운 상태를 반환합니다.', () => {
       const title = 'foo';
@@ -34,6 +47,13 @@ describe('todoReducer', () => {
       const nextState = todoReducer(prevState, completeTask(id));
 
       expect(nextState.tasks.find((task) => task.id === id)).toBeUndefined();
+    });
+
+    it('completeTask action에 기존 상태와 존재하지 않는 task의 is를 전달하면 이전 상태를 반환합니다.', () => {
+      const prevState = todoReducer(initialState);
+      const nextState = todoReducer(prevState, completeTask(-1));
+
+      expect(nextState).toEqual(prevState);
     });
   });
 });
