@@ -7,9 +7,13 @@ jest.mock('react-redux');
 
 describe('ListContainer', () => {
   const dispatch = jest.fn();
-  useDispatch.mockImplementation(() => dispatch);
 
-  describe('when tasks is empty', () => {
+  beforeEach(() => {
+    dispatch.mockClear();
+    useDispatch.mockImplementation(() => dispatch);
+  });
+
+  context('when tasks is empty', () => {
     it('should render empty message', () => {
       useSelector.mockImplementation((selector) => selector({
         tasks: [],
@@ -21,15 +25,17 @@ describe('ListContainer', () => {
     });
   });
 
-  describe('when tasks is not empty', () => {
-    it('should render tasks', () => {
+  context('when tasks is not empty', () => {
+    beforeEach(() => {
       useSelector.mockImplementation((selector) => selector({
         tasks: [
           { id: 1, title: 'Task-1' },
           { id: 2, title: 'Task-2' },
         ],
       }));
+    });
 
+    it('should render tasks', () => {
       const { getByText } = render(<ListContainer />);
 
       expect(getByText(/Task-1/)).not.toBeNull();
@@ -37,13 +43,6 @@ describe('ListContainer', () => {
     });
 
     it('should delete task', () => {
-      useSelector.mockImplementation((selector) => selector({
-        tasks: [
-          { id: 1, title: 'Task-1' },
-          { id: 2, title: 'Task-2' },
-        ],
-      }));
-
       const { getAllByText } = render(<ListContainer />);
 
       const buttons = getAllByText('완료');

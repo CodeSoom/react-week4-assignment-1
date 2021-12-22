@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from 'react-redux';
 
-import actions, { ACTION_TYPES } from '../../store/actions';
+import { deleteTask } from '../../store/actions';
 import List from './List';
 
 export default function ListContainer() {
@@ -8,7 +8,7 @@ export default function ListContainer() {
   const dispatch = useDispatch();
 
   function onClickDelete(id) {
-    dispatch(actions[ACTION_TYPES.DELETE_TASK](id));
+    dispatch(deleteTask(id));
   }
 
   return (

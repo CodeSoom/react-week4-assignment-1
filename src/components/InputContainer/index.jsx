@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from 'react-redux';
 
-import actions, { ACTION_TYPES } from '../../store/actions';
+import { addTask, changeTitle } from '../../store/actions';
 import Input from './Input';
 
 export default function InputContainer() {
@@ -8,11 +8,11 @@ export default function InputContainer() {
   const dispatch = useDispatch();
 
   function handleChangeTitle({ target: { value } }) {
-    dispatch(actions[ACTION_TYPES.CHANGE_TITLE](value));
+    dispatch(changeTitle(value));
   }
 
   function handleClickAddTask() {
-    dispatch(actions[ACTION_TYPES.ADD_TASK]());
+    dispatch(addTask());
   }
 
   return (
