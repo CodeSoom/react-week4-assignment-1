@@ -15,33 +15,27 @@ describe('reducer', () => {
   });
 
   describe('addTask', () => {
+    const previousState = {
+      newId: 100,
+      taskTitle: 'New task',
+      tasks: [],
+    };
+
     it('renders new task', () => {
-      const state = reducer({
-        newId: 100,
-        taskTitle: 'New task',
-        tasks: [],
-      }, addTask());
+      const state = reducer(previousState, addTask());
 
       expect(state.tasks).toHaveLength(1);
       expect(state.tasks[0].title).toBe('New task');
     });
 
     it('changes newId', () => {
-      const state = reducer({
-        newId: 100,
-        taskTitle: 'New task',
-        tasks: [],
-      }, addTask());
+      const state = reducer(previousState, addTask());
 
       expect(state.newId).toBe(101);
     });
 
-    it('cleares task title', () => {
-      const state = reducer({
-        newId: 100,
-        taskTitle: 'New task',
-        tasks: [],
-      }, addTask());
+    it('clears task title', () => {
+      const state = reducer(previousState, addTask());
 
       expect(state.taskTitle).toBe('');
     });
