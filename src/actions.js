@@ -12,3 +12,9 @@ export const addTask = () => ((
     type: 'addTask',
   }
 ));
+
+export const deleteTask = () => ((
+  {
+    type: 'deleteTask',
+  }
+));
