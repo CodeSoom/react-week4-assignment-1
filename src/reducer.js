@@ -1,5 +1,6 @@
 const initialState = {
-  taskTitle: 'initialTitle',
+  newId: 100,
+  taskTitle: '',
   tasks: [],
 };
 
