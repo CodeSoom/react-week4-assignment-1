@@ -1,6 +1,7 @@
 import { fireEvent, render } from '@testing-library/react';
 import { useDispatch, useSelector } from 'react-redux';
 import InputContainer from '../src/InputContainer';
+import { addTask, updateTaskTitle } from '../src/store/actions';
 
 jest.mock('react-redux');
 
@@ -8,25 +9,36 @@ describe('InputContainer', () => {
   const dispatch = jest.fn();
   const renderComponent = () => render(<InputContainer />);
 
-  it('렌더링 된다.', () => {
-    useSelector.mockImplementation((selector) => selector({
-      taskTitle: 'New Title',
-    }));
+  useSelector.mockImplementation((selector) => selector({
+    taskTitle: 'New Title',
+  }));
+  useDispatch.mockImplementation(() => dispatch);
 
-    const { getByRole } = renderComponent();
-
-    expect(getByRole('textbox', { name: /할 일/ })).not.toBeNull();
+  beforeEach(() => {
+    jest.clearAllMocks();
   });
 
-  it('할 일을 추가시, 할 일이 추가된다.', () => {
-    useSelector.mockImplementation((selector) => selector({
-      taskTitle: 'New Title',
-    }));
-    useDispatch.mockImplementation(() => dispatch);
+  it('렌더링 된다.', () => {
+    const { getByRole } = renderComponent();
+    const input = getByRole('textbox', { name: /할 일/ });
 
+    expect(input).not.toBeNull();
+    expect(input).toHaveValue('New Title');
+  });
+
+  it('할 일 입력시, updateTaskTitle 액션이 dispatch 된다', () => {
+    const { getByRole } = renderComponent();
+    const input = getByRole('textbox', { name: /할 일/ });
+
+    fireEvent.change(input, { target: { value: 'Change Title' } });
+
+    expect(dispatch).toBeCalledWith(updateTaskTitle('Change Title'));
+  });
+
+  it('할 일을 추가시, addTask 액션이 dispatch 된다.', () => {
     const { getByRole } = renderComponent();
 
     fireEvent.click(getByRole('button', { name: /추가/ }));
-    expect(dispatch).toBeCalledWith({ type: 'addTask' });
+    expect(dispatch).toBeCalledWith(addTask());
   });
 });
