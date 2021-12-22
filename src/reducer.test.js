@@ -1,4 +1,4 @@
-import reducer from './reducer';
+import reducer, { initialState } from './reducer';
 
 import { changeTaskTitle, addTask, deleteTask } from './actions';
 
@@ -81,6 +81,21 @@ describe('reducer', () => {
       const { tasks } = handleDeleteTask(3);
 
       expect(tasks.length).toBe(2);
+    });
+  });
+
+  describe('일치하는 action type이 없을 경우', () => {
+    context('state가 없으면', () => {
+      it('초기 state를 반환한다', () => {
+        const state = reducer(undefined, { type: 'unknown' });
+        expect(state).toEqual(initialState);
+      });
+    });
+    context('state가 있으면', () => {
+      it('state를 그대로 반환한다', () => {
+        const { newId } = reducer({ newId: 50 }, { type: 'unknown' });
+        expect(newId).toBe(50);
+      });
     });
   });
 });
