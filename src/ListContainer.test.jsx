@@ -8,7 +8,7 @@ jest.mock('react-redux');
 
 describe('ListContainer', () => {
   const tasks = [
-    { id: 1, title: '할 일' },
+    { id: 1, title: '하하하' },
   ];
 
   useSelector.mockImplementation((selector) => selector({
@@ -17,6 +17,6 @@ describe('ListContainer', () => {
 
   it('render', () => {
     const { getByText } = render(<ListContainer />);
-    expect(getByText('할 일')).not.toBeNull();
+    expect(getByText('하하하')).not.toBeNull();
   });
 });
