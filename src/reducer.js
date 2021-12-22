@@ -23,7 +23,7 @@ const reducer = (state = initialState, action) => {
       ...state,
       tasks: [
         ...state.tasks,
-        { title: 'NewTask' },
+        { title: state.taskTitle },
       ],
     };
   }
