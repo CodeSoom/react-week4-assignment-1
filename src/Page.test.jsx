@@ -12,7 +12,7 @@ test('Page', () => {
     { id: 2, title: 'Task-2' },
   ];
 
-  const { getByText } = render((
+  const { getByText } = render(
     <Page
       taskTitle=""
       onChangeTitle={handleChangeTitle}
@@ -20,7 +20,7 @@ test('Page', () => {
       tasks={tasks}
       onClickDeleteTask={handleClickDeleteTask}
     />
-  ));
+  );
 
   expect(getByText(/Task-1/)).not.toBeNull();
   expect(getByText(/Task-2/)).not.toBeNull();

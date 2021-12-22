@@ -1,64 +1,26 @@
-import { useState } from "react";
+import { useDispatch, useSelector } from 'react-redux';
 
-import Page from "./Page";
+import Page from './Page';
 
-const initialState = {
-  newId: 100,
-  taskTitle: "",
-  tasks: [
-    { id: 1, title: "Do nothig #1" },
-    { id: 1, title: "Do nothig #2" },
-  ],
-};
+import { updateTaskTitle, addTask, deleteTask } from './actions';
 
-function updateTaskTitle(state, taskTitle) {
-  return {
-    ...state,
-    taskTitle,
-  };
-}
+const selector = (state) => ({
+  taskTitle: state.taskTitle,
+  tasks: state.tasks,
+});
 
-function addTask(state) {
-  const { newId, taskTitle, tasks } = state;
-  return {
-    ...state,
-    newId: newId + 1,
-    taskTitle: "",
-    tasks: [...tasks, { id: newId, title: taskTitle }],
-  };
-}
-
-function deleteTask(state, id) {
-  const { tasks } = state;
-  return {
-    ...state,
-    tasks: tasks.filter((task) => task.id !== id),
-  };
-}
 export default function App() {
-  const [state, setState] = useState(initialState);
+  const { taskTitle, tasks } = useSelector(selector);
 
-  const { taskTitle, tasks } = state;
-
-  function handleChangeTitle(event) {
-    setState(updateTaskTitle(state, event.target.value));
-  }
-
-  function handleClickAddTask() {
-    setState(addTask(state));
-  }
-
-  function handleClickDeleteTask(id) {
-    setState(deleteTask(state, id));
-  }
+  const dispatch = useDispatch();
 
   return (
     <Page
       taskTitle={taskTitle}
-      onChangeTitle={handleChangeTitle}
-      onClickAddTask={handleClickAddTask}
+      onChangeTitle={(event) => dispatch(updateTaskTitle(event.target.value))}
+      onClickAddTask={() => dispatch(addTask())}
       tasks={tasks}
-      onClickDeleteTask={handleClickDeleteTask}
+      onClickDeleteTask={(id) => dispatch(deleteTask(id))}
     />
   );
 }
