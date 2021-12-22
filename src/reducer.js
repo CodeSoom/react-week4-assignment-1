@@ -1,4 +1,4 @@
-const initialState = {
+export const initialState = {
   newId: 100,
   taskTitle: '',
   tasks: [],

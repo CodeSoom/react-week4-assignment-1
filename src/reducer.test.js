@@ -1,4 +1,4 @@
-import reducer from './reducer';
+import reducer, { initialState } from './reducer';
 import { updateTaskTitle, addTask, deleteTask } from './action';
 
 import { tasks as stubTasks } from '../fixtures/tasks';
@@ -91,6 +91,17 @@ describe('reducer', () => {
       expect(state.newId).toBe(100);
       expect(state.taskTitle).toBe('exist taskTitle');
       expect(state.tasks).toEqual(stubTasks);
+    });
+  });
+
+  describe('reducer function', () => {
+    it('doesn\'t given state, set initialState', () => {
+      const state = reducer(
+        undefined,
+        { type: 'invalid type' },
+      );
+
+      expect(state).toEqual(initialState);
     });
   });
 });
