@@ -31,6 +31,13 @@ const reducer = (state = initialState, action) => {
     };
   }
 
+  if (type === 'deleteTask') {
+    return {
+      ...state,
+      tasks: [],
+    };
+  }
+
   return state;
 };
 
