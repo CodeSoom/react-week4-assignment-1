@@ -23,11 +23,6 @@ export default function App() {
     dispatch({
       type: 'addTask',
     });
-
-    // TODO
-    // newId: newId + 1,
-    // taskTitle: '',
-    // tasks: [...tasks, { id: newId, title: taskTitle }],
   }
 
   function handleClickDeleteTask(id) {
@@ -37,9 +32,6 @@ export default function App() {
         id,
       },
     });
-
-    // TODO
-    // tasks: tasks.filter((task) => task.id !== id),
   }
 
   return (
