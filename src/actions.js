@@ -1,8 +1,8 @@
-export function updateTitle(event) {
+export function updateTitle(value) {
   return {
     type: 'updateTitle',
     payload: {
-      taskTitle: event.target.value,
+      taskTitle: value,
     },
   };
 }

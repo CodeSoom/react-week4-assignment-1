@@ -16,7 +16,7 @@ export default function App() {
   }));
 
   function handleChangeTitle(event) {
-    dispatch(updateTitle(event));
+    dispatch(updateTitle(event.target.value));
   }
 
   function handleClickAddTask() {
