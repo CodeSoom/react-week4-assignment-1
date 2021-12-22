@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import Page from './Page';
 
-import { updateTaskTitle, addTask, deleteTask } from './actions';
+import { updateTaskTitle, addTask } from './actions';
 
 function selector(state) {
   return {
@@ -12,7 +12,7 @@ function selector(state) {
 }
 
 export default function App() {
-  const { taskTitle, tasks } = useSelector(selector);
+  const { taskTitle } = useSelector(selector);
 
   const dispatch = useDispatch();
 
@@ -24,17 +24,11 @@ export default function App() {
     dispatch(addTask());
   }
 
-  function handleClickDeleteTask(id) {
-    dispatch(deleteTask(id));
-  }
-
   return (
     <Page
       taskTitle={taskTitle}
       onChangeTitle={handleChangeTitle}
       onClickAddTask={handleClickAddTask}
-      tasks={tasks}
-      onClickDeleteTask={handleClickDeleteTask}
     />
   );
 }
