@@ -10,6 +10,6 @@ module.exports = {
       lines: 100,
       statements: 100,
     },
-    './src/App.jsx': {},
+    './src/components/App/index.jsx': {},
   },
 };
