@@ -7,4 +7,4 @@ export const updateTaskTitle = (taskTitle) => ((
   }
 ));
 
-export default {};
+export const addTask = () => ({});
