@@ -3,8 +3,9 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import ListContainer from './ListContainer';
 
-import { tasks } from '../fixtures/tasks';
 import { deleteTask } from './action';
+
+import { tasks } from '../fixtures/tasks';
 
 jest.mock('react-redux');
 

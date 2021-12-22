@@ -14,6 +14,10 @@ describe('InputContainer', () => {
   const dispatch = jest.fn();
   useDispatch.mockImplementation(() => dispatch);
 
+  const renderComponent = () => render(
+    <InputContainer />,
+  );
+
   useSelector.mockImplementation((selector) => selector({
     taskTitle: '',
   }));
@@ -23,9 +27,7 @@ describe('InputContainer', () => {
   });
 
   it('Input value, calls updateTaskTitle', () => {
-    const { getByLabelText } = render(
-      <InputContainer />,
-    );
+    const { getByLabelText } = renderComponent();
 
     fireEvent.change(getByLabelText(/할 일/), { target: { value: 'New Task' } });
 
@@ -33,9 +35,8 @@ describe('InputContainer', () => {
   });
 
   it('Click "추가" button, calls addTask', () => {
-    const { getByText } = render(
-      <InputContainer />,
-    );
+    const { getByText } = renderComponent();
+
     fireEvent.click(getByText(/추가/));
 
     expect(dispatch).toBeCalledWith(addTask());

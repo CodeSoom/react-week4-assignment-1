@@ -23,7 +23,7 @@ describe('reducer', () => {
 
   describe('addTask', () => {
     context('with taskTitle', () => {
-      it('append new task into tasks', () => {
+      it('appends new task into tasks', () => {
         const state = renderReducer(
           { newId: 100, taskTitle: 'New Task', tasks: [] },
           addTask(),
@@ -44,7 +44,7 @@ describe('reducer', () => {
     });
 
     context('without taskTitle', () => {
-      it('not working', () => {
+      it("doesn't change state", () => {
         const state = renderReducer(
           { newId: 100, taskTitle: '', tasks: [] },
           addTask(),
@@ -56,19 +56,21 @@ describe('reducer', () => {
   });
 
   describe('deleteTask', () => {
-    context('with valid task Id', () => {
+    context('exists task Id in tasks', () => {
       it('delete the task into Tasks', () => {
+        const oldLength = stubTasks.length;
         const state = renderReducer(
           { newId: 100, taskTitle: '', tasks: stubTasks },
           deleteTask(1),
         );
+        const newLength = state.tasks.length;
 
-        expect(state.tasks).toHaveLength(1);
+        expect(oldLength - newLength).toBe(1);
       });
     });
 
-    context('with invalid task Id', () => {
-      it('not working', () => {
+    context("doesn't exists task Id in tasks", () => {
+      it("doesn't change state", () => {
         const state = renderReducer(
           { newId: 100, taskTitle: '', tasks: stubTasks },
           deleteTask(200),
@@ -79,7 +81,7 @@ describe('reducer', () => {
     });
   });
 
-  describe('request invalid action type', () => {
+  describe('request Not defined action type', () => {
     it('return previous state', () => {
       const state = renderReducer(
         { newId: 100, taskTitle: 'exist taskTitle', tasks: stubTasks },
