@@ -1,6 +1,5 @@
-import { render } from '@testing-library/react';
-
-import { useSelector } from 'react-redux';
+import { fireEvent, render } from '@testing-library/react';
+import { useDispatch, useSelector } from 'react-redux';
 
 import ListContainer from './ListContainer';
 
@@ -11,12 +10,19 @@ describe('ListContainer', () => {
     { id: 1, title: '하하하' },
   ];
 
+  const dispatch = jest.fn();
+
+  useDispatch.mockImplementation(() => dispatch);
   useSelector.mockImplementation((selector) => selector({
     tasks,
   }));
 
-  it('render', () => {
+  it('deleteTask action이 호출된다', () => {
     const { getByText } = render(<ListContainer />);
-    expect(getByText('하하하')).not.toBeNull();
+    const deleteButton = getByText(/완료/);
+
+    fireEvent.click(deleteButton);
+
+    expect(dispatch).toBeCalledWith({ type: 'deleteTask', payload: { id: 1 } });
   });
 });
