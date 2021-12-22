@@ -5,15 +5,8 @@ import Page from './Page';
 import {
   updateTaskTitle,
   addTask,
+  deleteTask,
 } from './actions';
-
-const deleteTask = (state, id) => {
-  const { tasks } = state;
-  return {
-    ...state,
-    tasks: tasks.filter((task) => task.id !== id),
-  };
-};
 
 export default function App() {
   const dispatch = useDispatch();
@@ -32,7 +25,7 @@ export default function App() {
   );
 
   const handleClickDeleteTask = (id) => (
-    dispatch(deleteTask(state, id))
+    dispatch(deleteTask(id))
   );
 
   return (
