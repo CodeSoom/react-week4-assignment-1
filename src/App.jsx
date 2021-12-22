@@ -20,17 +20,12 @@ export default function App() {
     dispatch(addTask());
   }
 
-  function handleClickDeleteTask(id) {
-    dispatch(deleteTask(id));
-  }
-
   return (
     <Page
       taskTitle={taskTitle}
       onChangeTitle={handleChangeTitle}
       onClickAddTask={handleClickAddTask}
       tasks={tasks}
-      onClickDeleteTask={handleClickDeleteTask}
     />
   );
 }
