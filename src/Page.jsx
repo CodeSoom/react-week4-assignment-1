@@ -1,17 +1,12 @@
-import List from './List';
 import InputContainer from './InputContainer';
+import ListContainer from './ListContainer';
 
-export default function Page({
-  tasks, onClickDeleteTask,
-}) {
+export default function Page() {
   return (
     <div>
       <h1>To-do</h1>
       <InputContainer />
-      <List
-        tasks={tasks}
-        onClickDelete={onClickDeleteTask}
-      />
+      <ListContainer />
     </div>
   );
 }

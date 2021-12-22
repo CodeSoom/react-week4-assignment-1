@@ -1,13 +1,15 @@
 import { render } from '@testing-library/react';
-
+import { useSelector } from 'react-redux';
 import App from '../src/App';
 
 jest.mock('react-redux');
 
 test('App', () => {
-  const { getByText } = render((
-    <App />
-  ));
+  useSelector.mockImplementation((selector) => selector({
+    tasks: [],
+  }));
+
+  const { getByText } = render((<App />));
 
   expect(getByText(/추가/)).not.toBeNull();
 
