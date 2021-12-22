@@ -16,21 +16,12 @@ test('Page', () => {
     tasks,
   }));
 
-  const handleChangeTitle = jest.fn();
-  const handleClickAddTask = jest.fn();
-
   const { getByText } = render((
-    <Page
-      taskTitle=""
-      onChangeTitle={handleChangeTitle}
-      onClickAddTask={handleClickAddTask}
-    />
+    <Page />
   ));
 
   expect(getByText(/Task-1/)).not.toBeNull();
   expect(getByText(/Task-2/)).not.toBeNull();
 
   fireEvent.click(getByText('추가'));
-
-  expect(handleClickAddTask).toBeCalled();
 });
