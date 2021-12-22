@@ -11,7 +11,7 @@ const initialState = {
   ],
 };
 
-// reducer가 될 것들
+// 기존: 상태를 바꿔줌 -> action creator
 function updateTaskTitle(state, taskTitle) {
   return {
     ...state,
