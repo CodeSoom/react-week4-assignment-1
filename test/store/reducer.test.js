@@ -2,6 +2,16 @@ import reducer from '../../src/store/reducer';
 import { addTask, deleteTask, updateTaskTitle } from '../../src/store/actions';
 
 describe('reducer', () => {
+  it('초기에는 초기상태를 반환한다. ', () => {
+    const state = reducer();
+
+    expect(state).toEqual({
+      newId: 100,
+      taskTitle: '',
+      tasks: [],
+    });
+  });
+
   describe('addTask', () => {
     describe('taskTitle 이 있다면', () => {
       it('새로운 task 가 추가된 state 를 반환한다.', () => {

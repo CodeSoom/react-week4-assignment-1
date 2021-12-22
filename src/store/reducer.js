@@ -4,10 +4,10 @@ const initialState = {
   tasks: [],
 };
 
-export default function reducer(state = initialState, action) {
+export default function reducer(state = initialState, action = {}) {
   const { type } = action;
 
-  if (type === 'addTask') {
+  if (action.type === 'addTask') {
     if (!state.taskTitle) {
       return state;
     }
