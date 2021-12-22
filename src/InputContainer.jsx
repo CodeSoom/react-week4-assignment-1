@@ -8,11 +8,12 @@ export default function InputContainer() {
     taskTitle: state.taskTitle,
   }));
   const dispatch = useDispatch();
+
   function handleChangeTaskTitle(event) {
     dispatch(updateTaskTitle(event.target.value));
   }
   function handleClickAdd() {
-    dispatch(addTask);
+    dispatch(addTask());
   }
 
   return (
