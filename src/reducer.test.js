@@ -35,5 +35,15 @@ describe('reducer', () => {
 
       expect(state.newId).toBe(101);
     });
+
+    it('cleares task title', () => {
+      const state = reducer({
+        newId: 100,
+        taskTitle: 'New task',
+        tasks: [],
+      }, addTask());
+
+      expect(state.taskTitle).toBe('');
+    });
   });
 });
