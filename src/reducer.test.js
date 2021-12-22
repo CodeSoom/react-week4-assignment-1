@@ -25,5 +25,15 @@ describe('reducer', () => {
       expect(state.tasks).toHaveLength(1);
       expect(state.tasks[0].title).toBe('New task');
     });
+
+    it('changes newId', () => {
+      const state = reducer({
+        newId: 100,
+        taskTitle: 'New task',
+        tasks: [],
+      }, addTask());
+
+      expect(state.newId).toBe(101);
+    });
   });
 });
