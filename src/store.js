@@ -1,9 +1,11 @@
 import { createStore } from 'redux';
 
-const initState = {
+export const initState = {
   newId: 100,
   taskTitle: '',
-  tasks: [],
+  tasks: [{
+    id: 1, title: 'haha',
+  }],
 };
 
 function reducer(state = initState, action) {
