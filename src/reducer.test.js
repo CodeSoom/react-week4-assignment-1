@@ -4,26 +4,26 @@ import { changeTaskTitle, addTask, deleteTask } from './actions';
 
 describe('reducer', () => {
   describe('changeTaskTitle', () => {
-    const prevState = {
+    const previousState = {
       taskTitle: '',
       tasks: [],
     };
     it('새로운 할 일 제목을 저장한다', () => {
-      const state = reducer(prevState, changeTaskTitle('호호호'));
-      expect(state.taskTitle).toBe('호호호');
+      const { taskTitle } = reducer(previousState, changeTaskTitle('호호호'));
+      expect(taskTitle).toBe('호호호');
     });
   });
 
   describe('addTask', () => {
     function handleAddTask(taskTitle) {
-      const prevState = {
+      const previousState = {
         newId: 100,
         taskTitle: '',
         tasks: [],
       };
 
       return reducer({
-        ...prevState,
+        ...previousState,
         taskTitle,
       }, addTask());
     }
@@ -52,7 +52,7 @@ describe('reducer', () => {
 
   describe('deleteTask', () => {
     function handleDeleteTask(id) {
-      const prevState = {
+      const previousState = {
         newId: 100,
         taskTitle: '',
         tasks: [
@@ -60,7 +60,7 @@ describe('reducer', () => {
           { id: 2, title: '삭제할 할 일 2' },
         ],
       };
-      return reducer(prevState, deleteTask(id));
+      return reducer(previousState, deleteTask(id));
     }
 
     it('특정 id의 할 일이 삭제된다', () => {
