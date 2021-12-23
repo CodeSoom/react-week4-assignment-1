@@ -35,6 +35,6 @@ describe('InputContainer', () => {
 
     fireEvent.click(getByRole('button', { name: '추가' }));
 
-    expect(dispatch).toBeCalledWith(addTask('new task'));
+    expect(dispatch).toBeCalledWith(addTask());
   });
 });
