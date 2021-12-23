@@ -1,6 +1,6 @@
 import Page from "./Page";
 import { useDispatch, useSelector } from "react-redux";
-import { CHANGE_TODO, ADD_TODO, DELETE_TODO } from "./actions";
+import { changeTodo, addTodo, deleteTodo } from "./actions";
 
 export default function App() {
   const dispatch = useDispatch();
@@ -10,15 +10,15 @@ export default function App() {
   }));
 
   function handleChangeTitle(event) {
-    dispatch(CHANGE_TODO(event.target.value));
+    dispatch(changeTodo(event.target.value));
   }
 
   function handleClickAddTask() {
-    dispatch(ADD_TODO());
+    dispatch(addTodo());
   }
 
   function handleClickDeleteTask(id) {
-    dispatch(DELETE_TODO(id));
+    dispatch(deleteTodo(id));
   }
 
   return (

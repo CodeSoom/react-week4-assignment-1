@@ -8,7 +8,7 @@ jest.mock("react-redux", () => ({
   useSelector: jest.fn(),
 }));
 
-import { CHANGE_TODO, ADD_TODO, DELETE_TODO } from "./actions";
+import { changeTodo, addTodo, deleteTodo } from "./actions";
 
 describe("App", () => {
   beforeEach(() => {
@@ -41,7 +41,7 @@ describe("App", () => {
         target: { value: "4과제 input 변경" },
       });
 
-      expect(dispatch).toBeCalledWith(CHANGE_TODO("4과제 input 변경"));
+      expect(dispatch).toBeCalledWith(changeTodo("4과제 input 변경"));
     });
 
     it("task add function called", () => {
@@ -49,7 +49,7 @@ describe("App", () => {
 
       fireEvent.click(getByRole("button", { name: "추가" }));
 
-      expect(dispatch).toBeCalledWith(ADD_TODO());
+      expect(dispatch).toBeCalledWith(addTodo());
     });
 
     it("task delete called", () => {
@@ -57,7 +57,7 @@ describe("App", () => {
 
       fireEvent.click(getByRole("button", { name: "완료" }));
 
-      expect(dispatch).toBeCalledWith(DELETE_TODO(101));
+      expect(dispatch).toBeCalledWith(deleteTodo(101));
     });
   });
 

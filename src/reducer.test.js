@@ -1,10 +1,13 @@
 import reducer from "./reducer";
-import { CHANGE_TODO, ADD_TODO, DELETE_TODO } from "./actions";
+import { changeTodo, addTodo, deleteTodo } from "./actions";
 
 describe("reducer", () => {
   describe("CHANGE_TODO", () => {
     it("state 'taskTitle' changes", () => {
-      const state = reducer({ taskTitle: "" }, CHANGE_TODO("4주차 과제하기"));
+      const state = reducer(
+        { newId: 100, tasks: [], taskTitle: "" },
+        changeTodo("4주차 과제하기")
+      );
 
       expect(state.taskTitle).toBe("4주차 과제하기");
     });
@@ -15,7 +18,7 @@ describe("reducer", () => {
       it("state 'tasks' is added", () => {
         const state = reducer(
           { newId: 100, taskTitle: "4주차 과제하기", tasks: [] },
-          ADD_TODO()
+          addTodo()
         );
 
         expect(state.tasks).toHaveLength(1);
@@ -29,7 +32,7 @@ describe("reducer", () => {
       it("state 'tasks' isn't added", () => {
         const state = reducer(
           { newId: 100, taskTitle: "", tasks: [] },
-          ADD_TODO()
+          deleteTodo()
         );
 
         expect(state.tasks).toHaveLength(0);
@@ -54,7 +57,7 @@ describe("reducer", () => {
             },
           ],
         },
-        DELETE_TODO(100)
+        deleteTodo(100)
       );
 
       expect(state.tasks).toHaveLength(1);

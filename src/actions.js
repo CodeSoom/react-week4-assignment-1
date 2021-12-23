@@ -1,13 +1,14 @@
-export const CHANGE_TODO = (taskTitle) => ({
-  type: "CHANGE_TODO",
-  payload: { taskTitle },
+export const changeTodo = (title) => ({
+  type: "changeTodo",
+  payload: { taskTitle: title },
 });
 
-export const ADD_TODO = () => ({
-  type: "ADD_TODO",
+export const addTodo = () => ({
+  type: "addTodo",
+  payload: {},
 });
 
-export const DELETE_TODO = (id) => ({
-  type: "DELETE_TODO",
+export const deleteTodo = (id) => ({
+  type: "deleteTodo",
   payload: { id },
 });
