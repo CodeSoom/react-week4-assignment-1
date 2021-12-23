@@ -1,7 +1,7 @@
 describe('reducer', () => {
   describe('updateTaskTitle', () => {
     it('renders new task title', () => {
-      const state = {
+      const previousState = {
         taskTitle: '',
       };
 
@@ -12,15 +12,20 @@ describe('reducer', () => {
         },
       };
 
-      expect(state.taskTitle).toBe(action.payload.taskTitle);
+      // const state = reducer(previousState, action);
+
+      expect(previousState.taskTitle).toBe(action.payload.taskTitle);
     });
   });
 
   describe('addTask', () => {
     it('renders new task', () => {
-      const state = {
+      const previousState = {
+        taskTitle: '새로 할 일',
         tasks: [],
       };
+
+      const oldLength = previousState.tasks.length;
 
       const action = {
         type: 'addTask',
@@ -29,24 +34,34 @@ describe('reducer', () => {
         },
       };
 
-      expect(state.tasks).toBe(action.payload.tasks);
+      // const state = reducer(previousState, action);
+
+      const newLength = action.payload.tasks.length;
+
+      expect(newLength - oldLength).toBe(1);
     });
   });
 
   describe('deleteTask', () => {
-    it('renders new task', () => {
-      const state = {
+    it('remove the task', () => {
+      const previousState = {
         tasks: [{ id: 1, title: '새로 할 일' }],
       };
 
+      const oldLength = previousState.tasks.length;
+
       const action = {
-        type: 'addTask',
+        type: 'deleteTask',
         payload: {
           tasks: [],
         },
       };
 
-      expect(state.tasks).toBe(action.payload.tasks);
+      // const state = reducer(previousState, action);
+
+      const newLength = action.payload.tasks.length;
+
+      expect(oldLength - newLength).toBe(oldLength);
     });
   });
 });
