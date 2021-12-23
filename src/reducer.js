@@ -13,14 +13,16 @@ export default function reducer(state = initialState, action) {
     addTask: () => {
       const { newId, taskTitle, tasks } = state;
 
-      return taskTitle === ''
-        ? state
-        : {
-          ...state,
-          newId: newId + 1,
-          taskTitle: '',
-          tasks: [...tasks, { id: newId, title: taskTitle }],
-        };
+      if (!taskTitle) {
+        return state;
+      }
+
+      return {
+        ...state,
+        newId: newId + 1,
+        taskTitle: '',
+        tasks: [...tasks, { id: newId, title: taskTitle }],
+      };
     },
     deleteTask: () => {
       const { tasks } = state;
