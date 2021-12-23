@@ -22,6 +22,8 @@ describe('InputContainer', () => {
     fireEvent.click(getByText('추가'));
 
     expect(dispatch).toBeCalled();
-    expect(dispatch).toBeCalledWith(title);
+    expect(dispatch).toBeCalledWith({
+      type: 'addTask',
+    });
   });
 });
