@@ -1,67 +1,64 @@
+import reducer from './reducer';
+
+import {
+  updateTaskTitle,
+  addTask,
+  deleteTask,
+} from './actions';
+
+// reducer test
+// [updateTaskTitle]
+//  - renders new state with new task title
+// [addTask]
+// 1. with task title
+//  - renders new state with new task
+//  - renders task title with blank
+// [deleteTask]
+//  - remove the task from tasks
+
 describe('reducer', () => {
   describe('updateTaskTitle', () => {
-    it('renders new task title', () => {
-      const previousState = {
+    it('renders new state with new task title', () => {
+      const newState = reducer({
         taskTitle: '',
-      };
+      }, updateTaskTitle('새로 할 일'));
 
-      const action = {
-        type: 'updateTaskTitle',
-        payload: {
-          taskTitle: '새로 할 일',
-        },
-      };
-
-      // const state = reducer(previousState, action);
-
-      expect(previousState.taskTitle).toBe(action.payload.taskTitle);
+      expect(newState.taskTitle).toBe('새로 할 일');
     });
   });
 
   describe('addTask', () => {
-    it('renders new task', () => {
-      const previousState = {
-        taskTitle: '새로 할 일',
+    context('with task title', () => {
+      it('renders new state with new task', () => {
+        const newState = reducer({
+          newId: 100,
+          taskTitle: '운동가기',
+          tasks: [],
+        }, addTask());
+
+        expect(newState.tasks).toHaveLength(1);
+        expect(newState.tasks[0].id).toBe(100);
+        expect(newState.tasks[0].title).toBe('운동가기');
+      });
+    });
+    it('renders task title with blank', () => {
+      const newState = reducer({
+        newId: 100,
+        taskTitle: '운동가기',
         tasks: [],
-      };
+      }, addTask());
 
-      const oldLength = previousState.tasks.length;
-
-      const action = {
-        type: 'addTask',
-        payload: {
-          tasks: [{ id: 1, title: '새로 할 일' }],
-        },
-      };
-
-      // const state = reducer(previousState, action);
-
-      const newLength = action.payload.tasks.length;
-
-      expect(newLength - oldLength).toBe(1);
+      expect(newState.taskTitle).toBe('');
     });
   });
 
   describe('deleteTask', () => {
-    it('remove the task', () => {
-      const previousState = {
-        tasks: [{ id: 1, title: '새로 할 일' }],
-      };
+    it('remove the task from tasks', () => {
+      const newState = reducer({
+        tasks: [{ id: 100, title: '운동가기' }],
+      }, deleteTask(100));
 
-      const oldLength = previousState.tasks.length;
-
-      const action = {
-        type: 'deleteTask',
-        payload: {
-          tasks: [],
-        },
-      };
-
-      // const state = reducer(previousState, action);
-
-      const newLength = action.payload.tasks.length;
-
-      expect(oldLength - newLength).toBe(oldLength);
+      expect(newState.tasks).toHaveLength(0);
     });
   });
 });

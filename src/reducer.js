@@ -17,7 +17,7 @@ export default function reducer(state = initialState, action) {
       taskTitle: action.payload.taskTitle,
     };
   }
-  if (action.type === 'addTaskTitle') {
+  if (action.type === 'addTask') {
     const { newId, taskTitle, tasks } = state;
 
     return {
@@ -27,7 +27,7 @@ export default function reducer(state = initialState, action) {
       tasks: [...tasks, { id: newId, title: taskTitle }],
     };
   }
-  if (action.type === 'deleteTaskTitle') {
+  if (action.type === 'deleteTask') {
     const { tasks } = state;
 
     return {
