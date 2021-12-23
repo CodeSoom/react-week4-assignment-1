@@ -19,6 +19,6 @@ test('App', () => {
   ));
 
   expect(getByText(/추가/)).not.toBeNull();
-
   expect(getByText('Task1')).not.toBeNull();
+  expect(getByText('Task2')).not.toBeNull();
 });

@@ -9,7 +9,7 @@ import {
 } from './actions';
 
 export default function App() {
-  const [taskTitle, tasks] = useSelector((state) => ({
+  const { taskTitle, tasks } = useSelector((state) => ({
     taskTitle: state.taskTitle,
     tasks: state.tasks,
   }));
