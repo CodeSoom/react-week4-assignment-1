@@ -31,24 +31,50 @@ describe('reducer', () => {
 
       const state = reducer(previousState, addTask());
 
-      expect(state.tasks[0].title).toBe('new task');
-      expect(state.tasks).toHaveLength(1);
+      const { tasks } = state;
+
+      expect(tasks[0].title).toBe('new task');
+      expect(tasks).toHaveLength(1);
     });
   });
 
   describe('deleteTask', () => {
-    it('removes a task from tasks', () => {
-      const previousState = {
-        newId: 100,
-        taskTitle: '',
-        tasks: [
-          { id: 1, title: 'first task' },
-        ],
-      };
+    context('with an existing task id', () => {
+      it('removes a task from tasks', () => {
+        const previousState = {
+          newId: 100,
+          taskTitle: '',
+          tasks: [
+            { id: 1, title: 'first task' },
+            { id: 2, title: 'second task' },
+          ],
+        };
 
-      const state = reducer(previousState, deleteTask(1));
+        const state = reducer(previousState, deleteTask(1));
 
-      expect(state.tasks).toHaveLength(0);
+        const { tasks } = state;
+
+        expect(tasks).toHaveLength(1);
+      });
+    });
+
+    context('with a non-existent task id', () => {
+      it('removes a task from tasks', () => {
+        const previousState = {
+          newId: 100,
+          taskTitle: '',
+          tasks: [
+            { id: 1, title: 'first task' },
+            { id: 2, title: 'second task' },
+          ],
+        };
+
+        const state = reducer(previousState, deleteTask(100));
+
+        const { tasks } = state;
+
+        expect(tasks).toHaveLength(2);
+      });
     });
   });
 });

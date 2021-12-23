@@ -7,13 +7,13 @@ export function updateTaskTitle(taskTitle) {
 
 export function addTask() {
   return ({
-    type: 'updateTaskTitle',
+    type: 'addTask',
   });
 }
 
 export function deleteTask(id) {
   return ({
-    type: 'updateTaskTitle',
+    type: 'deleteTask',
     payload: { id },
   });
 }
