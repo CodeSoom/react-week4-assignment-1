@@ -2,26 +2,16 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import Page from './Page';
 import {
-  updateTitle,
-  addTask,
   deleteTask,
 } from './actions';
 
 export default function App() {
   const dispatch = useDispatch();
 
-  const { tasks, taskTitle } = useSelector((state) => ({
+  const { tasks } = useSelector((state) => ({
     tasks: state.tasks,
     taskTitle: state.taskTitle,
   }));
-
-  function handleChangeTitle(event) {
-    dispatch(updateTitle(event.target.value));
-  }
-
-  function handleClickAddTask() {
-    dispatch(addTask());
-  }
 
   function handleClickDeleteTask(id) {
     dispatch(deleteTask(id));
@@ -29,9 +19,6 @@ export default function App() {
 
   return (
     <Page
-      taskTitle={taskTitle}
-      onChangeTitle={handleChangeTitle}
-      onClickAddTask={handleClickAddTask}
       tasks={tasks}
       onClickDeleteTask={handleClickDeleteTask}
     />

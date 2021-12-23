@@ -1,22 +1,27 @@
 import { render, fireEvent } from '@testing-library/react';
+import { useSelector, useDispatch } from 'react-redux';
 
 import InputContainer from './InputContainer';
 
+jest.mock('react-redux');
+
 describe('InputContainer', () => {
-  const handleChangeTitle = jest.fn();
-  const handleClickAddTask = jest.fn();
+  const dispatch = jest.fn();
+  const title = 'newTitle';
+
+  useSelector.mockImplementation((selector) => selector({
+    taskTitle: title,
+  }));
+  useDispatch.mockImplementation(() => dispatch);
 
   it('taskTitle should be added', () => {
     const { getByText } = render((
-      <InputContainer
-        taskTitle="newTitle"
-        onChangeTitle={handleChangeTitle}
-        onClickAddTask={handleClickAddTask}
-      />
+      <InputContainer />
     ));
 
     fireEvent.click(getByText('추가'));
 
-    expect(handleClickAddTask).toBeCalled();
+    expect(dispatch).toBeCalled();
+    expect(dispatch).toBeCalledWith(title);
   });
 });
