@@ -1,6 +1,6 @@
 export const changeTodo = (title) => ({
   type: "changeTodo",
-  payload: { taskTitle: title },
+  payload: { taskTitle : title } ,
 });
 
 export const addTodo = () => ({
@@ -10,5 +10,5 @@ export const addTodo = () => ({
 
 export const deleteTodo = (id) => ({
   type: "deleteTodo",
-  payload: { id },
+  payload: {id} ,
 });

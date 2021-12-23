@@ -2,6 +2,12 @@ import reducer from "./reducer";
 import { changeTodo, addTodo, deleteTodo } from "./actions";
 
 describe("reducer", () => {
+  it('renders initial state', () => {
+    const state = reducer();
+
+    expect(state.newId).not.toBeUndefined();
+  })
+
   describe("CHANGE_TODO", () => {
     it("state 'taskTitle' changes", () => {
       const state = reducer(
@@ -32,7 +38,7 @@ describe("reducer", () => {
       it("state 'tasks' isn't added", () => {
         const state = reducer(
           { newId: 100, taskTitle: "", tasks: [] },
-          deleteTodo()
+          addTodo()
         );
 
         expect(state.tasks).toHaveLength(0);
