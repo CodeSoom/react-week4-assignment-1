@@ -6,32 +6,30 @@ import {
   deleteTask,
 } from './actions';
 
+const initialState = {
+  newId: 1,
+  taskTitle: '',
+  tasks: [],
+};
+
 describe('reducer', () => {
   describe('updateTaskTitle', () => {
     it('changes task title', () => {
-      const previousState = {
-        newId: 100,
-        taskTitle: '',
-        tasks: [],
-      };
+      const { taskTitle } = reducer({ ...initialState }, updateTaskTitle('new task'));
 
-      const state = reducer(previousState, updateTaskTitle('new task'));
-
-      expect(state.taskTitle).toBe('new task');
+      expect(taskTitle).toBe('new task');
     });
   });
 
   describe('addTask', () => {
     it('adds a new task to tasks', () => {
-      const previousState = {
-        newId: 100,
-        taskTitle: 'new task',
-        tasks: [],
-      };
-
-      const state = reducer(previousState, addTask());
-
-      const { tasks } = state;
+      const { tasks } = reducer(
+        {
+          ...initialState,
+          taskTitle: 'new task',
+        },
+        addTask(),
+      );
 
       expect(tasks[0].title).toBe('new task');
       expect(tasks).toHaveLength(1);
@@ -41,18 +39,16 @@ describe('reducer', () => {
   describe('deleteTask', () => {
     context('with an existing task id', () => {
       it('removes a task from tasks', () => {
-        const previousState = {
-          newId: 100,
-          taskTitle: '',
-          tasks: [
-            { id: 1, title: 'first task' },
-            { id: 2, title: 'second task' },
-          ],
-        };
-
-        const state = reducer(previousState, deleteTask(1));
-
-        const { tasks } = state;
+        const { tasks } = reducer(
+          {
+            ...initialState,
+            tasks: [
+              { id: 1, title: 'first task' },
+              { id: 2, title: 'second task' },
+            ],
+          },
+          deleteTask(1),
+        );
 
         expect(tasks).toHaveLength(1);
       });
@@ -60,18 +56,16 @@ describe('reducer', () => {
 
     context('with a non-existent task id', () => {
       it('removes a task from tasks', () => {
-        const previousState = {
-          newId: 100,
-          taskTitle: '',
-          tasks: [
-            { id: 1, title: 'first task' },
-            { id: 2, title: 'second task' },
-          ],
-        };
-
-        const state = reducer(previousState, deleteTask(100));
-
-        const { tasks } = state;
+        const { tasks } = reducer(
+          {
+            ...initialState,
+            tasks: [
+              { id: 1, title: 'first task' },
+              { id: 2, title: 'second task' },
+            ],
+          },
+          deleteTask(100),
+        );
 
         expect(tasks).toHaveLength(2);
       });
