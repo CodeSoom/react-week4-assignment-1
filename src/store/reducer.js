@@ -1,13 +1,17 @@
+import { identity } from '../lib';
+
 const initialState = {
   newId: 100,
   taskTitle: '',
   tasks: [],
 };
 
-export default function reducer(state = initialState, action = {}) {
-  const { type } = action;
+const ADD_TASK = 'addTask';
+const DELETE_TASK = 'deleteTask';
+const UPDATE_TASK_TITLE = 'updateTaskTitle';
 
-  if (action.type === 'addTask') {
+const reducers = {
+  [ADD_TASK]: (state) => {
     if (!state.taskTitle) {
       return state;
     }
@@ -17,21 +21,19 @@ export default function reducer(state = initialState, action = {}) {
       taskTitle: '',
       tasks: [...state.tasks, { id: state.newId, title: state.taskTitle }],
     };
-  }
+  },
+  [DELETE_TASK]: (state, action) => ({
+    ...state,
+    tasks: state.tasks.filter((task) => task.id !== action.payload.id),
+  }),
+  [UPDATE_TASK_TITLE]: (state, action) => ({
+    ...state,
+    taskTitle: action.payload.taskTitle,
+  }),
+};
 
-  if (type === 'deleteTask') {
-    return {
-      ...state,
-      tasks: state.tasks.filter((task) => task.id !== action.payload.id),
-    };
-  }
+export default function reducer(state = initialState, action = {}) {
+  const { type } = action;
 
-  if (type === 'updateTaskTitle') {
-    return {
-      ...state,
-      taskTitle: action.payload.taskTitle,
-    };
-  }
-
-  return state;
+  return (reducers[type] || identity)(state, action);
 }
