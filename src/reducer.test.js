@@ -1,4 +1,4 @@
-import { changeTitle } from './actions';
+import { addTask, changeTitle } from './actions';
 import reducer from './reducer';
 
 describe('reducer', () => {
@@ -13,7 +13,15 @@ describe('reducer', () => {
     });
   });
   describe('addTask', () => {
+    it('새로운 테스크를 추가한다.', () => {
+      const initialState = {
+        tasks: [],
+      };
+      const state = reducer(initialState, addTask('hi'));
 
+      expect(state.tasks).toHaveLength(1);
+      expect(state.tasks[0].title).toBe('hi');
+    });
   });
   describe('deleteTask', () => {
 
