@@ -1,12 +1,12 @@
 import InputContainer from './InputContainer';
-import List from './List';
+import ListContainer from './ListContainer';
 
 export default function App() {
   return (
     <div>
       <h1>To-do</h1>
       <InputContainer />
-      <List />
+      <ListContainer />
     </div>
   );
 }
