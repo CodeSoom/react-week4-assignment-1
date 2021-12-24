@@ -8,7 +8,7 @@ function reducer(state = initialState, action) {
   if (action.type === 'changeTitle') {
     return {
       ...state,
-      todoTitle: action.payload.title,
+      taskTitle: action.payload.title,
     };
   }
 
