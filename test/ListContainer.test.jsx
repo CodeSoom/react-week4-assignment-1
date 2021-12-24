@@ -11,12 +11,12 @@ describe('ListContainer', () => {
   const renderComponent = () => render(<ListContainer />);
 
   beforeEach(() => {
+    jest.clearAllMocks();
+
     useSelector.mockImplementation((selector) => selector({
       tasks: [{ id: 1, title: 'task1' }, { id: 2, title: 'task2' }],
     }));
     useDispatch.mockImplementation(() => dispatch);
-
-    jest.clearAllMocks();
   });
   afterEach(() => {
     useSelector.mockClear();

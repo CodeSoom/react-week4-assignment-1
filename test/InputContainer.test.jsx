@@ -10,12 +10,12 @@ describe('InputContainer', () => {
   const renderComponent = () => render(<InputContainer />);
 
   beforeEach(() => {
+    jest.clearAllMocks();
+
     useSelector.mockImplementation((selector) => selector({
       taskTitle: 'New Title',
     }));
     useDispatch.mockImplementation(() => dispatch);
-
-    jest.clearAllMocks();
   });
 
   afterEach(() => {
