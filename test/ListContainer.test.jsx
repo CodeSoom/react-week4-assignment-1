@@ -11,13 +11,17 @@ describe('ListContainer', () => {
   const renderComponent = () => render(<ListContainer />);
 
   beforeEach(() => {
+    useSelector.mockImplementation((selector) => selector({
+      tasks: [{ id: 1, title: 'task1' }, { id: 2, title: 'task2' }],
+    }));
+    useDispatch.mockImplementation(() => dispatch);
+
     jest.clearAllMocks();
   });
-
-  useSelector.mockImplementation((selector) => selector({
-    tasks: [{ id: 1, title: 'task1' }, { id: 2, title: 'task2' }],
-  }));
-  useDispatch.mockImplementation(() => dispatch);
+  afterEach(() => {
+    useSelector.mockClear();
+    useDispatch.mockClear();
+  });
 
   it('렌더링 된다.', () => {
     const { container } = renderComponent();

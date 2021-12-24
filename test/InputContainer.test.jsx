@@ -9,13 +9,18 @@ describe('InputContainer', () => {
   const dispatch = jest.fn();
   const renderComponent = () => render(<InputContainer />);
 
-  useSelector.mockImplementation((selector) => selector({
-    taskTitle: 'New Title',
-  }));
-  useDispatch.mockImplementation(() => dispatch);
-
   beforeEach(() => {
+    useSelector.mockImplementation((selector) => selector({
+      taskTitle: 'New Title',
+    }));
+    useDispatch.mockImplementation(() => dispatch);
+
     jest.clearAllMocks();
+  });
+
+  afterEach(() => {
+    useSelector.mockClear();
+    useDispatch.mockClear();
   });
 
   it('렌더링 된다.', () => {

@@ -11,7 +11,7 @@ export default function ListContainer() {
 
   return (
     <List
-      tasks={tasks}
+      tasks={tasks || []}
       onClickDelete={(id) => dispatch(deleteTask(id))}
     />
   );
