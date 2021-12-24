@@ -13,9 +13,6 @@ describe('ListContainer', () => {
   beforeEach(() => {
     jest.clearAllMocks();
 
-    useSelector.mockImplementation((selector) => selector({
-      tasks: [{ id: 1, title: 'task1' }, { id: 2, title: 'task2' }],
-    }));
     useDispatch.mockImplementation(() => dispatch);
   });
   afterEach(() => {
@@ -30,6 +27,10 @@ describe('ListContainer', () => {
   });
 
   it('task 삭제시, deleteTask 액션이 dispatch 된다.', () => {
+    useSelector.mockImplementation((selector) => selector({
+      tasks: [{ id: 1, title: 'task1' }, { id: 2, title: 'task2' }],
+    }));
+
     const { getAllByRole } = renderComponent();
 
     const buttons = getAllByRole('button', { name: '완료' });

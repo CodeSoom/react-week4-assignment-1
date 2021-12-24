@@ -37,20 +37,6 @@ describe('App', () => {
     expect(container).toHaveTextContent(/할 일이 없어요!/);
   });
 
-  it('할 일 목록이 있는 경우, 할 일 목록 들이 표현된다.', () => {
-    useSelector.mockImplementation((selector) => selector({
-      newId: 1,
-      taskTitle: '',
-      tasks: [{ id: 1, title: 'task1' }, { id: 2, title: 'task2' }],
-    }));
-
-    const { container, getAllByRole } = renderApp();
-
-    expect(getAllByRole('listitem')).toHaveLength(2);
-    expect(container).toHaveTextContent(/task1/);
-    expect(container).toHaveTextContent(/task2/);
-  });
-
   it('할 일 작성시, input 에 입력한 내용이 표시된다.', () => {
     const { getByRole } = renderApp();
     const input = getByRole('textbox', { name: /할 일/ });
