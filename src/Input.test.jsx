@@ -3,12 +3,13 @@ import { render, fireEvent } from '@testing-library/react';
 import Input from './Input';
 
 test('Input', () => {
+  const value = '기존 할 일';
   const handleChange = jest.fn();
   const handleClick = jest.fn();
 
   const { getByDisplayValue, getByLabelText, getByText } = render((
     <Input
-      value="기존 할 일"
+      value={value}
       onChange={handleChange}
       onClick={handleClick}
     />
