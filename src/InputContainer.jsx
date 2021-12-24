@@ -16,7 +16,7 @@ const InputContainer = () => {
   };
   return (
     <Input
-      taskTitle={taskTitle}
+      value={taskTitle}
       onClick={addTaskHandler}
       onChange={changeTaskTitleHandler}
     />
