@@ -1,4 +1,4 @@
-import reducer from './reducer';
+import reducer, { initialState } from './reducer';
 
 import { updateTaskTitle, addTask, deleteTask } from './actions';
 
@@ -9,7 +9,7 @@ describe('reducer', () => {
         {
           taskTitle: '',
         },
-        updateTaskTitle('New Title')
+        updateTaskTitle('New Title'),
       );
 
       expect(state.taskTitle).toBe('New Title');
@@ -24,7 +24,7 @@ describe('reducer', () => {
           taskTitle,
           tasks: [],
         },
-        addTask()
+        addTask(),
       );
     }
 
@@ -59,7 +59,7 @@ describe('reducer', () => {
           {
             tasks: [{ id: 1, title: 'Task' }],
           },
-          deleteTask(1)
+          deleteTask(1),
         );
 
         expect(state.tasks).toHaveLength(0);
@@ -72,10 +72,23 @@ describe('reducer', () => {
           {
             tasks: [{ id: 1, title: 'Task' }],
           },
-          deleteTask(2)
+          deleteTask(2),
         );
 
         expect(state.tasks).toHaveLength(1);
+      });
+    });
+
+    context('without any actions', () => {
+      it('returns initial state', () => {
+        const state = reducer(
+          undefined,
+          {
+            type: undefined,
+          },
+        );
+
+        expect(state).toEqual(initialState);
       });
     });
   });

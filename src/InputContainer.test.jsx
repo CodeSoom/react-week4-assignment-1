@@ -10,14 +10,11 @@ test('InputContainer', () => {
   const dispatch = jest.fn();
 
   useDispatch.mockImplementation(() => dispatch);
+  useSelector.mockImplementation((selector) => selector({
+    taskTitle: 'New Title',
+  }));
 
-  useSelector.mockImplementation((selector) =>
-    selector({
-      taskTitle: 'New Title',
-    })
-  );
-
-  const { getByText, getByDisplayValue } = render(<InputContainer />);
+  const { getByText, getByDisplayValue, getByRole } = render(<InputContainer />);
 
   expect(getByText(/추가/)).not.toBeNull();
   expect(getByDisplayValue(/New Title/)).not.toBeNull();
@@ -25,5 +22,12 @@ test('InputContainer', () => {
 
   expect(dispatch).toBeCalledWith({
     type: 'addTask',
+  });
+
+  const input = getByRole('textbox', { name: /할 일/ });
+  fireEvent.change(input, { target: { value: 'Change Title' } });
+  expect(dispatch).toBeCalledWith({
+    type: 'updateTaskTitle',
+    payload: { taskTitle: 'Change Title' },
   });
 });

@@ -7,15 +7,13 @@ import App from './App';
 jest.mock('react-redux');
 
 test('App', () => {
-  useSelector.mockImplementation((selector) =>
-    selector({
-      taskTitle: '',
-      tasks: [
-        { id: 1, title: 'Do nothig #1' },
-        { id: 2, title: 'Do nothig #2' },
-      ],
-    })
-  );
+  useSelector.mockImplementation((selector) => selector({
+    taskTitle: '',
+    tasks: [
+      { id: 1, title: 'Do nothig #1' },
+      { id: 2, title: 'Do nothig #2' },
+    ],
+  }));
 
   const { getByText } = render(<App />);
 

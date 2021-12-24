@@ -1,6 +1,6 @@
-import Input from './Input';
-
 import { useDispatch, useSelector } from 'react-redux';
+
+import Input from './Input';
 
 import { updateTaskTitle, addTask } from './actions';
 
@@ -11,17 +11,15 @@ export default function InputContainer() {
     taskTitle: state.taskTitle,
   }));
 
-  function handleChangeTitle(event) {
+  const handleChangeTitle = (event) => {
     dispatch(updateTaskTitle(event.target.value));
-  }
-
-  function handleClickAddTask() {
+  };
+  const handleClickAddTask = () => {
     dispatch(addTask());
-  }
+  };
 
   return (
     <div>
-      <h1>To-do</h1>
       <Input
         value={taskTitle}
         onChange={handleChangeTitle}
