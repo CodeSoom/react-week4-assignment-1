@@ -7,12 +7,13 @@ jest.mock('react-redux');
 
 describe('InputContainer', () => {
   const dispatch = jest.fn();
-  const title = 'newTitle';
 
-  useSelector.mockImplementation((selector) => selector({
-    taskTitle: title,
-  }));
-  useDispatch.mockImplementation(() => dispatch);
+  beforeEach(() => {
+    useSelector.mockImplementation((selector) => selector({
+      taskTitle: 'newTitle',
+    }));
+    useDispatch.mockImplementation(() => dispatch);
+  });
 
   it('taskTitle should be added', () => {
     const { getByText } = render((
