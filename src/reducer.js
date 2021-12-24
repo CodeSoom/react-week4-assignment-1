@@ -1,5 +1,5 @@
 const initialState = {
-  newId: 100,
+  newId: 1,
   taskTitle: '',
   tasks: [],
 };
@@ -26,7 +26,7 @@ export default function reducer(state = initialState, action) {
     },
     deleteTask: () => ({
       ...state,
-      tasks: state.tasks.filter((task) => task.id !== action.payload.id),
+      tasks: tasks.filter((task) => task.id !== action.payload.id),
     }),
   };
 

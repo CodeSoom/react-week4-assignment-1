@@ -15,9 +15,15 @@ const initialState = {
 describe('reducer', () => {
   describe('updateTaskTitle', () => {
     it('changes task title', () => {
-      const { taskTitle } = reducer({ ...initialState }, updateTaskTitle('new task'));
+      const { taskTitle } = reducer(
+        {
+          ...initialState,
+          taskTitle: '',
+        },
+        updateTaskTitle('Task-1'),
+      );
 
-      expect(taskTitle).toBe('new task');
+      expect(taskTitle).toBe('Task-1');
     });
   });
 
@@ -26,12 +32,12 @@ describe('reducer', () => {
       const { tasks } = reducer(
         {
           ...initialState,
-          taskTitle: 'new task',
+          taskTitle: 'New Task',
         },
         addTask(),
       );
 
-      expect(tasks[0].title).toBe('new task');
+      expect(tasks[0].title).toBe('New Task');
       expect(tasks).toHaveLength(1);
     });
   });

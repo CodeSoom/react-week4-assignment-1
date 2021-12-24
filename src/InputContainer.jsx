@@ -7,18 +7,18 @@ import {
   addTask,
 } from './actions';
 
-function handleChangeTitle(event) {
-  useDispatch(updateTaskTitle(event.target.value));
-}
-
-function handleClickAddTask() {
-  useDispatch(addTask());
-}
-
 export default function InputContainer() {
   const { taskTitle } = useSelector((state) => ({
     taskTitle: state.taskTitle,
   }));
+
+  function handleChangeTitle(event) {
+    useDispatch(updateTaskTitle(event.target.value));
+  }
+
+  function handleClickAddTask() {
+    useDispatch(addTask());
+  }
 
   return (
     <div>

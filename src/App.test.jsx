@@ -8,6 +8,7 @@ jest.mock('react-redux');
 
 test('App', () => {
   useSelector.mockImplementation((selector) => selector({
+    taskTitle: '',
     tasks: [
       { id: 1, title: 'Task1' },
       { id: 2, title: 'Task2' },
