@@ -27,4 +27,20 @@ describe('InputContainer', () => {
       type: 'addTask',
     });
   });
+
+  it('if input text is changed, "updateTitle" action is activated', () => {
+    const { getByDisplayValue } = render((
+      <InputContainer />
+    ));
+
+    fireEvent.change(getByDisplayValue(/newTitle/), { target: { value: 'oldTitle' } });
+
+    expect(dispatch).toBeCalled();
+    expect(dispatch).toBeCalledWith({
+      type: 'updateTitle',
+      payload: {
+        taskTitle: 'oldTitle',
+      },
+    });
+  });
 });

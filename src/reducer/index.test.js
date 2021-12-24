@@ -64,4 +64,26 @@ describe('reducer', () => {
       expect(state.tasks[0].title).toBe('title-1');
     });
   });
+
+  describe('someAction', () => {
+    it('if state is undefined type, returns original State', () => {
+      const state = reducer(undefined, { type: 'someAction' });
+
+      expect(state.newId).toBe(100);
+      expect(state.taskTitle).toBe('');
+      expect(state.tasks).toHaveLength(0);
+    });
+
+    it('it returns original state', () => {
+      const state = reducer({
+        taskTitle: '',
+        tasks: [],
+      }, {
+        type: 'someAction',
+      });
+
+      expect(state.taskTitle).toBe('');
+      expect(state.tasks).toHaveLength(0);
+    });
+  });
 });
