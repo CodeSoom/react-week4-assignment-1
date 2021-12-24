@@ -1,6 +1,6 @@
 import { fireEvent, render } from '@testing-library/react';
 
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import ListContainer from './ListContainer';
 
@@ -9,6 +9,7 @@ jest.mock('react-redux');
 test('ListContainer', () => {
   const dispatch = jest.fn();
 
+  useDispatch.mockImplementation(() => dispatch);
   useSelector.mockImplementation((selector) => selector({
     tasks: [
       { id: 1, title: 'Do nothig #1' },
@@ -24,11 +25,8 @@ test('ListContainer', () => {
   expect(buttons).not.toBeNull();
 
   fireEvent.click(buttons[0]);
-
   expect(dispatch).toBeCalledWith({
     type: 'deleteTask',
-    payload: {
-      id: 1,
-    },
+    payload: { id: 1 },
   });
 });
