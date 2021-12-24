@@ -20,6 +20,7 @@ describe('App', () => {
   it('task가 추가되면 목록에 나열된다', () => {
     const expectValue1 = '아무 것도 하지 않기 #1';
     const expectValue2 = '아무 것도 하지 않기 #2';
+
     useSelector.mockImplementation((selector) => selector({
       tasks: [
         { id: 1, title: expectValue1 },

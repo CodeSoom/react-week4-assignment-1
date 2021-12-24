@@ -4,6 +4,9 @@ module.exports = {
     './jest.setup',
   ],
   testEnvironment: 'jsdom',
+  testMatch: [
+    '<rootDir>/src/**/*.test.(js|ts|tsx)',
+  ],
   coverageThreshold: {
     global: {
       branches: 100,
