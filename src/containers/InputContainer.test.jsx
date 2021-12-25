@@ -30,7 +30,7 @@ describe('InputContainer', () => {
     });
   });
 
-  it('if input text is changed, "updateTitle" action is activated', () => {
+  it('if input text is changed, "updateTitle" action is dispatched', () => {
     const { getByDisplayValue } = render((
       <InputContainer />
     ));

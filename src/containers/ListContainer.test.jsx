@@ -30,7 +30,7 @@ describe('ListContainer', () => {
     expect(getByText(/Task-2/)).not.toBeNull();
   });
 
-  it('if "완료" button is clicked, "deleteTask" action is activated', () => {
+  it('if "완료" button is clicked, "deleteTask" action is dispatched', () => {
     const { getAllByText } = renderListContainer();
 
     fireEvent.click(getAllByText(/완료/)[0]);

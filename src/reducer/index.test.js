@@ -65,9 +65,9 @@ describe('reducer', () => {
     });
   });
 
-  describe('someAction', () => {
+  describe('undefined Action', () => {
     it('if state is undefined type, returns original State', () => {
-      const state = reducer(undefined, { type: 'someAction' });
+      const state = reducer(undefined, { type: 'undefined Action' });
 
       expect(state.newId).toBe(100);
       expect(state.taskTitle).toBe('');
@@ -79,7 +79,7 @@ describe('reducer', () => {
         taskTitle: '',
         tasks: [],
       }, {
-        type: 'someAction',
+        type: 'undefined Action',
       });
 
       expect(state.taskTitle).toBe('');
