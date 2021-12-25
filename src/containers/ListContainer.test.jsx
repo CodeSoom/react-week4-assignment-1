@@ -12,6 +12,8 @@ describe('ListContainer', () => {
   ));
 
   beforeEach(() => {
+    jest.clearAllMocks();
+
     useSelector.mockImplementation((selector) => selector({
       tasks: [
         { id: 1, title: 'Task-1' },

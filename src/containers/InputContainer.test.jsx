@@ -9,6 +9,8 @@ describe('InputContainer', () => {
   const dispatch = jest.fn();
 
   beforeEach(() => {
+    jest.clearAllMocks();
+
     useSelector.mockImplementation((selector) => selector({
       taskTitle: 'newTitle',
     }));
