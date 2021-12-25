@@ -1,9 +1,7 @@
 export const initialState = {
   newId: 100,
   taskTitle: '',
-  tasks: [{
-    id: 1, title: 'haha',
-  }],
+  tasks: [],
 };
 
 const defaultReducer = (state) => state;
