@@ -11,8 +11,8 @@ function stubSelector(tasks) {
 }
 
 describe('App', () => {
-  beforeEach(() => {
-    jest.clearAllMocks();
+  afterEach(() => {
+    useSelector.mockClear();
   });
 
   context('초기 화면일 경우엔 ', () => {
