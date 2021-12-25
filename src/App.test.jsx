@@ -1,64 +1,55 @@
-import { fireEvent, render } from "@testing-library/react";
-import App from "./App";
+import { fireEvent, render } from '@testing-library/react';
+import { useDispatch, useSelector } from 'react-redux';
+import App from './App';
 
-import { useDispatch, useSelector } from "react-redux";
-jest.mock("react-redux", () => ({
-  ...jest.requireActual("react-redux"),
+import { changeTodo, addTodo, deleteTodo } from './actions';
+
+jest.mock('react-redux', () => ({
   useDispatch: jest.fn(),
   useSelector: jest.fn(),
 }));
 
-import { changeTodo, addTodo, deleteTodo } from "./actions";
-
-describe("App", () => {
+describe('App', () => {
+  const dispatch = jest.fn();
   beforeEach(() => {
     jest.clearAllMocks();
-    useSelector.mockImplementation((selector) =>
-      selector({
-        tasks: [{ id: 101, title: "4주차 1과제하기" }],
-        taskTitle: "",
-      })
-    );
+    useSelector.mockImplementation((selector) => selector({
+      tasks: [{ id: 101, title: '4주차 1과제하기' }],
+      taskTitle: '',
+    }));
     useDispatch.mockImplementation(() => dispatch);
   });
-  const dispatch = jest.fn();
 
-  //통합테스트
-  it("show me tasks in store", () => {
-    //given
+  // 통합테스트
+  it('show me tasks in store', () => {
+    // given
     const { getByText } = render(<App />);
 
-    //then
+    // then
     expect(getByText(/추가/)).not.toBeNull();
     expect(getByText(/4주차 1과제하기/)).not.toBeNull();
   });
 
-  describe("function call", () => {
-    it("input change function called", () => {
-      const { getByLabelText } = render(<App />);
+  it('input change dispatch called', () => {
+    const { getByLabelText } = render(<App />);
 
-      fireEvent.change(getByLabelText(/할 일/), {
-        target: { value: "4과제 input 변경" },
-      });
-
-      expect(dispatch).toBeCalledWith(changeTodo("4과제 input 변경"));
+    fireEvent.change(getByLabelText(/할 일/), {
+      target: { value: '4과제 input 변경' },
     });
 
-    it("task add function called", () => {
-      const { getByRole } = render(<App />);
+    expect(dispatch).toBeCalledWith(changeTodo('4과제 input 변경'));
+  });
 
-      fireEvent.click(getByRole("button", { name: "추가" }));
+  it('task add and delete dispatch called', () => {
+    const { getByRole } = render(<App />);
 
-      expect(dispatch).toBeCalledWith(addTodo());
-    });
+    fireEvent.click(getByRole('button', { name: '추가' }));
 
-    it("task delete called", () => {
-      const { getByRole } = render(<App />);
+    expect(dispatch).toBeCalledWith(addTodo());
 
-      fireEvent.click(getByRole("button", { name: "완료" }));
+    fireEvent.click(getByRole('button', { name: '완료' }));
 
-      expect(dispatch).toBeCalledWith(deleteTodo(101));
-    });
+    expect(dispatch).toBeCalledWith(deleteTodo(101));
   });
 
   // TODO: 통합 테스트 코드 작성

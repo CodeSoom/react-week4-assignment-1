@@ -1,6 +1,6 @@
-import Page from "./Page";
-import { useDispatch, useSelector } from "react-redux";
-import { changeTodo, addTodo, deleteTodo } from "./actions";
+import { useDispatch, useSelector } from 'react-redux';
+import Page from './Page';
+import { changeTodo, addTodo, deleteTodo } from './actions';
 
 export default function App() {
   const dispatch = useDispatch();
