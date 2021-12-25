@@ -4,29 +4,37 @@ import App from './App';
 
 jest.mock('react-redux');
 
+function stubSelector(tasks) {
+  useSelector.mockImplementation((selector) => selector({
+    tasks,
+  }));
+}
+
 describe('App', () => {
-  it('초기 화면에는 추가 버튼만 존재한다', () => {
-    useSelector.mockImplementation((selector) => selector({
-      tasks: [],
-    }));
+  beforeEach(() => {
+    jest.clearAllMocks();
+  });
 
-    const { getByText } = render((
-      <App />
-    ));
+  context('초기 화면일 경우엔 ', () => {
+    it('추가 버튼만 존재한다', () => {
+      stubSelector([]);
 
-    expect(getByText(/추가/)).not.toBeNull();
+      const { getByRole } = render((
+        <App />
+      ));
+
+      expect(getByRole('button')).not.toBeNull();
+    });
   });
 
   it('task가 추가되면 목록에 나열된다', () => {
     const expectValue1 = '아무 것도 하지 않기 #1';
     const expectValue2 = '아무 것도 하지 않기 #2';
 
-    useSelector.mockImplementation((selector) => selector({
-      tasks: [
-        { id: 1, title: expectValue1 },
-        { id: 2, title: expectValue2 },
-      ],
-    }));
+    stubSelector([
+      { id: 1, title: expectValue1 },
+      { id: 2, title: expectValue2 },
+    ]);
 
     const { getAllByRole } = render((
       <App />

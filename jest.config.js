@@ -5,7 +5,7 @@ module.exports = {
   ],
   testEnvironment: 'jsdom',
   testMatch: [
-    '<rootDir>/src/**/*.test.(js|ts|tsx)',
+    '<rootDir>/src/**/*.test.(js|jsx)',
   ],
   coverageThreshold: {
     global: {
