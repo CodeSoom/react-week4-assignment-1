@@ -6,9 +6,12 @@ import { addTask, changeTitle } from './actions';
 jest.mock('react-redux');
 
 describe('InputContainer', () => {
-  it('새로운 todo를 store에 추가', () => {
-    const dispatch = jest.fn();
+  const dispatch = jest.fn();
+  beforeEach(() => {
     useDispatch.mockImplementation(() => dispatch);
+  });
+
+  it('새로운 todo를 store에 추가', () => {
     useSelector.mockImplementation((selector) => selector({
       taskTitle: 'new Title',
     }));
@@ -21,8 +24,6 @@ describe('InputContainer', () => {
   });
 
   it('할 일 작성시 taskTitle 변경', () => {
-    const dispatch = jest.fn();
-    useDispatch.mockImplementation(() => dispatch);
     useSelector.mockImplementation((selector) => selector({
       taskTitle: '',
     }));
