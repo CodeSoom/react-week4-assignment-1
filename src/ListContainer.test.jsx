@@ -2,9 +2,6 @@ import { render, fireEvent } from '@testing-library/react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import ListContainer from './ListContainer';
-import {
-  deleteTask,
-} from './actions';
 
 jest.mock('react-redux');
 
@@ -27,5 +24,8 @@ test('ListContainer', () => {
   expect(getByText(/리팩터링 공부하기 #2/)).not.toBeNull();
 
   fireEvent.click(getAllByText(/완료/)[0]);
-  expect(dispatch).toBeCalledWith(deleteTask(1));
+  expect(dispatch).toBeCalledWith({
+    type: 'deleteTask',
+    payload: { id: 1 },
+  });
 });
