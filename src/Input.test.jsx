@@ -8,7 +8,7 @@ test('Input', () => {
 
   const { getByDisplayValue, getByLabelText, getByText } = render((
     <Input
-      value="기존 할 일"
+      taskTitle="기존 할 일"
       onChange={handleChange}
       onClick={handleClick}
     />
