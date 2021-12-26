@@ -7,20 +7,18 @@ import {
 } from './actions';
 
 export default function ListContainer() {
-  const { tasks } = useSelector((state) => ({
-    tasks: state.tasks,
-  }));
+  const { tasks } = useSelector((state) => state);
+
+  const dispatch = useDispatch();
 
   function handleClickDeleteTask(id) {
-    useDispatch(deleteTask(id));
+    dispatch(deleteTask(id));
   }
 
   return (
-    <div>
-      <List
-        tasks={tasks}
-        onClickDelete={handleClickDeleteTask}
-      />
-    </div>
+    <List
+      tasks={tasks}
+      onClickDelete={handleClickDeleteTask}
+    />
   );
 }

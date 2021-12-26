@@ -2,7 +2,7 @@ import { render, fireEvent } from '@testing-library/react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
-import { addTask, updateTaskTitle } from './actions';
+import { addTask } from './actions';
 
 import InputContainer from './InputContainer';
 
@@ -11,26 +11,32 @@ jest.mock('react-redux');
 describe('InputContainer', () => {
   const dispatch = jest.fn();
 
-  useDispatch.mockImplementation(() => dispatch);
+  beforeEach(() => {
+    jest.clearAllMocks();
 
-  useSelector.mockImplementation((selector) => selector({
-    taskTitle: 'task',
-    tasks: [
-      { id: 1, title: 'Task1' },
-    ],
-  }));
+    useDispatch.mockImplementation(() => dispatch);
 
-  const { getByRole } = render((
-    <InputContainer />
-  ));
+    useSelector.mockImplementation((selector) => selector({
+      taskTitle: 'task',
+      tasks: [
+        { id: 1, title: 'Task1' },
+      ],
+    }));
+  });
 
-  it('update a task title with calling "updateTaskTitle"', () => {
-    fireEvent.change(getByRole('textbox'));
+  it('update a task title when changed', () => {
+    const { getByRole } = render((
+      <InputContainer />
+    ));
 
-    expect(dispatch).toBeCalledWith(updateTaskTitle('new Title'));
+    fireEvent.change(getByRole('textbox'), { target: { value: 'Task2' } });
+
+    expect(dispatch).toBeCalled();
   });
 
   it('add a new task with calling "addTask"', () => {
+    const { getByRole } = render((<InputContainer />));
+
     expect(getByRole('button', { name: '추가' })).not.toBeNull();
 
     fireEvent.click(getByRole('button', { name: '추가' }));

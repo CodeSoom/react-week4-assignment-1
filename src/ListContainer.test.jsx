@@ -11,13 +11,17 @@ jest.mock('react-redux');
 describe('ListContainer', () => {
   const dispatch = jest.fn();
 
-  useDispatch.mockImplementation(() => dispatch);
+  beforeEach(() => {
+    jest.clearAllMocks();
 
-  useSelector.mockImplementation((selector) => selector({
-    tasks: [
-      { id: 1, title: 'Task1' },
-    ],
-  }));
+    useDispatch.mockImplementation(() => dispatch);
+
+    useSelector.mockImplementation((selector) => selector({
+      tasks: [
+        { id: 1, title: 'Task1' },
+      ],
+    }));
+  });
 
   it('deletes a task with calling "deleteTask"', () => {
     const { getByRole } = render((
