@@ -7,14 +7,23 @@ const initialState = {
   tasks: [],
 };
 
-export function updateReducer(state = initialState, action) {
+function createReducer(initialState, handlers) {
+  return function reducer(state = initialState, action) {
+    if (handlers.hasOwnProperty(action.type)) {
+      return handlers[action.type](state, action);
+    }
+    return state;
+  }
+}
+
+function updateReducer(state, action) {
   return {
     ...state,
     taskTitle: action.payload.taskTitle,
   };
 }
 
-export function addReducer(state = initialState) {
+function addReducer(state, action) {
   const { newId, taskTitle, tasks } = state;
 
   if (!taskTitle) {
@@ -29,7 +38,7 @@ export function addReducer(state = initialState) {
   };
 }
 
-export function deleteReducer(state = initialState, action) {
+function deleteReducer(state, action) {
   const { tasks } = state;
   return {
     ...state,
@@ -37,6 +46,10 @@ export function deleteReducer(state = initialState, action) {
   };
 }
 
-export function missingReducer(state = initialState) {
-  return state;
-}
+const reducer = createReducer({} = initialState, {
+  updateTaskTitle: updateReducer,
+  addTask: addReducer,
+  deleteTask: deleteReducer
+});
+
+export default reducer;

@@ -1,12 +1,8 @@
-import {
-  updateReducer,
-  addReducer,
-  deleteReducer,
-  missingReducer,
-} from './reducer';
+import reducer from './reducer';
 
 import {
   updateTaskTitle,
+  addTask,
   deleteTask,
 } from './actions';
 
@@ -21,14 +17,14 @@ describe('reducer', () => {
 
   describe('updateTaskTitle', () => {
     it('changes state with new task title', () => {
-      const state = updateReducer(initialState(''), updateTaskTitle('New Title'));
+      const state = reducer(initialState(''), updateTaskTitle('New Title'));
 
       expect(state.taskTitle).toBe('New Title');
     });
 
     context('when initial state is undefined', () => {
       it('set the initial', () => {
-        const state = updateReducer(undefined, updateTaskTitle('New Title'));
+        const state = reducer(undefined, updateTaskTitle('New Title'));
 
         expect(state.tasks).toHaveLength(0);
         expect(state.taskTitle).toBe('New Title');
@@ -39,7 +35,7 @@ describe('reducer', () => {
   describe('addTask', () => {
     context('with taskTitle', () => {
       it('appends a new task into tasks', () => {
-        const state = addReducer(initialState('New Task'));
+        const state = reducer(initialState('New Task'), addTask());
 
         expect(state.tasks).toHaveLength(1);
         expect(state.tasks[0].id).not.toBeUndefined();
@@ -47,7 +43,7 @@ describe('reducer', () => {
       });
 
       it('clear task title', () => {
-        const state = addReducer(initialState('New Task'));
+        const state = reducer(initialState('New Task'), addTask());
 
         expect(state.taskTitle).toBe('');
         expect(state.tasks[0].id).not.toBeUndefined();
@@ -56,7 +52,7 @@ describe('reducer', () => {
 
     context('without taskTitle', () => {
       it('doesnt work', () => {
-        const state = addReducer(initialState(''));
+        const state = reducer(initialState(''), addTask());
 
         expect(state.tasks).toHaveLength(0);
       });
@@ -64,7 +60,7 @@ describe('reducer', () => {
 
     context('without state', () => {
       it('set the initial but dosnt work', () => {
-        const state = addReducer(undefined);
+        const state = reducer(undefined, addTask());
 
         expect(state.tasks).toHaveLength(0);
       });
@@ -91,7 +87,7 @@ describe('reducer', () => {
 
         const oldLength = originState.tasks.length;
 
-        const state = deleteReducer(originState, deleteTask(1));
+        const state = reducer(originState, deleteTask(1));
 
         const newLength = state.tasks.length;
 
@@ -102,7 +98,7 @@ describe('reducer', () => {
 
     context('without existed task ID', () => {
       it('dont remove the task', () => {
-        const state = deleteReducer(reduceDeleteTask('New Title'), deleteTask(111));
+        const state = reducer(reduceDeleteTask('New Title'), deleteTask(111));
 
         expect(state.tasks).toHaveLength(2);
       });
@@ -110,7 +106,7 @@ describe('reducer', () => {
 
     context('without state', () => {
       it('set the initial but dosnt work', () => {
-        const state = deleteReducer(undefined, deleteTask(1));
+        const state = reducer(undefined, deleteTask(1));
 
         expect(state.tasks).toHaveLength(0);
       });
@@ -119,14 +115,14 @@ describe('reducer', () => {
 
   describe('missingTask', () => {
     it('nothing happen', () => {
-      const state = missingReducer(initialState('Missing Title'));
+      const state = reducer(initialState('Missing Title'), { type: 'missingType' });
 
       expect(state.taskTitle).toBe('Missing Title');
     });
 
     context('without state', () => {
       it('set the initial but nothing happen', () => {
-        const state = missingReducer(undefined);
+        const state = reducer(undefined, { type: 'missingType' });
 
         expect(state.tasks).toHaveLength(0);
       });
