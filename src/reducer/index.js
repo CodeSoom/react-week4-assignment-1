@@ -4,15 +4,12 @@ const initialState = {
   tasks: [],
 };
 
-const reducer = (state = initialState, action) => {
-  if (action.type === 'updateTitle') {
-    return {
-      ...state,
-      taskTitle: action.payload.taskTitle,
-    };
-  }
-
-  if (action.type === 'addTask') {
+const handleReducer = {
+  updateTitle: (state, action) => ({
+    ...state,
+    taskTitle: action.payload.taskTitle,
+  }),
+  addTask: (state) => {
     const { newId, taskTitle, tasks } = state;
 
     return {
@@ -21,15 +18,20 @@ const reducer = (state = initialState, action) => {
       taskTitle: '',
       tasks: [...tasks, { id: newId, title: taskTitle }],
     };
-  }
-
-  if (action.type === 'deleteTask') {
+  },
+  deleteTask: (state, action) => {
     const { tasks } = state;
 
     return {
       ...state,
       tasks: tasks.filter((task) => task.id !== action.payload.id),
     };
+  },
+};
+
+const reducer = (state = initialState, action) => {
+  if (handleReducer[action.type]) {
+    return handleReducer[action.type](state, action);
   }
 
   return state;
