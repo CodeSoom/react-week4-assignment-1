@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { render } from '@testing-library/react';
+import { fireEvent, render } from '@testing-library/react';
 import ListContainer from './ListContainer';
 
 jest.mock('react-redux');
@@ -61,6 +61,19 @@ describe('ListContainer', () => {
       const result = getAllByRole('listitem');
       expect(result).toHaveLength(1);
       expect(result[0]).toHaveTextContent(expectValue);
+    });
+
+    context('handleClickDeleteTask 를 호출하면', () => {
+      it('dispatch가 1회 호출된다', () => {
+        mockSelector([
+          { id: 1, title: 'test' },
+        ]);
+        const { getByText } = render(<ListContainer />);
+
+        fireEvent.click(getByText('완료'));
+
+        expect(dispatch).toBeCalledTimes(1);
+      });
     });
   });
 });
