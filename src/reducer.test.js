@@ -21,15 +21,17 @@ describe('reducer', () => {
   });
 
   describe('addTask', () => {
-    it('새로운 Task가 등록되면 기존의 Title은 초기화된다', () => {
-      const expectTitle = '';
+    context('새로운 Task가 등록되면', () => {
+      it('기존의 Title은 초기화된다', () => {
+        const expectTitle = '';
 
-      const { taskTitle } = reducer({
-        taskTitle: 'New Task',
-        tasks: [],
-      }, addTask());
+        const { taskTitle } = reducer({
+          taskTitle: 'New Task',
+          tasks: [],
+        }, addTask());
 
-      expect(taskTitle).toBe(expectTitle);
+        expect(taskTitle).toBe(expectTitle);
+      });
     });
   });
 });
