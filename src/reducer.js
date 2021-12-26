@@ -7,36 +7,36 @@ const initialState = {
   tasks: [],
 };
 
-export default function reducer(state = initialState, action) {
-  if (action.type === 'updateTaskTitle') {
-    return {
-      ...state,
-      taskTitle: action.payload.taskTitle,
-    };
+export function updateReducer(state = initialState, action) {
+  return {
+    ...state,
+    taskTitle: action.payload.taskTitle,
+  };
+}
+
+export function addReducer(state = initialState) {
+  const { newId, taskTitle, tasks } = state;
+
+  if (!taskTitle) {
+    return state;
   }
 
-  if (action.type === 'addTask') {
-    const { newId, taskTitle, tasks } = state;
+  return {
+    ...state,
+    newId: newId + 1,
+    taskTitle: '',
+    tasks: [...tasks, { id: newId, title: taskTitle }],
+  };
+}
 
-    if (!taskTitle) {
-      return state;
-    }
+export function deleteReducer(state = initialState, action) {
+  const { tasks } = state;
+  return {
+    ...state,
+    tasks: tasks.filter((task) => task.id !== action.payload.id),
+  };
+}
 
-    return {
-      ...state,
-      newId: newId + 1,
-      taskTitle: '',
-      tasks: [...tasks, { id: newId, title: taskTitle }],
-    };
-  }
-
-  if (action.type === 'deleteTask') {
-    const { tasks } = state;
-    return {
-      ...state,
-      tasks: tasks.filter((task) => task.id !== action.payload.id),
-    };
-  }
-
-  return state; // 아무 일도 일어나지 않는다
+export function missingReducer(state = initialState) {
+  return state;
 }
