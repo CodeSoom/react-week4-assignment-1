@@ -19,8 +19,7 @@ describe('ListContainer', () => {
   });
 
   afterEach(() => {
-    useSelector.mockClear();
-    useDispatch.mockClear();
+    jest.clearAllMocks();
   });
 
   context('tasks가 비어있을 경우', () => {
