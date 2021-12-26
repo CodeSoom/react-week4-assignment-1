@@ -40,6 +40,18 @@ describe('reducer', () => {
       expect(tasks[0].title).toBe('New Task');
       expect(tasks).toHaveLength(1);
     });
+
+    it("doesn't add a new task when taskTitle is undefined", () => {
+      const { tasks } = reducer(
+        {
+          ...initialState,
+          taskTitle: undefined,
+        },
+        addTask(),
+      );
+
+      expect(tasks).toHaveLength(0);
+    });
   });
 
   describe('deleteTask', () => {
@@ -74,6 +86,14 @@ describe('reducer', () => {
         );
 
         expect(tasks).toHaveLength(2);
+      });
+    });
+
+    context('when undefined action called', () => {
+      it('returns the original state', () => {
+        const { tasks } = reducer(undefined, { type: undefined });
+
+        expect(tasks).toHaveLength(0);
       });
     });
   });
