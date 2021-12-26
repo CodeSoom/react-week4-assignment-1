@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { deleteTask } from '../actions';
+import { deleteTask } from '../action/actions';
 import List from './List';
 
 export default function ListContainer() {

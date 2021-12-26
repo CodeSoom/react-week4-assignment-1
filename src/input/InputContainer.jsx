@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { addTask, updateTaskTitle } from '../actions';
+import { addTask, updateTaskTitle } from '../action/actions';
 import Input from './Input';
 
 export default function InputContainer() {
