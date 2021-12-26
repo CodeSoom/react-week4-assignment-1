@@ -24,8 +24,5 @@ test('ListContainer', () => {
   expect(getByText(/리팩터링 공부하기 #2/)).not.toBeNull();
 
   fireEvent.click(getAllByText(/완료/)[0]);
-  expect(dispatch).toBeCalledWith({
-    type: 'deleteTask',
-    payload: { id: 1 },
-  });
+  expect(dispatch).toBeCalledWith(deleteTask(1));
 });
