@@ -1,31 +1,36 @@
-import { render, fireEvent } from '@testing-library/react';
+import { render } from '@testing-library/react';
 
+import { useDispatch, useSelector } from 'react-redux';
 import Page from './Page';
 
-test('Page', () => {
-  const handleChangeTitle = jest.fn();
-  const handleClickAddTask = jest.fn();
-  const handleClickDeleteTask = jest.fn();
+function mockSelector(tasks) {
+  useSelector.mockImplementation((selector) => selector({
+    tasks,
+  }));
+}
 
-  const tasks = [
-    { id: 1, title: 'Task-1' },
-    { id: 2, title: 'Task-2' },
-  ];
+describe('Page', () => {
+  let dispatch;
 
-  const { getByText } = render((
-    <Page
-      taskTitle=""
-      onChangeTitle={handleChangeTitle}
-      onClickAddTask={handleClickAddTask}
-      tasks={tasks}
-      onClickDeleteTask={handleClickDeleteTask}
-    />
-  ));
+  beforeEach(() => {
+    dispatch = jest.fn();
+    useDispatch.mockImplementation(() => dispatch);
+  });
 
-  expect(getByText(/Task-1/)).not.toBeNull();
-  expect(getByText(/Task-2/)).not.toBeNull();
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
 
-  fireEvent.click(getByText('추가'));
+  context('tasks에 값이 있는 경우', () => {
+    it('해당 값들이 노출된다', () => {
+      mockSelector([{ id: 1, title: 'Task-1' }, { id: 2, title: 'Task-2' }]);
 
-  expect(handleClickAddTask).toBeCalled();
+      const { getByText } = render((
+        <Page />
+      ));
+
+      expect(getByText(/Task-1/)).not.toBeNull();
+      expect(getByText(/Task-2/)).not.toBeNull();
+    });
+  });
 });

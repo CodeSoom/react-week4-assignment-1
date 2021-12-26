@@ -12,7 +12,7 @@ function stubSelector(tasks) {
 
 describe('App', () => {
   afterEach(() => {
-    useSelector.mockClear();
+    jest.clearAllMocks();
   });
 
   context('초기 화면일 경우엔 ', () => {

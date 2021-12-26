@@ -4,7 +4,7 @@ import ListContainer from './ListContainer';
 
 jest.mock('react-redux');
 
-function stubSelector(tasks) {
+function mockSelector(tasks) {
   useSelector.mockImplementation((selector) => selector({
     tasks,
   }));
@@ -24,7 +24,7 @@ describe('ListContainer', () => {
 
   context('tasks가 비어있을 경우', () => {
     it('공백 메세지가 출력된다', () => {
-      stubSelector([]);
+      mockSelector([]);
 
       const { getByText } = render(<ListContainer />);
 
@@ -37,7 +37,7 @@ describe('ListContainer', () => {
       const expectValue1 = '아무 것도 하지 않기 #1';
       const expectValue2 = '아무 것도 하지 않기 #2';
 
-      stubSelector([
+      mockSelector([
         { id: 1, title: expectValue1 },
         { id: 2, title: expectValue2 },
       ]);
@@ -52,7 +52,7 @@ describe('ListContainer', () => {
 
     it('Item에 완료버튼이 노출된다', () => {
       const expectValue = '완료';
-      stubSelector([
+      mockSelector([
         { id: 1, title: 'test' },
       ]);
 
