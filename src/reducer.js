@@ -7,13 +7,13 @@ const initialState = {
   tasks: [],
 };
 
-function createReducer(initialState, handlers) {
-  return function reducer(state = initialState, action) {
-    if (handlers.hasOwnProperty(action.type)) {
+function createReducer(originState, handlers) {
+  return function reducer(state = originState, action) {
+    if (Object.prototype.hasOwnProperty.call(handlers, action.type)) {
       return handlers[action.type](state, action);
     }
     return state;
-  }
+  };
 }
 
 function updateReducer(state, action) {
@@ -23,7 +23,7 @@ function updateReducer(state, action) {
   };
 }
 
-function addReducer(state, action) {
+function addReducer(state) {
   const { newId, taskTitle, tasks } = state;
 
   if (!taskTitle) {
@@ -46,10 +46,10 @@ function deleteReducer(state, action) {
   };
 }
 
-const reducer = createReducer({} = initialState, {
+const reducer = createReducer(initialState, {
   updateTaskTitle: updateReducer,
   addTask: addReducer,
-  deleteTask: deleteReducer
+  deleteTask: deleteReducer,
 });
 
 export default reducer;
