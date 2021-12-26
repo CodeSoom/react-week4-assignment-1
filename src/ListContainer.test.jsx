@@ -2,6 +2,9 @@ import { render, fireEvent } from '@testing-library/react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import ListContainer from './ListContainer';
+import {
+  deleteTask,
+} from './actions';
 
 jest.mock('react-redux');
 
