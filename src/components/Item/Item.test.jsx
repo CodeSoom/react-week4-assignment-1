@@ -1,6 +1,6 @@
 import { render, fireEvent } from '@testing-library/react';
 
-import Item from './Item';
+import Item from '.';
 
 test('Item', () => {
   const task = {
