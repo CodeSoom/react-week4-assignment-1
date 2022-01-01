@@ -3,6 +3,10 @@ module.exports = {
     'jest-plugin-context/setup',
     './jest.setup',
   ],
+  testEnvironment: 'jsdom',
+  testMatch: [
+    '<rootDir>/src/**/*.test.(js|jsx)',
+  ],
   coverageThreshold: {
     global: {
       branches: 100,

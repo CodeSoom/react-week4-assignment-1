@@ -18,10 +18,10 @@
     "@babel/core": "^7.14.2",
     "@babel/preset-env": "^7.14.2",
     "@babel/preset-react": "^7.13.13",
-    "@testing-library/jest-dom": "^5.12.0",
+    "@testing-library/jest-dom": "^5.16.1",
     "@testing-library/react": "^11.2.7",
-    "@types/jest": "^26.0.23",
-    "babel-jest": "^26.6.3",
+    "@types/jest": "^27.0.3",
+    "babel-jest": "^27.4.5",
     "babel-loader": "^8.2.2",
     "codeceptjs": "^3.0.7",
     "eslint": "^7.26.0",
@@ -30,16 +30,19 @@
     "eslint-plugin-jsx-a11y": "^6.4.1",
     "eslint-plugin-react": "^7.23.2",
     "eslint-plugin-react-hooks": "^4.2.0",
-    "jest": "^26.6.3",
+    "jest": "^27.4.5",
     "jest-plugin-context": "^2.9.0",
     "puppeteer": "^9.1.1",
     "start-server-and-test": "^1.12.2",
+    "ts-jest": "^27.1.2",
     "webpack": "^5.37.0",
     "webpack-cli": "^4.7.0",
     "webpack-dev-server": "^3.11.2"
   },
   "dependencies": {
     "react": "^17.0.2",
-    "react-dom": "^17.0.2"
+    "react-dom": "^17.0.2",
+    "react-redux": "^7.2.6",
+    "redux": "^4.1.2"
   }
 }
