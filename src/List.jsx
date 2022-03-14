@@ -6,7 +6,6 @@ export default function List({ tasks, onClickDelete }) {
       <p>할 일이 없어요!</p>
     );
   }
-
   return (
     <ol>
       {tasks.map((task) => (
