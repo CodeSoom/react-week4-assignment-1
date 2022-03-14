@@ -1,37 +1,24 @@
-import { useState } from 'react';
-
+import { useDispatch, useSelector } from 'react-redux';
 import Page from './Page';
+import { changeTodo, addTodo, deleteTodo } from './actions';
 
 export default function App() {
-  const [state, setState] = useState({
-    newId: 100,
-    taskTitle: '',
-    tasks: [],
-  });
-
-  const { newId, taskTitle, tasks } = state;
+  const dispatch = useDispatch();
+  const { taskTitle, tasks } = useSelector((state) => ({
+    taskTitle: state.taskTitle,
+    tasks: state.tasks,
+  }));
 
   function handleChangeTitle(event) {
-    setState({
-      ...state,
-      taskTitle: event.target.value,
-    });
+    dispatch(changeTodo(event.target.value));
   }
 
   function handleClickAddTask() {
-    setState({
-      ...state,
-      newId: newId + 1,
-      taskTitle: '',
-      tasks: [...tasks, { id: newId, title: taskTitle }],
-    });
+    dispatch(addTodo());
   }
 
   function handleClickDeleteTask(id) {
-    setState({
-      ...state,
-      tasks: tasks.filter((task) => task.id !== id),
-    });
+    dispatch(deleteTodo(id));
   }
 
   return (
