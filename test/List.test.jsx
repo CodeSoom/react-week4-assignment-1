@@ -1,6 +1,6 @@
 import { render, fireEvent } from '@testing-library/react';
 
-import List from './List';
+import List from '../src/List';
 
 // test('테스트 #1')
 //
