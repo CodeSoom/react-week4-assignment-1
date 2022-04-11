@@ -16,6 +16,7 @@ describe('reducer', () => {
         },
       });
     }
+
     it('returns new task title', () => {
       const state = reducer(previousState, updateTaskTitleAction('New Task'));
 
@@ -24,29 +25,45 @@ describe('reducer', () => {
   });
 
   describe('addTask', () => {
-    const previousState = {
-      id: 100,
-      taskTitle: 'New Task',
-      tasks: [],
-    };
-
     function addTaskAction() {
       return ({
         type: 'addTask',
       });
     }
 
-    it('appends a new task into tasks', () => {
-      const state = reducer(previousState, addTaskAction());
+    context('with task title', () => {
+      const previousState = {
+        id: 100,
+        taskTitle: 'New Task',
+        tasks: [],
+      };
 
-      expect(state.tasks).toHaveLength(1);
-      expect(state.tasks[0].title).toBe('New Task');
+      it('appends a new task into tasks', () => {
+        const state = reducer(previousState, addTaskAction());
+
+        expect(state.tasks).toHaveLength(1);
+        expect(state.tasks[0].title).toBe('New Task');
+      });
+
+      it('clear task title', () => {
+        const state = reducer(previousState, addTaskAction());
+
+        expect(state.taskTitle).toBe('');
+      });
     });
 
-    it('clear task title', () => {
-      const state = reducer(previousState, addTaskAction());
+    context('without task title', () => {
+      const previousState = {
+        id: 100,
+        taskTitle: '',
+        tasks: [],
+      };
 
-      expect(state.taskTitle).toBe('');
+      it("dosen't working", () => {
+        const state = reducer(previousState, addTaskAction());
+
+        expect(state.tasks).toHaveLength(0);
+      });
     });
   });
 
