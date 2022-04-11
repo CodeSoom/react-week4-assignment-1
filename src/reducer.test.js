@@ -39,6 +39,19 @@ describe('reducer', () => {
 
         expect(state.taskTitle).toBe('');
       });
+
+      context('without task title', () => {
+        it("doesn't work", () => {
+          const previousState = {
+            taskTitle: '',
+            tasks: [],
+          };
+
+          const state = reducer(previousState, addTask());
+
+          expect(state.tasks).toHaveLength(0);
+        });
+      });
     });
   });
 });
