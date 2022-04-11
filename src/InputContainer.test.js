@@ -10,14 +10,18 @@ describe('InputContainer', () => {
   const dispatch = jest.fn();
   useDispatch.mockImplementation(() => dispatch);
 
-  it('shows task title ', () => {
-    useSelector.mockImplementation((selector) => selector({
-      taskTitle: 'New Title',
-    }));
+  useSelector.mockImplementation((selector) => selector({
+    taskTitle: 'New Title',
+  }));
 
-    const { getByText, getByDisplayValue } = render((
+  function renderInputContainer() {
+    return render((
       <InputContainer />
     ));
+  }
+
+  it('shows task title ', () => {
+    const { getByText, getByDisplayValue } = renderInputContainer();
 
     expect(getByText(/추가/)).not.toBeNull();
     expect(getByDisplayValue(/New Title/)).not.toBeNull();
@@ -30,13 +34,7 @@ describe('InputContainer', () => {
   });
 
   it('changes task title ', () => {
-    useSelector.mockImplementation((selector) => selector({
-      taskTitle: 'New Title',
-    }));
-
-    const { getByLabelText } = render((
-      <InputContainer />
-    ));
+    const { getByLabelText } = renderInputContainer();
 
     fireEvent.change(getByLabelText(/할 일/), { target: { value: '새로운 할 일' } });
 
