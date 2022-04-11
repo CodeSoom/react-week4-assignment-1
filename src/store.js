@@ -12,6 +12,16 @@ function reducer(state, action) {
     };
   }
 
+  if (action.type === 'addTask') {
+    const { newId, taskTitle, tasks } = state;
+    return {
+      ...state,
+      newId: newId + 1,
+      taskTitle: '',
+      tasks: [...tasks, { id: newId, title: taskTitle }],
+    };
+  }
+
   return state;
 }
 

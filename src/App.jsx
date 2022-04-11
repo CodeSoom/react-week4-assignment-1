@@ -19,14 +19,9 @@ function updateTaskTitle(state, taskTitle) {
   };
 }
 
-function addTask(state) {
-  const { newId, taskTitle, tasks } = state;
-
+function addTask() {
   return {
-    ...state,
-    newId: newId + 1,
-    taskTitle: '',
-    tasks: [...tasks, { id: newId, title: taskTitle }],
+    type: 'updateTaskTitle',
   };
 }
 
