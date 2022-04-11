@@ -25,12 +25,12 @@ function addTask() {
   };
 }
 
-function deleteTask(state, id) {
-  const { tasks } = state;
-
+function deleteTask(id) {
   return {
-    ...state,
-    tasks: tasks.filter((task) => task.id !== id),
+    type: 'deleteTask',
+    payload: {
+      id,
+    },
   };
 }
 
