@@ -47,7 +47,7 @@ export default function App() {
   }
 
   function handleClickAddTask() {
-    dispatch(addTask(state));
+    dispatch(addTask());
   }
 
   function handleClickDeleteTask(id) {
