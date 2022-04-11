@@ -38,7 +38,7 @@ function deleteTask(state, id) {
 export default function App() {
   const [state, setState] = useState(initialState);
 
-  const { newId, taskTitle, tasks } = state;
+  const { taskTitle, tasks } = state;
 
   function handleChangeTitle(event) {
     setState(updateTaskTitle(state, event.target.value));
