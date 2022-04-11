@@ -21,12 +21,6 @@ describe('reducer', () => {
 
       expect(state.taskTitle).toBe('New Task');
     });
-
-    it('returns new task title in korean', () => {
-      const state = reducer(previousState, updateTaskTitleAction('새로운 테스크'));
-
-      expect(state.taskTitle).toBe('새로운 테스크');
-    });
   });
 
   describe('addTask', () => {
@@ -42,17 +36,16 @@ describe('reducer', () => {
       });
     }
 
-    it('returns new task with new title', () => {
+    it('appends a new task into tasks', () => {
       const state = reducer(previousState, addTaskAction());
 
       expect(state.tasks).toHaveLength(1);
       expect(state.tasks[0].title).toBe('New Task');
     });
 
-    it('returns new task with blank task title', () => {
+    it('clear task title', () => {
       const state = reducer(previousState, addTaskAction());
 
-      expect(state.tasks).toHaveLength(1);
       expect(state.taskTitle).toBe('');
     });
   });
@@ -62,8 +55,8 @@ describe('reducer', () => {
       id: 102,
       taskTitle: 'New Task',
       tasks: [
-        { id: 100, taskTitle: 'New Task#1' },
-        { id: 101, taskTitle: 'New Task#2' },
+        { id: 100, title: 'New Task#1' },
+        { id: 101, title: 'New Task#2' },
       ],
     };
 
@@ -76,20 +69,22 @@ describe('reducer', () => {
       });
     }
 
-    context('with data', () => {
-      it('returns existing tasks', () => {
+    context('with existed task id', () => {
+      it('remove the task into tasks', () => {
         const state = reducer(previousState, deleteTaskAction(100));
 
         expect(state.tasks).toHaveLength(1);
-        expect(state.tasks).toEqual([{ id: 101, taskTitle: 'New Task#2' }]);
+        expect(state.tasks).not.toContainEqual({ id: 100, title: 'New Task#1' });
       });
     });
 
-    context('without data', () => {
-      it('does\'t working', () => {
+    context('without existed task id', () => {
+      it("doesn't working", () => {
         const state = reducer(previousState, deleteTaskAction(102));
 
         expect(state.tasks).toHaveLength(2);
+        expect(state.tasks).toContainEqual({ id: 100, title: 'New Task#1' });
+        expect(state.tasks).toContainEqual({ id: 101, title: 'New Task#2' });
       });
     });
   });

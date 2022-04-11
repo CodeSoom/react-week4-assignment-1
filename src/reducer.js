@@ -3,6 +3,7 @@ const initalState = {
   taskTitle: '',
   tasks: [],
 };
+
 export default function reducer(state = initalState, action) {
   if (action.type === 'updateTaskTitle') {
     return {
