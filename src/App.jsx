@@ -12,8 +12,10 @@ const initialState = {
 
 function updateTaskTitle(state, taskTitle) {
   return {
-    ...state,
-    taskTitle,
+    type: 'updateTaskTitle',
+    payload: {
+      taskTitle,
+    },
   };
 }
 
@@ -38,21 +40,23 @@ function deleteTask(state, id) {
 }
 
 export default function App() {
+  const dispatch = useDispatch();
+
   const { taskTitle, tasks } = useSelector((state) => ({
     taskTitle: state.taskTitle,
     tasks: state.tasks,
   }));
 
   function handleChangeTitle(event) {
-    setState(updateTaskTitle(state, event.target.value));
+    dispatch(updateTaskTitle(event.target.value));
   }
 
   function handleClickAddTask() {
-    setState(addTask(state));
+    dispatch(addTask(state));
   }
 
   function handleClickDeleteTask(id) {
-    setState(deleteTask(state, id));
+    dispatch(deleteTask(state, id));
   }
 
   return (
