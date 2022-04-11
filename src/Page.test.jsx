@@ -3,7 +3,6 @@ import { render, fireEvent } from '@testing-library/react';
 import Page from './Page';
 
 test('Page', () => {
-  const handleChangeTitle = jest.fn();
   const handleClickAddTask = jest.fn();
   const handleClickDeleteTask = jest.fn();
 
@@ -14,9 +13,6 @@ test('Page', () => {
 
   const { getByText } = render((
     <Page
-      taskTitle=""
-      onChangeTitle={handleChangeTitle}
-      onClickAddTask={handleClickAddTask}
       tasks={tasks}
       onClickDeleteTask={handleClickDeleteTask}
     />
