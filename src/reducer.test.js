@@ -16,7 +16,7 @@ describe('reducer', () => {
   });
 
   describe('addTask', () => {
-    it('add task ', () => {
+    it('returns new state with a new task ', () => {
       const previousState = {
         taskTitle: 'New Task',
         tasks: [],
@@ -25,6 +25,7 @@ describe('reducer', () => {
       const state = reducer(previousState, addTask());
 
       expect(state.tasks).toHaveLength(1);
+      expect(state.tasks[0].title).toBe('New Task');
     });
   });
 });
