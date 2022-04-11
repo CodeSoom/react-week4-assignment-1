@@ -42,10 +42,18 @@ describe('reducer', () => {
       });
     }
 
-    it('returns new task', () => {
+    it('returns new task with new title', () => {
       const state = reducer(previousState, addTaskAction());
 
       expect(state.tasks).toHaveLength(1);
+      expect(state.tasks[0].title).toBe('New Task');
+    });
+
+    it('returns new task with blank task title', () => {
+      const state = reducer(previousState, addTaskAction());
+
+      expect(state.tasks).toHaveLength(1);
+      expect(state.taskTitle).toBe('');
     });
   });
 
