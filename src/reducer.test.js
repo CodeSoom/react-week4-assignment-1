@@ -73,7 +73,7 @@ describe('reducer', () => {
         const state = reducer(previousState, deleteTaskAction(100));
 
         expect(state.tasks).toHaveLength(1);
-        expect(state.tasks).toEqual([{ id: '101', taskTitle: 'New Task#2' }]);
+        expect(state.tasks).toEqual([{ id: 101, taskTitle: 'New Task#2' }]);
       });
     });
   });
