@@ -51,7 +51,7 @@ export default function App() {
   }
 
   function handleClickDeleteTask(id) {
-    dispatch(deleteTask(state, id));
+    dispatch(deleteTask(id));
   }
 
   return (
