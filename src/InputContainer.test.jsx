@@ -10,12 +10,22 @@ const renderInputContainer = () => render((
   <InputContainer />
 ));
 
+const dispatch = jest.fn();
+
+beforeEach(() => {
+  useSelector.mockImplementation(() => ({
+    taskTitle: 'New Task!',
+  }));
+
+  useDispatch.mockImplementation(() => dispatch);
+});
+
+afterEach(() => {
+  jest.clearAllMocks();
+});
+
 describe('InputContainer', () => {
   it('renders task title', () => {
-    useSelector.mockImplementation(() => ({
-      taskTitle: 'New Task!',
-    }));
-
     const { queryByDisplayValue } = renderInputContainer();
 
     expect(queryByDisplayValue('New Task!')).not.toBeNull();
@@ -33,10 +43,23 @@ describe('InputContainer', () => {
     expect(queryByPlaceholderText('할 일을 입력해 주세요')).not.toBeNull();
   });
 
-  it('listens for click evnet on add task', () => {
-    const dispatch = jest.fn();
-    useDispatch.mockImplementation(() => dispatch);
+  it('listens for change evnet on update task title', () => {
+    const { getByDisplayValue } = renderInputContainer();
 
+    fireEvent.change(
+      getByDisplayValue('New Task!'),
+      { target: { value: '새로운 할일!' } },
+    );
+
+    expect(dispatch).toBeCalledWith({
+      type: 'updateTaskTitle',
+      payload: {
+        taskTitle: '새로운 할일!',
+      },
+    });
+  });
+
+  it('listens for click evnet on add task', () => {
     const { getByText } = renderInputContainer();
 
     expect(dispatch).not.toBeCalled();
