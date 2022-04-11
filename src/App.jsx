@@ -1,5 +1,7 @@
 import { useState } from 'react';
 
+import { useDispatch, useSelector } from 'react-redux';
+
 import Page from './Page';
 
 const initialState = {
@@ -36,9 +38,10 @@ function deleteTask(state, id) {
 }
 
 export default function App() {
-  const [state, setState] = useState(initialState);
-
-  const { taskTitle, tasks } = state;
+  const { taskTitle, tasks } = useSelector((state) => ({
+    taskTitle: state.taskTitle,
+    tasks: state.tasks,
+  }));
 
   function handleChangeTitle(event) {
     setState(updateTaskTitle(state, event.target.value));
