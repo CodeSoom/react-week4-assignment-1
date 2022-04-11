@@ -1,6 +1,10 @@
 import reducer from './reducer';
 
-import { updateTaskTitle, addTask } from './actions';
+import {
+  updateTaskTitle,
+  addTask,
+  deleteTask,
+} from './actions';
 
 describe('reducer', () => {
   describe('updateTaskTitle', () => {
@@ -47,6 +51,36 @@ describe('reducer', () => {
 
           expect(state.tasks).toHaveLength(0);
         });
+      });
+    });
+  });
+
+  describe('deleteTask', () => {
+    context('with existed task ID', () => {
+      it('remove the task from tasks', () => {
+        const previousState = {
+          tasks: [
+            { id: 1, title: 'Task' },
+          ],
+        };
+
+        const state = reducer(previousState, deleteTask(1));
+
+        expect(state.tasks).toHaveLength(0);
+      });
+    });
+
+    context('without existed task ID', () => {
+      it("doesn't work", () => {
+        const previousState = {
+          tasks: [
+            { id: 1, title: 'Task' },
+          ],
+        };
+
+        const state = reducer(previousState, deleteTask(100));
+
+        expect(state.tasks).toHaveLength(1);
       });
     });
   });
