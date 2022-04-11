@@ -44,13 +44,13 @@ describe('reducer', () => {
 
         expect(state.taskTitle).toBe('');
       });
+    });
 
-      context('without task title', () => {
-        it("doesn't work", () => {
-          const state = reduceAddTask();
+    context('without task title', () => {
+      it("doesn't work", () => {
+        const state = reduceAddTask();
 
-          expect(state.tasks).toHaveLength(0);
-        });
+        expect(state.tasks).toHaveLength(0);
       });
     });
   });
