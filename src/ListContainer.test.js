@@ -6,16 +6,24 @@ import ListContainer from './ListContainer';
 
 jest.mock('react-redux');
 
-describe('ListContainer', () => {
-  const dispatch = jest.fn();
-  useDispatch.mockImplementation(() => dispatch);
+const dispatch = jest.fn();
 
+beforeEach(() => {
+  useDispatch.mockImplementation(() => dispatch);
+});
+
+afterEach(() => {
+  jest.clearAllMocks();
+});
+
+describe('ListContainer', () => {
   function renderListContainer() {
     return render((
       <ListContainer />
     ));
   }
 
+  // TODO : beforeEach 로 분리하고 싶은데 tasks가 비어있을 경우와 비어있지 않을 경우를 구분해야해서 분리가 어렵다.
   function returnUseSelector(tasks) {
     return (
       useSelector.mockImplementation((selector) => selector({
