@@ -4,7 +4,7 @@ import { updateTaskTitle, addTask } from './actions';
 
 describe('reducer', () => {
   describe('updateTaskTitle', () => {
-    it('returns new state with new task title', () => {
+    it('changes new task title', () => {
       const previousState = {
         taskTitle: '',
       };
@@ -16,27 +16,29 @@ describe('reducer', () => {
   });
 
   describe('addTask', () => {
-    it('returns new state with a new task', () => {
-      const previousState = {
-        taskTitle: 'New Task',
-        tasks: [],
-      };
+    context('with task title', () => {
+      it('appends a new task into tasks', () => {
+        const previousState = {
+          taskTitle: 'New Task',
+          tasks: [],
+        };
 
-      const state = reducer(previousState, addTask());
+        const state = reducer(previousState, addTask());
 
-      expect(state.tasks).toHaveLength(1);
-      expect(state.tasks[0].title).toBe('New Task');
-    });
+        expect(state.tasks).toHaveLength(1);
+        expect(state.tasks[0].title).toBe('New Task');
+      });
 
-    it('returns new state with a blank task title', () => {
-      const previousState = {
-        taskTitle: 'New Task',
-        tasks: [],
-      };
+      it('clears task title after appends a task into tasks', () => {
+        const previousState = {
+          taskTitle: 'New Task',
+          tasks: [],
+        };
 
-      const state = reducer(previousState, addTask());
+        const state = reducer(previousState, addTask());
 
-      expect(state.taskTitle).toBe('');
+        expect(state.taskTitle).toBe('');
+      });
     });
   });
 });
