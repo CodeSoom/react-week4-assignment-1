@@ -105,4 +105,32 @@ describe('reducer', () => {
       });
     });
   });
+
+  context('without defined type', () => {
+    const previousState = {
+      id: 102,
+      taskTitle: 'New Task',
+      tasks: [
+        { id: 100, title: 'New Task#1' },
+        { id: 101, title: 'New Task#2' },
+      ],
+    };
+    it('returns previous state', () => {
+      const state = reducer(previousState, { type: 'undefinedType' });
+
+      expect(state).toEqual(previousState);
+    });
+
+    context('without state', () => {
+      it('returns initial state', () => {
+        const state = reducer(undefined, { type: 'undefinedType' });
+
+        expect(state).toEqual({
+          newId: 100,
+          taskTitle: '',
+          tasks: [],
+        });
+      });
+    });
+  });
 });
