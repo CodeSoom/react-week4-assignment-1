@@ -48,4 +48,33 @@ describe('reducer', () => {
       expect(state.tasks).toHaveLength(1);
     });
   });
+
+  describe('deleteTask', () => {
+    const previousState = {
+      id: 102,
+      taskTitle: 'New Task',
+      tasks: [
+        { id: 100, taskTitle: 'New Task#1' },
+        { id: 101, taskTitle: 'New Task#2' },
+      ],
+    };
+
+    function deleteTaskAction(taskId) {
+      return ({
+        type: 'deleteTask',
+        payload: {
+          id: taskId,
+        },
+      });
+    }
+
+    context('with data', () => {
+      it('returns new task', () => {
+        const state = reducer(previousState, deleteTaskAction(100));
+
+        expect(state.tasks).toHaveLength(1);
+        expect(state.tasks).toEqual([{ id: '101', taskTitle: 'New Task#2' }]);
+      });
+    });
+  });
 });
