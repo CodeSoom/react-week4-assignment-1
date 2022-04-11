@@ -69,11 +69,19 @@ describe('reducer', () => {
     }
 
     context('with data', () => {
-      it('returns new task', () => {
+      it('returns existing tasks', () => {
         const state = reducer(previousState, deleteTaskAction(100));
 
         expect(state.tasks).toHaveLength(1);
         expect(state.tasks).toEqual([{ id: 101, taskTitle: 'New Task#2' }]);
+      });
+    });
+
+    context('without data', () => {
+      it('does\'t working', () => {
+        const state = reducer(previousState, deleteTaskAction(102));
+
+        expect(state.tasks).toHaveLength(2);
       });
     });
   });
