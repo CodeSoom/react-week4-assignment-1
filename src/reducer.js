@@ -1,14 +1,12 @@
-import { createStore } from 'redux';
-
-// Redux action
-// - type (string)
-// - payload => object = { taskTitle, ... }
-
 const initialState = {
   newId: 100,
   taskTitle: '',
   tasks: [],
 };
+
+// Redux action
+// - type (string)
+// - payload => object = { taskTitle, ... }
 
 export default function reducer(state = initialState, action) {
   if (action.type === 'updateTaskTitle') {
