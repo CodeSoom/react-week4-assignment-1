@@ -36,7 +36,7 @@ describe('reducer', () => {
 
     function addTaskAction() {
       return ({
-        type: 'updateTaskTitle',
+        type: 'addTask',
       });
     }
 
