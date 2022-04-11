@@ -7,6 +7,10 @@ import ListContainer from './ListContainer';
 jest.mock('react-redux');
 
 test('ListContainer', () => {
+  beforeEach(() => {
+    jest.clearAllMocks();
+  });
+
   const dispatch = jest.fn();
 
   useDispatch.mockImplementation(() => dispatch);
@@ -20,11 +24,11 @@ test('ListContainer', () => {
     tasks,
   }));
 
-  const { getByText, getAllByText } = render((
+  const { queryByText, getAllByText } = render((
     <ListContainer />
   ));
 
-  expect(getByText(/아무 것도 하지 않기 #1/)).not.toBeNull();
+  expect(queryByText(/아무 것도 하지 않기 #1/)).not.toBeNull();
 
   fireEvent.click(getAllByText(/완료/)[0]);
 

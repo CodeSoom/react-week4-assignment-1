@@ -52,25 +52,25 @@ describe('reducer', () => {
   });
 
   describe('deleteTask', () => {
-    context('with existing task ID', () => {
+    function reduceDeleteTask({ id }) {
+      return reducer({
+        tasks: [
+          { id: 1, title: 'Task' },
+        ],
+      }, deleteTask({ id }));
+    }
+
+    context('when task ID exists', () => {
       it('removes the task from tasks', () => {
-        const state = reducer({
-          tasks: [
-            { id: 1, title: 'Task' },
-          ],
-        }, deleteTask({ id: 1 }));
+        const state = reduceDeleteTask({ id: 1 });
 
         expect(state.tasks).toHaveLength(0);
       });
     });
 
-    context('with nonexisting task ID', () => {
+    context('when task ID doesn\'t exist', () => {
       it('does nothing', () => {
-        const state = reducer({
-          tasks: [
-            { id: 1, title: 'Task' },
-          ],
-        }, deleteTask({ id: 100 }));
+        const state = reduceDeleteTask({ id: 100 });
 
         expect(state.tasks).toHaveLength(1);
       });

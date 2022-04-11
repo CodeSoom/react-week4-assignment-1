@@ -26,10 +26,10 @@ describe('InputContainer', () => {
   });
 
   it('renders add button and the task title', () => {
-    const { getByText, getByDisplayValue } = renderInputContainer();
+    const { queryByText, queryByDisplayValue } = renderInputContainer();
 
-    expect(getByText(/추가/)).not.toBeNull();
-    expect(getByDisplayValue(/New Title/)).not.toBeNull();
+    expect(queryByText(/추가/)).not.toBeNull();
+    expect(queryByDisplayValue(/New Title/)).not.toBeNull();
   });
 
   it('changes the task title', () => {

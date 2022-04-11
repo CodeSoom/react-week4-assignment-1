@@ -7,6 +7,10 @@ import App from './App';
 jest.mock('react-redux');
 
 test('App', () => {
+  beforeEach(() => {
+    jest.clearAllMocks();
+  });
+
   const tasks = [
     { id: 1, title: '아무 것도 하지 않기 #1' },
     { id: 2, title: '아무 것도 하지 않기 #2' },
@@ -17,10 +21,10 @@ test('App', () => {
     tasks,
   }));
 
-  const { getByText } = render((
+  const { queryByText } = render((
     <App />
   ));
 
-  expect(getByText(/추가/)).not.toBeNull();
-  expect(getByText(/아무 것도 하지 않기 #1/)).not.toBeNull();
+  expect(queryByText(/추가/)).not.toBeNull();
+  expect(queryByText(/아무 것도 하지 않기 #1/)).not.toBeNull();
 });
