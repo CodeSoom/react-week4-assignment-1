@@ -14,8 +14,8 @@ export default function InputContainer() {
     taskTitle: state.taskTitle,
   }));
 
-  function handleChangeTitle(event) {
-    dispatch(updateTaskTitle(event.target.value));
+  function handleChangeTitle(value) {
+    dispatch(updateTaskTitle(value));
   }
 
   function handleClickAddTask() {
