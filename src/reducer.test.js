@@ -84,4 +84,24 @@ describe('reducer', () => {
       });
     });
   });
+
+  describe('action type is not defined', () => {
+    it('return previous state', () => {
+      const previousState = {
+        newId: 100,
+        taskTitle: '',
+        tasks: [
+          { id: 1, title: 'Task' },
+        ],
+      };
+
+      const state = reducer(previousState, { type: '', payload: { taskTitle: '' } });
+
+      expect(state.newId).toBe(100);
+      expect(state.taskTitle).toBe('');
+      expect(state.tasks).toHaveLength(1);
+
+      expect(state).toEqual(previousState);
+    });
+  });
 });
