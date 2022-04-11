@@ -1,6 +1,6 @@
 import reducer from './reducer';
 
-import { updateTaskTitle } from './actions';
+import { updateTaskTitle, addTask } from './actions';
 
 describe('reducer', () => {
   describe('updateTaskTitle', () => {
@@ -12,6 +12,19 @@ describe('reducer', () => {
       const state = reducer(previousState, updateTaskTitle('New Title'));
 
       expect(state.taskTitle).toBe('New Title');
+    });
+  });
+
+  describe('addTask', () => {
+    it('add task ', () => {
+      const previousState = {
+        taskTitle: 'New Task',
+        tasks: [],
+      };
+
+      const state = reducer(previousState, addTask());
+
+      expect(state.tasks).toHaveLength(1);
     });
   });
 });
