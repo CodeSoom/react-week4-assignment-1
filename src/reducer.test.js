@@ -2,11 +2,12 @@ import reducer from './reducer';
 
 describe('reducer', () => {
   describe('updateTaskTitle', () => {
-    const initialState = {
+    const previousState = {
       taskTitle: '',
       tasks: [],
     };
-    function changeTaskTitle(taskTitle) {
+
+    function updateTaskTitleAction(taskTitle) {
       return ({
         type: 'updateTaskTitle',
         payload: {
@@ -15,15 +16,34 @@ describe('reducer', () => {
       });
     }
     it('returns new task title', () => {
-      const state = reducer(initialState, changeTaskTitle('New Task'));
+      const state = reducer(previousState, updateTaskTitleAction('New Task'));
 
       expect(state.taskTitle).toBe('New Task');
     });
 
     it('returns new task title in korean', () => {
-      const state = reducer(initialState, changeTaskTitle('새로운 테스크'));
+      const state = reducer(previousState, updateTaskTitleAction('새로운 테스크'));
 
       expect(state.taskTitle).toBe('새로운 테스크');
+    });
+  });
+
+  describe('addTask', () => {
+    const previousState = {
+      taskTitle: 'New Task',
+      tasks: [],
+    };
+
+    function addTaskAction() {
+      return ({
+        type: 'updateTaskTitle',
+      });
+    }
+
+    it('returns new task', () => {
+      const state = reducer(previousState, addTaskAction());
+
+      expect(state).toHaveLength(1);
     });
   });
 });
