@@ -3,6 +3,7 @@ import reducer from './reducer';
 describe('reducer', () => {
   describe('updateTaskTitle', () => {
     const previousState = {
+      id: 100,
       taskTitle: '',
       tasks: [],
     };
@@ -30,6 +31,7 @@ describe('reducer', () => {
 
   describe('addTask', () => {
     const previousState = {
+      id: 100,
       taskTitle: 'New Task',
       tasks: [],
     };
@@ -43,7 +45,7 @@ describe('reducer', () => {
     it('returns new task', () => {
       const state = reducer(previousState, addTaskAction());
 
-      expect(state).toHaveLength(1);
+      expect(state.tasks).toHaveLength(1);
     });
   });
 });
