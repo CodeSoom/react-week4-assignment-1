@@ -27,17 +27,15 @@ describe('reducer', () => {
     }
 
     context('with task title', () => {
-      it('adds a new task', () => {
-        const state = reduceAddTask({ taskTitle: 'New Task' });
+      const state = reduceAddTask({ taskTitle: 'New Task' });
 
+      it('adds a new task', () => {
         expect(state.tasks).toHaveLength(1);
         expect(state.tasks[0].id).not.toBeUndefined();
         expect(state.tasks[0].title).toBe('New Task');
       });
 
       it('clears the task title', () => {
-        const state = reduceAddTask({ taskTitle: 'New Task' });
-
         expect(state.taskTitle).toBe('');
       });
     });
