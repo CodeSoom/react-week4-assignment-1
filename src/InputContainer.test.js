@@ -28,4 +28,23 @@ describe('InputContainer', () => {
       type: 'addTask',
     });
   });
+
+  it('changes task title ', () => {
+    useSelector.mockImplementation((selector) => selector({
+      taskTitle: 'New Title',
+    }));
+
+    const { getByLabelText } = render((
+      <InputContainer />
+    ));
+
+    fireEvent.change(getByLabelText(/할 일/), { target: { value: '새로운 할 일' } });
+
+    expect(dispatch).toBeCalledWith({
+      type: 'updateTaskTitle',
+      payload: {
+        taskTitle: '새로운 할 일',
+      },
+    });
+  });
 });
