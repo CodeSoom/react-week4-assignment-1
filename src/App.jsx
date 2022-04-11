@@ -4,12 +4,6 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import Page from './Page';
 
-const initialState = {
-  newId: 100,
-  taskTitle: '',
-  tasks: [],
-};
-
 function updateTaskTitle(state, taskTitle) {
   return {
     type: 'updateTaskTitle',

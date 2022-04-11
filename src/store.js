@@ -4,7 +4,13 @@ import { createStore } from 'redux';
 // - type (string)
 // - payload => object = { taskTitle, ... }
 
-function reducer(state, action) {
+const initialState = {
+  newId: 100,
+  taskTitle: '',
+  tasks: [],
+};
+
+function reducer(state = initialState, action) {
   if (action.type === 'updateTaskTitle') {
     return {
       ...state,
