@@ -87,6 +87,18 @@ describe('reducer', () => {
     });
   });
 
+  context('without state', () => {
+    it('returns initial state', () => {
+      const state = reducer(undefined, { type: 'undefinedType' });
+
+      expect(state).toEqual({
+        newId: 100,
+        taskTitle: '',
+        tasks: [],
+      });
+    });
+  });
+
   context('without defined type', () => {
     const previousState = {
       id: 102,
@@ -101,18 +113,6 @@ describe('reducer', () => {
       const state = reducer(previousState, { type: 'undefinedType' });
 
       expect(state).toEqual(previousState);
-    });
-
-    context('without state', () => {
-      it('returns initial state', () => {
-        const state = reducer(undefined, { type: 'undefinedType' });
-
-        expect(state).toEqual({
-          newId: 100,
-          taskTitle: '',
-          tasks: [],
-        });
-      });
     });
   });
 });
