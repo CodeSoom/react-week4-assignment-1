@@ -11,7 +11,11 @@ const renderListContainer = () => render((
 
 const dispatch = jest.fn();
 
-beforeEach(() => {
+describe('ListContainer', () => {
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
+
   useSelector.mockImplementation(() => ({
     tasks: [
       { id: 1, title: 'Task-1' },
@@ -20,13 +24,7 @@ beforeEach(() => {
   }));
 
   useDispatch.mockImplementation(() => dispatch);
-});
 
-afterEach(() => {
-  jest.clearAllMocks();
-});
-
-describe('ListContainer', () => {
   context('with tasks', () => {
     it('renders tasks', () => {
       const { queryByText } = renderListContainer();
