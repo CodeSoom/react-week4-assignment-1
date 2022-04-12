@@ -14,8 +14,8 @@ export default function InputContainer() {
 
   const dispatch = useDispatch();
 
-  function onChangeTitle(event) {
-    dispatch(updateTaskTitle(event.target.value));
+  function onChangeTitle(title) {
+    dispatch(updateTaskTitle(title));
   }
 
   function onClickAddTask() {
