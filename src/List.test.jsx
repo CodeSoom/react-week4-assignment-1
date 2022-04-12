@@ -1,64 +1,72 @@
-import { render, fireEvent } from '@testing-library/react';
-
+import { fireEvent, render } from '@testing-library/react';
 import List from './List';
 
-// test('테스트 #1')
-//
-// describe - it => describe('List') => it('renders tasks')
-// describe - context - it
-// jest-plugins => jest-plugin-context
-//
-// with tasks
-// - List renders tasks...
-// - List renders “delete” button to delete a task
-// without tasks
-// - List renders no task message.
-//
-// TDD cycle: Red - Green - Refactoring
-
 describe('List', () => {
-  const handleClickDelete = jest.fn();
+  const tasks = [
+    {
+      id: 1,
+      title: '배고파요',
+    },
+    {
+      id: 2,
+      title: '치킨을 먹어요',
+    },
+    {
+      id: 3,
+      title: '피자를 먹어요',
+    },
+  ];
 
-  function renderList(tasks) {
+  const handleClickDelete = jest.fn();
+  function renderList(newTasks) {
     return render((
       <List
-        tasks={tasks}
+        tasks={newTasks}
         onClickDelete={handleClickDelete}
       />
     ));
   }
 
-  context('with tasks', () => {
-    const tasks = [
-      { id: 1, title: 'Task-1' },
-      { id: 2, title: 'Task-2' },
-    ];
+  beforeEach(() => {
+    jest.clearAllMocks();
+  });
 
-    it('renders tasks', () => {
-      const { getByText } = renderList(tasks);
+  context('1. 할일 있을 때', () => {
+    it('1-1. 할일 리스트 출력', () => {
+      const { container } = renderList(tasks);
 
-      expect(getByText(/Task-1/)).not.toBeNull();
-      expect(getByText(/Task-2/)).not.toBeNull();
+      expect(container).toHaveTextContent('배고파요');
+      expect(container).toHaveTextContent('치킨을 먹어요');
+      expect(container).toHaveTextContent('피자를 먹어요');
     });
 
-    it('renders “완료” button to delete a task', () => {
-      const { getAllByText } = renderList(tasks);
+    it("1-2. '완료' 버튼 출력", () => {
+      const { container } = renderList(tasks);
 
-      const buttons = getAllByText('완료');
+      expect(container).toHaveTextContent('완료');
+    });
 
-      fireEvent.click(buttons[0]);
+    it("1-3. '완료' 버튼 클릭 (배고파요 삭제, 피자를 먹어요 삭제)", () => {
+      const { container, getAllByText } = renderList(tasks);
 
+      expect(container).toHaveTextContent('완료');
+
+      fireEvent.click(getAllByText('완료')[0]);
       expect(handleClickDelete).toBeCalledWith(1);
+
+      fireEvent.click(getAllByText('완료')[1]);
+      expect(handleClickDelete).toBeCalledWith(2);
+
+      fireEvent.click(getAllByText('완료')[2]);
+      expect(handleClickDelete).toBeCalledWith(3);
     });
   });
 
-  context('without tasks', () => {
-    it('renders no task message', () => {
-      const tasks = [];
+  context('2. 빈 배열일 때', () => {
+    it("2-1. '할 일이 없어요!' 출력", () => {
+      const { container } = renderList([]);
 
-      const { getByText } = renderList(tasks);
-
-      expect(getByText(/할 일이 없어요/)).not.toBeNull();
+      expect(container).toHaveTextContent('할 일이 없어요!');
     });
   });
 });
