@@ -4,11 +4,11 @@ const initialState = {
   tasks: [],
 };
 
-export default function reducer(action, state = initialState) {
+export default function reducer(state = initialState, action) {
   if (action.type === 'updateTaskTitle') {
     return {
       ...state,
-      taskTitle: action.payload.taskTittle,
+      taskTitle: action.payload.taskTitle,
     };
   }
 
