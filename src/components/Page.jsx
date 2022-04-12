@@ -1,17 +1,11 @@
+import InputContainer from '../containers/InputContainer';
 import ListContainer from '../containers/ListContainer';
-import Input from './Input';
 
-export default function Page({
-  taskTitle, onChangeTitle, onClickAddTask,
-}) {
+export default function Page() {
   return (
     <div>
       <h1>To-do</h1>
-      <Input
-        value={taskTitle}
-        onChange={onChangeTitle}
-        onClick={onClickAddTask}
-      />
+      <InputContainer />
       <ListContainer />
     </div>
   );
