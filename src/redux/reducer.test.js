@@ -13,7 +13,7 @@ describe('reducer', () => {
   });
 
   describe('addTask', () => {
-    function reduceAddTask(taskTitle) {
+    function reduceAddTask({ taskTitle }) {
       return reducer({
         newId: 100,
         taskTitle,
@@ -23,7 +23,7 @@ describe('reducer', () => {
 
     context('with taskTitle', () => {
       it('tasks에 새 task 추가', () => {
-        const state = reduceAddTask('New Task');
+        const state = reduceAddTask({ taskTitle: 'New Task' });
 
         expect(state.tasks).toHaveLength(1);
         expect(state.tasks[0].id).not.toBeUndefined();
@@ -31,7 +31,7 @@ describe('reducer', () => {
       });
 
       it('새 task추가 후 taskTitle 클리어', () => {
-        const state = reduceAddTask('New Task');
+        const state = reduceAddTask({ taskTitle: 'New Task' });
 
         expect(state.taskTitle).toBe('');
       });
@@ -39,7 +39,7 @@ describe('reducer', () => {
 
     context('with taskTitle', () => {
       it('아무일도 일어나지 않는다.', () => {
-        const state = reduceAddTask('');
+        const state = reduceAddTask({ taskTitle: '' });
 
         expect(state.tasks).toHaveLength(0);
       });
@@ -53,7 +53,7 @@ describe('reducer', () => {
           tasks: [{
             id: 1, title: 'Task',
           }],
-        }, deleteTask(1));
+        }, deleteTask({ id: 1 }));
 
         expect(state.tasks).toHaveLength(0);
       });
@@ -65,10 +65,27 @@ describe('reducer', () => {
           tasks: [{
             id: 1, title: 'Task',
           }],
-        }, deleteTask(100));
+        }, deleteTask({ id: 100 }));
 
         expect(state.tasks).toHaveLength(1);
       });
+    });
+  });
+
+  describe('other action', () => {
+    function otherFunction({ id }) {
+      return {
+        type: 'otherFunction',
+        payload: {
+          id,
+        },
+      };
+    }
+
+    it('아무 reducer실행', () => {
+      const state = reducer(undefined, otherFunction({ id: 1 }));
+
+      expect(state.tasks).toHaveLength(0);
     });
   });
 });
