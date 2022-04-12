@@ -29,10 +29,10 @@ afterEach(() => {
 describe('ListContainer', () => {
   context('with tasks', () => {
     it('renders tasks', () => {
-      const { getByText } = renderListContainer();
+      const { queryByText } = renderListContainer();
 
-      expect(getByText(/Task-1/)).not.toBeNull();
-      expect(getByText(/Task-2/)).not.toBeNull();
+      expect(queryByText(/Task-1/)).not.toBeNull();
+      expect(queryByText(/Task-2/)).not.toBeNull();
     });
 
     it('renders button each task', () => {
