@@ -2,12 +2,6 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import Page from './Page';
 
-const initialState = {
-  newId: 100,
-  taskTitle: '',
-  tasks: [],
-};
-
 function updateTaskTitle(state, taskTitle) {
   return {
     ...state,
@@ -44,7 +38,7 @@ export default function App() {
   }));
 
   function handleChangeTitle(event) {
-    dispatch(updateTaskTitle(state, event.target.value));
+    dispatch(updateTaskTitle(event.target.value));
   }
 
   function handleClickAddTask() {
@@ -52,7 +46,7 @@ export default function App() {
   }
 
   function handleClickDeleteTask(id) {
-    dispatch(deleteTask(state, id));
+    dispatch(deleteTask(id));
   }
 
   return (
