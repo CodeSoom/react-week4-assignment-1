@@ -104,4 +104,16 @@ describe('reducer', () => {
       expect(state).toEqual(previousState);
     });
   });
+
+  describe('initial value', () => {
+    context('when reducer function called with undefined state ', () => {
+      it('return initial state', () => {
+        const state = reducer(undefined, { type: '', payload: { taskTitle: '' } });
+
+        expect(state.newId).toBe(100);
+        expect(state.taskTitle).toBe('');
+        expect(state.tasks).toHaveLength(0);
+      });
+    });
+  });
 });
