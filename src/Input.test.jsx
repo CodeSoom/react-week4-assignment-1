@@ -9,7 +9,7 @@ test('Input', () => {
   const { getByDisplayValue, getByLabelText, getByText } = render((
     <Input
       value="기존 할 일"
-      onChange={handleChange}
+      onChangeTitle={handleChange}
       onClick={handleClick}
     />
   ));
