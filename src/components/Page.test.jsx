@@ -1,5 +1,8 @@
-import { fireEvent, render } from '@testing-library/react';
+import { render } from '@testing-library/react';
+import { useDispatch, useSelector } from 'react-redux';
 import Page from './Page';
+
+jest.mock('react-redux');
 
 describe('Page', () => {
   const tasks = [
@@ -20,21 +23,25 @@ describe('Page', () => {
   const taskTitle = 'hello';
   const handleChangeTitle = jest.fn();
   const handleClickAddTask = jest.fn();
-  const handleClickDeleteTask = jest.fn();
 
-  function renderPage(newTasks = tasks) {
+  function renderPage() {
     return render((
       <Page
         taskTitle={taskTitle}
-        tasks={newTasks}
         onChangeTitle={handleChangeTitle}
         onClickAddTask={handleClickAddTask}
-        onClickDeleteTask={handleClickDeleteTask}
       />
     ));
   }
 
   beforeEach(() => {
+    const dispatch = jest.fn();
+    useDispatch.mockImplementation(() => dispatch);
+    useSelector.mockImplementation((selector) => selector({
+      newId: 100,
+      taskTitle: '',
+      tasks,
+    }));
     jest.clearAllMocks();
   });
 
@@ -57,29 +64,6 @@ describe('Page', () => {
       const { container } = renderPage();
 
       expect(container).toHaveTextContent('완료');
-    });
-
-    it("2-3. '완료' 버튼 클릭", () => {
-      const { getAllByText } = renderPage();
-
-      expect(handleClickDeleteTask).not.toBeCalled();
-
-      fireEvent.click(getAllByText('완료')[0]);
-      expect(handleClickDeleteTask).toBeCalledWith(1);
-
-      fireEvent.click(getAllByText('완료')[1]);
-      expect(handleClickDeleteTask).toBeCalledWith(2);
-
-      fireEvent.click(getAllByText('완료')[2]);
-      expect(handleClickDeleteTask).toBeCalledWith(3);
-    });
-  });
-
-  context('3. 할일 없을 때', () => {
-    it("3-1. 빈 배열일 때 '할 일이 없어요!' 출력", () => {
-      const { container } = renderPage([]);
-
-      expect(container).toHaveTextContent('할 일이 없어요!');
     });
   });
 });
