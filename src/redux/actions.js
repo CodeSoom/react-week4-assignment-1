@@ -13,7 +13,7 @@ export function addTask() {
   };
 }
 
-export function deleteTask(id) {
+export function deleteTask({ id }) {
   return {
     type: 'deleteTask',
     payload: {
