@@ -25,10 +25,10 @@ describe('List', () => {
     ];
 
     it('renders tasks', () => {
-      const { getByText } = renderList(tasks);
+      const { queryByText } = renderList(tasks);
 
-      expect(getByText(/Task-1/)).not.toBeNull();
-      expect(getByText(/Task-2/)).not.toBeNull();
+      expect(queryByText(/Task-1/)).not.toBeNull();
+      expect(queryByText(/Task-2/)).not.toBeNull();
     });
 
     it('renders “완료” button to delete a task', () => {
@@ -46,9 +46,9 @@ describe('List', () => {
     it('renders no task message', () => {
       const tasks = [];
 
-      const { getByText } = renderList(tasks);
+      const { queryByText } = renderList(tasks);
 
-      expect(getByText(/할 일이 없어요/)).not.toBeNull();
+      expect(queryByText(/할 일이 없어요/)).not.toBeNull();
     });
   });
 });
