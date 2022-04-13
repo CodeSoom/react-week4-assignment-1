@@ -7,12 +7,16 @@ import {
   updateTaskTitle,
 } from './actions';
 
-export default function InputContainer() {
-  const dispatch = useDispatch();
-
-  const { taskTitle } = useSelector((state) => ({
+function selector(state) {
+  return {
     taskTitle: state.taskTitle,
-  }));
+  };
+}
+
+export default function InputContainer() {
+  const { taskTitle } = useSelector(selector);
+
+  const dispatch = useDispatch();
 
   function handleChangeTitle(title) {
     dispatch(updateTaskTitle({ taskTitle: title }));

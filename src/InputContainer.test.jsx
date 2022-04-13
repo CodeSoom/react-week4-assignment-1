@@ -13,6 +13,10 @@ function renderInputContainer() {
 }
 
 describe('InputContainer', () => {
+  beforeEach(() => {
+    jest.clearAllMocks();
+  });
+
   const dispatch = jest.fn();
 
   useDispatch.mockImplementation(() => dispatch);
@@ -20,10 +24,6 @@ describe('InputContainer', () => {
   useSelector.mockImplementation((selector) => selector({
     taskTitle: 'New Title',
   }));
-
-  beforeEach(() => {
-    jest.clearAllMocks();
-  });
 
   it('renders add button and taskTitle', () => {
     const { getByText, queryByDisplayValue } = renderInputContainer();

@@ -6,15 +6,19 @@ import {
   deleteTask,
 } from './actions';
 
-export default function ListContainer() {
-  const { tasks } = useSelector((state) => ({
+function selector(state) {
+  return {
     tasks: state.tasks,
-  }));
+  };
+}
+
+export default function ListContainer() {
+  const { tasks } = useSelector(selector);
 
   const dispatch = useDispatch();
 
   function handleClickDeleteTask(id) {
-    dispatch(deleteTask(id));
+    dispatch(deleteTask({ id }));
   }
 
   return (

@@ -1,4 +1,4 @@
-export function updateTaskTitle(taskTitle) {
+export function updateTaskTitle({ taskTitle }) {
   return {
     type: 'updateTaskTitle',
     payload: {
@@ -13,7 +13,7 @@ export function addTask() {
   };
 }
 
-export function deleteTask(id) {
+export function deleteTask({ id }) {
   return {
     type: 'deleteTask',
     payload: {
