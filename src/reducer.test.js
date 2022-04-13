@@ -6,6 +6,10 @@ import {
 } from './actions';
 
 describe('reducer', () => {
+  beforeEach(() => {
+    jest.clearAllMocks();
+  });
+
   describe('updateTaskTitle', () => {
     it('changes task title', () => {
       const state = reducer({

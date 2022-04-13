@@ -8,11 +8,11 @@ import {
 } from './actions';
 
 export default function InputContainer() {
+  const dispatch = useDispatch();
+
   const { taskTitle } = useSelector((state) => ({
     taskTitle: state.taskTitle,
   }));
-
-  const dispatch = useDispatch();
 
   function handleChangeTitle(title) {
     dispatch(updateTaskTitle({ taskTitle: title }));
