@@ -25,7 +25,7 @@ export default function InputContainer() {
       <Input
         value={taskTitle}
         onChangeTitle={handleChangeTitle}
-        onclick={handleClickAddTask}
+        onClick={handleClickAddTask}
       />
     </div>
   );
