@@ -37,4 +37,17 @@ describe('InputContainer', () => {
       type: 'addTask',
     });
   });
+
+  it('updates task title', () => {
+    const { getByRole } = renderInputContainer();
+
+    fireEvent.change(getByRole('textbox'), { target: { value: '밥 먹기' } });
+
+    expect(dispatch).toBeCalledWith({
+      type: 'updateTaskTitle',
+      payload: {
+        taskTitle: '밥 먹기',
+      },
+    });
+  });
 });
