@@ -27,15 +27,17 @@ describe('reducer', () => {
     }
 
     context('with task title', () => {
-      const state = reduceAddTask({ taskTitle: 'New Task' });
-
       it('adds a new task', () => {
+        const state = reduceAddTask({ taskTitle: 'New Task' });
+
         expect(state.tasks).toHaveLength(1);
         expect(state.tasks[0].id).not.toBeUndefined();
         expect(state.tasks[0].title).toBe('New Task');
       });
 
       it('clears the task title', () => {
+        const state = reduceAddTask({ taskTitle: 'New Task' });
+
         expect(state.taskTitle).toBe('');
       });
     });
@@ -75,7 +77,7 @@ describe('reducer', () => {
     });
   });
 
-  describe('other actions', () => {
+  describe('without actions', () => {
     const someFunction = jest.fn(({ id, taskTitle }) => ({
       type: 'someFunction',
       payload: {
