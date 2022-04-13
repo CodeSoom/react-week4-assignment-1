@@ -6,8 +6,11 @@ describe('reducer', () => {
     describe('updateTaskTitle', () => {
       it('returns new state with a new task title', () => {
         const state = reducer({
-          taskTitle: '',
-        }, updateTaskTitle('New Title'));
+          state: {
+            taskTitle: '',
+          },
+          action: updateTaskTitle('New Title'),
+        });
 
         expect(state.taskTitle).toBe('New Title');
       });
@@ -16,10 +19,13 @@ describe('reducer', () => {
     describe('addTask', () => {
       function reduceAddTask({ taskTitle }) {
         return reducer({
-          newId: 100,
-          taskTitle,
-          tasks: [],
-        }, addTask());
+          state: {
+            newId: 100,
+            taskTitle,
+            tasks: [],
+          },
+          action: addTask(),
+        });
       }
 
       context('with taskTitle', () => {
@@ -51,10 +57,13 @@ describe('reducer', () => {
       context('with exist task ID', () => {
         it('tasks에서 task 삭제', () => {
           const state = reducer({
-            tasks: [{
-              id: 1, title: 'Task',
-            }],
-          }, deleteTask({ id: 1 }));
+            state: {
+              tasks: [{
+                id: 1, title: 'Task',
+              }],
+            },
+            action: deleteTask({ id: 1 }),
+          });
 
           expect(state.tasks).toHaveLength(0);
         });
@@ -63,10 +72,13 @@ describe('reducer', () => {
       context('without exist task ID', () => {
         it("doesn't work", () => {
           const state = reducer({
-            tasks: [{
-              id: 1, title: 'Task',
-            }],
-          }, deleteTask({ id: 100 }));
+            state: {
+              tasks: [{
+                id: 1, title: 'Task',
+              }],
+            },
+            action: deleteTask({ id: 100 }),
+          });
 
           expect(state.tasks).toHaveLength(1);
         });
@@ -85,7 +97,10 @@ describe('reducer', () => {
     }
 
     it('존재하지 않는 reducer실행', () => {
-      const state = reducer(undefined, otherFunction({ id: 1 }));
+      const state = reducer({
+        state: undefined,
+        action: otherFunction({ id: 1 }),
+      });
 
       expect(state.tasks).toHaveLength(0);
     });
