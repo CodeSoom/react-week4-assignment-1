@@ -6,8 +6,18 @@ import InputContainer from './InputContainer';
 
 jest.mock('react-redux');
 
-test('InputContainer', () => {
+describe('InputContainer', () => {
   const dispatch = jest.fn();
+
+  beforeEach(() => {
+    dispatch.mockClear();
+  });
+
+  function renderInput() {
+    return render((
+      <InputContainer />
+    ));
+  }
 
   useDispatch.mockImplementation(() => dispatch);
 
@@ -15,14 +25,27 @@ test('InputContainer', () => {
     taskTitle: 'New Title',
   }));
 
-  const { getByText, getByDisplayValue } = render((
-    <InputContainer />
-  ));
+  it('InputContainer Change', () => {
+    const { getByLabelText, getByDisplayValue } = renderInput();
 
-  expect(getByText(/추가/)).not.toBeNull();
-  expect(getByDisplayValue(/New Title/)).not.toBeNull();
+    expect(getByDisplayValue('New Title')).not.toBeNull();
 
-  fireEvent.click(getByText(/추가/));
+    fireEvent.change(getByLabelText('할 일'), {
+      target: { value: '무언가 하기' },
+    });
 
-  expect(dispatch).toBeCalledWith({ type: 'addTask' });
+    expect(dispatch).toBeCalled();
+  });
+
+  it('InputContainer Click', () => {
+    const { getByText, getByDisplayValue } = renderInput();
+
+    expect(getByText(/추가/)).not.toBeNull();
+
+    expect(getByDisplayValue(/New Title/)).not.toBeNull();
+
+    fireEvent.click(getByText(/추가/));
+
+    expect(dispatch).toBeCalledWith({ type: 'addTask' });
+  });
 });
