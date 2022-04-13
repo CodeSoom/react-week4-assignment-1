@@ -1,4 +1,4 @@
-import { render } from '@testing-library/react';
+import { fireEvent, render } from '@testing-library/react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import ListContainer from './ListContainer';
@@ -33,6 +33,18 @@ describe('ListContainer', () => {
 
       expect(queryByText(/아무 것도 하지 않기 #1/)).not.toBeNull();
       expect(queryByText(/아무 것도 하지 않기 #2/)).not.toBeNull();
+    });
+
+    it('delete task from tasks', () => {
+      const { getAllByText } = renderListContainer();
+
+      fireEvent.click(getAllByText(/완료/)[0]);
+      expect(dispatch).toBeCalledWith({
+        type: 'deleteTask',
+        payload: {
+          id: 1,
+        },
+      });
     });
   });
 });
