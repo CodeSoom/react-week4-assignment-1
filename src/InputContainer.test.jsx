@@ -6,22 +6,35 @@ import InputContainer from './InputContainer';
 
 jest.mock('react-redux');
 
-test('InputContainer', () => {
-  const dispatch = jest.fn();
+const dispatch = jest.fn();
+
+beforeEach(() => {
   useDispatch.mockImplementation(() => dispatch);
 
   useSelector.mockImplementation((selector) => selector({
     taskTitle: 'New Title',
   }));
+});
 
-  const { getByText, getByDisplayValue } = render(<InputContainer />);
+afterEach(() => {
+  jest.clearAllMocks();
+});
 
-  expect(getByText(/추가/)).not.toBeNull();
-  expect(getByDisplayValue(/New Title/)).not.toBeNull();
+const renderInputContainer = () => render((
+  <InputContainer />
+));
 
-  fireEvent.click(getByText(/추가/));
+describe('InputContainer', () => {
+  it('renders task title', () => {
+    const { getByText, getByDisplayValue } = renderInputContainer();
 
-  expect(dispatch).toBeCalledWith({
-    type: 'addTask',
+    expect(getByText(/추가/)).not.toBeNull();
+    expect(getByDisplayValue(/New Title/)).not.toBeNull();
+
+    fireEvent.click(getByText(/추가/));
+
+    expect(dispatch).toBeCalledWith({
+      type: 'addTask',
+    });
   });
 });
