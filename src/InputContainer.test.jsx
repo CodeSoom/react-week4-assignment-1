@@ -25,7 +25,7 @@ const renderInputContainer = () => render((
 ));
 
 describe('InputContainer', () => {
-  it('renders task title', () => {
+  it('add task title', () => {
     const { getByText, getByDisplayValue } = renderInputContainer();
 
     expect(getByText(/추가/)).not.toBeNull();
