@@ -25,7 +25,7 @@ describe('InputContainer', () => {
     taskTitle: 'New Title',
   }));
 
-  it('InputContainer Change', () => {
+  it('입력값 변경', () => {
     const { getByLabelText, getByDisplayValue } = renderInput();
 
     expect(getByDisplayValue('New Title')).not.toBeNull();
@@ -37,7 +37,7 @@ describe('InputContainer', () => {
     expect(dispatch).toBeCalled();
   });
 
-  it('InputContainer Click', () => {
+  it('추가 버튼 클릭', () => {
     const { getByText, getByDisplayValue } = renderInput();
 
     expect(getByText(/추가/)).not.toBeNull();
