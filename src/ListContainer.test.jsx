@@ -2,6 +2,8 @@ import { fireEvent, render } from '@testing-library/react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
+import given2 from 'given2';
+
 import ListContainer from './ListContainer';
 
 jest.mock('react-redux');
@@ -34,7 +36,7 @@ describe('ListContainer', () => {
     ];
 
     it('renders tasks', () => {
-      getUseSelector(tasks);
+      given2('getUserSelector', getUseSelector(tasks));
 
       const { queryByText } = renderListContainer();
 
@@ -59,7 +61,8 @@ describe('ListContainer', () => {
     const emptyTask = [];
 
     it('renders `할 일이 없어요!`', () => {
-      getUseSelector(emptyTask);
+      given2('getUserSelector', getUseSelector(emptyTask));
+
       const { container } = renderListContainer();
 
       expect(container).toHaveTextContent('할 일이 없어요!');
