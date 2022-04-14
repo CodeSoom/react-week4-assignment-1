@@ -36,7 +36,7 @@ describe('ListContainer', () => {
     ];
 
     it('renders tasks', () => {
-      given2('getUserSelector', getUseSelector(tasks));
+      given2('tasks', getUseSelector(tasks));
 
       const { queryByText } = renderListContainer();
 
@@ -61,7 +61,7 @@ describe('ListContainer', () => {
     const emptyTask = [];
 
     it('renders `할 일이 없어요!`', () => {
-      given2('getUserSelector', getUseSelector(emptyTask));
+      given2('empty tasks', getUseSelector(emptyTask));
 
       const { container } = renderListContainer();
 
