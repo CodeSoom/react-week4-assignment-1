@@ -79,5 +79,22 @@ describe('reducer', () => {
         expect(state.tasks).toHaveLength(1);
       });
     });
+
+    context('when reducer called undefined state', () => {
+      const tempAction = () => ({
+        type: '',
+        payload: {
+          taskTitle: '',
+        },
+      });
+
+      it('returns initial state', () => {
+        const state = reducer(undefined, tempAction);
+
+        expect(state.newId).toBe(100);
+        expect(state.taskTitle).toBe('');
+        expect(state.tasks).toHaveLength(0);
+      });
+    });
   });
 });
