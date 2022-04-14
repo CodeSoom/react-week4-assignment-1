@@ -5,9 +5,11 @@ import { updateTaskTitle, addTask, deleteTask } from './actions';
 describe('reducer', () => {
   describe('updateTaskTitle', () => {
     it('changes state task title', () => {
-      const state = reducer({
+      const previousState = {
         taskTitle: '',
-      }, updateTaskTitle('New Title'));
+      };
+
+      const state = reducer(previousState, updateTaskTitle('New Title'));
 
       expect(state.taskTitle).toBe('New Title');
     });
