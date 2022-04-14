@@ -7,6 +7,14 @@ import {
 } from './actions';
 
 describe('reducer', () => {
+  it('기본 값 변환', () => {
+    const state = reducer(undefined, {});
+
+    expect(state.newId).toBe(100);
+    expect(state.taskTitle).toBe('');
+    expect(state.tasks).toHaveLength(0);
+  });
+
   describe('updateTaskTitle', () => {
     it('changes task title', () => {
       const state = reducer({
