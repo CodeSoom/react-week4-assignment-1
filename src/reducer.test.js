@@ -68,11 +68,13 @@ describe('reducer', () => {
 
     context('when not existed task ID', () => {
       it("doesn't work", () => {
-        const state = reducer({
+        const previousState = {
           tasks: [
             { id: 1, title: 'Task' },
           ],
-        }, deleteTask(100));
+        };
+
+        const state = reducer(previousState, deleteTask(100));
 
         expect(state.tasks).toHaveLength(1);
       });
