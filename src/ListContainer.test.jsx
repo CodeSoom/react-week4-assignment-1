@@ -1,6 +1,6 @@
 import { render, fireEvent } from '@testing-library/react';
 
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import ListContainer from './ListContainer';
 
@@ -18,6 +18,8 @@ describe('ListContainer', () => {
       <ListContainer />
     ));
   }
+
+  useDispatch.mockImplementation(() => dispatch);
 
   useSelector.mockImplementation((selector) => selector({
     tasks: [
