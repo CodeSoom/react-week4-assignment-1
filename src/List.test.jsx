@@ -13,7 +13,7 @@ describe('List', () => {
     return render((
       <List
         tasks={tasks}
-        onClickDelete={handleClickDelete}
+        onClickDeleteTask={handleClickDelete}
       />
     ));
   }
