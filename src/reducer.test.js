@@ -86,7 +86,7 @@ describe('reducer', () => {
       },
     }));
 
-    it('doesn\'t change initial state', () => {
+    it("doesn't change initial state", () => {
       const state = reducer(undefined, someFunction({ id: 101, taskTitle: 'New Title' }));
 
       expect(state.newId).toBe(100);
