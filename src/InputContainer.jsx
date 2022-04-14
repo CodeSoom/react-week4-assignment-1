@@ -21,7 +21,6 @@ export default function InputContainer() {
 
   return (
     <div>
-      <h1>To-do</h1>
       <Input
         value={taskTitle}
         onChangeTitle={handleChangeTitle}
