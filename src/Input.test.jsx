@@ -27,7 +27,7 @@ describe('Input', () => {
     expect(container).toBeInTheDocument();
   });
 
-  it('should be able to change in input', () => {
+  it('changes input value', () => {
     const { getByRole } = rederInput();
     fireEvent.change(getByRole('textbox'), { target: { value: '코딩을 즐기기' } });
     expect(handleChange).toBeCalled();
