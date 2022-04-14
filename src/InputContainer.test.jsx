@@ -11,21 +11,17 @@ const dispatch = jest.fn();
 beforeEach(() => {
   useDispatch.mockImplementation(() => dispatch);
 
-  useSelector.mockImplementation((selector) => selector({
-    taskTitle: 'New Title',
-  }));
+  useSelector.mockImplementation((selector) => selector({ taskTitle: 'New Title' }));
 
   afterEach(() => {
     jest.clearAllMocks();
   });
 });
 
-const renderInputContainer = () => render((
-  <InputContainer />
-));
+const renderInputContainer = () => render(<InputContainer />);
 
 describe('InputContainer', () => {
-  it('add task title', () => {
+  it('adds task title', () => {
     const { getByText, getByDisplayValue } = renderInputContainer();
 
     expect(getByText(/추가/)).not.toBeNull();
