@@ -17,11 +17,13 @@ describe('reducer', () => {
 
   describe('addTask', () => {
     function reduceAddTask(taskTitle) {
-      return reducer({
+      const previousState = {
         newId: 100,
         taskTitle,
         tasks: [],
-      }, addTask());
+      };
+
+      return reducer(previousState, addTask());
     }
 
     context('with task title', () => {
