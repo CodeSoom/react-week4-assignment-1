@@ -35,7 +35,7 @@ describe('reducer', () => {
         expect(state.tasks[0].title).toBe('New Task');
       });
 
-      it('clears task title', () => {
+      it('clears task title after appends a new task', () => {
         const state = reduceAddTask('New Task');
 
         expect(state.taskTitle).toBe('');
