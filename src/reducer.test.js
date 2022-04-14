@@ -78,21 +78,19 @@ describe('reducer', () => {
   });
 
   context('with non existing actions.type', () => {
-    function otherFunction({ id }) {
-      return {
-        type: 'otherFunction',
-        payload: {
-          id,
-        },
-      };
-    }
+    const someFunction = jest.fn(({ id, taskTitle }) => ({
+      type: 'someFunction',
+      payload: {
+        id,
+        taskTitle,
+      },
+    }));
 
-    it('존재하지 않는 reducer실행', () => {
-      const state = reducer({
-        state: undefined,
-        action: otherFunction({ id: 1 }),
-      });
+    it('doesn\'t change initial state', () => {
+      const state = reducer(undefined, someFunction({ id: 101, taskTitle: 'New Title' }));
 
+      expect(state.newId).toBe(100);
+      expect(state.taskTitle).toBe('');
       expect(state.tasks).toHaveLength(0);
     });
   });
