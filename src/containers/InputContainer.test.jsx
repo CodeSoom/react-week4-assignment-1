@@ -29,9 +29,9 @@ describe('InputContainer', () => {
         taskTitle: 'New Title',
       }));
 
-      const { queryByText } = render(<InputContainer />);
+      const { getByText } = render(<InputContainer />);
 
-      fireEvent.click(queryByText('추가'));
+      fireEvent.click(getByText('추가'));
 
       expect(dispatch).toBeCalledWith(addTask());
     });
