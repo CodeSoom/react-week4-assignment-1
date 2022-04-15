@@ -29,7 +29,7 @@ describe('ListContainer', () => {
       expect(getByText(/안녕하세요 반가워요/)).not.toBeNull();
     });
 
-    it('click delete button', () => {
+    it('clicks delete button', () => {
       const { queryAllByText } = render(<ListContainer />);
 
       fireEvent.click(queryAllByText('완료')[0]);
