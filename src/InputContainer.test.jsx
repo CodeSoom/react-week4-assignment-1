@@ -26,13 +26,13 @@ describe('InputContainer', () => {
   }));
 
   it('renders add button and taskTitle', () => {
-    const { getByText, queryByDisplayValue } = renderInputContainer();
+    const { queryByText, queryByDisplayValue } = renderInputContainer();
 
-    expect(getByText(/추가/)).not.toBeNull();
+    expect(queryByText(/추가/)).not.toBeNull();
     expect(queryByDisplayValue(/New Title/)).not.toBeNull();
   });
 
-  it('renders add button and taskTitle', () => {
+  it('calls addTask ', () => {
     const { getByText } = renderInputContainer();
 
     fireEvent.click(getByText(/추가/));
