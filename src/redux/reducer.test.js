@@ -29,7 +29,7 @@ describe('reducer', () => {
       }
 
       context('with taskTitle', () => {
-        it('tasks에 새 task 추가', () => {
+        it('adds a new task', () => {
           const state = reduceAddTask({ taskTitle: 'New Task' });
 
           expect(state.tasks).toHaveLength(1);
@@ -37,7 +37,7 @@ describe('reducer', () => {
           expect(state.tasks[0].title).toBe('New Task');
         });
 
-        it('새 task추가 후 taskTitle 클리어', () => {
+        it('clears taskTitle after add task', () => {
           const state = reduceAddTask({ taskTitle: 'New Task' });
 
           expect(state.taskTitle).toBe('');
@@ -45,7 +45,7 @@ describe('reducer', () => {
       });
 
       context('with taskTitle', () => {
-        it('아무일도 일어나지 않는다.', () => {
+        it("doesn't work", () => {
           const state = reduceAddTask({ taskTitle: '' });
 
           expect(state.tasks).toHaveLength(0);
@@ -55,7 +55,7 @@ describe('reducer', () => {
 
     describe('deleteTask', () => {
       context('with exist task ID', () => {
-        it('tasks에서 task 삭제', () => {
+        it('deletes task by id', () => {
           const state = reducer({
             state: {
               tasks: [{
@@ -96,7 +96,7 @@ describe('reducer', () => {
       };
     }
 
-    it('존재하지 않는 reducer실행', () => {
+    it('works nothing', () => {
       const state = reducer({
         state: undefined,
         action: otherFunction({ id: 1 }),
