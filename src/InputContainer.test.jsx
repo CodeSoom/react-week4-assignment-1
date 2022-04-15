@@ -13,9 +13,7 @@ beforeEach(() => {
 
   useSelector.mockImplementation((selector) => selector({ taskTitle: 'New Title' }));
 
-  afterEach(() => {
-    jest.clearAllMocks();
-  });
+  afterEach(() => jest.clearAllMocks());
 });
 
 const renderInputContainer = () => render(<InputContainer />);
