@@ -80,7 +80,7 @@ describe('reducer', () => {
       });
     });
 
-    context('when reducer called undefined state', () => {
+    context('when given undefined state', () => {
       const tempAction = () => ({
         type: '',
         payload: {
