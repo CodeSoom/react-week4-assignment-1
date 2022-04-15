@@ -28,7 +28,7 @@ describe('ListContainer', () => {
     ],
   }));
 
-  describe('with tasks', () => {
+  context('with tasks', () => {
     it('renders "완료" button to delete a task', () => {
       const { getByText, getAllByText } = renderList();
 
@@ -48,7 +48,7 @@ describe('ListContainer', () => {
     });
   });
 
-  describe('without tasks', () => {
+  context('without tasks', () => {
     it('renders no task message', () => {
       const { getByText } = renderList();
 

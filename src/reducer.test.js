@@ -7,7 +7,7 @@ import {
 } from './actions';
 
 describe('reducer', () => {
-  it('기본 값 변환', () => {
+  it("doesn't change initial state", () => {
     const state = reducer(undefined, {});
 
     expect(state.newId).toBe(100);
