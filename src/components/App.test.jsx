@@ -8,9 +8,7 @@ import App from './App';
 jest.mock('react-redux');
 
 describe('App', () => {
-  const tasks = [
-    // { id: 1, title: '안녕하세요 반가워요' },
-  ];
+  const tasks = [];
 
   const dispatch = jest.fn();
   useDispatch.mockImplementation(() => dispatch);
