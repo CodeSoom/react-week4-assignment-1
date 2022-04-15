@@ -25,7 +25,7 @@ describe('Input', () => {
     expect(container).toHaveTextContent('할 일');
   });
 
-  it("2. '추가' 버튼 클릭", () => {
+  it("2. '추가' 버튼 클릭시 버튼 이벤트가 호출 된다.", () => {
     const { getByText } = renderInput();
 
     expect(handleClick).not.toBeCalled();
@@ -44,7 +44,7 @@ describe('Input', () => {
     expect(handleChange).toBeCalled();
   });
 
-  it('4. input에 placeholder 테스트', async () => {
+  it('4. input에 placeholder 출력 테스트', async () => {
     const { getByLabelText } = renderInput();
 
     expect(getByLabelText('할 일')
