@@ -1,6 +1,8 @@
 import { fireEvent, render } from '@testing-library/react';
 import { useDispatch, useSelector } from 'react-redux';
+
 import { addTask } from '../redux/actions';
+
 import InputContainer from './InputContainer';
 
 jest.mock('react-redux');
