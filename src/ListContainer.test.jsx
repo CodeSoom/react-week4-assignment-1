@@ -44,7 +44,7 @@ describe('ListContainer', () => {
       expect(queryByText(/아무 것도 하지 않기 #2/)).not.toBeNull();
     });
 
-    it('delete task from tasks', () => {
+    it('deletes task from tasks', () => {
       const { getAllByText } = renderListContainer();
 
       fireEvent.click(getAllByText(/완료/)[0]);
