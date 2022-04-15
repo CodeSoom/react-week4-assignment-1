@@ -1,5 +1,7 @@
 import { fireEvent, render } from '@testing-library/react';
 import { useDispatch, useSelector } from 'react-redux';
+import given from 'given2';
+import 'given2/setup';
 
 import { addTask } from '../redux/actions';
 
@@ -11,15 +13,19 @@ describe('InputContainer', () => {
   const dispatch = jest.fn();
   useDispatch.mockImplementation(() => dispatch);
 
+  given('taskTitle', () => 'New Title');
+
+  useSelector.mockImplementation((selector) => selector({
+    taskTitle: given.taskTitle,
+  }));
+
   beforeEach(() => {
     jest.clearAllMocks();
   });
 
   context('with taskTitle', () => {
     it('input has value "New Title"', () => {
-      useSelector.mockImplementation((selector) => selector({
-        taskTitle: 'New Title',
-      }));
+      given('taskTitle', () => 'New Title');
 
       const { getByPlaceholderText } = render(<InputContainer />);
 
@@ -27,9 +33,7 @@ describe('InputContainer', () => {
     });
 
     it('activates "addTask" actions', () => {
-      useSelector.mockImplementation((selector) => selector({
-        taskTitle: 'New Title',
-      }));
+      given('taskTitle', () => 'New Title');
 
       const { getByText } = render(<InputContainer />);
 
@@ -41,9 +45,7 @@ describe('InputContainer', () => {
 
   context('without taskTitle', () => {
     it('input has no value', () => {
-      useSelector.mockImplementation((selector) => selector({
-        taskTitle: '',
-      }));
+      given('taskTitle', () => '');
 
       const { getByPlaceholderText } = render(<InputContainer />);
 
