@@ -5,16 +5,18 @@ import ListContainer from './ListContainer';
 
 jest.mock('react-redux');
 
-const renderListContainer = () => render((
-  <ListContainer />
-));
-
-const dispatch = jest.fn();
-
 describe('ListContainer', () => {
-  afterEach(() => {
+  beforeEach(() => {
     jest.clearAllMocks();
   });
+
+  const renderListContainer = () => render((
+    <ListContainer />
+  ));
+
+  const dispatch = jest.fn();
+
+  useDispatch.mockImplementation(() => dispatch);
 
   useSelector.mockImplementation((selector) => selector({
     tasks: [
@@ -22,8 +24,6 @@ describe('ListContainer', () => {
       { id: 2, title: 'Task-2' },
     ],
   }));
-
-  useDispatch.mockImplementation(() => dispatch);
 
   context('with tasks', () => {
     it('renders tasks', () => {
