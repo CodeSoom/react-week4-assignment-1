@@ -13,7 +13,7 @@ const renderInputContainer = () => render((
 const dispatch = jest.fn();
 
 beforeEach(() => {
-  useSelector.mockImplementation(() => ({
+  useSelector.mockImplementation((selector) => selector({
     taskTitle: 'New Task!',
   }));
 
