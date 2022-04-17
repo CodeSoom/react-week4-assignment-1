@@ -80,7 +80,7 @@ describe('reducer', () => {
       });
     });
 
-    context('when given undefined state', () => {
+    context("when doesn't action type exists", () => {
       const tempAction = () => ({
         type: '',
         payload: {
