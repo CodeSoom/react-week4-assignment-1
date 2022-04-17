@@ -1,28 +1,40 @@
-import { render, fireEvent } from '@testing-library/react';
+import {
+  render, fireEvent,
+} from '@testing-library/react';
 
 import Input from './Input';
 
-test('Input', () => {
+describe('Input', () => {
   const handleChange = jest.fn();
   const handleClick = jest.fn();
 
-  const { getByDisplayValue, getByLabelText, getByText } = render((
-    <Input
-      value="기존 할 일"
-      onChange={handleChange}
-      onClick={handleClick}
-    />
-  ));
+  function rederInput() {
+    return render((
+      <Input
+        value=""
+        onChange={handleChange}
+        onClick={handleClick}
+      />
+    ));
+  }
 
-  expect(getByDisplayValue('기존 할 일')).not.toBeNull();
-
-  fireEvent.change(getByLabelText('할 일'), {
-    target: { value: '무언가 하기' },
+  beforeEach(() => {
+    jest.clearAllMocks();
   });
 
-  expect(handleChange).toBeCalled();
+  it('renders input element', () => {
+    const { container } = rederInput();
+    expect(container).toBeInTheDocument();
+  });
 
-  fireEvent.click(getByText('추가'));
+  it('changes input value', () => {
+    const { getByRole } = rederInput();
+    fireEvent.change(getByRole('textbox'), { target: { value: '코딩을 즐기기' } });
+    expect(handleChange).toBeCalled();
+  });
 
-  expect(handleClick).toBeCalled();
+  it('has 할 일 text.', () => {
+    const { container } = rederInput();
+    expect(container).toHaveTextContent('할 일');
+  });
 });
