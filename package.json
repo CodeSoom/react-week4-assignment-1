@@ -9,6 +9,7 @@
     "coverage": "npm run test:unit -- --coverage",
     "test:e2e": "codeceptjs run --steps",
     "test": "npm run coverage && start-server-and-test start http://localhost:8080 test:e2e",
+    "watch:test": "jest --watchAll",
     "lint": "eslint --ext js,jsx ."
   },
   "keywords": [],
@@ -40,6 +41,8 @@
   },
   "dependencies": {
     "react": "^17.0.2",
-    "react-dom": "^17.0.2"
+    "react-dom": "^17.0.2",
+    "react-redux": "^7.2.8",
+    "redux": "^4.1.2"
   }
 }
