@@ -52,7 +52,7 @@ describe('reducer', () => {
   });
 
   describe('deleteTask', () => {
-    context('when there is a target to delete', () => {
+    context('when ID exists', () => {
       it('remove the task from tasks', () => {
         const previousState = {
           tasks: [
@@ -66,7 +66,7 @@ describe('reducer', () => {
       });
     });
 
-    context('when there is no target to delete', () => {
+    context("when ID doesn't exists", () => {
       it("doesn't work", () => {
         const previousState = {
           tasks: [
