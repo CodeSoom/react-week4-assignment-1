@@ -26,9 +26,9 @@ describe('InputContainer', () => {
   }));
 
   it('changes the task title', () => {
-    const { getByLabelText, getByDisplayValue } = renderInput();
+    const { getByLabelText, queryByDisplayValue } = renderInput();
 
-    expect(getByDisplayValue('New Title')).not.toBeNull();
+    expect(queryByDisplayValue('New Title')).not.toBeNull();
 
     fireEvent.change(getByLabelText('할 일'), {
       target: { value: '무언가 하기' },
@@ -38,11 +38,11 @@ describe('InputContainer', () => {
   });
 
   it('adds a new task', () => {
-    const { getByText, getByDisplayValue } = renderInput();
+    const { getByText, queryByText, queryByDisplayValue } = renderInput();
 
-    expect(getByText(/추가/)).not.toBeNull();
+    expect(queryByText(/추가/)).not.toBeNull();
 
-    expect(getByDisplayValue(/New Title/)).not.toBeNull();
+    expect(queryByDisplayValue(/New Title/)).not.toBeNull();
 
     fireEvent.click(getByText(/추가/));
 

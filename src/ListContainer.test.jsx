@@ -30,10 +30,10 @@ describe('ListContainer', () => {
 
   context('with tasks', () => {
     it('renders "완료" button to delete a task', () => {
-      const { getByText, getAllByText } = renderList();
+      const { getAllByText, queryByText } = renderList();
 
-      expect(getByText(/Task-1/)).not.toBeNull();
-      expect(getByText(/Task-2/)).not.toBeNull();
+      expect(queryByText(/Task-1/)).not.toBeNull();
+      expect(queryByText(/Task-2/)).not.toBeNull();
 
       const buttons = getAllByText('완료');
 
@@ -50,9 +50,9 @@ describe('ListContainer', () => {
 
   context('without tasks', () => {
     it('renders no task message', () => {
-      const { getByText } = renderList();
+      const { queryByText } = renderList();
 
-      expect(getByText(/Task-1/)).not.toBeNull();
+      expect(queryByText(/Task-1/)).not.toBeNull();
     });
   });
 });

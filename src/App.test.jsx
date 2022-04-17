@@ -16,13 +16,13 @@ describe('App', () => {
   }));
 
   it('render app', () => {
-    const { getByText } = render((
+    const { queryByText } = render((
       <App />
     ));
 
-    expect(getByText(/추가/)).not.toBeNull();
+    expect(queryByText(/추가/)).not.toBeNull();
 
-    expect(getByText(/Task-1/)).not.toBeNull();
-    expect(getByText(/Task-2/)).not.toBeNull();
+    expect(queryByText(/Task-1/)).not.toBeNull();
+    expect(queryByText(/Task-2/)).not.toBeNull();
   });
 });
