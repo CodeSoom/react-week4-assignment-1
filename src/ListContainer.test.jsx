@@ -12,17 +12,14 @@ const dispatch = jest.fn();
 
 beforeEach(() => {
   useDispatch.mockImplementation(() => dispatch);
+  useSelector.mockImplementation((selector) => selector({
+    tasks: given2.tasks,
+  }));
 });
 
 afterEach(() => {
   jest.clearAllMocks();
 });
-
-const getUseSelector = (tasks) => (
-  useSelector.mockImplementation((selector) => selector({
-    tasks,
-  }))
-);
 
 const renderListContainer = () => render((
   <ListContainer />
@@ -30,14 +27,12 @@ const renderListContainer = () => render((
 
 describe('ListContainer', () => {
   context('with tasks', () => {
-    const tasks = [
+    given2('tasks', () => [
       { id: 1, title: '아무 것도 하지 않기 #1' },
       { id: 2, title: '아무 것도 하지 않기 #2' },
-    ];
+    ]);
 
     it('renders tasks', () => {
-      given2('tasks', getUseSelector(tasks));
-
       const { queryByText } = renderListContainer();
 
       expect(queryByText(/아무 것도 하지 않기 #1/)).not.toBeNull();
@@ -58,11 +53,9 @@ describe('ListContainer', () => {
   });
 
   context('without tasks', () => {
-    const emptyTask = [];
+    given2('tasks', () => []);
 
     it('renders `할 일이 없어요!`', () => {
-      given2('empty tasks', getUseSelector(emptyTask));
-
       const { container } = renderListContainer();
 
       expect(container).toHaveTextContent('할 일이 없어요!');
