@@ -20,12 +20,7 @@ describe('List', () => {
   const handleClickDelete = jest.fn();
 
   function renderList(tasks) {
-    return render((
-      <List
-        tasks={tasks}
-        onClickDelete={handleClickDelete}
-      />
-    ));
+    return render(<List tasks={tasks} onClickDelete={handleClickDelete} />);
   }
 
   context('with tasks', () => {

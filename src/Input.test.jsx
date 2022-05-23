@@ -6,13 +6,9 @@ test('Input', () => {
   const handleChange = jest.fn();
   const handleClick = jest.fn();
 
-  const { getByDisplayValue, getByLabelText, getByText } = render((
-    <Input
-      value="기존 할 일"
-      onChange={handleChange}
-      onClick={handleClick}
-    />
-  ));
+  const { getByDisplayValue, getByLabelText, getByText } = render(
+    <Input value="기존 할 일" onChange={handleChange} onClick={handleClick} />,
+  );
 
   expect(getByDisplayValue('기존 할 일')).not.toBeNull();
 
