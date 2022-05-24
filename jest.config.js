@@ -12,7 +12,7 @@ module.exports = {
     },
     './src/App.jsx': {},
   },
-  // transform: {
-  //   '^.+\\.(t|j)sx?$': ['@swc/jest'],
-  // },
+  transform: {
+    '^.+\\.(t|j)sx?$': ['@swc/jest'],
+  },
 };
