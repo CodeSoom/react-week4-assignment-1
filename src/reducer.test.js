@@ -2,6 +2,17 @@ import { reducer } from './reducer';
 import { updateTaskTitle, addTask, deleteTask } from './actions';
 
 describe('reducer', () => {
+  describe("Action type that doesn't exist", () => {
+    it('returns the initial state', () => {
+      const initialState = {
+        newId: 100,
+        taskTitle: '',
+        tasks: [{ id: 1, title: '아무 것도 하지 않기 #1' }, { id: 2, title: '아무 것도 하지 않기 #2' }],
+      };
+      const state = reducer(initialState, { type: 'unknown' });
+      expect(state).toEqual(initialState);
+    });
+  });
   describe('updateTaskTitle', () => {
     it('changes task title', () => {
       const state = reducer({
