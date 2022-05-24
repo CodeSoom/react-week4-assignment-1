@@ -4,6 +4,7 @@ const initialState = {
   tasks: [{ id: 1, title: '아무 것도 하지 않기 #1' }, { id: 2, title: '아무 것도 하지 않기 #2' }],
 };
 
+// eslint-disable-next-line import/prefer-default-export
 export function reducer(state = initialState, action) {
   if (action.type === 'updateTaskTitle') {
     return {
@@ -13,6 +14,9 @@ export function reducer(state = initialState, action) {
   }
   if (action.type === 'addTask') {
     const { newId, tasks, taskTitle } = state;
+    if (!taskTitle) {
+      return state;
+    }
     return {
       ...state,
       newId: newId + 1,
