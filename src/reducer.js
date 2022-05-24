@@ -1,18 +1,15 @@
 const initialState = {
   newId: 100,
   taskTitle: '',
-  tasks: [{ id: 1, title: '아무 것도 하지 않기 #1' }, { id: 2, title: '아무 것도 하지 않기 #2' }],
+  tasks: [],
 };
 
-// eslint-disable-next-line import/prefer-default-export
-export function reducer(state = initialState, action) {
-  if (action.type === 'updateTaskTitle') {
-    return {
-      ...state,
-      taskTitle: action.payload.taskTitle,
-    };
-  }
-  if (action.type === 'addTask') {
+const reducerOptions = {
+  updateTaskTitle: (state, action) => ({
+    ...state,
+    taskTitle: action.payload.taskTitle,
+  }),
+  addTask: (state) => {
     const { newId, tasks, taskTitle } = state;
     if (!taskTitle) {
       return state;
@@ -23,13 +20,16 @@ export function reducer(state = initialState, action) {
       taskTitle: '',
       tasks: [...tasks, { id: newId, title: taskTitle }],
     };
-  }
-  if (action.type === 'deleteTask') {
+  },
+  deleteTask: (state, action) => {
     const { tasks } = state;
     return {
       ...state,
       tasks: tasks.filter((task) => task.id !== action.payload.id),
     };
-  }
-  return state;
+  },
+};
+
+export default function reducer(state = initialState, action = '') {
+  return reducerOptions[action.type] ? reducerOptions[action.type](state, action) : state;
 }
