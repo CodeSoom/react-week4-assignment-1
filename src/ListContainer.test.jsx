@@ -33,6 +33,8 @@ describe('ListContainer', () => {
 
     fireEvent.click(deleteButtons[0]);
 
-    expect(getByText(/아무 것도 하지 않기 #1/)).toBeNull();
+    expect(dispatch).toBeCalledWith(
+      { type: 'deleteTask', payload: { id: 1 } },
+    );
   });
 });
