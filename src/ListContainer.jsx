@@ -7,7 +7,7 @@ import List from './List';
 import { deleteTask } from './actions';
 
 export default function ListContainer() {
-  // tasks 목록만 알면 됌
+  // tasks 목록만 알면
   const { tasks } = useSelector((state) => ({
     tasks: state.tasks,
   }));
