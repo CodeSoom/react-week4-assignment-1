@@ -1,7 +1,17 @@
-import { reducer } from './reducer';
+import reducer from './reducer';
 import { updateTaskTitle, addTask, deleteTask } from './actions';
 
 describe('reducer', () => {
+  describe('parameters that are not defined', () => {
+    it('should return the initial state', () => {
+      expect(reducer()).toEqual({
+        newId: 100,
+        taskTitle: '',
+        tasks: [],
+      });
+    });
+  });
+
   describe("Action type that doesn't exist", () => {
     it('returns the initial state', () => {
       const initialState = {
@@ -13,6 +23,7 @@ describe('reducer', () => {
       expect(state).toEqual(initialState);
     });
   });
+
   describe('updateTaskTitle', () => {
     it('changes task title', () => {
       const state = reducer({
@@ -22,6 +33,7 @@ describe('reducer', () => {
       expect(state.taskTitle).toBe('New Title');
     });
   });
+
   describe('addTask', () => {
     function reduceAddTask(taskTitle) {
       return reducer({
