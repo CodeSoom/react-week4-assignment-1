@@ -19,7 +19,7 @@ describe('reducer', () => {
             taskTitle,
             tasks: [],
           },
-          addTaskTitle()
+          addTaskTitle(),
         );
       }
 
@@ -39,7 +39,7 @@ describe('reducer', () => {
       });
 
       context('without task title', () => {
-        it("doesn't work", () => {
+        it("tasks don't have task", () => {
           const state = reduceAddTaskTitle('');
 
           expect(state.tasks).toHaveLength(0);
@@ -52,7 +52,7 @@ describe('reducer', () => {
         it('remove the task from tasks', () => {
           const state = reducer(
             { tasks: [{ id: 1, title: 'Task' }] },
-            deleteTaskTitle(1)
+            deleteTaskTitle(1),
           );
 
           expect(state.tasks).toHaveLength(0);
@@ -60,10 +60,10 @@ describe('reducer', () => {
       });
 
       context('without existed task ID', () => {
-        it("doesn't work", () => {
+        it("don't remove the task from tasks", () => {
           const state = reducer(
             { tasks: [{ id: 1, title: 'Task' }] },
-            deleteTaskTitle(100)
+            deleteTaskTitle(100),
           );
 
           expect(state.tasks).toHaveLength(1);
@@ -81,10 +81,10 @@ describe('reducer', () => {
       },
     }));
 
-    it("doesn't work", () => {
+    it("state doesn't change", () => {
       const state = reducer(
         undefined,
-        anonymousFunction({ id: 101, taskTitle: 'New Title' })
+        anonymousFunction({ id: 101, taskTitle: 'New Title' }),
       );
 
       expect(state.newId).toBe(100);
