@@ -55,7 +55,7 @@ describe('reducer', () => {
       it('remove the task from tasks', () => {
         const state = reducer({
           tasks: [
-            {id: 1, title: 'Task'},
+            { id: 1, title: 'Task' },
           ],
         }, deleteTask(1));
 
@@ -67,7 +67,7 @@ describe('reducer', () => {
       it("doesn't work", () => {
         const state = reducer({
           tasks: [
-            {id: 1, title: 'Task'},
+            { id: 1, title: 'Task' },
           ],
         }, deleteTask(100));
 
