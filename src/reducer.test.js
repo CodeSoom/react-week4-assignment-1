@@ -78,7 +78,7 @@ describe('reducer', () => {
 
   describe('Exception', () => {
     context('with invalid action', () => {
-      it("returns the previous state", () => {
+      it('returns the previous state', () => {
         const state = reducer({
           tasks: [
             { id: 1, title: 'Task' },
@@ -95,14 +95,12 @@ describe('reducer', () => {
     });
 
     context('with empty state', () => {
-      it("returns the initial state", () => {
+      it('returns the initial state', () => {
         const state = reducer(undefined, { type: '' });
 
         expect(state.taskTitle).toBe('');
         expect(state.tasks).toHaveLength(0);
-
       });
     });
-
   });
 });

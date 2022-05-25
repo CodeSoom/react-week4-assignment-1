@@ -25,14 +25,14 @@ test('InputContainer', () => {
   const changedTaskTitle = '산책';
 
   fireEvent.change(getByLabelText('할 일'), {
-    target: {value: changedTaskTitle },
+    target: { value: changedTaskTitle },
   });
 
   expect(dispatch).toBeCalledWith({
     type: 'updateTaskTitle',
     payload: {
       taskTitle: changedTaskTitle,
-    }
+    },
   });
 
   fireEvent.click(getByText(/추가/));

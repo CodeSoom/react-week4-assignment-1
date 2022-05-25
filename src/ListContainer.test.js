@@ -30,6 +30,6 @@ test('ListContainer', () => {
     type: 'deleteTask',
     payload: {
       id: 1,
-    }
+    },
   });
 });
