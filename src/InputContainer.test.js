@@ -19,8 +19,8 @@ test('InputContainer', () => {
     <InputContainer />
   ));
 
-  expect(getByText(/추가/)).not.toBeNull();
-  expect(getByDisplayValue(/New Title/)).not.toBeNull();
+  expect(getByText(/추가/)).toBeInTheDocument();
+  expect(getByDisplayValue(/New Title/)).toBeInTheDocument();
 
   const changedTaskTitle = '산책';
 

@@ -19,7 +19,7 @@ test('App', () => {
     <App />
   ));
 
-  expect(getByText(/Task-1/)).not.toBeNull();
-  expect(getByText(/Task-2/)).not.toBeNull();
-  expect(getByText(/추가/)).not.toBeNull();
+  expect(getByText(/Task-1/)).toBeInTheDocument();
+  expect(getByText(/Task-2/)).toBeInTheDocument();
+  expect(getByText(/추가/)).toBeInTheDocument();
 });

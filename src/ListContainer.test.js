@@ -22,7 +22,7 @@ test('ListContainer', () => {
     <ListContainer />
   ));
 
-  expect(getByText(/아무것도 하지 않기 #1/)).not.toBeNull();
+  expect(getByText(/아무것도 하지 않기 #1/)).toBeInTheDocument();
 
   fireEvent.click(getAllByText(/완료/)[0]);
 
