@@ -42,10 +42,16 @@ describe('reducer', () => {
     });
 
     context('without task title', () => {
-      it("doesn't work", () => {
+      it("doesn't change the tasks", () => {
+        const taskTitle = '';
+        const tasks = [];
+
+        const originLength = tasks.length;
+
         const state = reduceAddTask('');
 
-        expect(state.tasks).toHaveLength(0);
+        expect(state.taskTitle).toBe(taskTitle);
+        expect(state.tasks.length).toBe(originLength);
       });
     });
   });
@@ -64,14 +70,18 @@ describe('reducer', () => {
     });
 
     context('without existed task ID', () => {
-      it("doesn't work", () => {
+      it("doesn't change the tasks", () => {
+        const tasks = [
+          { id: 1, title: 'Task' },
+        ];
+
+        const originLength = tasks.length;
+
         const state = reducer({
-          tasks: [
-            { id: 1, title: 'Task' },
-          ],
+          tasks,
         }, deleteTask(100));
 
-        expect(state.tasks).toHaveLength(1);
+        expect(state.tasks.length).toBe(originLength);
       });
     });
   });
@@ -79,18 +89,20 @@ describe('reducer', () => {
   describe('Exception', () => {
     context('with invalid action', () => {
       it('returns the previous state', () => {
-        const state = reducer({
+        const previousState = {
           tasks: [
             { id: 1, title: 'Task' },
           ],
           taskTitle: 'New Title',
-        }, {
+        };
+
+        const state = reducer(previousState, {
           type: 'invalid',
         });
 
-        expect(state.taskTitle).toBe('New Title');
-        expect(state.tasks[0].id).toBe(1);
-        expect(state.tasks[0].title).toBe('Task');
+        expect(state.taskTitle).toBe(previousState.taskTitle);
+        expect(state.tasks[0].id).toBe(previousState.tasks[0].id);
+        expect(state.tasks[0].title).toBe(previousState.tasks[0].title);
       });
     });
 
