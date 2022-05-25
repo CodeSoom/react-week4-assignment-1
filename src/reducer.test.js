@@ -75,4 +75,34 @@ describe('reducer', () => {
       });
     });
   });
+
+  describe('Exception', () => {
+    context('with invalid action', () => {
+      it("returns the previous state", () => {
+        const state = reducer({
+          tasks: [
+            { id: 1, title: 'Task' },
+          ],
+          taskTitle: 'New Title',
+        }, {
+          type: 'invalid',
+        });
+
+        expect(state.taskTitle).toBe('New Title');
+        expect(state.tasks[0].id).toBe(1);
+        expect(state.tasks[0].title).toBe('Task');
+      });
+    });
+
+    context('with empty state', () => {
+      it("returns the initial state", () => {
+        const state = reducer(undefined, { type: '' });
+
+        expect(state.taskTitle).toBe('');
+        expect(state.tasks).toHaveLength(0);
+
+      });
+    });
+
+  });
 });
