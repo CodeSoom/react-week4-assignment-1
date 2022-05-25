@@ -1,6 +1,7 @@
 import { render, fireEvent } from '@testing-library/react';
 
 import { useSelector, useDispatch } from 'react-redux';
+import { deleteTask } from './actions';
 
 import ListContainer from './ListContainer';
 
@@ -26,10 +27,5 @@ test('ListContainer', () => {
 
   fireEvent.click(getAllByText(/완료/)[0]);
 
-  expect(dispatch).toBeCalledWith({
-    type: 'deleteTask',
-    payload: {
-      id: 1,
-    },
-  });
+  expect(dispatch).toBeCalledWith(deleteTask(1));
 });
