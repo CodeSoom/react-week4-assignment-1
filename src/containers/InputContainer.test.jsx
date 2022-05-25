@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import InputContainer from './InputContainer';
 
+import { updateTaskTitle, addTaskTitle } from '../actions';
+
 jest.mock('react-redux');
 
 describe('InputContainer', () => {
@@ -10,11 +12,9 @@ describe('InputContainer', () => {
 
   useDispatch.mockImplementation(() => dispatch);
 
-  useSelector.mockImplementation((selector) =>
-    selector({
-      taskTitle: 'New Title',
-    })
-  );
+  useSelector.mockImplementation((selector) => selector({
+    taskTitle: 'New Title',
+  }));
 
   const renderInputContainer = () => render(<InputContainer />);
 
@@ -30,7 +30,7 @@ describe('InputContainer', () => {
 
     fireEvent.click(getByText('추가'));
 
-    expect(dispatch).toBeCalledWith({ type: 'addTaskTitle' });
+    expect(dispatch).toBeCalledWith(addTaskTitle());
   });
 
   it('input taskTitle, dispatch changeTaskTitle', () => {
@@ -38,9 +38,6 @@ describe('InputContainer', () => {
 
     fireEvent.change(getByLabelText('할 일'), { target: { value: '테스트' } });
 
-    expect(dispatch).toBeCalledWith({
-      type: 'updateTaskTitle',
-      payload: { taskTitle: '테스트' },
-    });
+    expect(dispatch).toBeCalledWith(updateTaskTitle('테스트'));
   });
 });
