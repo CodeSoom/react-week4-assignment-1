@@ -1,7 +1,7 @@
 import { render, fireEvent } from '@testing-library/react';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { updateTaskTitle } from './actions';
+import { addTask, updateTaskTitle } from './actions';
 
 import InputContainer from './InputContainer';
 
@@ -33,5 +33,5 @@ test('InputContainer', () => {
 
   fireEvent.click(getByText(/추가/));
 
-  expect(dispatch).toBeCalledWith({ type: 'addTask' });
+  expect(dispatch).toBeCalledWith(addTask());
 });
