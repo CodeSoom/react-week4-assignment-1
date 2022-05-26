@@ -65,4 +65,27 @@ describe('reducer', () => {
       });
     });
   });
+
+  describe('reducer에 존재하지 않는 action type이 들어오면', () => {
+    it('초기 state 값이 반환된다.', () => {
+      const state = reducer({
+        newId: 101,
+        taskTitle: '잠자기',
+        tasks: [],
+      }, { type: null });
+
+      expect(state.taskTitle).toBe('잠자기');
+      expect(state.newId).toBe(101);
+    });
+  });
+
+  describe('reducer에 state 값이 없으면', () => {
+    it('initialState 값이 반환된다.', () => {
+      const state = reducer(undefined, addTask());
+
+      expect(state.newId).toBe(100);
+      expect(state.taskTitle).toBe('');
+      expect(state.tasks).toHaveLength(0);
+    });
+  });
 });
