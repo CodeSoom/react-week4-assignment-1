@@ -78,7 +78,12 @@ const actionMethod = {
   deleteTaskTitle: (state, action) => deleteTaskTitle(state, action),
 };
 
-const reducer = (state = initialState, action) =>
-  actionMethod[action.type](state, action);
+const reducer = (state = initialState, action) => {
+  if (action.type in actionMethod) {
+    return actionMethod[action.type](state, action);
+  }
+
+  return state;
+};
 
 export default reducer;
