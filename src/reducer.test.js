@@ -68,26 +68,27 @@ describe('reducer', () => {
     });
   });
   describe('deleteTask', () => {
+    const tasks = [{ id: 1, title: 'Task' }];
     context('with existed task ID', () => {
       it('remove the task from tasks', () => {
-        const state = reducer({
-          tasks: [
-            { id: 1, title: 'Task' },
-          ],
-        }, deleteTask(1));
+        const originLength = tasks.length;
 
-        expect(state.tasks).toHaveLength(0);
+        const state = reducer({ tasks }, deleteTask(1));
+
+        const newLength = state.tasks.length;
+
+        expect((newLength - originLength)).toBe(-1);
       });
     });
     context('without existed task ID', () => {
       it("doesn't work", () => {
-        const state = reducer({
-          tasks: [
-            { id: 1, title: 'Task' },
-          ],
-        }, deleteTask(100));
+        const originLength = tasks.length;
 
-        expect(state.tasks).toHaveLength(1);
+        const state = reducer({ tasks }, deleteTask(100));
+
+        const newLength = state.tasks.length;
+
+        expect(originLength).toBe(newLength);
       });
     });
   });
