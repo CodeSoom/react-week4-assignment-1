@@ -18,10 +18,6 @@ beforeEach(() => {
   }));
 });
 
-afterEach(() => {
-  jest.clearAllMocks();
-});
-
 describe('ListContainer', () => {
   it('should call dispatch when clicked', () => {
     const { getByText, getAllByText } = render(<ListContainer />);

@@ -17,10 +17,6 @@ describe('InputContainer', () => {
     }));
   });
 
-  afterEach(() => {
-    jest.clearAllMocks();
-  });
-
   it('should call dispatch when clicked', () => {
     const { getByText, getByDisplayValue } = render(<InputContainer />);
 
