@@ -1,7 +1,6 @@
 import { render, fireEvent } from '@testing-library/react';
 
-import { useSelector } from 'react-redux';
-import { useDispatch } from '../__mocks__/react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
 import App from './App';
 
