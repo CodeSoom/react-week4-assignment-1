@@ -1,7 +1,7 @@
 import { render, fireEvent } from '@testing-library/react';
 
 import List from './List';
-
+import tasks from '../fixtures/tasks';
 // test('테스트 #1')
 //
 // describe - it => describe('List') => it('renders tasks')
@@ -19,21 +19,16 @@ import List from './List';
 describe('List', () => {
   const handleClickDeleteTask = jest.fn();
 
-  function renderList(tasks) {
+  function renderList(list) {
     return render((
       <List
-        tasks={tasks}
+        tasks={list}
         onClickDeleteTask={handleClickDeleteTask}
       />
     ));
   }
 
   context('with tasks', () => {
-    const tasks = [
-      { id: 1, title: 'Task-1' },
-      { id: 2, title: 'Task-2' },
-    ];
-
     it('renders tasks', () => {
       const { getByText } = renderList(tasks);
 
@@ -54,9 +49,9 @@ describe('List', () => {
 
   context('without tasks', () => {
     it('renders no task message', () => {
-      const tasks = [];
+      const emptyTasks = [];
 
-      const { getByText } = renderList(tasks);
+      const { getByText } = renderList(emptyTasks);
 
       expect(getByText(/할 일이 없어요/)).not.toBeNull();
     });

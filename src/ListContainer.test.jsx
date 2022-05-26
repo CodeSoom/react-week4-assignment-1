@@ -2,6 +2,7 @@ import { render, fireEvent } from '@testing-library/react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import ListContainer from './ListContainer';
+import tasks from '../fixtures/tasks';
 
 jest.mock('react-redux');
 
@@ -11,10 +12,7 @@ beforeEach(() => {
   useDispatch.mockImplementation(() => dispatch);
 
   useSelector.mockImplementation((selector) => selector({
-    tasks: [
-      { id: 1, title: '아무 것도 하지 않기 #1' },
-      { id: 2, title: '아무 것도 하지 않기 #2' },
-    ],
+    tasks,
   }));
 });
 

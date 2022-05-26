@@ -1,7 +1,9 @@
 import { render } from '@testing-library/react';
 
 import { useSelector } from 'react-redux';
+
 import App from './App';
+import tasks from '../fixtures/tasks';
 
 // TODO: jest.mock에 대해서 공부해보자
 jest.mock('react-redux');
@@ -9,11 +11,7 @@ jest.mock('react-redux');
 test('App', () => {
   useSelector.mockImplementation((selector) => selector({
     taskTitle: '',
-    tasks: [
-      { id: 1, title: '아무 것도 하지 않기 #1' },
-      { id: 2, title: '아무 것도 하지 않기 #2' },
-    ],
-
+    tasks,
   }));
   const { getByText } = render((
     <App />
