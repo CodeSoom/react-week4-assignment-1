@@ -16,32 +16,35 @@ describe('InputContainer', () => {
       taskTitle: 'New Title',
     }));
   });
+  context('with "추가" button when clicked', () => {
+    it('call dispatch with type name "addTask"', () => {
+      const { getByText, getByDisplayValue } = render(<InputContainer />);
 
-  it('should call dispatch when clicked', () => {
-    const { getByText, getByDisplayValue } = render(<InputContainer />);
+      expect(getByText(/추가/)).not.toBeNull();
+      expect(getByDisplayValue(/New Title/)).not.toBeNull();
 
-    expect(getByText(/추가/)).not.toBeNull();
-    expect(getByDisplayValue(/New Title/)).not.toBeNull();
+      fireEvent.click(getByText(/추가/));
 
-    fireEvent.click(getByText(/추가/));
-
-    expect(dispatch).toBeCalledWith({
-      type: 'addTask',
+      expect(dispatch).toBeCalledWith({
+        type: 'addTask',
+      });
     });
   });
 
-  it('should call dispatch when changed', () => {
-    const { getByDisplayValue } = render(<InputContainer />);
+  context('with typed text', () => {
+    it('call dispatch with type name "updateTaskTitle"', () => {
+      const { getByDisplayValue } = render(<InputContainer />);
 
-    fireEvent.change(getByDisplayValue(/New Title/), {
-      target: { value: 'New Title Changed' },
-    });
+      fireEvent.change(getByDisplayValue(/New Title/), {
+        target: { value: 'New Title Changed' },
+      });
 
-    expect(dispatch).toBeCalledWith({
-      type: 'updateTaskTitle',
-      payload: {
-        taskTitle: 'New Title Changed',
-      },
+      expect(dispatch).toBeCalledWith({
+        type: 'updateTaskTitle',
+        payload: {
+          taskTitle: 'New Title Changed',
+        },
+      });
     });
   });
 });
