@@ -8,19 +8,19 @@ jest.mock('react-redux');
 
 const dispatch = jest.fn();
 
-beforeEach(() => {
-  useDispatch.mockImplementation(() => dispatch);
-
-  useSelector.mockImplementation((selector) => selector({
-    taskTitle: 'New Title',
-  }));
-});
-
-afterEach(() => {
-  jest.clearAllMocks();
-});
-
 describe('InputContainer', () => {
+  beforeEach(() => {
+    useDispatch.mockImplementation(() => dispatch);
+
+    useSelector.mockImplementation((selector) => selector({
+      taskTitle: 'New Title',
+    }));
+  });
+
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
+
   it('should call dispatch when clicked', () => {
     const { getByText, getByDisplayValue } = render(<InputContainer />);
 
