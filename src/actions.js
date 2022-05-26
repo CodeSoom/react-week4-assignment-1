@@ -1,23 +1,19 @@
-export function updateTaskTitle(taskTitle) {
-  return {
-    type: 'updateTaskTitle',
-    payload: {
-      taskTitle,
-    },
-  };
-}
+export const updateTaskTitle = (taskTitle) => ({
+  type: 'updateTaskTitle',
+  payload: {
+    taskTitle,
+  },
+});
 
-export function addTask() {
-  return {
-    type: 'addTask',
-  };
-}
+export const addTask = () => ({
+  type: 'addTask',
+});
 
-export function deleteTask(id) {
-  return {
-    type: 'deleteTask',
-    payload: {
-      id,
-    },
-  };
-}
+export const deleteTask = (id) => ({
+  type: 'deleteTask',
+  payload: {
+    id,
+  },
+});
+
+export default {};

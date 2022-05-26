@@ -1,25 +1,28 @@
-import { render } from '@testing-library/react';
+import { fireEvent, render } from '@testing-library/react';
 
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+
+import { deleteTask } from './actions';
+import { tasks } from '../__mocks__/tasks';
 
 import ListContainer from './ListContainer';
 
 jest.mock('react-redux');
 
-test('ListContainer', () => {
+describe('ListContainer', () => {
+  const dispatch = jest.fn();
+  useDispatch.mockImplementation(() => dispatch);
   useSelector.mockImplementation((selector) => selector({
-    tasks: [
-      { id: 1, title: '아무 것도 하지 않기 #1' },
-      { id: 2, title: '아무 것도 하지 않기 #2' },
-    ],
+    tasks,
   }));
 
-  const { getByText } = render((
-    <ListContainer />
-  ));
+  it('to do를 삭제', () => {
+    const { getAllByRole } = render((
+      <ListContainer />
+    ));
+    const buttons = getAllByRole('button', { name: /완료/ });
 
-  expect(getByText(/아무 것도 하지 않기 #1/)).not.toBeNull();
-
-  // TODO: 통합 테스트 코드 작성
-  // CodeceptJS => 실제 브라우저에서 사용자 테스트 실행 가능.
+    fireEvent.click(buttons[1]);
+    expect(dispatch).toBeCalledWith(deleteTask(tasks[1].id));
+  });
 });
