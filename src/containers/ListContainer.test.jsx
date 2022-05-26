@@ -5,7 +5,7 @@ import ListContainer from './ListContainer';
 
 import { deleteTaskTitle } from '../actions';
 
-import tasks from '../../fixtures/DataToTest';
+import tasks from '../../fixtures/TasksData';
 
 jest.mock('react-redux');
 

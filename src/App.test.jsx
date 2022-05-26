@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 
 import App from './App';
 
-import tasks from '../fixtures/DataToTest';
+import tasks from '../fixtures/TasksData';
 
 jest.mock('react-redux');
 

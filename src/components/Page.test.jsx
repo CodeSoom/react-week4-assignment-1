@@ -2,7 +2,7 @@ import { render, fireEvent } from '@testing-library/react';
 
 import Page from './Page';
 
-import tasks from '../../fixtures/DataToTest';
+import tasks from '../../fixtures/TasksData';
 
 test('Page', () => {
   const handleChangeTitle = jest.fn();
