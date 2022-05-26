@@ -32,8 +32,8 @@ describe('List', () => {
     it('renders tasks', () => {
       const { getByText } = renderList(tasks);
 
-      expect(getByText(/Task-1/)).not.toBeNull();
-      expect(getByText(/Task-2/)).not.toBeNull();
+      expect(getByText(/아무 것도 하지 않기 #1/)).not.toBeNull();
+      expect(getByText(/아무 것도 하지 않기 #2/)).not.toBeNull();
     });
 
     it('renders “완료” button to delete a task', () => {
