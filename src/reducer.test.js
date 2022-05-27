@@ -72,20 +72,12 @@ describe('reducer', () => {
     });
   });
 
-  context('without action type', () => {
-    const anonymousFunction = jest.fn(({ id, taskTitle }) => ({
-      type: 'anonymousFunction',
-      payload: {
-        id,
-        taskTitle,
-      },
-    }));
-
+  context('with not existing action type', () => {
     it("state doesn't change", () => {
-      const state = reducer(
-        undefined,
-        anonymousFunction({ id: 101, taskTitle: 'New Title' }),
-      );
+      const state = reducer(undefined, {
+        type: 'notExistingAction',
+        payload: { id: 101, taskTitle: 'New Title' },
+      });
 
       expect(state.newId).toBe(100);
       expect(state.taskTitle).toBe('');
