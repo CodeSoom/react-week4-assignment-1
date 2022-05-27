@@ -4,32 +4,40 @@ const initialState = {
   tasks: [],
 };
 
+const handleUpdateTaskTitle = (state, action) => ({
+  ...state,
+  taskTitle: action.payload.taskTitle,
+});
+
+const handleAddTask = (state) => {
+  const { taskTitle, newId, tasks } = state;
+
+  if (!taskTitle) {
+    return state;
+  }
+
+  return {
+    ...state,
+    newId: newId + 1,
+    taskTitle: '',
+    tasks: [...tasks, { id: newId, title: taskTitle }],
+  };
+};
+
+const handleDeleteTask = (state, action) => (
+  {
+    ...state,
+    tasks: state.tasks.filter((task) => task.id !== action.payload.id),
+  }
+);
+
+const actionTypeFunctions = {
+  updateTaskTitle: (state, action) => handleUpdateTaskTitle(state, action),
+  addTask: (state) => handleAddTask(state),
+  deleteTask: (state, action) => handleDeleteTask(state, action),
+};
+
 export default function reducer(state = initialState, action) {
-  const { newId, tasks, taskTitle } = state;
-  if (action.type === 'updateTaskTitle') {
-    return {
-      ...state,
-      taskTitle: action.payload.taskTitle,
-    };
-  }
-  if (action.type === 'addTask') {
-    if (!taskTitle) {
-      return state;
-    }
-
-    return {
-      ...state,
-      newId: newId + 1,
-      taskTitle: '',
-      tasks: [...tasks, { id: newId, title: taskTitle }],
-    };
-  }
-  if (action.type === 'deleteTask') {
-    return {
-      ...state,
-      tasks: tasks.filter((task) => task.id !== action.payload.id),
-    };
-  }
-
+  if (actionTypeFunctions[action.type]) return actionTypeFunctions[action.type](state, action);
   return state;
 }
