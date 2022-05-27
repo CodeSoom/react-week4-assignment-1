@@ -4,7 +4,7 @@ import {
   updateTaskTitle,
   addTask,
   deleteTask,
-} from './action';
+} from './actions';
 
 describe('reducer', () => {
   describe('updateTaskTitle', () => {
