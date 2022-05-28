@@ -6,7 +6,9 @@ describe('reducer', () => {
   describe('updateTaskTitle', () => {
     it('state의 taskTitle 값이 New Title로 바뀐다.', () => {
       const state = reducer({
+        newId: 2,
         taskTitle: '',
+        tasks: [],
       }, updateTaskTitle('New Title'));
 
       expect(state.taskTitle).toBe('New Title');
@@ -49,6 +51,8 @@ describe('reducer', () => {
     context('tasks에 존재하는 id를 삭제하면', () => {
       it('state의 tasks 값이 삭제된다.', () => {
         const state = reducer({
+          newId: 2,
+          taskTitle: '',
           tasks: [{ id: 1, title: '할 일1' }],
         }, deleteTask(1));
 
@@ -58,6 +62,8 @@ describe('reducer', () => {
     context('tasks에 존재하지 않는 id를 삭제하면', () => {
       it('state의 tasks 값이 삭제되지 않는다.', () => {
         const state = reducer({
+          newId: 2,
+          teskTitle: '',
           tasks: [{ id: 1, title: '할 일1' }],
         }, deleteTask(100));
 
