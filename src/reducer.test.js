@@ -19,6 +19,7 @@ describe('reducer', () => {
         taskTitle: '',
         tasks: [{ id: 1, title: '아무 것도 하지 않기 #1' }, { id: 2, title: '아무 것도 하지 않기 #2' }],
       };
+
       const state = reducer(initialState, { type: 'unknown' });
       expect(state).toEqual(initialState);
     });
@@ -42,6 +43,7 @@ describe('reducer', () => {
         tasks: [],
       }, addTask());
     }
+
     context('with task title', () => {
       it('appends a new task into tasks', () => {
         const state = reduceAddTask('New Task');
@@ -67,8 +69,10 @@ describe('reducer', () => {
       });
     });
   });
+
   describe('deleteTask', () => {
     const tasks = [{ id: 1, title: 'Task' }];
+
     context('with existed task ID', () => {
       it('remove the task from tasks', () => {
         const originLength = tasks.length;
@@ -77,9 +81,10 @@ describe('reducer', () => {
 
         const newLength = state.tasks.length;
 
-        expect((newLength - originLength)).toBe(-1);
+        expect(newLength - originLength).toBe(-1);
       });
     });
+
     context('without existed task ID', () => {
       it("doesn't work", () => {
         const originLength = tasks.length;
