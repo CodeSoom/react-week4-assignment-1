@@ -40,7 +40,7 @@ describe('reducer', () => {
       });
     });
 
-    context('with out task title', () => {
+    context('without task title', () => {
       it('doesn`t work', () => {
         const state = reduceAddTask('');
 
