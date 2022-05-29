@@ -3,6 +3,7 @@ import { render, fireEvent } from '@testing-library/react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import InputContainer from './InputContainer';
+import { addTask, updateTaskTitle } from './actions';
 
 jest.mock('react-redux');
 
@@ -15,14 +16,21 @@ test('InputContainer', () => {
     taskTitle: 'New Title',
   }));
 
-  const { getByText, getByDisplayValue } = render(<InputContainer />);
+  const { getByText, getByDisplayValue, getByLabelText } = render(
+    <InputContainer />,
+  );
 
   expect(getByText(/추가/)).not.toBeNull();
   expect(getByDisplayValue(/New Title/)).not.toBeNull();
 
+  const changedTaskTile = '변경된 타이틀';
+  fireEvent.change(getByLabelText('할 일'), {
+    target: { value: changedTaskTile },
+  });
+
+  expect(dispatch).toBeCalledWith(updateTaskTitle(changedTaskTile));
+
   fireEvent.click(getByText(/추가/));
 
-  expect(dispatch).toBeCalledWith({
-    type: 'addTask',
-  });
+  expect(dispatch).toBeCalledWith(addTask());
 });
