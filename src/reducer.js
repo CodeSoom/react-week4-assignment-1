@@ -6,14 +6,14 @@ const initialState = {
   tasks: [],
 };
 
-const operationList = {
+const operations = {
   updateTaskTitle: (state, action) => updateTaskTitle(state, action),
   addTask: (state) => addTask(state),
   deleteTask: (state, action) => deleteTask(state, action),
 };
 
 export default function reducer(state = initialState, action) {
-  return operationList[action.type]
-    ? (operationList[action.type](state, action))
+  return operations[action.type]
+    ? (operations[action.type](state, action))
     : (state);
 }
