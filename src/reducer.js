@@ -31,13 +31,16 @@ const handleDeleteTask = (state, action) => (
   }
 );
 
-const actionTypeFunctions = {
+const reducers = {
   updateTaskTitle: (state, action) => handleUpdateTaskTitle(state, action),
   addTask: (state) => handleAddTask(state),
   deleteTask: (state, action) => handleDeleteTask(state, action),
 };
 
 export default function reducer(state = initialState, action) {
-  if (actionTypeFunctions[action.type]) return actionTypeFunctions[action.type](state, action);
-  return state;
+  if (!reducers[action.type]) {
+    return state;
+  }
+
+  return reducers[action.type](state, action);
 }
