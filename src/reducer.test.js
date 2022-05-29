@@ -31,7 +31,7 @@ describe('reducer', () => {
         expect(state.tasks).toHaveLength(1);
 
         expect(state.tasks[0].title).toBe('new Task');
-        expect(state.tasks[0].id).not.toBeNull();
+        expect(state.tasks[0].id).not.toBeUndefined();
       });
 
       it('clears taskTitle', () => {
@@ -85,6 +85,34 @@ describe('reducer', () => {
         );
         expect(state.tasks).toHaveLength(1);
       });
+    });
+  });
+
+  describe("action type doesn't exist", () => {
+    it('return initialState', () => {
+      const state = reducer(
+        {
+          newId: 100,
+          taskTitle: 'title',
+          tasks: [],
+        },
+        { type: '1234' },
+      );
+
+      expect(state.taskTitle).toBe('title');
+      expect(state.tasks).toHaveLength(0);
+    });
+  });
+
+  describe("initialState doesn't exist", () => {
+    it('return initialState', () => {
+      const state = reducer(
+        undefined,
+        addTask(),
+      );
+
+      expect(state.newId).toBe(100);
+      expect(state.tasks).toHaveLength(0);
     });
   });
 });
