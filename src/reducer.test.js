@@ -52,13 +52,13 @@ describe('reducer', () => {
   describe('deleteTask', () => {
     context('with existed task ID', () => {
       it('remove the task from tasks', () => {
-        const state = reducer({
-          tasks: [
-            { id: 1, title: 'Task' },
-          ],
-        }, deleteTask(1));
+        const tasks = [
+          { id: 1, title: 'Task' },
+        ];
 
-        expect(state.tasks).toHaveLength(0);
+        const state = reducer({ tasks }, deleteTask(100));
+
+        expect(state.tasks).toHaveLength(tasks.length);
       });
     });
 
