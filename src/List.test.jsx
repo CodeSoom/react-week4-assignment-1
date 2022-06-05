@@ -2,20 +2,6 @@ import { render, fireEvent } from '@testing-library/react';
 
 import List from './List';
 
-// test('테스트 #1')
-//
-// describe - it => describe('List') => it('renders tasks')
-// describe - context - it
-// jest-plugins => jest-plugin-context
-//
-// with tasks
-// - List renders tasks...
-// - List renders “delete” button to delete a task
-// without tasks
-// - List renders no task message.
-//
-// TDD cycle: Red - Green - Refactoring
-
 describe('List', () => {
   const handleClickDelete = jest.fn();
 
@@ -28,7 +14,7 @@ describe('List', () => {
     ));
   }
 
-  context('with tasks', () => {
+  context('tasks들을', () => {
     const tasks = [
       { id: 1, title: 'Task-1' },
       { id: 2, title: 'Task-2' },
