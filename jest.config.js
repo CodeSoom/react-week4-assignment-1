@@ -12,4 +12,8 @@ module.exports = {
     },
     './src/App.jsx': {},
   },
+  transform: {
+    '^.+\\.(t|j)sx?$': ['@swc/jest'],
+  },
+  clearMocks: true,
 };

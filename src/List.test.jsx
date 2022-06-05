@@ -1,7 +1,7 @@
 import { render, fireEvent } from '@testing-library/react';
 
 import List from './List';
-
+import tasks from '../fixtures/tasks';
 // test('테스트 #1')
 //
 // describe - it => describe('List') => it('renders tasks')
@@ -17,46 +17,41 @@ import List from './List';
 // TDD cycle: Red - Green - Refactoring
 
 describe('List', () => {
-  const handleClickDelete = jest.fn();
+  const handleClickDeleteTask = jest.fn();
 
-  function renderList(tasks) {
+  function renderList(list) {
     return render((
       <List
-        tasks={tasks}
-        onClickDelete={handleClickDelete}
+        tasks={list}
+        onClickDeleteTask={handleClickDeleteTask}
       />
     ));
   }
 
   context('with tasks', () => {
-    const tasks = [
-      { id: 1, title: 'Task-1' },
-      { id: 2, title: 'Task-2' },
-    ];
-
     it('renders tasks', () => {
       const { getByText } = renderList(tasks);
 
-      expect(getByText(/Task-1/)).not.toBeNull();
-      expect(getByText(/Task-2/)).not.toBeNull();
+      expect(getByText(/아무 것도 하지 않기 #1/)).not.toBeNull();
+      expect(getByText(/아무 것도 하지 않기 #2/)).not.toBeNull();
     });
 
     it('renders “완료” button to delete a task', () => {
       const { getAllByText } = renderList(tasks);
 
-      const buttons = getAllByText('완료');
+      const buttons = getAllByText(/완료/);
 
       fireEvent.click(buttons[0]);
 
-      expect(handleClickDelete).toBeCalledWith(1);
+      expect(handleClickDeleteTask).toBeCalled();
     });
   });
 
   context('without tasks', () => {
     it('renders no task message', () => {
-      const tasks = [];
+      const emptyTasks = [];
 
-      const { getByText } = renderList(tasks);
+      const { getByText } = renderList(emptyTasks);
 
       expect(getByText(/할 일이 없어요/)).not.toBeNull();
     });
