@@ -14,7 +14,7 @@ test('Input', () => {
     />
   ));
 
-  expect(getByDisplayValue('기존 할 일')).not.toBeNull();
+  expect(getByDisplayValue('기존 할 일')).toBeInTheDocument();
 
   fireEvent.change(getByLabelText('할 일'), {
     target: { value: '무언가 하기' },
