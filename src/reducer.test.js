@@ -1,0 +1,118 @@
+import reducer from './reducer';
+
+import {
+  updateTaskTitle,
+  addTask,
+  deleteTask,
+} from './actions';
+
+describe('reducer', () => {
+  describe('updateTaskTitle', () => {
+    it('change task title', () => {
+      const state = reducer({
+        taskTitle: 'previous title',
+      }, updateTaskTitle('new Title'));
+      expect(state.taskTitle).toBe('new Title');
+    });
+  });
+
+  describe('addTask', () => {
+    function reduceAddTask(taskTitle) {
+      return reducer({
+        newId: 100,
+        taskTitle,
+        tasks: [],
+      }, addTask());
+    }
+    context('with taskTitle', () => {
+      it('append a new task into tasks', () => {
+        const state = reduceAddTask('new Task');
+
+        expect(state.tasks).toHaveLength(1);
+
+        expect(state.tasks[0].title).toBe('new Task');
+        expect(state.tasks[0].id).not.toBeUndefined();
+      });
+
+      it('clears taskTitle', () => {
+        const state = reduceAddTask('new Task');
+
+        expect(state.taskTitle).toBe('');
+      });
+    });
+
+    context('without taskTitle', () => {
+      it("doesn't work", () => {
+        const state = reduceAddTask('');
+
+        expect(state.tasks).toHaveLength(0);
+      });
+    });
+  });
+
+  describe('deleteTask', () => {
+    context('with existed task id', () => {
+      const tasks = [
+        {
+          id: 1,
+          title: 'task',
+        },
+      ];
+
+      it('remove task from tasks', () => {
+        const originLength = tasks.length;
+
+        const state = reducer({ tasks }, deleteTask(1));
+
+        const newLength = state.tasks.length;
+
+        expect(newLength - originLength).toBe(-1);
+      });
+    });
+
+    context('without existed task id', () => {
+      it("doesn't work", () => {
+        const state = reducer(
+          {
+            tasks: [
+              {
+                id: 1,
+                title: 'task',
+              },
+            ],
+          },
+          deleteTask(100),
+        );
+        expect(state.tasks).toHaveLength(1);
+      });
+    });
+  });
+
+  describe("action type doesn't exist", () => {
+    it('return initialState', () => {
+      const state = reducer(
+        {
+          newId: 100,
+          taskTitle: 'title',
+          tasks: [],
+        },
+        { type: '1234' },
+      );
+
+      expect(state.taskTitle).toBe('title');
+      expect(state.tasks).toHaveLength(0);
+    });
+  });
+
+  describe("initialState doesn't exist", () => {
+    it('return initialState', () => {
+      const state = reducer(
+        undefined,
+        addTask(),
+      );
+
+      expect(state.newId).toBe(100);
+      expect(state.tasks).toHaveLength(0);
+    });
+  });
+});
