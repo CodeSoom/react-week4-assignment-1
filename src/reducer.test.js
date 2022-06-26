@@ -73,4 +73,27 @@ describe('reducer', () => {
       });
     });
   });
+
+  describe('deleteTask', () => {
+    const previousState = {
+      tasks: [
+        { id: 101, title: '오늘 할 일 1' },
+        { id: 102, title: '오늘 할 일 2' },
+      ],
+    };
+
+    const action = {
+      type: 'deleteTask',
+      payload: {
+        id: 101,
+      },
+    };
+
+    it('removes the task from tasks', () => {
+      const state = reducer(previousState, action);
+
+      expect(state.tasks).toHaveLength(1);
+      expect(state.tasks.find(({ id }) => id === 101)).toBeUndefined();
+    });
+  });
 });
