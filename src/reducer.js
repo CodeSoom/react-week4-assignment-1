@@ -1,4 +1,6 @@
 const reducer = (state, action) => {
+  const { newId, tasks, taskTitle } = state;
+
   if (action.type === 'updateTaskTitle') {
     return {
       ...state,
@@ -7,8 +9,6 @@ const reducer = (state, action) => {
   }
 
   if (action.type === 'addTask') {
-    const { newId, tasks, taskTitle } = state;
-
     if (!taskTitle) return state;
 
     return {
@@ -19,6 +19,13 @@ const reducer = (state, action) => {
         ...tasks,
         { id: newId, title: taskTitle },
       ],
+    };
+  }
+
+  if (action.type === 'deleteTask') {
+    return {
+      ...state,
+      tasks: tasks.filter(({ id }) => id !== action.payload.id),
     };
   }
 
