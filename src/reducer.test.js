@@ -24,12 +24,6 @@ describe('reducer', () => {
   });
 
   describe('addTask', () => {
-    const previousState = {
-      newId,
-      taskTitle,
-      tasks: [],
-    };
-
     const action = {
       type: 'addTask',
       payload: {
@@ -37,24 +31,46 @@ describe('reducer', () => {
       },
     };
 
-    it('appends a new task with new id into tasks', () => {
-      const state = reducer(previousState, action);
+    context('with task title', () => {
+      const previousState = {
+        newId,
+        taskTitle,
+        tasks: [],
+      };
 
-      expect(state.tasks).toHaveLength(1);
-      expect(state.tasks[0].id).toBe(newId);
-      expect(state.tasks[0].title).toBe(taskTitle);
+      it('appends a new task with new id into tasks', () => {
+        const state = reducer(previousState, action);
+
+        expect(state.tasks).toHaveLength(1);
+        expect(state.tasks[0].id).toBe(newId);
+        expect(state.tasks[0].title).toBe(taskTitle);
+      });
+
+      it('adds 1 to newId', () => {
+        const state = reducer(previousState, action);
+
+        expect(state.newId).toBe(newId + 1);
+      });
+
+      it('makes taskTitle blank', () => {
+        const state = reducer(previousState, action);
+
+        expect(state.taskTitle).toBe('');
+      });
     });
 
-    it('adds 1 to newId', () => {
-      const state = reducer(previousState, action);
+    context('without task title', () => {
+      const previousState = {
+        newId,
+        taskTitle: '',
+        tasks: [],
+      };
 
-      expect(state.newId).toBe(newId + 1);
-    });
+      it("doesn't work", () => {
+        const state = reducer(previousState, action);
 
-    it('makes taskTitle blank', () => {
-      const state = reducer(previousState, action);
-
-      expect(state.taskTitle).toBe('');
+        expect(state.tasks).toHaveLength(0);
+      });
     });
   });
 });
