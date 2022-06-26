@@ -82,18 +82,35 @@ describe('reducer', () => {
       ],
     };
 
-    const action = {
-      type: 'deleteTask',
-      payload: {
-        id: 101,
-      },
-    };
+    context('with existent task id', () => {
+      const action = {
+        type: 'deleteTask',
+        payload: {
+          id: 101,
+        },
+      };
 
-    it('removes the task from tasks', () => {
-      const state = reducer(previousState, action);
+      it('removes the task from tasks', () => {
+        const state = reducer(previousState, action);
 
-      expect(state.tasks).toHaveLength(1);
-      expect(state.tasks.find(({ id }) => id === 101)).toBeUndefined();
+        expect(state.tasks).toHaveLength(1);
+        expect(state.tasks.find(({ id }) => id === 101)).toBeUndefined();
+      });
+    });
+
+    context('with non-existent task id', () => {
+      const action = {
+        type: 'deleteTask',
+        payload: {
+          id: 32134,
+        },
+      };
+
+      it("doesn't work", () => {
+        const state = reducer(previousState, action);
+
+        expect(state.tasks).toHaveLength(2);
+      });
     });
   });
 });
