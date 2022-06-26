@@ -7,11 +7,16 @@ const reducer = (state, action) => {
   }
 
   if (action.type === 'addTask') {
+    const { newId, tasks, taskTitle } = state;
+
     return {
       ...state,
-      newId: state.newId + 1,
+      newId: newId + 1,
       taskTitle: '',
-      tasks: [...state.tasks, { id: state.newId, title: state.taskTitle }],
+      tasks: [
+        ...tasks,
+        { id: newId, title: taskTitle },
+      ],
     };
   }
 
