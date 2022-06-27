@@ -1,4 +1,4 @@
-import { addTask, updateTaskTitle } from './actions';
+import { addTask, deleteTask, updateTaskTitle } from './actions';
 import reducer from './reducer';
 
 describe('reducer', () => {
@@ -18,6 +18,19 @@ describe('reducer', () => {
       }, addTask());
 
       expect(state.tasks[0].title).toBe('새로운 할 일');
+    });
+  });
+
+  describe('deleteTask', () => {
+    it('해당 id의 task가 삭제됩니다.', () => {
+      const state = reducer({
+        tasks:
+        [
+          { id: 1, title: '완료된 일' },
+        ],
+      }, deleteTask(1));
+
+      expect(state.tasks).toHaveLength(0);
     });
   });
 });
