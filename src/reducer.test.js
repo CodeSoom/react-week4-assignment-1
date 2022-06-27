@@ -10,6 +10,17 @@ describe('reducer', () => {
   const defaultNewId = 101;
   const defaultTaskTitle = '새로운 할 일';
 
+  context('with unhandled actions', () => {
+    it("doesn't work", () => {
+      const state = reducer(
+        { taskTitle: '' },
+        {},
+      );
+
+      expect(state).toEqual({ taskTitle: '' });
+    });
+  });
+
   describe('updateTaskTitle', () => {
     it('changes task title', () => {
       const state = reducer(
