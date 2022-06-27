@@ -10,6 +10,23 @@ describe('reducer', () => {
   const defaultNewId = 101;
   const defaultTaskTitle = '새로운 할 일';
 
+  context('without state', () => {
+    const initialState = {
+      newId: 101,
+      taskTitle: '',
+      tasks: [],
+    };
+
+    it('has the initial state', () => {
+      const state = reducer(
+        undefined,
+        {},
+      );
+
+      expect(state).toEqual(initialState);
+    });
+  });
+
   context('with unhandled actions', () => {
     it("doesn't work", () => {
       const state = reducer(
