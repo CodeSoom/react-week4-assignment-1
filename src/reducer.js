@@ -1,5 +1,11 @@
-const reducer = (state, action) => {
-  const { newId, tasks, taskTitle } = state;
+const initialState = {
+  newId: 101,
+  taskTitle: '',
+  tasks: [],
+};
+
+const reducer = (state = initialState, action) => {
+  const { newId, taskTitle, tasks } = state;
 
   if (action.type === 'updateTaskTitle') {
     return {
