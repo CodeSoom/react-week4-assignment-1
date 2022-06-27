@@ -1,6 +1,6 @@
 import { legacy_createStore as createStore } from 'redux';
 
-const reducer = () => ({});
+import reducer from './reducer';
 
 const store = createStore(reducer);
 

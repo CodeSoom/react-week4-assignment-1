@@ -8,3 +8,5 @@ export function updateTaskTitle(taskTitle) {
 }
 
 export function addTask() {}
+
+export function deleteTask() {}

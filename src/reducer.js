@@ -1,7 +1,15 @@
 const initialState = {
   newId: 100,
   taskTitle: '',
-  tasks: [],
+  tasks: [
+    {
+      id: 1,
+      title: '할 일',
+    }, {
+      id: 2,
+      title: '두 일',
+    },
+  ],
 };
 
 export default function reducer(state = initialState, action) {
@@ -12,5 +20,5 @@ export default function reducer(state = initialState, action) {
     };
   }
 
-  return initialState;
+  return state;
 }
