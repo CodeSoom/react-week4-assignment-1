@@ -1,10 +1,13 @@
 import { render } from '@testing-library/react';
+import { Provider } from 'react-redux';
 
 import App from './App';
 
 test('App', () => {
   const { getByText } = render((
-    <App />
+    <Provider>
+      <App />
+    </Provider>
   ));
 
   expect(getByText(/추가/)).not.toBeNull();
