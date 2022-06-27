@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from 'react-redux';
 
-import { updateTaskTitle } from './actions';
+import { addTask, updateTaskTitle } from './actions';
 
 import Page from './Page';
 
@@ -17,12 +17,7 @@ export default function App() {
   }
 
   function handleClickAddTask() {
-    // setState({
-    //   ...state,
-    //   newId: newId + 1,
-    //   taskTitle: '',
-    //   tasks: [...tasks, { id: newId, title: taskTitle }],
-    // });
+    dispatch(addTask());
   }
 
   function handleClickDeleteTask() {
