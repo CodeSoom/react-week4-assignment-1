@@ -18,6 +18,7 @@ test('Item', () => {
   ));
 
   expect(container).toHaveTextContent('뭐라도 하기');
+
   expect(container).toHaveTextContent('완료');
 
   expect(handleClick).not.toBeCalled();
