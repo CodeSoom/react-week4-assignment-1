@@ -11,13 +11,36 @@ describe('reducer', () => {
   });
 
   describe('addTask', () => {
-    it('tasks가 새로운 task가 담겨 반환됩니다.', () => {
-      const state = reducer({
-        taskTitle: '새로운 할 일',
+    function reduceAddTask(taskTitle) {
+      return reducer({
+        newId: 100,
+        taskTitle,
         tasks: [],
       }, addTask());
+    }
 
-      expect(state.tasks[0].title).toBe('새로운 할 일');
+    context('taskTitle이 있을 때', () => {
+      it('tasks가 새로운 task가 담겨 반환됩니다.', () => {
+        const state = reduceAddTask('새로운 할 일');
+
+        expect(state.tasks).toHaveLength(1);
+        expect(state.tasks[0].id).not.toBeUndefined();
+        expect(state.tasks[0].title).toBe('새로운 할 일');
+      });
+
+      it('taskTitle을 비워줍니다.', () => {
+        const state = reduceAddTask('새로운 할 일');
+
+        expect(state.taskTitle).toBe('');
+      });
+    });
+
+    context('taskTitle이 없을 때', () => {
+      it('아무일도 일어나지 않습니다.', () => {
+        const state = reduceAddTask('');
+
+        expect(state.tasks).toHaveLength(0);
+      });
     });
   });
 
