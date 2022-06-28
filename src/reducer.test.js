@@ -1,7 +1,19 @@
 import { addTask, deleteTask, updateTaskTitle } from './actions';
-import reducer from './reducer';
+
+import reducer, { initialState } from './reducer';
 
 describe('reducer', () => {
+  context('state가 없을 때', () => {
+    it('initialstate가 존재합니다.', () => {
+      const state = reducer(
+        undefined,
+        {},
+      );
+
+      expect(state).toEqual(initialState);
+    });
+  });
+
   describe('updateTaskTitle', () => {
     it('taskTitle을 입력한 값으로 변경하여 반환합니다.', () => {
       const state = reducer({ taskTitle: '' }, updateTaskTitle('New Title'));

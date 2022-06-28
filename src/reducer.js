@@ -1,15 +1,7 @@
-const initialState = {
+export const initialState = {
   newId: 100,
   taskTitle: '',
-  tasks: [
-    {
-      id: 1,
-      title: '할 일',
-    }, {
-      id: 2,
-      title: '두 일',
-    },
-  ],
+  tasks: [],
 };
 
 export default function reducer(state = initialState, action) {
