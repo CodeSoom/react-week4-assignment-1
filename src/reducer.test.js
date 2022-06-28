@@ -45,15 +45,28 @@ describe('reducer', () => {
   });
 
   describe('deleteTask', () => {
-    it('해당 id의 task가 삭제됩니다.', () => {
-      const state = reducer({
+    function reduceDeleteTask(id) {
+      return reducer({
         tasks:
         [
           { id: 1, title: '완료된 일' },
         ],
-      }, deleteTask(1));
+      }, deleteTask(id));
+    }
+    context('id를 정상적으로 입력했을 때', () => {
+      it('해당 id의 task가 삭제됩니다.', () => {
+        const state = reduceDeleteTask(1);
 
-      expect(state.tasks).toHaveLength(0);
+        expect(state.tasks).toHaveLength(0);
+      });
+    });
+
+    context('id가 비정상적일 때', () => {
+      it('아무일도 일어나지 않습니다.', () => {
+        const state = reduceDeleteTask(2);
+
+        expect(state.tasks).toHaveLength(1);
+      });
     });
   });
 });
