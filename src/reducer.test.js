@@ -31,7 +31,7 @@ describe('reducer', () => {
     it("doesn't work", () => {
       const state = reducer(
         { taskTitle: '' },
-        {},
+        { type: undefined },
       );
 
       expect(state).toEqual({ taskTitle: '' });
@@ -114,7 +114,7 @@ describe('reducer', () => {
 
     context('with non-existent task id', () => {
       it("doesn't work", () => {
-        const state = reduceDeleteTask(32134);
+        const state = reduceDeleteTask(-156);
 
         expect(state.tasks).toHaveLength(2);
       });
