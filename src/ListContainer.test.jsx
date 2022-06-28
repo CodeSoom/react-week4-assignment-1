@@ -22,12 +22,14 @@ describe('ListContainer', () => {
     tasks,
   }));
 
+  const renderListContainer = () => render(<ListContainer />);
+
   beforeEach(() => {
     jest.clearAllMocks();
   });
 
   it('renders titles of tasks', () => {
-    const { container } = render(<ListContainer />);
+    const { container } = renderListContainer();
 
     tasks.map((task) => task.title).forEach((title) => {
       expect(container).toHaveTextContent(title);
@@ -35,8 +37,8 @@ describe('ListContainer', () => {
   });
 
   it('dispatches a deleteTask action with the task id when complete button is clicked', () => {
-    const { getAllByRole } = render(<ListContainer />);
-    const completeButtons = getAllByRole('button');
+    const { getAllByRole } = renderListContainer();
+    const completeButtons = getAllByRole('button', { name: '완료' });
 
     fireEvent.click(completeButtons[1]);
 
