@@ -16,7 +16,7 @@ test('App', () => {
     },
   ];
 
-  useSelector.mockImplementation((selecotr) => selecotr({
+  useSelector.mockImplementation((selector) => selector({
     tasks,
   }));
 
