@@ -19,28 +19,30 @@ describe('InputContainer', () => {
     taskTitle,
   }));
 
+  const renderInputContainer = () => render(<InputContainer />);
+
   beforeEach(() => {
     jest.clearAllMocks();
   });
 
   it('renders the task title', () => {
-    const { getByRole } = render(<InputContainer />);
+    const { getByLabelText } = renderInputContainer();
 
-    expect(getByRole('textbox')).toHaveDisplayValue(taskTitle);
+    expect(getByLabelText('할 일')).toHaveDisplayValue(taskTitle);
   });
 
   it('dispatches a updateTaskTitle action with input value when the input is changed', () => {
-    const { getByRole } = render(<InputContainer />);
+    const { getByLabelText } = renderInputContainer();
 
-    fireEvent.change(getByRole('textbox'), { target: { value: '그냥 놀기' } });
+    fireEvent.change(getByLabelText('할 일'), { target: { value: '그냥 놀기' } });
 
     expect(dispatch).toBeCalledWith(updateTaskTitle('그냥 놀기'));
   });
 
   it('dispatches a addTask action when the button is clicked', () => {
-    const { getByRole } = render(<InputContainer />);
+    const { getByRole } = renderInputContainer();
 
-    fireEvent.click(getByRole('button'));
+    fireEvent.click(getByRole('button', { name: '추가' }));
 
     expect(dispatch).toBeCalledWith(addTask(taskTitle));
   });
