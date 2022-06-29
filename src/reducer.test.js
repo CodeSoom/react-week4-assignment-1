@@ -4,7 +4,7 @@ import reducer, { initialState } from './reducer';
 
 describe('reducer', () => {
   context('state가 없을 때', () => {
-    it('initialstate가 존재합니다.', () => {
+    it('initialstate를 반환합니다.', () => {
       const state = reducer(
         undefined,
         {},
