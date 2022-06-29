@@ -12,17 +12,27 @@ describe('reducer', () => {
   });
 
   describe('addTask ', () => {
-    it('tasks에 할일이 추가되었다', () => {
-      const state = reducer({ taskTitle: '할일을 추가해봅시다!', tasks: [] }, addTask());
+    context('taskTitle이 있는경우', () => {
+      it('tasks에 할일이 추가되었다', () => {
+        const state = reducer({ taskTitle: '할일을 추가해봅시다!', tasks: [] }, addTask());
 
-      expect(state.tasks).toHaveLength(1);
-      expect(state.tasks[0].title).toBe('할일을 추가해봅시다!');
+        expect(state.tasks).toHaveLength(1);
+        expect(state.tasks[0].title).toBe('할일을 추가해봅시다!');
+      });
+
+      it('tasks에 추가후 taskTitle이 초기화되었다', () => {
+        const state = reducer({ taskTitle: '할일이 곧 사라지겠군요!', tasks: [] }, addTask());
+
+        expect(state.taskTitle).toBe('');
+      });
     });
 
-    it('tasks에 추가후 taskTitle이 초기화되었다', () => {
-      const state = reducer({ taskTitle: '할일이 곧 사라지겠군요!', tasks: [] }, addTask());
+    context('taskTitle이 없는경우', () => {
+      it('tasks에 할일이 추가되지않는다', () => {
+        const state = reducer({ taskTitle: '', tasks: [] }, addTask());
 
-      expect(state.taskTitle).toBe('');
+        expect(state.tasks).toHaveLength(0);
+      });
     });
   });
 
