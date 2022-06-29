@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { addTask, deleteTask, updateTaskTitle } from './store/actions';
 
 import Page from './Page';
+import ListContainer from './container/ListContainer';
 
 export default function App() {
   const dispatch = useDispatch();
@@ -25,12 +26,9 @@ export default function App() {
   }
 
   return (
-    <Page
-      taskTitle={taskTitle}
-      onChangeTitle={handleChangeTitle}
-      onClickAddTask={handleClickAddTask}
-      tasks={tasks}
-      onClickDeleteTask={handleClickDeleteTask}
-    />
+    <div>
+      <h1>To-do</h1>
+      <ListContainer />
+    </div>
   );
 }
