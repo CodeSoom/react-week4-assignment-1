@@ -10,10 +10,16 @@ const initialState = {
   tasks: [],
 };
 
+const selector = (state) => ({
+  newId: state.newId,
+  taskTitle: state.taskTitle,
+  tasks: state.tasks,
+});
+
 export default function App() {
   const [state, setState] = useState(initialState);
 
-  const { newId, taskTitle, tasks } = useSelector((state) => state);
+  const { newId, taskTitle, tasks } = useSelector(selector);
 
   function handleChangeTitle(event) {
     setState({
