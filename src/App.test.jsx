@@ -1,16 +1,24 @@
 import { render } from '@testing-library/react';
 
-import { Provider } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import App from './App';
 
-import store from './store';
+jest.mock('react-redux');
+
+beforeEach(() => {
+  jest.clearAllMocks();
+});
 
 test('App', () => {
+  useSelector.mockImplementation((selector) => selector({
+    newId: 100,
+    taskTitle: '',
+    tasks: [],
+  }));
+
   const { getByText } = render((
-    <Provider store={store}>
-      <App />
-    </Provider>
+    <App />
   ));
 
   expect(getByText(/추가/)).not.toBeNull();
