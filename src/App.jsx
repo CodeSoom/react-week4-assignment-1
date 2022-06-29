@@ -1,8 +1,13 @@
 import { useState } from 'react';
 
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
 import Page from './Page';
+
+import {
+  updateTaskTitle,
+  addTask,
+} from './actions';
 
 const initialState = {
   newId: 100,
@@ -19,22 +24,16 @@ const selector = (state) => ({
 export default function App() {
   const [state, setState] = useState(initialState);
 
-  const { newId, taskTitle, tasks } = useSelector(selector);
+  const dispatch = useDispatch();
+
+  const { taskTitle, tasks } = useSelector(selector);
 
   function handleChangeTitle(event) {
-    setState({
-      ...state,
-      taskTitle: event.target.value,
-    });
+    dispatch(updateTaskTitle(event.target.value));
   }
 
   function handleClickAddTask() {
-    setState({
-      ...state,
-      newId: newId + 1,
-      taskTitle: '',
-      tasks: [...tasks, { id: newId, title: taskTitle }],
-    });
+    dispatch(addTask());
   }
 
   function handleClickDeleteTask(id) {
