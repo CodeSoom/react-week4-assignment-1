@@ -1,9 +1,9 @@
 import Input from './Input';
-import List from './List';
+
+import ListContainer from './ListContainer';
 
 export default function Page({
   taskTitle, onChangeTitle, onClickAddTask,
-  tasks, onClickDeleteTask,
 }) {
   return (
     <div>
@@ -13,10 +13,7 @@ export default function Page({
         onChange={onChangeTitle}
         onClick={onClickAddTask}
       />
-      <List
-        tasks={tasks}
-        onClickDelete={onClickDeleteTask}
-      />
+      <ListContainer />
     </div>
   );
 }
