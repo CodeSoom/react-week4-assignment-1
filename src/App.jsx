@@ -19,8 +19,8 @@ export default function App() {
 
   const { taskTitle, tasks } = useSelector(selector);
 
-  function handleChangeTitle(event) {
-    dispatch(updateTaskTitle(event.target.value));
+  function handleChangeTitle(newTitle) {
+    dispatch(updateTaskTitle(newTitle));
   }
 
   function handleClickAddTask() {
