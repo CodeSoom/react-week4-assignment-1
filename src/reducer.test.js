@@ -14,7 +14,7 @@ describe('reducer', () => {
         taskTitle: '',
       }, action);
 
-      expect(newState.taskTitle).toBe('New Task');
+      expect(newState).toHaveProperty('taskTitle', 'New Task');
     });
   });
 });
