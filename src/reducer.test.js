@@ -25,13 +25,29 @@ describe('reducer', () => {
           type: 'addTask',
         };
 
-        const state = reducer({
+        const newState = reducer({
           newId: 100,
           taskTitle: 'New Task',
           tasks: [],
         }, action);
 
-        expect(state.tasks).toHaveLength(1);
+        expect(newState.tasks).toHaveLength(1);
+        expect(newState.tasks[0].title).toBe('New Task');
+        expect(newState.tasks[0].id).toBe(100);
+      });
+
+      it('입력중인 할 일이 비워진다.', () => {
+        const action = {
+          type: 'addTask',
+        };
+
+        const newState = reducer({
+          newId: 100,
+          taskTitle: 'New Task',
+          tasks: [],
+        }, action);
+
+        expect(newState.taskTitle).toBe('');
       });
     });
   });
