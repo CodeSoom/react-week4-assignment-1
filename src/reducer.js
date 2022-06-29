@@ -12,8 +12,9 @@ export default function reducer(state = initialState, action) {
     };
   }
 
-  if (action.type === 'updateTaskTitle') {
+  if (action.type === 'addTask') {
     const { newId, taskTitle, tasks } = state;
+
     return {
       ...state,
       newId: newId + 1,
