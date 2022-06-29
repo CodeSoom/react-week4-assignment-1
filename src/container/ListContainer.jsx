@@ -5,7 +5,7 @@ import { deleteTask } from '../store/actions';
 export default function ListContainer() {
   const dispatch = useDispatch();
 
-  const tasks = useSelector((state) => ({
+  const { tasks } = useSelector((state) => ({
     tasks: state.tasks,
   }));
 
