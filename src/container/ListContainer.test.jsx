@@ -2,6 +2,8 @@ import { render, fireEvent } from '@testing-library/react';
 
 import { useSelector, useDispatch } from 'react-redux';
 
+import { deleteTask } from '../store/actions';
+
 import ListContainer from './ListContainer';
 
 jest.mock('react-redux');
@@ -45,12 +47,7 @@ describe('ListContainer', () => {
 
       fireEvent.click(buttons[0]);
 
-      expect(dispatch).toBeCalledWith({
-        payload: {
-          id: 1,
-        },
-        type: 'deleteTask',
-      });
+      expect(dispatch).toBeCalledWith(deleteTask(1));
     });
   });
 });

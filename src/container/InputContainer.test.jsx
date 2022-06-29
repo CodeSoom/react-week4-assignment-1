@@ -2,6 +2,8 @@ import { render, fireEvent } from '@testing-library/react';
 
 import { useSelector, useDispatch } from 'react-redux';
 
+import { addTask, updateTaskTitle } from '../store/actions';
+
 import InputContainer from './InputContainer';
 
 jest.mock('react-redux');
@@ -27,7 +29,7 @@ describe('InputContainer', () => {
 
       fireEvent.click(getByText('추가'));
 
-      expect(dispatch).toBeCalledWith({ type: 'addTask' });
+      expect(dispatch).toBeCalledWith(addTask());
     });
   });
 
@@ -39,12 +41,7 @@ describe('InputContainer', () => {
 
       fireEvent.change(getByLabelText('할 일'), { target: { value: '이발' } });
 
-      expect(dispatch).toBeCalledWith({
-        payload: {
-          taskTitle: '이발',
-        },
-        type: 'updateTaskTitle',
-      });
+      expect(dispatch).toBeCalledWith(updateTaskTitle('이발'));
     });
   });
 });
