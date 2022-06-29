@@ -31,7 +31,7 @@ describe('InputContainer', () => {
     expect(getByDisplayValue(/할일/)).not.toBeNull();
   });
 
-  it('click 이벤트를 listen한다', () => {
+  it('change 이벤트를 listen한다', () => {
     const { getByLabelText } = renderInputContainer();
 
     fireEvent.change(getByLabelText('할 일'), {
