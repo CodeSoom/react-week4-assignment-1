@@ -2,6 +2,8 @@ import { fireEvent, render } from '@testing-library/react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
+import { tasks } from '../fixtures/task-data';
+
 import { deleteTask } from './actions';
 
 import ListContainer from './ListContainer';
@@ -9,11 +11,6 @@ import ListContainer from './ListContainer';
 jest.mock('react-redux');
 
 describe('ListContainer', () => {
-  const tasks = [
-    { id: 1, title: '할 일 1' },
-    { id: 2, title: '할 일 2' },
-  ];
-
   const dispatch = jest.fn();
 
   useDispatch.mockImplementation(() => dispatch);

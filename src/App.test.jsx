@@ -2,6 +2,8 @@ import { fireEvent, render } from '@testing-library/react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
+import { taskTitle, tasks } from '../fixtures/task-data';
+
 import { addTask, deleteTask, updateTaskTitle } from './actions';
 
 import App from './App';
@@ -9,13 +11,6 @@ import App from './App';
 jest.mock('react-redux');
 
 describe('App', () => {
-  const taskTitle = '새로 할 일';
-
-  const tasks = [
-    { id: 1, title: '할 일 1' },
-    { id: 2, title: '할 일 2' },
-  ];
-
   const dispatch = jest.fn();
 
   useDispatch.mockImplementation(() => dispatch);

@@ -1,3 +1,5 @@
+import { taskTitle as defaultTaskTitle } from '../fixtures/task-data';
+
 import reducer from './reducer';
 
 import {
@@ -8,7 +10,6 @@ import {
 
 describe('reducer', () => {
   const defaultNewId = 101;
-  const defaultTaskTitle = '새로운 할 일';
 
   context('without state', () => {
     const initialState = {

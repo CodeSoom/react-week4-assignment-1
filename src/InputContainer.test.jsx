@@ -2,6 +2,8 @@ import { fireEvent, render } from '@testing-library/react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
+import { taskTitle } from '../fixtures/task-data';
+
 import { addTask, updateTaskTitle } from './actions';
 
 import InputContainer from './InputContainer';
@@ -9,8 +11,6 @@ import InputContainer from './InputContainer';
 jest.mock('react-redux');
 
 describe('InputContainer', () => {
-  const taskTitle = '새로운 할 일';
-
   const dispatch = jest.fn();
 
   useDispatch.mockImplementation(() => dispatch);
