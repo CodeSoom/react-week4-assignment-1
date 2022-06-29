@@ -12,7 +12,7 @@ describe('reducer', () => {
         taskTitle: '',
       }, updateTaskTitle('New Task'));
 
-      expect(newState).toHaveProperty('taskTitle', 'New Task');
+      expect(newState.taskTitle).toBe('New Task');
     });
   });
 
@@ -38,6 +38,18 @@ describe('reducer', () => {
         }, addTask());
 
         expect(newState.taskTitle).toBe('');
+      });
+    });
+
+    context('현재 입력중인 할 일이 없으면', () => {
+      it('할 일이 추가되지 않는다.', () => {
+        const newState = reducer({
+          newId: 100,
+          taskTitle: '',
+          tasks: [],
+        }, addTask());
+
+        expect(newState.tasks).toHaveLength(0);
       });
     });
   });
