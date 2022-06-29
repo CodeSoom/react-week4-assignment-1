@@ -21,11 +21,15 @@ describe('InputContainer', () => {
     jest.clearAllMocks();
   });
 
+  function renderInput() {
+    return render((
+      <InputContainer />
+    ));
+  }
+
   context('추가 버튼을 누르면', () => {
     it('dispatch가 addTask 액션과 함께 호출됩니다.', () => {
-      const { getByText } = render((
-        <InputContainer />
-      ));
+      const { getByText } = renderInput();
 
       fireEvent.click(getByText('추가'));
 
@@ -35,9 +39,7 @@ describe('InputContainer', () => {
 
   context('Input창에 입력을 하면', () => {
     it('dispatch가 updateTaskTitle과 함께 호출됩니다.', () => {
-      const { getByLabelText } = render((
-        <InputContainer />
-      ));
+      const { getByLabelText } = renderInput();
 
       fireEvent.change(getByLabelText('할 일'), { target: { value: '이발' } });
 
