@@ -12,6 +12,15 @@ const reducer = (state = initialState, action) => {
     };
   }
 
+  if (action.type === 'addTask') {
+    const { newId, taskTitle, tasks } = state;
+
+    return {
+      ...state,
+      tasks: [...tasks, { id: newId, title: taskTitle }],
+    };
+  }
+
   return state;
 };
 
