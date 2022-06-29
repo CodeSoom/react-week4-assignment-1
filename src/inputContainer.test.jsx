@@ -32,6 +32,16 @@ describe('InputContainer', () => {
   });
 
   it('click 이벤트를 listen한다', () => {
+    const { getByLabelText } = renderInputContainer();
+
+    fireEvent.change(getByLabelText('할 일'), {
+      target: { value: '무언가 하기' },
+    });
+
+    expect(dispathch).toBeCalled();
+  });
+
+  it('click 이벤트를 listen한다', () => {
     const { getByText } = renderInputContainer();
 
     fireEvent.click(getByText(/추가/));
