@@ -14,9 +14,10 @@ describe('reducer', () => {
   describe('addTask ', () => {
     context('taskTitle이 있는경우', () => {
       it('tasks에 할일이 추가되었다', () => {
-        const state = reducer({ taskTitle: '할일을 추가해봅시다!', tasks: [] }, addTask());
+        const state = reducer({ newId: 100, taskTitle: '할일을 추가해봅시다!', tasks: [] }, addTask());
 
         expect(state.tasks).toHaveLength(1);
+        expect(state.tasks[0].id).not.toBeUndefined();
         expect(state.tasks[0].title).toBe('할일을 추가해봅시다!');
       });
 
