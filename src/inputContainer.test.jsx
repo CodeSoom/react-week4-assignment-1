@@ -1,6 +1,7 @@
 import { fireEvent, render } from '@testing-library/react';
 
 import { useDispatch, useSelector } from 'react-redux';
+import { addTask } from './actions';
 
 import InputContainer from './InputContainer';
 
@@ -46,8 +47,6 @@ describe('InputContainer', () => {
 
     fireEvent.click(getByText(/추가/));
 
-    expect(dispathch).toBeCalledWith({
-      type: 'addTask',
-    });
+    expect(dispathch).toBeCalledWith(addTask());
   });
 });
