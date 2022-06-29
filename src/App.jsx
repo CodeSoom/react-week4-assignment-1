@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import updateTaskTitle from './actions';
+import { updateTaskTitle, addTask } from './actions';
 
 import Page from './Page';
 
@@ -19,7 +19,7 @@ export default function App() {
   }
 
   function handleClickAddTask() {
-    dispatch(updateTaskTitle());
+    dispatch(addTask());
   }
 
   function handleClickDeleteTask(id) {
