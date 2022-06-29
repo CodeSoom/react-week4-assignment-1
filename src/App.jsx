@@ -8,27 +8,18 @@ import Page from './Page';
 export default function App() {
   const dispatch = useDispatch();
 
-  const { taskTitle } = useSelector((state) => state);
+  const { taskTitle, tasks } = useSelector((state) => state);
 
   const [state, setState] = useState({
     newId: 100,
-    taskTitle: '',
-    tasks: [],
   });
-
-  const { newId, tasks } = state;
 
   function handleChangeTitle(event) {
     dispatch(updateTaskTitle(event.target.value));
   }
 
   function handleClickAddTask() {
-    setState({
-      ...state,
-      newId: newId + 1,
-      taskTitle: '',
-      tasks: [...tasks, { id: newId, title: taskTitle }],
-    });
+    dispatch(updateTaskTitle());
   }
 
   function handleClickDeleteTask(id) {
