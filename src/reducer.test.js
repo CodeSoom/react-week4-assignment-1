@@ -18,13 +18,15 @@ describe('reducer', () => {
   });
 
   describe('addTask', () => {
+    const reduceAddTask = (taskTitle = '') => reducer({
+      newId: 100,
+      taskTitle,
+      tasks: [],
+    }, addTask());
+
     context('현재 입력중인 할 일이 있으면', () => {
       it('할 일이 추가된다.', () => {
-        const newState = reducer({
-          newId: 100,
-          taskTitle: 'New Task',
-          tasks: [],
-        }, addTask());
+        const newState = reduceAddTask('New Task');
 
         expect(newState.tasks).toHaveLength(1);
         expect(newState.tasks[0].title).toBe('New Task');
@@ -32,11 +34,7 @@ describe('reducer', () => {
       });
 
       it('입력중인 할 일이 비워진다.', () => {
-        const newState = reducer({
-          newId: 100,
-          taskTitle: 'New Task',
-          tasks: [],
-        }, addTask());
+        const newState = reduceAddTask('New Task');
 
         expect(newState.taskTitle).toBe('');
       });
@@ -44,11 +42,7 @@ describe('reducer', () => {
 
     context('현재 입력중인 할 일이 없으면', () => {
       it('할 일이 추가되지 않는다.', () => {
-        const newState = reducer({
-          newId: 100,
-          taskTitle: '',
-          tasks: [],
-        }, addTask());
+        const newState = reduceAddTask('');
 
         expect(newState.tasks).toHaveLength(0);
       });
