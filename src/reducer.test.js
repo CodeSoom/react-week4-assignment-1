@@ -1,4 +1,4 @@
-import { addTask, updateTaskTitle } from './actions';
+import { addTask, deleteTask, updateTaskTitle } from './actions';
 
 import reducer from './reducer';
 
@@ -17,6 +17,19 @@ describe('reducer', () => {
 
       expect(state.tasks).toHaveLength(1);
       expect(state.tasks[0].title).toBe('할일을 추가해봅시다!');
+    });
+  });
+
+  describe('tasks-title 지우기를 시도한다', () => {
+    it('할일이 삭제되었다', () => {
+      const state = reducer({
+        taskTitle: '',
+        tasks: [{
+          id: 100, title: '할일을 지워보자',
+        }],
+      }, deleteTask(100));
+
+      expect(state.tasks).toHaveLength(0);
     });
   });
 });
