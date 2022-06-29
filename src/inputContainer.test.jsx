@@ -6,7 +6,7 @@ import InputContainer from './InputContainer';
 
 jest.mock('react-redux');
 
-test('InputContainer', () => {
+describe('InputContainer', () => {
   const dispathch = jest.fn();
 
   useDispatch.mockImplementation(() => dispathch);
@@ -15,16 +15,29 @@ test('InputContainer', () => {
     taskTitle: '할일!',
   }));
 
-  const { getByText, getByDisplayValue } = render((
+  const renderInputContainer = () => render((
     <InputContainer />
   ));
 
-  expect(getByText(/추가/)).not.toBeNull();
-  expect(getByDisplayValue(/할일/)).not.toBeNull();
+  it('InputContainer-button 을 렌더링한다', () => {
+    const { getByText } = renderInputContainer();
 
-  fireEvent.click(getByText(/추가/));
+    expect(getByText(/추가/)).not.toBeNull();
+  });
 
-  expect(dispathch).toBeCalledWith({
-    type: 'addTask',
+  it('inputContainer-label 을 렌더링한다', () => {
+    const { getByDisplayValue } = renderInputContainer();
+
+    expect(getByDisplayValue(/할일/)).not.toBeNull();
+  });
+
+  it('click 이벤트를 listen한다', () => {
+    const { getByText } = renderInputContainer();
+
+    fireEvent.click(getByText(/추가/));
+
+    expect(dispathch).toBeCalledWith({
+      type: 'addTask',
+    });
   });
 });
