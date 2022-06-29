@@ -6,7 +6,7 @@ import ListContainer from './ListContainer';
 
 jest.mock('react-redux');
 
-test('ListContainer', () => {
+describe('ListContainer', () => {
   const tasks = [
     { id: 1, title: '할일 1' }, { id: 2, title: '할일 2' },
   ];
@@ -15,9 +15,13 @@ test('ListContainer', () => {
     tasks,
   }));
 
-  const { getByText } = render((
+  const renderListContainer = () => render((
     <ListContainer />
   ));
 
-  expect(getByText(/할일 1/)).not.toBeNull();
+  it('list-title 을 렌더링한다', () => {
+    const { getByText } = renderListContainer();
+
+    expect(getByText(/할일 1/)).not.toBeNull();
+  });
 });
