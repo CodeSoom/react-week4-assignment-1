@@ -3,6 +3,7 @@ import reducer from './reducer';
 import {
   updateTaskTitle,
   addTask,
+  deleteTask,
 } from './actions';
 
 describe('reducer', () => {
@@ -48,6 +49,21 @@ describe('reducer', () => {
           taskTitle: '',
           tasks: [],
         }, addTask());
+
+        expect(newState.tasks).toHaveLength(0);
+      });
+    });
+
+    describe('deleteTask', () => {
+      it('할 일이 삭제된다.', () => {
+        const newState = reducer({
+          tasks: [
+            {
+              id: 1,
+              title: '아무것도 하지 않기',
+            },
+          ],
+        }, deleteTask(1));
 
         expect(newState.tasks).toHaveLength(0);
       });

@@ -9,7 +9,15 @@ const addTask = () => ({
   type: 'addTask',
 });
 
+const deleteTask = (id) => ({
+  type: 'deleteTask',
+  payload: {
+    id,
+  },
+});
+
 export {
   updateTaskTitle,
   addTask,
+  deleteTask,
 };
