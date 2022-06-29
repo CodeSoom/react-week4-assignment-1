@@ -1,5 +1,3 @@
-import { useState } from 'react';
-
 import { useSelector, useDispatch } from 'react-redux';
 
 import Page from './Page';
@@ -7,13 +5,8 @@ import Page from './Page';
 import {
   updateTaskTitle,
   addTask,
+  deleteTask,
 } from './actions';
-
-const initialState = {
-  newId: 100,
-  taskTitle: '',
-  tasks: [],
-};
 
 const selector = (state) => ({
   newId: state.newId,
@@ -22,8 +15,6 @@ const selector = (state) => ({
 });
 
 export default function App() {
-  const [state, setState] = useState(initialState);
-
   const dispatch = useDispatch();
 
   const { taskTitle, tasks } = useSelector(selector);
@@ -37,10 +28,7 @@ export default function App() {
   }
 
   function handleClickDeleteTask(id) {
-    setState({
-      ...state,
-      tasks: tasks.filter((task) => task.id !== id),
-    });
+    dispatch(deleteTask(id));
   }
 
   return (
