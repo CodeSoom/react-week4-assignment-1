@@ -3,7 +3,7 @@ import { addTask, deleteTask, updateTaskTitle } from './actions';
 import reducer from './reducer';
 
 describe('reducer', () => {
-  describe('taskTitle 변경을 시도한다', () => {
+  describe('updateTaskTitle', () => {
     it('taskTitle이 변경이된다', () => {
       const state = reducer({ taskTitle: '' }, updateTaskTitle('새로운 할일이다!'));
 
@@ -41,7 +41,7 @@ describe('reducer', () => {
     });
   });
 
-  describe('tasks-title 지우기를 시도한다', () => {
+  describe('deleteTask', () => {
     it('할일이 삭제되었다', () => {
       const state = reducer({
         taskTitle: '',
