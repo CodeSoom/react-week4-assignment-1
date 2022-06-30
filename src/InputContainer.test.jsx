@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import InputContainer from './InputContainer';
 
-import { addTask } from './actions';
+import { addTask, updateTaskTitle } from './actions';
 
 jest.mock('react-redux');
 
@@ -24,6 +24,32 @@ describe('InputContainer', () => {
 
     expect(getByLabelText('할 일')).toBeInTheDocument();
     expect(getByText('추가')).toBeInTheDocument();
+  });
+
+  describe('할 일 입력', () => {
+    it('할 일이 입력된다.', () => {
+      useSelector.mockImplementation((selector) => selector({
+        taskTitle: '',
+      }));
+
+      const dispatch = jest.fn();
+
+      useDispatch.mockImplementation(() => dispatch);
+
+      const { getByLabelText } = render((
+        <InputContainer />
+      ));
+
+      const input = getByLabelText('할 일');
+
+      fireEvent.change(input, {
+        target: {
+          value: 'New Task',
+        },
+      });
+
+      expect(dispatch).toBeCalledWith(updateTaskTitle('New Task'));
+    });
   });
 
   describe('추가 버튼 클릭', () => {
