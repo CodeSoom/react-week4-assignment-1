@@ -2,6 +2,8 @@ import { render, fireEvent } from '@testing-library/react';
 
 import List from './List';
 
+import TASKS from './fixtures/tasks';
+
 // test('테스트 #1')
 //
 // describe - it => describe('List') => it('renders tasks')
@@ -29,20 +31,15 @@ describe('List', () => {
   }
 
   context('with tasks', () => {
-    const tasks = [
-      { id: 1, title: 'Task-1' },
-      { id: 2, title: 'Task-2' },
-    ];
-
     it('renders tasks', () => {
-      const { getByText } = renderList(tasks);
+      const { getByText } = renderList(TASKS);
 
       expect(getByText(/Task-1/)).not.toBeNull();
       expect(getByText(/Task-2/)).not.toBeNull();
     });
 
     it('renders “완료” button to delete a task', () => {
-      const { getAllByText } = renderList(tasks);
+      const { getAllByText } = renderList(TASKS);
 
       const buttons = getAllByText('완료');
 

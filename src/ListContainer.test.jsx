@@ -2,6 +2,12 @@ import { render, fireEvent } from '@testing-library/react';
 
 import { useSelector, useDispatch } from 'react-redux';
 
+import {
+  deleteTask,
+} from './actions';
+
+import TASKS from './fixtures/tasks';
+
 import ListContainer from './ListContainer';
 
 jest.mock('react-redux');
@@ -26,14 +32,9 @@ describe('ListContainer', () => {
   });
 
   context('할 일 목록이 있으면', () => {
-    const tasks = [
-      { id: 1, title: 'Task-1' },
-      { id: 2, title: 'Task-2' },
-    ];
-
     it('할 일 목록이 보인다.', () => {
       useSelector.mockImplementation((selector) => selector({
-        tasks,
+        tasks: TASKS,
       }));
 
       const { container, getAllByRole } = render((
@@ -42,7 +43,7 @@ describe('ListContainer', () => {
 
       expect(getAllByRole('listitem')).toHaveLength(2);
 
-      tasks.forEach((task) => {
+      TASKS.forEach((task) => {
         expect(container).toHaveTextContent(task.title);
       });
     });
@@ -50,7 +51,7 @@ describe('ListContainer', () => {
     describe('완료 버튼 클릭', () => {
       it('할 일을 삭제한다.', () => {
         useSelector.mockImplementation((selector) => selector({
-          tasks,
+          tasks: TASKS,
         }));
 
         const dispatch = jest.fn();
@@ -65,12 +66,7 @@ describe('ListContainer', () => {
 
         fireEvent.click(completeButtons[0]);
 
-        expect(dispatch).toBeCalledWith({
-          type: 'deleteTask',
-          payload: {
-            id: 1,
-          },
-        });
+        expect(dispatch).toBeCalledWith(deleteTask(TASKS[0].id));
       });
     });
   });
