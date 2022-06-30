@@ -2,27 +2,44 @@ import { render } from '@testing-library/react';
 
 import { useSelector } from 'react-redux';
 
+import { initialState } from './reducer';
+
+import TASKS from './fixtures/tasks';
+
 import App from './App';
 
 jest.mock('react-redux');
 
-beforeEach(() => {
-  jest.clearAllMocks();
-});
+describe('App', () => {
+  useSelector.mockImplementation((selector) => selector(initialState));
 
-test('App', () => {
-  useSelector.mockImplementation((selector) => selector({
-    newId: 100,
-    taskTitle: '',
-    tasks: [],
-  }));
+  beforeEach(() => {
+    jest.clearAllMocks();
+  });
 
-  const { getByText } = render((
-    <App />
-  ));
+  it('Input이 보인다.', () => {
+    const { getByText, getByLabelText } = render((
+      <App />
+    ));
 
-  expect(getByText(/추가/)).not.toBeNull();
+    expect(getByText(/추가/)).toBeInTheDocument();
+    expect(getByLabelText(/할 일/)).toBeInTheDocument();
+  });
 
-  // TODO: 통합 테스트 코드 작성
-  // CodeceptJS => 실제 브라우저에서 사용자 테스트 실행 가능.
+  context('할 일 목록이 있을 경우', () => {
+    it('할 일 목록이 보인다.', () => {
+      useSelector.mockImplementation((selector) => selector({
+        ...initialState,
+        tasks: TASKS,
+      }));
+
+      const { container } = render((
+        <App />
+      ));
+
+      TASKS.forEach((task) => {
+        expect(container).toHaveTextContent(task.title);
+      });
+    });
+  });
 });
