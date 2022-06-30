@@ -1,6 +1,6 @@
 import { render, fireEvent } from '@testing-library/react';
 
-import { tasksDummy } from './fixtures/task-dummy';
+import { tasks } from './fixtures/task-dummy';
 
 import List from './List';
 
@@ -21,10 +21,10 @@ import List from './List';
 describe('List', () => {
   const handleClickDelete = jest.fn();
 
-  function renderList(tasks) {
+  function renderList(propTasks) {
     return render((
       <List
-        tasks={tasks}
+        tasks={propTasks}
         onClickDelete={handleClickDelete}
       />
     ));
@@ -32,14 +32,14 @@ describe('List', () => {
 
   context('tasks가 있을경우', () => {
     it('tasks-title 을 렌더링한다', () => {
-      const { getByText } = renderList(tasksDummy);
+      const { getByText } = renderList(tasks);
 
       expect(getByText(/할일 1/)).not.toBeNull();
       expect(getByText(/할일 2/)).not.toBeNull();
     });
 
     it('click', () => {
-      const { getAllByText } = renderList(tasksDummy);
+      const { getAllByText } = renderList(tasks);
 
       const buttons = getAllByText('완료');
 
@@ -51,9 +51,7 @@ describe('List', () => {
 
   context('tasks가 없는경우', () => {
     it('renders no task message', () => {
-      const tasks = [];
-
-      const { getByText } = renderList(tasks);
+      const { getByText } = renderList([]);
 
       expect(getByText(/할 일이 없어요/)).not.toBeNull();
     });

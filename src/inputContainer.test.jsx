@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { addTask } from './actions';
 
-import { taskTitleDummy } from './fixtures/task-dummy';
+import { taskTitle } from './fixtures/task-dummy';
 
 import InputContainer from './InputContainer';
 
@@ -16,7 +16,7 @@ describe('InputContainer', () => {
   useDispatch.mockImplementation(() => dispathch);
 
   useSelector.mockImplementation((selector) => selector({
-    taskTitle: taskTitleDummy,
+    taskTitle,
   }));
 
   const renderInputContainer = () => render((

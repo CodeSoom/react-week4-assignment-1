@@ -4,14 +4,14 @@ import { useSelector } from 'react-redux';
 
 import App from './App';
 
-import { tasksDummy } from './fixtures/task-dummy';
+import { tasks } from './fixtures/task-dummy';
 
 jest.mock('react-redux');
 
 describe('App', () => {
   useSelector.mockImplementation((selector) => selector({
     taskTitle: '',
-    tasks: tasksDummy,
+    tasks,
   }));
 
   const renderApp = () => render((

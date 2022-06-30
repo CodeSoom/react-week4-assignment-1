@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { deleteTask } from './actions';
 
-import { tasksDummy } from './fixtures/task-dummy';
+import { tasks } from './fixtures/task-dummy';
 
 import ListContainer from './ListContainer';
 
@@ -16,7 +16,7 @@ describe('ListContainer', () => {
   useDispatch.mockImplementation(() => dispatch);
 
   useSelector.mockImplementation((selector) => selector({
-    tasks: tasksDummy,
+    tasks,
   }));
 
   const renderListContainer = () => render((
