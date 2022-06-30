@@ -16,11 +16,13 @@ describe('Input', () => {
 
   it('value를 렌더링한다', () => {
     const { getByDisplayValue } = renderInput();
+
     expect(getByDisplayValue('기존 할 일')).not.toBeNull();
   });
 
   it('change 이벤트를 listen한다', () => {
     const { getByLabelText } = renderInput();
+
     fireEvent.change(getByLabelText('할 일'), {
       target: { value: '무언가 하기' },
     });
@@ -32,6 +34,7 @@ describe('Input', () => {
     const { getByText } = renderInput();
 
     fireEvent.click(getByText('추가'));
+
     expect(handleClick).toBeCalled();
   });
 });
