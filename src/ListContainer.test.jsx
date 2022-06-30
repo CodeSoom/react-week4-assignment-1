@@ -4,6 +4,8 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { deleteTask } from './actions';
 
+import { tasksDummy } from './fixtures/task-dummy';
+
 import ListContainer from './ListContainer';
 
 jest.mock('react-redux');
@@ -13,12 +15,8 @@ describe('ListContainer', () => {
 
   useDispatch.mockImplementation(() => dispatch);
 
-  const tasks = [
-    { id: 1, title: '할일 1' }, { id: 2, title: '할일 2' },
-  ];
-
   useSelector.mockImplementation((selector) => selector({
-    tasks,
+    tasks: tasksDummy,
   }));
 
   const renderListContainer = () => render((

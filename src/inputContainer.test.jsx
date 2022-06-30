@@ -4,6 +4,8 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { addTask } from './actions';
 
+import { taskTitleDummy } from './fixtures/task-dummy';
+
 import InputContainer from './InputContainer';
 
 jest.mock('react-redux');
@@ -14,7 +16,7 @@ describe('InputContainer', () => {
   useDispatch.mockImplementation(() => dispathch);
 
   useSelector.mockImplementation((selector) => selector({
-    taskTitle: '할일!',
+    taskTitle: taskTitleDummy,
   }));
 
   const renderInputContainer = () => render((

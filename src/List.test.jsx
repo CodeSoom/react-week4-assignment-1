@@ -1,5 +1,7 @@
 import { render, fireEvent } from '@testing-library/react';
 
+import { tasksDummy } from './fixtures/task-dummy';
+
 import List from './List';
 
 // test('테스트 #1')
@@ -29,20 +31,15 @@ describe('List', () => {
   }
 
   context('tasks가 있을경우', () => {
-    const tasks = [
-      { id: 1, title: 'Task-1' },
-      { id: 2, title: 'Task-2' },
-    ];
-
     it('tasks-title 을 렌더링한다', () => {
-      const { getByText } = renderList(tasks);
+      const { getByText } = renderList(tasksDummy);
 
-      expect(getByText(/Task-1/)).not.toBeNull();
-      expect(getByText(/Task-2/)).not.toBeNull();
+      expect(getByText(/할일 1/)).not.toBeNull();
+      expect(getByText(/할일 2/)).not.toBeNull();
     });
 
-    it('click 이벤트를 listen한다', () => {
-      const { getAllByText } = renderList(tasks);
+    it('click', () => {
+      const { getAllByText } = renderList(tasksDummy);
 
       const buttons = getAllByText('완료');
 
