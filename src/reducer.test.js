@@ -1,4 +1,4 @@
-import reducer from './reducer';
+import reducer, { initialState } from './reducer';
 
 import {
   updateTaskTitle,
@@ -7,6 +7,24 @@ import {
 } from './actions';
 
 describe('reducer', () => {
+  context('state가 없으면', () => {
+    it('initialState를 초기 상태로 가진다.', () => {
+      const newState = reducer(undefined, {});
+
+      expect(newState).toEqual(initialState);
+    });
+  });
+
+  describe('정의되지 않은 액션', () => {
+    it('현재 상태를 그대로 반환한다.', () => {
+      const newState = reducer(initialState, {
+        type: undefined,
+      });
+
+      expect(newState).toEqual(initialState);
+    });
+  });
+
   describe('updateTaskTitle', () => {
     it('taskTitle이 변경된다.', () => {
       const newState = reducer({
@@ -47,20 +65,20 @@ describe('reducer', () => {
         expect(newState.tasks).toHaveLength(0);
       });
     });
+  });
 
-    describe('deleteTask', () => {
-      it('할 일이 삭제된다.', () => {
-        const newState = reducer({
-          tasks: [
-            {
-              id: 1,
-              title: '아무것도 하지 않기',
-            },
-          ],
-        }, deleteTask(1));
+  describe('deleteTask', () => {
+    it('할 일이 삭제된다.', () => {
+      const newState = reducer({
+        tasks: [
+          {
+            id: 1,
+            title: '아무것도 하지 않기',
+          },
+        ],
+      }, deleteTask(1));
 
-        expect(newState.tasks).toHaveLength(0);
-      });
+      expect(newState.tasks).toHaveLength(0);
     });
   });
 });
