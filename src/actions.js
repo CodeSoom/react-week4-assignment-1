@@ -1,4 +1,4 @@
-const updateTaskTitle = (taskTitle = '') => ({
+const updateTaskTitle = (taskTitle) => ({
   type: 'updateTaskTitle',
   payload: {
     taskTitle,
