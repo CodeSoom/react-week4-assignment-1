@@ -67,4 +67,12 @@ describe('reducer', () => {
       });
     });
   });
+
+  describe('넘겨주는 값이 없을 때', () => {
+    it('', () => {
+      const state = reducer();
+
+      expect(state.taskTitle).toBe('');
+    });
+  });
 });
