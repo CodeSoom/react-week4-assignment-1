@@ -1,4 +1,4 @@
-import reducer from './reducer';
+import reducer, { initialState } from './reducer';
 
 import {
   updateTaskTitle,
@@ -7,6 +7,17 @@ import {
 } from './actions';
 
 describe('reducer', () => {
+  context('without state', () => {
+    it('return initial state', () => {
+      const state = reducer(
+        undefined,
+        {},
+      );
+
+      expect(state).toEqual(initialState);
+    });
+  });
+
   describe('updateTaskTitle', () => {
     it('changes task title', () => {
       const state = reducer({
