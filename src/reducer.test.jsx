@@ -58,7 +58,7 @@ describe('reducer', () => {
     });
 
     context('할 일 ID가 존재 안 할 때', () => {
-      it('동작하지 않음', () => {
+      it('할 일을 삭제 하지 않음', () => {
         const state = reducer({
           tasks: [{ id: 1, title: 'Task' }],
         }, deleteTask(100));
@@ -69,10 +69,10 @@ describe('reducer', () => {
   });
 
   describe('넘겨주는 값이 없을 때', () => {
-    it('', () => {
+    it('아무일도 일어나지 않음', () => {
       const state = reducer();
-
       expect(state.taskTitle).toBe('');
+      expect(state.tasks).toHaveLength(0);
     });
   });
 });
