@@ -8,6 +8,20 @@ import ListContainer from './ListContainer';
 jest.mock('react-redux');
 
 describe('ListContainer', () => {
+  const dispatch = jest.fn();
+  useSelector.mockImplementation((selector) => selector({
+    tasks: [
+      { id: 1, title: '아무 것도 하지 않기 #1' },
+    ],
+  }));
+  useDispatch.mockImplementation(() => dispatch);
+
+  function renderElement() {
+    return render((
+      <ListContainer />
+    ));
+  }
+
   context('with tasks', () => {
     it('renders tasks', () => {
       useSelector.mockImplementation((selector) => selector({
@@ -17,9 +31,7 @@ describe('ListContainer', () => {
         ],
       }));
 
-      const { getByText } = render((
-        <ListContainer />
-      ));
+      const { getByText } = renderElement();
 
       expect(getByText(/아무 것도 하지 않기 #1/)).not.toBeNull();
       expect(getByText(/아무 것도 하지 않기 #2/)).not.toBeNull();
@@ -32,9 +44,7 @@ describe('ListContainer', () => {
         tasks: [],
       }));
 
-      const { getByText } = render((
-        <ListContainer />
-      ));
+      const { getByText } = renderElement();
 
       expect(getByText(/할 일이 없어요/)).not.toBeNull();
     });
@@ -42,18 +52,13 @@ describe('ListContainer', () => {
 
   context('button click', () => {
     it('delete task', () => {
-      const dispatch = jest.fn();
-
-      useDispatch.mockImplementation(() => dispatch);
       useSelector.mockImplementation((selector) => selector({
         tasks: [
           { id: 1, title: '아무 것도 하지 않기 #1' },
         ],
       }));
 
-      const { getByText } = render((
-        <ListContainer />
-      ));
+      const { getByText } = renderElement();
 
       fireEvent.click(getByText('완료'));
 
