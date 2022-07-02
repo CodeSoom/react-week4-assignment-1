@@ -2,6 +2,8 @@ import { render } from '@testing-library/react';
 
 import { useSelector } from 'react-redux';
 
+import given from 'given2';
+
 import { initialState } from './reducer';
 
 import TASKS from './fixtures/tasks';
@@ -11,7 +13,9 @@ import App from './App';
 jest.mock('react-redux');
 
 describe('App', () => {
-  useSelector.mockImplementation((selector) => selector(initialState));
+  given('state', () => initialState);
+
+  useSelector.mockImplementation((selector) => selector(given.state));
 
   beforeEach(() => {
     jest.clearAllMocks();
@@ -28,7 +32,7 @@ describe('App', () => {
 
   context('할 일 목록이 있을 경우', () => {
     it('할 일 목록이 보인다.', () => {
-      useSelector.mockImplementation((selector) => selector({
+      given('state', () => ({
         ...initialState,
         tasks: TASKS,
       }));
