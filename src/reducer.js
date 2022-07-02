@@ -34,9 +34,9 @@ const initialState = {
 };
 
 export default function reducer(state = initialState, action) {
-  try {
-    return reducers[action.type](state, action);
-  } catch {
+  if (!action || !reducers[action.type]) {
     return state;
   }
+
+  return reducers[action.type](state, action);
 }
