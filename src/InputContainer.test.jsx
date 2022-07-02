@@ -8,11 +8,15 @@ import { addTask, updateTaskTitle } from './actions';
 
 jest.mock('react-redux');
 
-beforeAll(() => {
-  jest.clearAllMocks();
-});
-
 describe('InputContainer', () => {
+  const dispatch = jest.fn();
+
+  useDispatch.mockImplementation(() => dispatch);
+
+  beforeEach(() => {
+    jest.clearAllMocks();
+  });
+
   it('Input이 보인다.', () => {
     useSelector.mockImplementation((selector) => selector({
       taskTitle: '',
@@ -31,10 +35,6 @@ describe('InputContainer', () => {
       useSelector.mockImplementation((selector) => selector({
         taskTitle: '',
       }));
-
-      const dispatch = jest.fn();
-
-      useDispatch.mockImplementation(() => dispatch);
 
       const { getByLabelText } = render((
         <InputContainer />
@@ -58,10 +58,6 @@ describe('InputContainer', () => {
         useSelector.mockImplementation((selector) => selector({
           taskTitle: 'New Task',
         }));
-
-        const dispatch = jest.fn();
-
-        useDispatch.mockImplementation(() => dispatch);
 
         const { getByText } = render((
           <InputContainer />
