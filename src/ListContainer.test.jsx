@@ -2,6 +2,8 @@ import { render, fireEvent } from '@testing-library/react';
 
 import { useSelector, useDispatch } from 'react-redux';
 
+import given from 'given2';
+
 import {
   deleteTask,
 } from './actions';
@@ -12,16 +14,24 @@ import ListContainer from './ListContainer';
 
 jest.mock('react-redux');
 
-beforeEach(() => {
-  jest.clearAllMocks();
-});
-
 describe('ListContainer', () => {
+  given('tasks', () => TASKS);
+
+  const dispatch = jest.fn();
+
+  useDispatch.mockImplementation(() => dispatch);
+
+  useSelector.mockImplementation((selector) => selector({
+    tasks: given.tasks,
+  }));
+
+  beforeEach(() => {
+    jest.clearAllMocks();
+  });
+
   context('할 일 목록이 없으면', () => {
     it('할 일이 없다는 메시지가 보인다.', () => {
-      useSelector.mockImplementation((selector) => selector({
-        tasks: [],
-      }));
+      given('tasks', () => []);
 
       const { container } = render((
         <ListContainer />
@@ -33,10 +43,6 @@ describe('ListContainer', () => {
 
   context('할 일 목록이 있으면', () => {
     it('할 일 목록이 보인다.', () => {
-      useSelector.mockImplementation((selector) => selector({
-        tasks: TASKS,
-      }));
-
       const { container, getAllByRole } = render((
         <ListContainer />
       ));
@@ -50,19 +56,13 @@ describe('ListContainer', () => {
 
     describe('완료 버튼 클릭', () => {
       it('할 일을 삭제한다.', () => {
-        useSelector.mockImplementation((selector) => selector({
-          tasks: TASKS,
-        }));
-
-        const dispatch = jest.fn();
-
-        useDispatch.mockImplementation(() => dispatch);
-
         const { getAllByText } = render((
           <ListContainer />
         ));
 
         const completeButtons = getAllByText('완료');
+
+        expect(dispatch).not.toBeCalled();
 
         fireEvent.click(completeButtons[0]);
 
