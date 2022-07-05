@@ -1,5 +1,7 @@
 import { render, fireEvent } from '@testing-library/react';
 
+import { tasks as defaultTasks } from '../fixtures/task-data';
+
 import List from './List';
 
 // test('테스트 #1')
@@ -29,20 +31,15 @@ describe('List', () => {
   }
 
   context('with tasks', () => {
-    const tasks = [
-      { id: 1, title: 'Task-1' },
-      { id: 2, title: 'Task-2' },
-    ];
-
     it('renders tasks', () => {
-      const { getByText } = renderList(tasks);
+      const { getByText } = renderList(defaultTasks);
 
-      expect(getByText(/Task-1/)).not.toBeNull();
-      expect(getByText(/Task-2/)).not.toBeNull();
+      expect(getByText(/할 일 1/)).not.toBeNull();
+      expect(getByText(/할 일 2/)).not.toBeNull();
     });
 
     it('renders “완료” button to delete a task', () => {
-      const { getAllByText } = renderList(tasks);
+      const { getAllByText } = renderList(defaultTasks);
 
       const buttons = getAllByText('완료');
 
@@ -54,9 +51,7 @@ describe('List', () => {
 
   context('without tasks', () => {
     it('renders no task message', () => {
-      const tasks = [];
-
-      const { getByText } = renderList(tasks);
+      const { getByText } = renderList([]);
 
       expect(getByText(/할 일이 없어요/)).not.toBeNull();
     });
