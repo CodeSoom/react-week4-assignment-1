@@ -2,11 +2,11 @@ import { render, fireEvent } from '@testing-library/react';
 
 import Input from './Input';
 
-test('Input', () => {
+describe('Input', () => {
   const handleChange = jest.fn();
   const handleClick = jest.fn();
 
-  const { getByDisplayValue, getByLabelText, getByText } = render((
+  const renderInput = () => render((
     <Input
       value="기존 할 일"
       onChange={handleChange}
@@ -14,15 +14,27 @@ test('Input', () => {
     />
   ));
 
-  expect(getByDisplayValue('기존 할 일')).not.toBeNull();
+  it('value를 렌더링한다', () => {
+    const { getByDisplayValue } = renderInput();
 
-  fireEvent.change(getByLabelText('할 일'), {
-    target: { value: '무언가 하기' },
+    expect(getByDisplayValue('기존 할 일')).not.toBeNull();
   });
 
-  expect(handleChange).toBeCalled();
+  it('change 이벤트를 listen한다', () => {
+    const { getByLabelText } = renderInput();
 
-  fireEvent.click(getByText('추가'));
+    fireEvent.change(getByLabelText('할 일'), {
+      target: { value: '무언가 하기' },
+    });
 
-  expect(handleClick).toBeCalled();
+    expect(handleChange).toBeCalled();
+  });
+
+  it('click 이벤트를 listen한다', () => {
+    const { getByText } = renderInput();
+
+    fireEvent.click(getByText('추가'));
+
+    expect(handleClick).toBeCalled();
+  });
 });
