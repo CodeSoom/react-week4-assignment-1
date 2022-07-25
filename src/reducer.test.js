@@ -2,7 +2,7 @@ import reducer from './reducer';
 import { updateTaskTitle, addTask, deleteTask } from './actions';
 
 describe('Reducer', () => {
-  context('action type is updateTaskTitle', () => {
+  describe('action type is updateTaskTitle', () => {
     it('returns updated taskTitle', () => {
       const initialState = {
         newId: 100,
@@ -15,7 +15,7 @@ describe('Reducer', () => {
       });
     });
   });
-  context('action type is addTask', () => {
+  describe('action type is addTask', () => {
     it('returns tasks with added task', () => {
       const initialState = {
         taskTitle: 'New Task',
@@ -35,7 +35,7 @@ describe('Reducer', () => {
       });
     });
   });
-  context('action type is deleteTask', () => {
+  describe('action type is deleteTask', () => {
     it('returns tasks without deletedTask', () => {
       const initialState = {
         taskTitle: '',
@@ -52,6 +52,36 @@ describe('Reducer', () => {
         newId: 101,
         tasks: [],
       });
+    });
+  });
+  describe('action type is not one of the defined actions', () => {
+    it('returns state as is', () => {
+      function someAction() {
+        return {
+          type: 'someAction',
+        };
+      }
+      const initialState = {
+        taskTitle: '',
+        newId: 101,
+        tasks: [
+          {
+            id: 100,
+            title: 'New Task',
+          },
+        ],
+      };
+      expect(reducer(initialState, someAction())).toEqual(initialState);
+    });
+  });
+  describe('action is not defined at all', () => {
+    it('returns initial state', () => {
+      const initialState = {
+        newId: 100,
+        taskTitle: '',
+        tasks: [],
+      };
+      expect(reducer()).toEqual(initialState);
     });
   });
 });
