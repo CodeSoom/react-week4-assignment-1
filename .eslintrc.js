@@ -52,5 +52,7 @@ module.exports = {
 
     'react/prop-types': 'off',
     'react/react-in-jsx-scope': 'off',
+
+    'no-param-reassign': ['error', { props: true, ignorePropertyModificationsFor: ['state'] }],
   },
 };
