@@ -1,4 +1,4 @@
-import { reducer } from './store';
+import reducer from './reducer';
 import { updateTaskTitle, addTask, deleteTask } from './actions';
 
 describe('Reducer', () => {
