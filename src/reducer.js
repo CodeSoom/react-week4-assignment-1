@@ -18,7 +18,13 @@ export default function reducer(state = initialState, action) {
       ...state,
       newId: newId + 1,
       taskTitle: '',
-      tasks: [...tasks, { id: newId, title: taskTitle }],
+      tasks: [
+        ...tasks,
+        {
+          id: newId,
+          title: taskTitle,
+        },
+      ],
     };
   }
   if (action.type === 'deleteTask') {
