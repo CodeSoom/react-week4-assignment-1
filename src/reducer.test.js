@@ -2,26 +2,28 @@ import reducer from './reducer';
 import { updateTaskTitle, addTask, deleteTask } from './actions';
 
 describe('Reducer', () => {
-  describe('action type is updateTaskTitle', () => {
+  context('with updateTaskTitle', () => {
     it('returns updated taskTitle', () => {
       const initialState = {
         newId: 100,
         taskTitle: '',
         tasks: [],
       };
+
       expect(reducer(initialState, updateTaskTitle('할 일을 하기'))).toEqual({
         ...initialState,
         taskTitle: '할 일을 하기',
       });
     });
   });
-  describe('action type is addTask', () => {
+  context('with addTask', () => {
     it('returns tasks with added task', () => {
       const initialState = {
         taskTitle: 'New Task',
         newId: 100,
         tasks: [],
       };
+
       expect(reducer(initialState, addTask())).toEqual({
         taskTitle: '',
         newId: 101,
@@ -35,7 +37,7 @@ describe('Reducer', () => {
       });
     });
   });
-  describe('action type is deleteTask', () => {
+  context('with deleteTask', () => {
     it('returns tasks without deletedTask', () => {
       const initialState = {
         taskTitle: '',
@@ -47,6 +49,7 @@ describe('Reducer', () => {
           },
         ],
       };
+
       expect(reducer(initialState, deleteTask(100))).toEqual({
         taskTitle: '',
         newId: 101,
@@ -54,7 +57,7 @@ describe('Reducer', () => {
       });
     });
   });
-  describe('action type is not one of the defined actions', () => {
+  context('with not predefined action', () => {
     it('returns state as is', () => {
       function someAction() {
         return {
@@ -71,16 +74,18 @@ describe('Reducer', () => {
           },
         ],
       };
+
       expect(reducer(initialState, someAction())).toEqual(initialState);
     });
   });
-  describe('action is not defined at all', () => {
+  context('without an action', () => {
     it('returns initial state', () => {
       const initialState = {
         newId: 100,
         taskTitle: '',
         tasks: [],
       };
+
       expect(reducer()).toEqual(initialState);
     });
   });

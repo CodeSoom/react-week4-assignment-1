@@ -16,8 +16,8 @@ export default function App() {
 
   const { taskTitle, tasks } = useSelector(selector);
 
-  function handleChangeTitle(event) {
-    dispatch(updateTaskTitle(event.target.value));
+  function handleChangeTitle(title) {
+    dispatch(updateTaskTitle(title));
   }
 
   function handleClickAddTask() {
@@ -31,7 +31,7 @@ export default function App() {
   return (
     <Page
       taskTitle={taskTitle}
-      onChangeTitle={handleChangeTitle}
+      onChangeTitle={(e) => handleChangeTitle(e.target.value)}
       onClickAddTask={handleClickAddTask}
       tasks={tasks}
       onClickDeleteTask={handleClickDeleteTask}

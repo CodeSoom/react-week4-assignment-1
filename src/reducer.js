@@ -6,13 +6,13 @@ const initialState = {
 
 export default function reducer(state = initialState, action) {
   if (!action) return state;
-  switch (action.type) {
-  case 'updateTaskTitle':
+  if (action.type === 'updateTaskTitle') {
     return {
       ...state,
       taskTitle: action.payload.taskTitle,
     };
-  case 'addTask':
+  }
+  if (action.type === 'addTask') {
     return {
       ...state,
       newId: state.newId + 1,
@@ -25,12 +25,12 @@ export default function reducer(state = initialState, action) {
         },
       ],
     };
-  case 'deleteTask':
+  }
+  if (action.type === 'deleteTask') {
     return {
       ...state,
       tasks: state.tasks.filter((task) => task.id !== action.payload.id),
     };
-  default:
-    return state;
   }
+  return state;
 }

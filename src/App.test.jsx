@@ -6,7 +6,7 @@ import App from './App';
 
 jest.mock('react-redux');
 
-test('App', () => {
+describe('App', () => {
   const tasks = [
     {
       id: 1,
@@ -24,28 +24,39 @@ test('App', () => {
   }));
 
   const dispatch = jest.fn();
-
   useDispatch.mockImplementation(() => dispatch);
 
-  const { getByText, getAllByText, getByLabelText } = render((
-    <App />
-  ));
+  function customRender() {
+    return render((
+      <App />
+    ));
+  }
 
-  expect(getByText(/아무 것도 하지 않기/)).not.toBeNull();
-  expect(getByText(/그래도 뭐라도 하기/)).not.toBeNull();
+  it('renders to do list', () => {
+    const { queryByText } = customRender();
 
-  fireEvent.click(getAllByText(/완료/)[0]);
+    expect(queryByText(/아무 것도 하지 않기/)).not.toBeNull();
+    expect(queryByText(/그래도 뭐라도 하기/)).not.toBeNull();
+  });
 
-  expect(dispatch).toBeCalledWith({ type: 'deleteTask', payload: { id: 1 } });
+  it('removes completed todo item', () => {
+    const { getAllByText } = customRender();
+    fireEvent.click(getAllByText(/완료/)[0]);
 
-  fireEvent.click(getByText(/추가/));
+    expect(dispatch).toBeCalledWith({ type: 'deleteTask', payload: { id: 1 } });
+  });
 
-  expect(dispatch).toBeCalledWith({ type: 'addTask' });
+  it('adds todo item', () => {
+    const { getByText } = customRender();
+    fireEvent.click(getByText(/추가/));
 
-  fireEvent.change(getByLabelText(/할 일/), { target: { value: 'a' } });
+    expect(dispatch).toBeCalledWith({ type: 'addTask' });
+  });
 
-  expect(dispatch).toBeCalledWith({ type: 'updateTaskTitle', payload: { taskTitle: 'a' } });
+  it('changes title', () => {
+    const { getByLabelText } = customRender();
+    fireEvent.change(getByLabelText(/할 일/), { target: { value: 'a' } });
 
-  // TODO: 통합 테스트 코드 작성
-  // CodeceptJS => 실제 브라우저에서 사용자 테스트 실행 가능.
+    expect(dispatch).toBeCalledWith({ type: 'updateTaskTitle', payload: { taskTitle: 'a' } });
+  });
 });
