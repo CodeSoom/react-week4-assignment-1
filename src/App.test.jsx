@@ -39,22 +39,25 @@ describe('App', () => {
     expect(queryByText(/그래도 뭐라도 하기/)).not.toBeNull();
   });
 
-  it('removes completed todo item', () => {
+  it('listens for click event on deleteTask', () => {
     const { getAllByText } = customRender();
+
     fireEvent.click(getAllByText(/완료/)[0]);
 
     expect(dispatch).toBeCalledWith({ type: 'deleteTask', payload: { id: 1 } });
   });
 
-  it('adds todo item', () => {
+  it('listens for click event on addTask', () => {
     const { getByText } = customRender();
+
     fireEvent.click(getByText(/추가/));
 
     expect(dispatch).toBeCalledWith({ type: 'addTask' });
   });
 
-  it('changes title', () => {
+  it('listens for change event on updateTaskTitle', () => {
     const { getByLabelText } = customRender();
+
     fireEvent.change(getByLabelText(/할 일/), { target: { value: 'a' } });
 
     expect(dispatch).toBeCalledWith({ type: 'updateTaskTitle', payload: { taskTitle: 'a' } });

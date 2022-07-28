@@ -31,7 +31,7 @@ export default function App() {
   return (
     <Page
       taskTitle={taskTitle}
-      onChangeTitle={(e) => handleChangeTitle(e.target.value)}
+      onChangeTitle={handleChangeTitle}
       onClickAddTask={handleClickAddTask}
       tasks={tasks}
       onClickDeleteTask={handleClickDeleteTask}
