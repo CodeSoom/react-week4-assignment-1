@@ -2,28 +2,14 @@ import { render, fireEvent } from '@testing-library/react';
 
 import List from './List';
 
-// test('테스트 #1')
-//
-// describe - it => describe('List') => it('renders tasks')
-// describe - context - it
-// jest-plugins => jest-plugin-context
-//
-// with tasks
-// - List renders tasks...
-// - List renders “delete” button to delete a task
-// without tasks
-// - List renders no task message.
-//
-// TDD cycle: Red - Green - Refactoring
-
 describe('List', () => {
-  const handleClickDelete = jest.fn();
+  const handleClickDeleteTask = jest.fn();
 
   function renderList(tasks) {
     return render((
       <List
         tasks={tasks}
-        onClickDelete={handleClickDelete}
+        onClickDeleteTask={handleClickDeleteTask}
       />
     ));
   }
@@ -48,7 +34,7 @@ describe('List', () => {
 
       fireEvent.click(buttons[0]);
 
-      expect(handleClickDelete).toBeCalledWith(1);
+      expect(handleClickDeleteTask).toBeCalledWith(1);
     });
   });
 
