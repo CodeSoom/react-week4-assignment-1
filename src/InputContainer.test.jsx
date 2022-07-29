@@ -24,11 +24,15 @@ describe('InputContainer', () => {
     jest.clearAllMocks();
   });
 
-  it('renders to do list', () => {
-    const { queryByText, getByDisplayValue } = customRender();
+  it('renders new todo form', () => {
+    const { queryByText, queryByDisplayValue } = customRender();
 
     expect(queryByText(/추가/)).not.toBeNull();
-    expect(getByDisplayValue(/New Title/)).not.toBeNull();
+    expect(queryByDisplayValue(/New Title/)).not.toBeNull();
+  });
+
+  it('listens to click event on addTask', () => {
+    const { queryByText } = customRender();
 
     fireEvent.click(queryByText(/추가/));
 

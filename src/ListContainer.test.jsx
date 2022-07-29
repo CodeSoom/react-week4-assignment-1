@@ -31,10 +31,6 @@ describe('ListContainer', () => {
     ));
   }
 
-  afterEach(() => {
-    jest.clearAllMocks();
-  });
-
   it('renders to do list', () => {
     const { queryByText } = customRender();
 
