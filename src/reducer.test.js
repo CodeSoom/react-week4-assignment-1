@@ -1,6 +1,6 @@
 import reducer from './reducer';
 
-import { updateTaskTitle, addTask } from './actions';
+import { updateTaskTitle, addTask, deleteTask } from './actions';
 
 describe('reducer', () => {
   describe('updateTaskTitle', () => {
@@ -12,29 +12,66 @@ describe('reducer', () => {
   });
 
   describe('addTask', () => {
-    it('appens a new task into tasks', () => {
-      const state = reducer(
+    function reduceAddTask(taskTitle) {
+      return reducer(
         {
-          taskTitle: 'New Task',
+          newId: 100,
+          taskTitle,
           tasks: [],
         },
         addTask()
       );
+    }
 
-      expect(state.tasks).toHaveLength(1);
-      expect(state.tasks[0].title).toBe('New Task');
+    context('with taks title', () => {
+      it('append a new task into tasks', () => {
+        const state = reduceAddTask('New Task');
+
+        expect(state.tasks).toHaveLength(1);
+        expect(state.tasks[0].id).not.toBeUndefined();
+        expect(state.tasks[0].title).toBe('New Task');
+      });
+
+      it('clear task title', () => {
+        const state = reduceAddTask('New Task');
+        expect(state.taskTitle).toBe('');
+      });
+
+      context('without task title', () => {
+        it("doesn't work", () => {
+          const state = reduceAddTask('');
+
+          expect(state.tasks).toHaveLength(0);
+        });
+      });
+    });
+  });
+
+  describe('deleteTask', () => {
+    context('with existed task ID', () => {
+      it('remove the task from tasks', () => {
+        const state = reducer(
+          {
+            tasks: [{ id: 1, title: 'Task' }],
+          },
+          deleteTask(1)
+        );
+
+        expect(state.tasks).toHaveLength(0);
+      });
     });
 
-    it('clear task title', () => {
-      const state = reducer(
-        {
-          taskTitle: 'New Task',
-          tasks: [],
-        },
-        addTask()
-      );
+    context('without existed task ID', () => {
+      it("doesn't work", () => {
+        const state = reducer(
+          {
+            tasks: [{ id: 1, title: 'Task' }],
+          },
+          deleteTask(100)
+        );
 
-      expect(state.taskTitle).toBe('');
+        expect(state.tasks).toHaveLength(1);
+      });
     });
   });
 });
