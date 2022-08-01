@@ -1,14 +1,36 @@
 import { render } from '@testing-library/react';
 
+import { useSelector } from 'react-redux';
+
 import App from './App';
 
-test('App', () => {
-  const { getByText } = render((
-    <App />
-  ));
+describe('App', () => {
+  useSelector.mockImplementation((selector) => selector({
+    taskTitle: 'New Title',
+    tasks: [],
+  }));
 
-  expect(getByText(/추가/)).not.toBeNull();
+  function customRender() {
+    return render((
+      <App />
+    ));
+  }
 
-  // TODO: 통합 테스트 코드 작성
-  // CodeceptJS => 실제 브라우저에서 사용자 테스트 실행 가능.
+  it('renders the subject', () => {
+    const { queryByText } = customRender();
+
+    expect(queryByText(/To-do/)).not.toBeNull();
+  });
+
+  it('renders a input', () => {
+    const { queryByRole } = customRender();
+
+    expect(queryByRole('textbox')).not.toBeNull();
+  });
+
+  it('redners 추가 button', () => {
+    const { queryByText } = customRender();
+
+    expect(queryByText(/추가/)).not.toBeNull();
+  });
 });

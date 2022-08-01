@@ -13,7 +13,7 @@ test('Item', () => {
   const { container, getByText } = render((
     <Item
       task={task}
-      onClickDelete={handleClick}
+      onClickDeleteTask={handleClick}
     />
   ));
 
