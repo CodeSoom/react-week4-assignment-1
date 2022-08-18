@@ -30,7 +30,9 @@ export default function reducer(state = initialState, action) {
 
     return {
       ...state,
-      tasks: tasks.filter((task) => task.id !== action.payload.id),
+      tasks: tasks.filter(
+        (task) => task.id !== action.payload.id,
+      ),
     };
   }
 

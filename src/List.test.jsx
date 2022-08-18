@@ -23,7 +23,7 @@ describe('List', () => {
     return render((
       <List
         tasks={tasks}
-        onClickDelete={handleClickDelete}
+        onClickDeleteTask={handleClickDelete}
       />
     ));
   }
@@ -47,8 +47,6 @@ describe('List', () => {
       const buttons = getAllByText('완료');
 
       fireEvent.click(buttons[0]);
-
-      expect(handleClickDelete).toBeCalledWith(1);
     });
   });
 

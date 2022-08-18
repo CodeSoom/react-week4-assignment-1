@@ -3,8 +3,9 @@ import { addTask, updateTaskTitle } from './actions';
 import Input from './Input';
 
 export default function InputContainer() {
-  const state = useSelector(selector);
-  const { taskTitle } = state;
+  const { taskTitle } = useSelector((state) => ({
+    taskTitle: state.taskTitle,
+  }));
 
   const dispatch = useDispatch();
 
