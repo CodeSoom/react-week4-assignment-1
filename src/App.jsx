@@ -1,13 +1,15 @@
 import { useState } from 'react';
 
+import { useSelector } from 'react-redux';
+
 import Page from './Page';
 
 const initialState = {
   newId: 100,
   taskTitle: '',
   tasks: [
-    { id: 1, title: '아무 것도 안함 #1'},
-    { id: 2, title: '아무 것도 안함 #2'},
+    { id: 1, title: '아무 것도 안함 #1' },
+    { id: 2, title: '아무 것도 안함 #2' },
   ],
 };
 
@@ -15,7 +17,7 @@ function updateTaskTitle(state, taskTitle) {
   return {
     ...state,
     taskTitle,
-  }
+  };
 }
 
 function addTask(state) {
@@ -38,9 +40,10 @@ function deleteTask(state, id) {
 }
 
 export default function App() {
-  const [state, setState] = useState(initialState);
-
-  const { taskTitle, tasks } = state;
+  const { taskTitle, tasks } = useSelector((state) => ({
+    taskTitle: state.taskTitle,
+    tasks: state.tasks,
+  }));
 
   function handleChangeTitle(event) {
     setState(updateTaskTitle(state, event.target.value));
