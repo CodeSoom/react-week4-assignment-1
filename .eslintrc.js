@@ -20,6 +20,7 @@ module.exports = {
     'react',
   ],
   globals: {
+    context: 'readonly',
     Atomics: 'readonly',
     SharedArrayBuffer: 'readonly',
     actor: 'readonly',
