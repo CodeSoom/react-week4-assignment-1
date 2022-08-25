@@ -1,9 +1,9 @@
 import Input from './Input';
-import List from './List';
 
 export default function Page({
-  taskTitle, onChangeTitle, onClickAddTask,
-  tasks, onClickDeleteTask,
+  taskTitle,
+  onChangeTitle,
+  onClickAddTask,
 }) {
   return (
     <div>
@@ -12,10 +12,6 @@ export default function Page({
         value={taskTitle}
         onChange={onChangeTitle}
         onClick={onClickAddTask}
-      />
-      <List
-        tasks={tasks}
-        onClickDelete={onClickDeleteTask}
       />
     </div>
   );
