@@ -1,4 +1,4 @@
-import { configureStore } from 'redux';
+import { configureStore } from '@reduxjs/toolkit';
 
 const initialState = {
   newId: 100,
