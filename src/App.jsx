@@ -2,40 +2,23 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Page from './Page';
 
-// action creator
-function updateTask(newTask) {
-  return {
-    type: 'updateTask',
-    payload: {
-      newTask,
-    },
-  };
-}
+import {
+  updateTask, addTask, deleteTask,
+} from './actions';
 
-function addTask() {
+function selector(state) {
   return {
-    type: 'addTask',
-  };
-}
-
-function deleteTask(id) {
-  return {
-    type: 'deleteTask',
-    payload: {
-      id,
-    },
+    newTask: state.newTask,
+    tasks: state.tasks,
   };
 }
 
 export default function App() {
-  const { newTask, tasks } = useSelector((state) => ({
-    newTask: state.newTask,
-    tasks: state.tasks,
-  }));
+  const { newTask, tasks } = useSelector(selector);
 
   const dispatch = useDispatch();
 
-  function onClickChangeTask(event) {
+  function onChangeTask(event) {
     dispatch(updateTask(event.target.value));
   }
 
@@ -51,7 +34,7 @@ export default function App() {
     <Page
       tasks={tasks}
       newTask={newTask}
-      onClickChangeTask={onClickChangeTask}
+      onChangeTask={onChangeTask}
       onClickAddTask={onClickAddTask}
       onClickDeleteTask={onClickDeleteTask}
     />
