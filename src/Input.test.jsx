@@ -2,27 +2,44 @@ import { render, fireEvent } from '@testing-library/react';
 
 import Input from './Input';
 
-test('Input', () => {
+describe('Input', () => {
   const handleChange = jest.fn();
   const handleClick = jest.fn();
 
-  const { getByDisplayValue, getByLabelText, getByText } = render((
+  const setup = (text = '') => render(
     <Input
-      value="기존 할 일"
+      value={text}
       onChange={handleChange}
       onClick={handleClick}
-    />
-  ));
+    />,
+  );
 
-  expect(getByDisplayValue('기존 할 일')).not.toBeNull();
+  const text = '코드숨 리액트 11기 화이팅!';
 
-  fireEvent.change(getByLabelText('할 일'), {
-    target: { value: '무언가 하기' },
+  it('renders input & button', () => {
+    const { getByDisplayValue, getByText } = setup(text);
+
+    expect(getByText(/추가/)).not.toBeNull();
+    expect(getByDisplayValue(text)).toHaveAttribute('type', 'text');
   });
 
-  expect(handleChange).toBeCalled();
+  it('renders input to listen to change event', () => {
+    const { getByLabelText } = setup();
 
-  fireEvent.click(getByText('추가'));
+    expect(handleChange).not.toBeCalled();
 
-  expect(handleClick).toBeCalled();
+    fireEvent.change(getByLabelText(/할 일/), { target: { value: text } });
+
+    expect(handleChange).toBeCalled();
+  });
+
+  it('renders add button to listen to click event', () => {
+    const { getByText } = setup();
+
+    expect(handleClick).not.toBeCalled();
+
+    fireEvent.click(getByText(/추가/));
+
+    expect(handleClick).toBeCalled();
+  });
 });
