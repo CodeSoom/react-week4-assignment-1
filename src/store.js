@@ -3,10 +3,7 @@ import { configureStore } from '@reduxjs/toolkit';
 const initialState = {
   newId: 100,
   taskTitle: '',
-  tasks: [
-    { id: 1, title: '아무 것도 안함 #1' },
-    { id: 2, title: '아무 것도 안함 #2' },
-  ],
+  tasks: [],
 };
 
 function reducer(state = initialState, action) {
