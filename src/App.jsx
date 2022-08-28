@@ -30,7 +30,6 @@ export default function App() {
     dispatch(deleteTask(id));
   }
 
-
   const { taskTitle, tasks } = useSelector(selector);
 
   return (
