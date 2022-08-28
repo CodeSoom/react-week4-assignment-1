@@ -18,15 +18,28 @@ function selector(state) {
 export default function App() {
   const dispatch = useDispatch();
 
+  function handleChangeTitle(event) {
+    dispatch(updateTaskTitle(event.target.value));
+  }
+
+  function handleClickAddTask() {
+    dispatch(addTask());
+  }
+
+  function handleClickDeleteTask(id) {
+    dispatch(deleteTask(id));
+  }
+
+
   const { taskTitle, tasks } = useSelector(selector);
 
   return (
     <Page
       taskTitle={taskTitle}
       tasks={tasks}
-      onChangeTitle={(event) => dispatch(updateTaskTitle(event.target.value))}
-      onClickAddTask={() => dispatch(addTask())}
-      onClickDeleteTask={(id) => dispatch(deleteTask(id))}
+      onChangeTitle={handleChangeTitle}
+      onClickAddTask={handleClickAddTask}
+      onClickDeleteTask={handleClickDeleteTask}
     />
   );
 }
