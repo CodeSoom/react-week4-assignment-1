@@ -12,4 +12,5 @@ module.exports = {
     },
     './src/App.jsx': {},
   },
+  testEnvironment: 'jsdom',
 };

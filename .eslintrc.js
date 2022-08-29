@@ -1,3 +1,4 @@
+// .eslintrc.js
 module.exports = {
   env: {
     browser: true,
@@ -19,14 +20,15 @@ module.exports = {
     'react',
   ],
   globals: {
+    context: 'readonly',
     Atomics: 'readonly',
     SharedArrayBuffer: 'readonly',
     actor: 'readonly',
     Feature: 'readonly',
     Scenario: 'readonly',
-    context: 'readonly',
   },
   rules: {
+    'linebreak-style': 0,
     indent: ['error', 2],
     'no-trailing-spaces': 'error',
     curly: 'error',
@@ -47,10 +49,9 @@ module.exports = {
     'object-curly-spacing': ['error', 'always'],
     'key-spacing': ['error', { mode: 'strict' }],
     'arrow-spacing': ['error', { before: true, after: true }],
-    'jsx-a11y/label-has-associated-control': ['error', { assert: 'either' }],
-    'linebreak-style': 'off',
 
     'react/prop-types': 'off',
     'react/react-in-jsx-scope': 'off',
+    'react/jsx-no-bind': 'off',
   },
 };
