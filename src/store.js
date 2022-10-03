@@ -10,7 +10,7 @@ function reducer(state = initialState, action) {
   if (action.type === 'updateTaskTitle') {
     return {
       ...state,
-      taskTitle: action.payload.taskTilte,
+      taskTitle: action.payload.taskTitle,
     };
   }
 
