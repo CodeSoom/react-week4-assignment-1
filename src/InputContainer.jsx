@@ -15,7 +15,8 @@ export default function InputContainer() {
   const dispatch = useDispatch();
 
   function handleChangeTitle(event) {
-    dispatch(updateTitle(event.target.value));
+    const { value } = event.target;
+    dispatch(updateTitle(value));
   }
 
   function handleClickAddTask() {
@@ -23,12 +24,10 @@ export default function InputContainer() {
   }
 
   return (
-    <>
-      <Input
-        taskTitle={taskTitle}
-        onChangeTitle={handleChangeTitle}
-        onClickAddTask={handleClickAddTask}
-      />
-    </>
+    <Input
+      taskTitle={taskTitle}
+      onChangeTitle={handleChangeTitle}
+      onClickAddTask={handleClickAddTask}
+    />
   );
 }

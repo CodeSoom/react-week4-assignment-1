@@ -1,4 +1,4 @@
-export default function Input({ value, onChange, onClick }) {
+export default function Input({ taskTitle, onChangeTitle, onClickAddTask }) {
   return (
     <p>
       <label htmlFor="input-task-title">
@@ -8,10 +8,10 @@ export default function Input({ value, onChange, onClick }) {
         id="input-task-title"
         type="text"
         placeholder="할 일을 입력해 주세요"
-        value={value}
-        onChange={onChange}
+        value={taskTitle}
+        onChange={onChangeTitle}
       />
-      <button type="button" onClick={onClick}>
+      <button type="button" onClick={onClickAddTask}>
         추가
       </button>
     </p>
