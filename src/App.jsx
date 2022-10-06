@@ -19,10 +19,7 @@ function selector(state) {
 
 export default function App() {
   // store에서 그려오기 위한 것
-  const { taskTitle, tasks } = useSelector((state) => ({
-    taskTitle: state.taskTitle,
-    tasks: state.tasks,
-  }));
+  const { taskTitle, tasks } = useSelector(selector);
 
   const dispatch = useDispatch();
 

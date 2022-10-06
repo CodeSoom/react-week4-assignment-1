@@ -14,24 +14,25 @@ const initialState = {
 };
 
 function reducer(state = initialState, action){
-	if(action === 'updateTaskTitle') {
+	if(action.type === 'updateTaskTitle') {
 		return {
 			...state,
 			taskTitle: action.payload.taskTitle,
 		}
 	}
-	if(action === 'addTask') {
+	if(action.type === 'addTask') {
+		const { newId, taskTitle, tasks } = state;
 		return {
-			...state,
 			newId: newId + 1,
 			taskTitle: '',
 			tasks: [...tasks, { id: newId, title: taskTitle }],
 		}
 	}
-	if(action === 'deleteTask') {
+	if(action.type === 'deleteTask') {
+		const { tasks } = state;
 		return {
 		...state,
-    tasks: tasks.filter((task) => task.id !== id),
+    tasks: tasks.filter((task) => task.id !== action.payload.id),
 		}
 	}
 

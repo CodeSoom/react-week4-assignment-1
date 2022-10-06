@@ -1,4 +1,4 @@
-export function updateTaskTitle(state, taskTitle){
+export function updateTaskTitle(taskTitle){
   return {
     type: 'updateTaskTitle',
     payload: {
@@ -7,7 +7,7 @@ export function updateTaskTitle(state, taskTitle){
   }
 }
 
-export function addTask(state) {
+export function addTask() {
   return {
     type:'addTask',
   };
