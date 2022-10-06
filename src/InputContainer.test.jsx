@@ -6,7 +6,7 @@ import InputContainer from './InputContainer';
 
 jest.mock('react-redux');
 
-test('InputContainer', () => {
+describe('InputContainer', () => {
   const dispatch = jest.fn();
   useDispatch.mockImplementation(() => dispatch);
 
@@ -14,12 +14,33 @@ test('InputContainer', () => {
     taskTitle: 'New Title',
   }));
 
-  const { getByText, getByDisplayValue } = render(<InputContainer />);
+  it('renders label text', () => {
+    const { getByLabelText } = render(
+      <InputContainer />,
+    );
 
-  expect(getByText(/추가/)).not.toBeNull();
+    expect(getByLabelText(/할 일/)).not.toBeNull();
+  });
 
-  fireEvent.click(getByText(/추가/));
-  expect(getByDisplayValue(/New Title/)).not.toBeNull();
+  it('renders an input element with a title change event', () => {
+    const { getByLabelText, getByDisplayValue } = render(
+      <InputContainer />,
+    );
 
-  expect(dispatch).toBeCalledWith({ type: 'addTask' });
+    fireEvent.change(getByLabelText(/할 일/), { target: { value: 'New Title' } });
+
+    expect(getByDisplayValue(/New Title/)).not.toBeNull();
+  });
+
+  it('renders add task button with click event', () => {
+    const { getByText } = render(
+      <InputContainer />,
+    );
+
+    expect(getByText(/추가/)).not.toBeNull();
+
+    fireEvent.click(getByText(/추가/));
+
+    expect(dispatch).toBeCalledWith({ type: 'addTask' });
+  });
 });

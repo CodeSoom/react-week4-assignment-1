@@ -14,9 +14,8 @@ export default function InputContainer() {
 
   const dispatch = useDispatch();
 
-  function handleChangeTitle(event) {
-    const { value } = event.target;
-    dispatch(updateTitle(value));
+  function handleChangeTitle(e) {
+    dispatch(updateTitle(e.target.value));
   }
 
   function handleClickAddTask() {
