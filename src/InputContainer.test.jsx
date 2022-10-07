@@ -14,6 +14,10 @@ describe('InputContainer', () => {
     taskTitle: 'New Title',
   }));
 
+  beforeEach(() => {
+    jest.clearAllMocks();
+  });
+
   it('renders label text', () => {
     const { getByLabelText } = render(
       <InputContainer />,
