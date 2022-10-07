@@ -15,11 +15,12 @@ test('InputContainer', () => {
     taskTitle: 'New Title',
   }));
 
-  const { getByText } = render((
+  const { getByText, getByDisplayValue } = render((
     <InputContainer />
   ));
 
   expect(getByText(/추가/)).not.toBeNull();
+  expect(getByDisplayValue(/New Title/)).not.toBeNull();
 
   fireEvent.click(getByText(/추가/));
   expect(dispatch).toBeCalledWith({
