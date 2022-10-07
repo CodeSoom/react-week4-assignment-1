@@ -21,13 +21,14 @@ describe('ListContainer', () => {
     it('renders task list with delete button', () => {
       setSelector(tasks);
 
-      const { getByText } = render((
+      const { getByText, getAllByText } = render((
         <ListContainer />
       ));
 
       expect(getByText(/아무 것도 하지 않기 #1/)).not.toBeNull();
       expect(getByText(/아무 것도 하지 않기 #2/)).not.toBeNull();
-      expect(getByText(/완료/)).not.toBeNull();
+
+      expect(getAllByText(/완료/)).not.toBeNull();
     });
   });
 

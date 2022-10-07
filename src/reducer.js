@@ -4,7 +4,7 @@ const initialState = {
   tasks: [],
 };
 
-export default function reducer(state = initialState, action) {
+export default function reducer(state = initialState, action = { type: '' }) {
   if (action.type === 'updateTitle') {
     return {
       ...state,
@@ -27,6 +27,7 @@ export default function reducer(state = initialState, action) {
 
   if (action.type === 'deleteTask') {
     const { tasks } = state;
+
     return {
       ...state,
       tasks: tasks.filter((task) => task.id !== action.payload.id),

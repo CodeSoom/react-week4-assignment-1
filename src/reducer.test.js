@@ -76,4 +76,17 @@ describe('reducer', () => {
       });
     });
   });
+
+  describe('no actions type', () => {
+    it('returns init state', () => {
+      const initialState = {
+        newId: 100,
+        taskTitle: '',
+        tasks: [],
+      };
+      const state = reducer(initialState);
+
+      expect(state).toBe(initialState);
+    });
+  });
 });
