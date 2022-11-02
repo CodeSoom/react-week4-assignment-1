@@ -23,13 +23,10 @@ export default function InputContainer() {
   }
 
   return (
-    <div>
-      <h1>To-do</h1>
-      <Input
-        value={taskTitle}
-        onChange={handleChangeTitle}
-        onClick={handleClickAddTask}
-      />
-    </div>
+    <Input
+      value={taskTitle}
+      onChange={handleChangeTitle}
+      onClick={handleClickAddTask}
+    />
   );
 }
