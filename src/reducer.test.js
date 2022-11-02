@@ -3,7 +3,7 @@ import reducer from './reducer';
 import { updateTaskTitle, addTask, deleteTask } from './actions';
 
 describe('reducer', () => {
-  describe('updateTaskTitle를 실행할 시', () => {
+  describe('updateTaskTitle', () => {
     it('입력한 할일을 업데이트 해준다', () => {
       const state = reducer(
         {
@@ -16,7 +16,7 @@ describe('reducer', () => {
     });
   });
 
-  describe('addTask를 실행할 시', () => {
+  describe('addTask', () => {
     function reduceAddTask(taskTitle) {
       return reducer(
         {
@@ -52,7 +52,7 @@ describe('reducer', () => {
     });
   });
 
-  describe('deleteTask를 실행할 시', () => {
+  describe('deleteTask', () => {
     function reduceDeleteTask(id) {
       return reducer(
         {
