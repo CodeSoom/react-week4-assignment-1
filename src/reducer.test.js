@@ -72,7 +72,7 @@ describe('reducer', () => {
 
     context('id가 없을 경우', () => {
       it('아무런 작동을 하지 않는다', () => {
-        const state = reduceDeleteTask(10000);
+        const state = reduceDeleteTask(-1);
 
         expect(state.tasks).toHaveLength(1);
       });
