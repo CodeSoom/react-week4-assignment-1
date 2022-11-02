@@ -22,7 +22,6 @@ describe('reducer', () => {
         {
           taskTitle,
           tasks: [],
-          newId: 100,
         },
         addTask(taskTitle),
       );
@@ -77,6 +76,15 @@ describe('reducer', () => {
 
         expect(state.tasks).toHaveLength(1);
       });
+    });
+  });
+
+  describe('아무런 값이 없을 때', () => {
+    it('아무런 일도 일어나지 않음', () => {
+      const state = reducer();
+
+      expect(state.taskTitle).toBe('');
+      expect(state.tasks).toHaveLength(0);
     });
   });
 });
