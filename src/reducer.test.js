@@ -63,13 +63,15 @@ describe('reducer', () => {
       );
     }
 
-    context('id가 있을경우', () => {
+    context('id가 있을 경우', () => {
       it('해당 할일을 삭제한다', () => {
         const state = reduceDeleteTask(1);
 
         expect(state.tasks).toHaveLength(0);
       });
+    });
 
+    context('id가 없을 경우', () => {
       it('아무런 작동을 하지 않는다', () => {
         const state = reduceDeleteTask(10000);
 
