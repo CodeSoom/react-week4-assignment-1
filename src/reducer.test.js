@@ -81,4 +81,14 @@ describe('reducer', () => {
       });
     });
   });
+
+  it('action type이 일치하는 게 없을 경우 현재 상태를 반환한다', () => {
+    const state = reducer({
+      taskTitle: '',
+      tasks: [],
+    });
+
+    expect(state.taskTitle).toBe('');
+    expect(state.tasks).toHaveLength(0);
+  });
 });
