@@ -1,5 +1,4 @@
-import React from 'react';
-import { render } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
 
 import { useSelector, useDispatch } from 'react-redux';
 
@@ -7,27 +6,42 @@ import ListContainer from './ListContainer';
 
 import tasks from '../fixtures/tasks';
 
-jest.mock('react-redux'); // import { useDispatch, useSelector } from 'react-redux';할때 잡아준 경로
+jest.mock('react-redux');
 
-describe('App', () => {
-  // TODO: useSelector 조작
+describe('ListContainer', () => {
   const dispatch = jest.fn();
+
   useDispatch.mockImplementation(() => dispatch);
 
   useSelector.mockImplementation((selector) => selector({
     tasks,
   }));
 
-  /* function renderApp() {
-    return render((<App />));
+  function renderListContainer() {
+    return (
+      render(
+        <ListContainer />,
+      )
+    );
   }
- */
 
-  it('App 컴포넌트 랜더링이 된다', () => {
-    const { getByText } = render((
-      <ListContainer />
-    ));
+  it('할 일이 랜더링된다', () => {
+    renderListContainer();
 
-    expect(getByText(/넷플릭스 보기/)).not.toBeNull();
+    expect(screen.getByText(/넷플릭스 보기/)).not.toBeNull();
+  });
+
+  it('"완료"버튼을 누르면 deleteTask가 호출된다', () => {
+    renderListContainer();
+
+    expect(screen.getAllByText(/완료/)).not.toBeNull();
+    expect(screen.getByText(/넷플릭스 보기/)).not.toBeNull();
+
+    fireEvent.click(screen.getAllByText(/완료/)[0]);
+
+    expect(dispatch).toBeCalledWith({
+      type: 'deleteTask',
+      payload: { id: 1 },
+    });
   });
 });

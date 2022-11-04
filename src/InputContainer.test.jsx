@@ -1,9 +1,10 @@
-import React from 'react';
-import { render, fireEvent } from '@testing-library/react';
+import { render, fireEvent, screen } from '@testing-library/react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
 import InputContainer from './InputContainer';
+
+import { updateTaskTitle } from './actions';
 
 jest.mock('react-redux');
 
@@ -16,16 +17,42 @@ describe('InputContainer', () => {
     taskTitle: 'New Title',
   }));
 
-  it('추가버튼을 누르면 handleClickAddTask함수가 실행된다', () => {
-    const { getByText, getByDisplayValue } = render((
-      <InputContainer />
-    ));
+  function renderInputContainer() {
+    return (
+      render(
+        <InputContainer />,
+      )
+    );
+  }
 
-    expect(getByText(/추가/)).not.toBeNull();
-    expect(getByDisplayValue(/New Title/)).not.toBeNull();
+  it('InputContainer가 랜더링된다', () => {
+    renderInputContainer();
 
-    fireEvent.click(getByText(/추가/));
+    expect(screen.getByLabelText(/할 일/)).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: '추가' })).toBeInTheDocument();
+  });
 
-    expect(dispatch).toBeCalledWith({ type: 'addTask' });
+  it('입력한 값으로 할 일이 랜더링된다.', () => {
+    renderInputContainer();
+
+    const input = screen.getByLabelText('할 일');
+
+    fireEvent.change(input, {
+      target: {
+        value: '쿠키 먹기',
+      },
+    });
+
+    expect(dispatch).toBeCalledWith(updateTaskTitle('쿠키 먹기'));
+  });
+
+  it('"추가" 버튼을 누르면 addTask가 호출된다', () => {
+    renderInputContainer();
+
+    fireEvent.click(screen.getByText(/추가/));
+
+    expect(dispatch).toBeCalledWith({
+      type: 'addTask',
+    });
   });
 });
