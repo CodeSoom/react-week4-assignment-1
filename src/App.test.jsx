@@ -1,19 +1,14 @@
-import React from 'react';
 import { render } from '@testing-library/react';
 
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import App from './App';
 
 import tasks from '../fixtures/tasks';
 
-jest.mock('react-redux'); // import { useDispatch, useSelector } from 'react-redux';할때 잡아준 경로
+jest.mock('react-redux');
 
 describe('App', () => {
-  // TODO: useSelector 조작
-  const dispatch = jest.fn();
-  useDispatch.mockImplementation(() => dispatch);
-
   useSelector.mockImplementation((selector) => selector({
     taskTitle: '',
     tasks,
