@@ -9,19 +9,23 @@ jest.mock('react-redux');
 describe('InpurContainer', () => {
   const dispatch = jest.fn();
 
+  function renderInputContainer() {
+    return render(<InputContainer />);
+  }
+
   useDispatch.mockImplementation(() => dispatch);
 
   useSelector.mockImplementation((selector) => selector({ taskTitle: 'New Title' }));
 
   it('InputContainer를 렌더링한다.', () => {
-    const { getByText, getByDisplayValue } = render(<InputContainer />);
+    const { getByText, getByDisplayValue } = renderInputContainer();
 
     expect(getByText('추가')).not.toBeNull();
     expect(getByDisplayValue('New Title')).not.toBeNull();
   });
 
   it('할 일을 입력하면 handleChange가 실행되어 value가 변경된다.', () => {
-    const { getByLabelText } = render(<InputContainer />);
+    const { getByLabelText } = renderInputContainer();
 
     fireEvent.change(getByLabelText('할 일'), {
       target: {
@@ -38,7 +42,7 @@ describe('InpurContainer', () => {
   });
 
   it('추가 버튼을 누르면 할 일이 추가된다.', () => {
-    const { getByText } = render(<InputContainer />);
+    const { getByText } = renderInputContainer();
 
     fireEvent.click(getByText('추가'));
 
