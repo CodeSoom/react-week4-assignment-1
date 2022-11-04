@@ -29,9 +29,11 @@ const reducers = {
       tasks: tasks.filter((task) => task.id !== action.payload.id),
     };
   },
-
 };
 
 export default function reducer(state = initialState, action) {
-  return reducers[action.type] ? reducers[action.type](state, action) : state;
+  if (!action || !reducers[action.type]) {
+    return state;
+  }
+  return reducers[action.type](state, action);
 }
