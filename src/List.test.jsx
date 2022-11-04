@@ -2,46 +2,29 @@ import { render, fireEvent } from '@testing-library/react';
 
 import List from './List';
 
-// test('테스트 #1')
-//
-// describe - it => describe('List') => it('renders tasks')
-// describe - context - it
-// jest-plugins => jest-plugin-context
-//
-// with tasks
-// - List renders tasks...
-// - List renders “delete” button to delete a task
-// without tasks
-// - List renders no task message.
-//
-// TDD cycle: Red - Green - Refactoring
+import tasks from '../fixtures/tasks';
 
 describe('List', () => {
   const handleClickDelete = jest.fn();
 
-  function renderList(tasks) {
+  function renderList(task) {
     return render((
       <List
-        tasks={tasks}
+        tasks={task}
         onClickDelete={handleClickDelete}
       />
     ));
   }
 
-  context('with tasks', () => {
-    const tasks = [
-      { id: 1, title: 'Task-1' },
-      { id: 2, title: 'Task-2' },
-    ];
-
-    it('renders tasks', () => {
+  context('할 일이 있다면', () => {
+    it('할 일이 랜더링된다', () => {
       const { getByText } = renderList(tasks);
 
-      expect(getByText(/Task-1/)).not.toBeNull();
-      expect(getByText(/Task-2/)).not.toBeNull();
+      expect(getByText(/넷플릭스 보기/)).not.toBeNull();
+      expect(getByText(/카페 가기/)).not.toBeNull();
     });
 
-    it('renders “완료” button to delete a task', () => {
+    it('할 일을 삭제하는 "완료"버튼이 랜더링된다', () => {
       const { getAllByText } = renderList(tasks);
 
       const buttons = getAllByText('완료');
@@ -52,13 +35,13 @@ describe('List', () => {
     });
   });
 
-  context('without tasks', () => {
-    it('renders no task message', () => {
-      const tasks = [];
+  context('할 일이 없다면', () => {
+    it('할 일이 없다는 문구가 랜더링된다', () => {
+      const task = [];
 
-      const { getByText } = renderList(tasks);
+      const { getByText } = renderList(task);
 
-      expect(getByText(/할 일이 없어요/)).not.toBeNull();
+      expect(getByText(/할 일이 없어요!/)).not.toBeNull();
     });
   });
 });

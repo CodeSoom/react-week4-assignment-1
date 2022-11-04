@@ -2,27 +2,43 @@ import { render, fireEvent } from '@testing-library/react';
 
 import Input from './Input';
 
-test('Input', () => {
-  const handleChange = jest.fn();
+describe('Input', () => {
   const handleClick = jest.fn();
+  const handleChange = jest.fn();
 
-  const { getByDisplayValue, getByLabelText, getByText } = render((
-    <Input
-      value="기존 할 일"
-      onChange={handleChange}
-      onClick={handleClick}
-    />
-  ));
+  function renderInput() {
+    return (
+      render(
+        <Input
+          value="넷플릭스 보기"
+          onChange={handleChange}
+          onClick={handleClick}
+        />,
+      )
+    );
+  }
 
-  expect(getByDisplayValue('기존 할 일')).not.toBeNull();
+  it('추가버튼을 누르면 onClick함수가 실행된다', () => {
+    const { getByText } = renderInput();
 
-  fireEvent.change(getByLabelText('할 일'), {
-    target: { value: '무언가 하기' },
+    expect(handleClick).not.toBeCalled();
+
+    fireEvent.click(getByText('추가'));
+
+    expect(handleClick).toBeCalled();
   });
 
-  expect(handleChange).toBeCalled();
+  it('value값이 변경되면 onChange함수가 실행된다 ', () => {
+    const { getByDisplayValue, getByLabelText } = renderInput();
 
-  fireEvent.click(getByText('추가'));
+    expect(getByDisplayValue('넷플릭스 보기')).not.toBeNull();
 
-  expect(handleClick).toBeCalled();
+    fireEvent.change(getByLabelText('할 일'), {
+      target: {
+        value: '카페 가기',
+      },
+    });
+
+    expect(handleChange).toBeCalled();
+  });
 });

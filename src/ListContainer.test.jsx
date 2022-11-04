@@ -3,7 +3,7 @@ import { render } from '@testing-library/react';
 
 import { useSelector, useDispatch } from 'react-redux';
 
-import App from './App';
+import ListContainer from './ListContainer';
 
 import tasks from '../fixtures/tasks';
 
@@ -15,16 +15,19 @@ describe('App', () => {
   useDispatch.mockImplementation(() => dispatch);
 
   useSelector.mockImplementation((selector) => selector({
-    taskTitle: '',
     tasks,
   }));
 
+  /* function renderApp() {
+    return render((<App />));
+  }
+ */
+
   it('App 컴포넌트 랜더링이 된다', () => {
     const { getByText } = render((
-      <App />
+      <ListContainer />
     ));
 
-    expect(getByText(/추가/)).not.toBeNull();
     expect(getByText(/넷플릭스 보기/)).not.toBeNull();
   });
 });
