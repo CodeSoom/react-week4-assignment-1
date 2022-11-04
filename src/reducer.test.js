@@ -82,14 +82,14 @@ describe('reducer', () => {
     });
   });
 
-  describe('action의 type이 일치하지 않거나 없는 경우', () => {
-    const prevState = {
-      newId: 100,
-      taskTitle: '',
-      tasks: [],
-    };
-
+  describe('action의 type이 일치하지 않는 경우', () => {
     it('아무 일도 일어나지 않는다.', () => {
+      const prevState = {
+        newId: 100,
+        taskTitle: '',
+        tasks: [],
+      };
+
       const action = {
         type: 'non-existed action type',
       };
@@ -98,11 +98,14 @@ describe('reducer', () => {
 
       expect(state).toBe(prevState);
     });
+  });
 
+  describe('아무런 동작을 하지 않는 경우', () => {
     it('아무 일도 일어나지 않는다.', () => {
-      const state = reducer(prevState);
+      const state = reducer();
 
-      expect(state).toBe(prevState);
+      expect(state.taskTitle).toBe('');
+      expect(state.tasks).toHaveLength(0);
     });
   });
 });
