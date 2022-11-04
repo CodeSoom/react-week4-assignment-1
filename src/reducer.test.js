@@ -8,11 +8,10 @@ import {
 
 describe('reducer', () => {
   describe('updateTaskTitle', () => {
-    it('changes task title', () => {
+    it('입력한 값으로 할 일을 업데이트 한다', () => {
       const state = reducer({
         taskTitle: '',
       }, updateTaskTitle('New Title'));
-      // reducer.js의  reducer매개변수로 / actions안의 매개변수에 들어감
 
       expect(state.taskTitle).toBe('New Title');
     });
@@ -27,8 +26,8 @@ describe('reducer', () => {
       }, addTask());
     }
 
-    context('with task title', () => {
-      it('appends a new task into tasks', () => {
+    context('할 일이 있을 경우', () => {
+      it('입력한 할 일이 랜더링된다', () => {
         const state = reduceAddTask('New Task');
 
         expect(state.tasks).toHaveLength(1);
@@ -36,15 +35,15 @@ describe('reducer', () => {
         expect(state.tasks[0].title).toBe('New Task');
       });
 
-      it('clears task title', () => {
+      it('입력한 값이 초기화된다', () => {
         const state = reduceAddTask('New Task');
 
         expect(state.taskTitle).toBe('');
       });
     });
 
-    context('without task title', () => {
-      it("doesn't work", () => {
+    context('할 일이 없을 경우', () => {
+      it('아무런 작동을 하지 않는다', () => {
         const state = reduceAddTask();
 
         expect(state.tasks).toHaveLength(0);
@@ -53,30 +52,38 @@ describe('reducer', () => {
   });
 
   describe('deleteTask', () => {
-    context('with existed task ID', () => {
-      it('remove the task from tasks', () => {
+    context('id가 있을 경우', () => {
+      it('해당하는 할 일이 삭제된다', () => {
         const state = reducer({
           tasks: [
             { id: 1, title: 'Task' },
           ],
         }, deleteTask(1));
-        // reducer.js의  reducer매개변수로 / actions안의 매개변수에 들어감
 
         expect(state.tasks).toHaveLength(0);
       });
     });
 
-    context('without existed task ID', () => {
-      it("doesn't work", () => {
+    context('id가 없을 경우', () => {
+      it('아무런 작동을 하지 않는다', () => {
         const state = reducer({
           tasks: [
             { id: 1, title: 'Task' },
           ],
         }, deleteTask(100));
-          // reducer.js의  reducer매개변수로 / actions안의 매개변수에 들어감
 
         expect(state.tasks).toHaveLength(1);
       });
+    });
+  });
+
+  describe('아무런 동작이 없는 경우', () => {
+    it('아무런 일도 일어나지 않는다', () => {
+      const state = reducer();
+
+      expect(state.taskTitle).toBe('');
+
+      expect(state.tasks).toHaveLength(0);
     });
   });
 });

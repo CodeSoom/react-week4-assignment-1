@@ -1,4 +1,3 @@
-// action creator 3개 (state는 reducer에서 하니까 생략됨)
 export function updateTaskTitle(taskTitle) {
   return {
     type: 'updateTaskTitle',
