@@ -74,7 +74,7 @@ describe('reducer', () => {
           {
             tasks: [{ id: 1, title: 'Task' }],
           },
-          deleteTask(100),
+          deleteTask(-1),
         );
 
         expect(state.tasks).toHaveLength(1);
@@ -82,13 +82,27 @@ describe('reducer', () => {
     });
   });
 
-  it('action type이 일치하는 게 없을 경우 현재 상태를 반환한다', () => {
-    const state = reducer({
+  describe('action의 type이 일치하지 않거나 없는 경우', () => {
+    const prevState = {
+      newId: 100,
       taskTitle: '',
       tasks: [],
+    };
+
+    it('아무 일도 일어나지 않는다.', () => {
+      const action = {
+        type: 'non-existed action type',
+      };
+
+      const state = reducer(prevState, action);
+
+      expect(state).toBe(prevState);
     });
 
-    expect(state.taskTitle).toBe('');
-    expect(state.tasks).toHaveLength(0);
+    it('아무 일도 일어나지 않는다.', () => {
+      const state = reducer(prevState);
+
+      expect(state).toBe(prevState);
+    });
   });
 });
