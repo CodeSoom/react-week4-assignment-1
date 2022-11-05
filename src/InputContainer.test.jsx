@@ -32,7 +32,7 @@ describe('InputContainer', () => {
     expect(screen.getByRole('button', { name: '추가' })).toBeInTheDocument();
   });
 
-  it('입력한 값으로 할 일이 랜더링된다.', () => {
+  it('입력된 값으로 할 일이 변경된다', () => {
     renderInputContainer();
 
     const input = screen.getByLabelText('할 일');

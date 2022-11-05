@@ -27,7 +27,7 @@ describe('reducer', () => {
     }
 
     context('할 일이 있을 경우', () => {
-      it('입력한 할 일이 랜더링된다', () => {
+      it('입력한 할 일로 목록이 만들어진다', () => {
         const state = reduceAddTask('New Task');
 
         expect(state.tasks).toHaveLength(1);
@@ -52,7 +52,7 @@ describe('reducer', () => {
   });
 
   describe('deleteTask', () => {
-    context('id가 있을 경우', () => {
+    context('존재하는 id인 경우', () => {
       it('해당하는 할 일이 삭제된다', () => {
         const state = reducer({
           tasks: [
@@ -64,13 +64,13 @@ describe('reducer', () => {
       });
     });
 
-    context('id가 없을 경우', () => {
+    context('존재하지 않은 id인 경우', () => {
       it('아무런 작동을 하지 않는다', () => {
         const state = reducer({
           tasks: [
             { id: 1, title: 'Task' },
           ],
-        }, deleteTask(100));
+        }, deleteTask(-1));
 
         expect(state.tasks).toHaveLength(1);
       });

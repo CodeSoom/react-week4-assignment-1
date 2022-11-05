@@ -18,7 +18,7 @@ describe('Input', () => {
     );
   }
 
-  it('추가버튼을 누르면 onClick함수가 실행된다', () => {
+  it('추가버튼을 누르면 handleClick함수가 실행된다', () => {
     const { getByText } = renderInput();
 
     expect(handleClick).not.toBeCalled();
@@ -28,7 +28,7 @@ describe('Input', () => {
     expect(handleClick).toBeCalled();
   });
 
-  it('value값이 변경되면 onChange함수가 실행된다 ', () => {
+  it('할 일이 입력되면 handleChange함수가 실행된다', () => {
     const { getByDisplayValue, getByLabelText } = renderInput();
 
     expect(getByDisplayValue('넷플릭스 보기')).not.toBeNull();
