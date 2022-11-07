@@ -17,13 +17,13 @@ import List from './List';
 // TDD cycle: Red - Green - Refactoring
 
 describe('List', () => {
-  const handleClickDelete = jest.fn();
+  const handleClickDeleteTask = jest.fn();
 
   function renderList(tasks) {
     return render((
       <List
         tasks={tasks}
-        onClickDelete={handleClickDelete}
+        onClickDeleteTask={handleClickDeleteTask}
       />
     ));
   }
@@ -48,7 +48,7 @@ describe('List', () => {
 
       fireEvent.click(buttons[0]);
 
-      expect(handleClickDelete).toBeCalledWith(1);
+      expect(handleClickDeleteTask).toBeCalledWith(1);
     });
   });
 
