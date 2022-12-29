@@ -22,7 +22,7 @@ describe('reducer', () => {
       );
 
       expect(state.tasks).toHaveLength(1);
-      expect(state.tasks[0]).toBe('코드숨 과제');
+      expect(state.tasks[0].taskTitle).toBe('코드숨 과제');
     });
   });
 });
