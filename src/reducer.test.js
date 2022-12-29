@@ -1,5 +1,5 @@
 import reducer from './reducer';
-import { updateTaskTitle, addTask } from './actions';
+import { updateTaskTitle, addTask, deleteTask } from './actions';
 
 describe('reducer', () => {
   describe('updateTaskTitle', () => {
@@ -14,6 +14,7 @@ describe('reducer', () => {
       expect(state.taskTitle).toBe('코드숨 과제');
     });
   });
+
   describe('addTask', () => {
     const reduceAddTask = (taskTitle) =>
       reducer({ newId: 100, taskTitle, tasks: [] }, addTask());
@@ -39,6 +40,24 @@ describe('reducer', () => {
 
         expect(state.tasks).toHaveLength(0);
       });
+    });
+  });
+
+  describe('deleteTask', () => {
+    it('removes the task from tasks', () => {
+      const state = reducer(
+        {
+          tasks: [
+            {
+              id: 1,
+              taskTitle: 'PR',
+            },
+          ],
+        },
+        deleteTask()
+      );
+
+      expect(state.tasks).toHaveLength(0);
     });
   });
 });
