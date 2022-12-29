@@ -1,5 +1,5 @@
 import reducer from './reducer';
-import { updateTaskTitle } from './actions';
+import { updateTaskTitle, addTask } from './actions';
 
 describe('reducer', () => {
   describe('updateTaskTitle', () => {
@@ -12,6 +12,17 @@ describe('reducer', () => {
       );
 
       expect(state.taskTitle).toBe('코드숨 과제');
+    });
+  });
+  describe('addTask', () => {
+    it('returns state with new tasks', () => {
+      const state = reducer(
+        { newId: 100, taskTitle: '코드숨 과제', tasks: [] },
+        addTask()
+      );
+
+      expect(state.tasks).toHaveLength(1);
+      expect(state.tasks[0]).toBe('코드숨 과제');
     });
   });
 });
