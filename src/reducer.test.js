@@ -15,32 +15,27 @@ describe('reducer', () => {
     });
   });
   describe('addTask', () => {
+    const reduceAddTask = (taskTitle) =>
+      reducer({ newId: 100, taskTitle, tasks: [] }, addTask());
+
     context('with taskTitle', () => {
       it('returns state with new tasks', () => {
-        const state = reducer(
-          { newId: 100, taskTitle: '코드숨 과제', tasks: [] },
-          addTask()
-        );
+        const state = reduceAddTask('코드숨 과제');
 
         expect(state.tasks).toHaveLength(1);
         expect(state.tasks[0].taskTitle).toBe('코드숨 과제');
       });
 
       it('clear task title', () => {
-        const state = reducer(
-          { newId: 100, taskTitle: '코드숨 과제', tasks: [] },
-          addTask()
-        );
+        const state = reduceAddTask('코드숨 과제');
+
         expect(state.taskTitle).toBe('');
       });
     });
 
     context('without taskTitle', () => {
       it("doesn't work", () => {
-        const state = reducer(
-          { newId: 100, taskTitle: '', tasks: [] },
-          addTask()
-        );
+        const state = reduceAddTask('');
 
         expect(state.tasks).toHaveLength(0);
       });
