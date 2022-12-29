@@ -54,7 +54,7 @@ describe('reducer', () => {
             },
           ],
         },
-        deleteTask()
+        deleteTask(1)
       );
 
       expect(state.tasks).toHaveLength(0);
