@@ -12,8 +12,12 @@ export default function reducer(state = initialState, action) {
     };
   }
   if (action.type === 'addTask') {
+    if (!state.taskTitle) {
+      return state;
+    }
     return {
       ...state,
+      taskTitle: '',
       tasks: [...state.tasks, { id: state.newId, taskTitle: state.taskTitle }],
     };
   }
