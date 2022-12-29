@@ -4,18 +4,12 @@ import { updateTaskTitle } from './actions';
 describe('reducer', () => {
   describe('updateTaskTitle', () => {
     it('returns updated task title', () => {
-      const previousState = {
-        taskTitle: '',
-      };
-
-      const action = {
-        type: 'updateTaskTitle',
-        payload: {
-          taskTitle: '코드숨 과제',
+      const state = reducer(
+        {
+          taskTitle: '',
         },
-      };
-
-      const state = reducer(previousState, action);
+        updateTaskTitle('코드숨 과제')
+      );
 
       expect(state.taskTitle).toBe('코드숨 과제');
     });
