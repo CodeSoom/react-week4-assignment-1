@@ -4,7 +4,7 @@ import List from './List';
 
 import { deleteTask } from './actions';
 
-export default function ListContainer() {
+const ListContainer = () => {
   const dispatch = useDispatch();
 
   const { tasks } = useSelector((state) => ({
@@ -21,4 +21,6 @@ export default function ListContainer() {
       onClickDelete={handleClickDeleteTask}
     />
   );
-}
+};
+
+export default ListContainer;
