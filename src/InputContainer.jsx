@@ -25,6 +25,5 @@ export default function InputContainer() {
       onChange={handleChangeTitle}
       onClick={handleClickAddTask}
     />
-
   );
 }
