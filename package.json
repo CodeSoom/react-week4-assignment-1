@@ -6,9 +6,9 @@
   "scripts": {
     "start": "webpack serve --mode development",
     "test:unit": "jest",
-    "coverage": "yarn run test:unit -- --coverage",
+    "coverage": "npm run test:unit -- --coverage",
     "test:e2e": "codeceptjs run --steps",
-    "test": "yarn run coverage && start-server-and-test start http://localhost:8080 test:e2e",
+    "test": "npm run coverage && start-server-and-test start http://localhost:8080 test:e2e",
     "lint": "eslint --ext js,jsx ."
   },
   "keywords": [],
