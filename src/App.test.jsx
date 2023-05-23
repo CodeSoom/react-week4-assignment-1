@@ -1,11 +1,8 @@
-import { render } from '@testing-library/react';
-
 import App from './App';
+import renderWithProviders from './utils/utils-for-tests';
 
 test('App', () => {
-  const { getByText } = render((
-    <App />
-  ));
+  const { getByText } = renderWithProviders(<App />);
 
   expect(getByText(/추가/)).not.toBeNull();
 
