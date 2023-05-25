@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { deleteTask } from './actions';
+import { deleteTask } from './reducers';
 import List from './List';
 
 export default function ListContainer() {
@@ -10,7 +10,7 @@ export default function ListContainer() {
   // 관심사분리
 
   function handleClickDeleteTask(id) {
-    dispatch((deleteTask(id)));
+    dispatch((deleteTask({ id })));
   }
 
   return (

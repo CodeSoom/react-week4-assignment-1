@@ -1,5 +1,4 @@
-import reducer from './reducer';
-import { updateTaskTitle, addTask, deleteTask } from './actions';
+import reducer, { updateTaskTitle, addTask, deleteTask } from './reducers';
 
 // 테스트하고자 하는 것의 input과 output을 명확하게 해야하지
 // input? 변경 전 state,action
