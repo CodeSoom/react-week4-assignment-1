@@ -6,7 +6,7 @@ import reducer, { updateTaskTitle, addTask, deleteTask } from './reducers';
 
 describe('reducer', () => {
   describe('taskTitle을 변경한다', () => {
-    it('taskTitle이 바뀐다.', () => {
+    it('taskTitle이 변경된 상태를 반환한다.', () => {
       const prevState = { newId: 100, taskTitle: '', tasks: [] };
       const state = reducer(prevState, updateTaskTitle('change'));
       expect(state.taskTitle).toBe('change');
@@ -31,7 +31,7 @@ describe('reducer', () => {
     });
   });
   describe('task를 삭제한다', () => {
-    it('task가 없어진다', () => {
+    it('tasks에서 해당 값을 제외한 상태를 반환한다.', () => {
       const prevState = {
         newId: 101,
         taskTitle: '',
